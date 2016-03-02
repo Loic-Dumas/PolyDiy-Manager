@@ -1,5 +1,5 @@
 package login;
 
-public abstract class FactoryAccount {
+public abstract class AccountFactory {
 	public abstract Account build(String login);
 }

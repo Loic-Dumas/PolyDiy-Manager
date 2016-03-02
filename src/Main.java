@@ -6,6 +6,7 @@ public class Main {
 
 		try {
 				JDBConnection connection = JDBConnection.getInstance();
+				System.out.println("Connected");
 		         
 		    } catch (Exception e) {
 		      e.printStackTrace();

@@ -1,6 +1,6 @@
 package login;
 
-public class FactoryJDBCAccount extends FactoryAccount {
+public class JDBCAccountFactory extends AccountFactory {
 
 	@Override
 	public Account build(String login) {
