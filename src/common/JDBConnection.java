@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBConnection {
-	//postgres login
 	private Connection connection;
 	static JDBConnection instance;
 	
@@ -30,6 +29,7 @@ public class JDBConnection {
 		return JDBConnection.instance;
 	}
 	
+<<<<<<< HEAD
 	public Statement getStatement() throws SQLException {
 		return this.connection.createStatement();
 	}
@@ -37,4 +37,14 @@ public class JDBConnection {
 	public PreparedStatement getPreparedStatement(String query) throws SQLException {
 		return this.connection.prepareStatement(query);
 	}
+=======
+	public Statement getStatement () throws SQLException {
+		return this.connection.createStatement();
+	}
+	
+	public PreparedStatement getPreparedStatement (String query) throws SQLException {
+		return this.connection.prepareStatement(query);
+	}
+	
+>>>>>>> 19d096cf176426501c504bd725533a34c2c0b4e0
 }

@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import common.ErrorConnectionException;
 import common.JDBConnection;
+<<<<<<< HEAD
 import common.UnknownLoginException;
 
 public class JDBCAccount  extends Account {
@@ -29,5 +30,35 @@ public class JDBCAccount  extends Account {
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
 		}
+=======
+import common.UnknowLoginException;
+
+public class JDBCAccount  extends Account {
+	public JDBCAccount(String login) throws ErrorConnectionException, UnknowLoginException {
+		super(login);
+		// aller chercher l'identifiant dans a BD etc. 
+		String query = "SELECT * FROM account WHERE login = " + login + ";";
+		JDBConnection connection = JDBConnection.getInstance();
+		Statement statement;
+		try {
+			statement = connection.getStatement();
+			ResultSet result = statement.executeQuery(query);
+			if (result.next()) {
+				this.password = result.getString("password");
+				this.ID = result.getInt("id");
+				
+			} else {
+				throw new UnknowLoginException(login);
+			}
+			
+			result.close();
+			statement.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+>>>>>>> 19d096cf176426501c504bd725533a34c2c0b4e0
 	}
 }
