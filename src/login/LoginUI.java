@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-<<<<<<< HEAD
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -42,18 +41,6 @@ public class LoginUI extends JPanel implements ActionListener {
 		}
 		this.connected = true;
 	}
-=======
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-public class LoginUI {
-
-	private JPanel pan;
-	private JButton connection;
-	private JTextField login;
-	private JTextField password;
-	
->>>>>>> 19d096cf176426501c504bd725533a34c2c0b4e0
 	
 	public Boolean isConnected() {
 		return this.connected;
