@@ -14,7 +14,8 @@ public class LoginUI extends JPanel implements ActionListener {
 	private JTextField login = new JTextField();
 	private JTextField password = new JTextField();
 	private JButton connection = new JButton();
-	private Boolean connected = false;
+	
+	private String token = null;
 	
 	public LoginUI() {
 		this.login.setPreferredSize(new Dimension(150, 30));
@@ -35,14 +36,14 @@ public class LoginUI extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeAccount account = new FacadeAccount();
 		try {
-			account.login(this.login.getText(), this.password.getText());
+			this.token = account.login(this.login.getText(), this.password.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			this.token = null;
 		}
-		this.connected = true;
 	}
 	
 	public Boolean isConnected() {
-		return this.connected;
+		return this.token == null;
 	}
 }

@@ -1,13 +1,6 @@
 package login;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.UUID;
-
-import common.JDBConnection;
 import common.PasswordErrorException;
-import common.SessionErrorException;
 
 public class FacadeAccount {
 	public FacadeAccount() {

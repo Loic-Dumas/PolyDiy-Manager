@@ -3,6 +3,8 @@ package login;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import common.ErrorConnectionException;
 import common.IncorrectLoginException;
@@ -33,9 +35,10 @@ public class LoginChecker {
 	}
 	
 	public void createAccount(String login) throws UnknownLoginException, ErrorConnectionException, IncorrectLoginException {
-		Boolean match = false;
-		// TODO check invalid characters
-		if(!match) {
+		Pattern pattern = Pattern.compile("[[^ \\w] && [^ \\p{javaLowerCase}] && [^ \\p{javaUpperCase}]]");
+		Matcher matcher = pattern.matcher(login);
+		
+		if(!matcher.find()) {
 			AccountFactory factory = new JDBCAccountFactory();
 			this.account = factory.build(login);
 		} else {
