@@ -14,4 +14,8 @@ public abstract class Account {
 		return this.password;
 	}
 	
+	public int getID() {
+		return this.ID;
+	}
+	
 }

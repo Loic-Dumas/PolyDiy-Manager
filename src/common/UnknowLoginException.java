@@ -13,6 +13,6 @@ public class UnknowLoginException extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return "" + unknowLogin + "is unknown.";
+		return "" + unknowLogin + " is unknown.";
 	}
 }

@@ -1,18 +1,19 @@
-import common.JDBConnection;
+import javax.swing.JFrame;
+
+import login.LoginUI;
 
 public class Main {
 
 	public static void main(String[] args) {
-
-		try {
-				JDBConnection connection = JDBConnection.getInstance();
-				System.out.println("Connected");
-		         
-		    } catch (Exception e) {
-		      e.printStackTrace();
-		    }      
+		JFrame window = new JFrame();
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setSize(400, 100);
+		window.setTitle("PolyDIY Manager");
+		
+		LoginUI loginUI = new LoginUI();
+		window.setContentPane(loginUI);
+		window.setVisible(true);
 	}
-
 }
 
 

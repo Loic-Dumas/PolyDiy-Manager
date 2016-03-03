@@ -1,9 +1,11 @@
 package login;
 
-public class JDBCAccountFactory extends AccountFactory {
+import common.ErrorConnectionException;
+import common.UnknowLoginException;
 
-	@Override
-	public Account build(String login) {
+public class JDBCAccountFactory implements AccountFactory {
+
+	public Account build(String login) throws ErrorConnectionException, UnknowLoginException {
 		return new JDBCAccount(login);
 	}
 

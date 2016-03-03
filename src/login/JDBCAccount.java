@@ -8,11 +8,16 @@ import common.ErrorConnectionException;
 import common.JDBConnection;
 import common.UnknowLoginException;
 
+/**
+ * This class create an account
+ * 
+ * @author loicd_000
+ *
+ */
 public class JDBCAccount  extends Account {
 	public JDBCAccount(String login) throws ErrorConnectionException, UnknowLoginException {
 		super(login);
-		// aller chercher l'identifiant dans a BD etc. 
-		String query = "SELECT * FROM account WHERE login = " + login + ";";
+		String query = "SELECT * FROM account WHERE login = '" + login + "';";
 		JDBConnection connection = JDBConnection.getInstance();
 		Statement statement;
 		try {
@@ -30,8 +35,7 @@ public class JDBCAccount  extends Account {
 			statement.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ErrorConnectionException();
 		}
 		
 	}
