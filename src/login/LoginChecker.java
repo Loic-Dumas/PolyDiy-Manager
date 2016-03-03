@@ -8,33 +8,32 @@ import java.util.regex.Pattern;
 
 import common.ErrorConnectionException;
 import common.IncorrectLoginException;
-import common.UnknownLoginException;
+import common.UnknowLoginException;
 
 public class LoginChecker {
-	private Account account = null;
+	private Account account = null;	
 	
 	public boolean isValidPassword(String password) {
-		if(this.account == null) {
-			throw new NullPointerException();
+		if (this.account == null) {
+			throw new NullPointerException() ;
 		}
-		
 		MessageDigest digest;
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
 			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 			String hashPassword = "";
 			for(byte b : hash) {
-			    hashPassword += String.format("%02x",b);
+				hashPassword += String.format("%02x", b);
 			}
-			return account.getPassword().equals(hashPassword);
+			return hashPassword.equals(this.account.getPassword());
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		return false ;
 		
-		return false;
 	}
 	
-	public void createAccount(String login) throws UnknownLoginException, ErrorConnectionException, IncorrectLoginException {
+	public void createAccount(String login) throws UnknowLoginException, ErrorConnectionException, IncorrectLoginException {
 		Pattern pattern = Pattern.compile("[[^ \\w] && [^ \\p{javaLowerCase}] && [^ \\p{javaUpperCase}]]");
 		Matcher matcher = pattern.matcher(login);
 		
@@ -46,7 +45,7 @@ public class LoginChecker {
 		}
 	}
 	
-	public Account getAccount() {
+	public Account getAccount(){
 		return this.account;
 	}
 

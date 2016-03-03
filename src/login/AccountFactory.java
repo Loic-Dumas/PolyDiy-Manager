@@ -1,8 +1,8 @@
 package login;
 
 import common.ErrorConnectionException;
-import common.UnknownLoginException;
+import common.UnknowLoginException;
 
-public abstract class AccountFactory {
-	public abstract Account build(String login) throws UnknownLoginException, ErrorConnectionException;
+public interface AccountFactory {
+	public abstract Account build(String login) throws ErrorConnectionException, UnknowLoginException;
 }

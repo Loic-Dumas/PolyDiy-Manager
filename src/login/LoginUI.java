@@ -9,18 +9,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LoginUI extends JPanel implements ActionListener {
-	private static final long serialVersionUID = 1L;
+import common.ErrorConnectionException;
+import common.ErrorPasswordException;
+import common.SessionErrorException;
+import common.UnknowLoginException;
+
+public class LoginUI extends JPanel implements ActionListener{
+
+	private JButton connection = new JButton();
 	private JTextField login = new JTextField();
 	private JTextField password = new JTextField();
-	private JButton connection = new JButton();
-	
 	private String token = null;
 	
 	public LoginUI() {
-		this.login.setPreferredSize(new Dimension(150, 30));
-		this.password.setPreferredSize(new Dimension(150, 30));
-		this.connection.setPreferredSize(new Dimension(150, 30));
+		this.login.setPreferredSize(new Dimension(150,30));
+		this.password.setPreferredSize(new Dimension(150,30));
+		this.connection.setPreferredSize(new Dimension(150,30));
 		this.connection.setText("Connect");
 		
 		this.add(login);
@@ -28,15 +32,14 @@ public class LoginUI extends JPanel implements ActionListener {
 		this.add(connection);
 		
 		this.connection.addActionListener(this);
-		
 		this.setVisible(true);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		FacadeAccount account = new FacadeAccount();
+		FacadeAccount facade = new FacadeAccount();
 		try {
-			this.token = account.login(this.login.getText(), this.password.getText());
+			this.token = facade.login(this.login.getText(), this.password.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			this.token = null;

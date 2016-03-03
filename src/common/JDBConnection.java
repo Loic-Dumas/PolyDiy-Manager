@@ -6,6 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * This class crate a connection to the DB with JDBC.
+ * This class use the pattern Singleton, because we cannot have more than one connection.
+ * 
+ * @author loicd_000
+ * @version 1.0
+ * @since 2016-03-02
+ */
 public class JDBConnection {
 	//postgres login
 	private Connection connection;
@@ -16,6 +24,15 @@ public class JDBConnection {
 		this.connection = DriverManager.getConnection(URL , user, password);
 	}
 	
+	/**
+	 * getInstance() return a JDBConnection. 
+	 * Use the pattern singleton to have only one connection.
+	 * 
+	 * @author loicd_000
+	 * @version 1.0
+	 * @since 2016-03-02
+	 * @return JDBConnection
+	 */
 	public static JDBConnection getInstance() throws ErrorConnectionException {
 		if (JDBConnection.instance == null) {
 			try {

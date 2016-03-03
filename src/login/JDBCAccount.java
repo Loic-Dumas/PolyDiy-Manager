@@ -6,28 +6,37 @@ import java.sql.Statement;
 
 import common.ErrorConnectionException;
 import common.JDBConnection;
-import common.UnknownLoginException;
+import common.UnknowLoginException;
 
+/**
+ * This class create an account
+ * 
+ * @author loicd_000
+ *
+ */
 public class JDBCAccount  extends Account {
-	public JDBCAccount(String login) throws UnknownLoginException, ErrorConnectionException{
+	public JDBCAccount(String login) throws ErrorConnectionException, UnknowLoginException {
 		super(login);
-		
+		String query = "SELECT * FROM account WHERE login = '" + login + "';";
 		JDBConnection connection = JDBConnection.getInstance();
-		String query = "SELECT * FROM Account WHERE Login='" + login + "';";
-		Statement state;
+		Statement statement;
 		try {
-			state = connection.getStatement();
-			ResultSet result = state.executeQuery(query);
-			if(result.next()) {
-				this.ID = result.getInt("Id");
-				this.password = result.getString("Password");
+			statement = connection.getStatement();
+			ResultSet result = statement.executeQuery(query);
+			if (result.next()) {
+				this.password = result.getString("password");
+				this.ID = result.getInt("id");
+				
 			} else {
-				throw new UnknownLoginException(login);
+				throw new UnknowLoginException(login);
 			}
+			
 			result.close();
-			state.close();
+			statement.close();
+			
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
 		}
+		
 	}
 }

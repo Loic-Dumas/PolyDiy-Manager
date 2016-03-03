@@ -3,3 +3,4 @@ bin/*
 src/postgresql-9.4.1208.jre6.jar
 *.bak
 *.orig
+/bin/
