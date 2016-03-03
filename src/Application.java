@@ -3,6 +3,14 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+// TODO add Javadoc
+/**
+ * 
+ * 
+ * @author Pierre Casati
+ * @version 1.0
+ * @since 2016-03-03
+ */
 
 public class Application extends JFrame{
 	private static final long serialVersionUID = 1L;

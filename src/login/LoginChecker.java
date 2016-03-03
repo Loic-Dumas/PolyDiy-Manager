@@ -1,5 +1,12 @@
 package login;
 
+/**
+ * This class make the compares the paswword entered by the user and the real account.
+ * 
+ * @author Pierre Casati
+ * @version 1.0
+ * @since 2016-03-03
+ */
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +20,17 @@ import common.UnknowLoginException;
 public class LoginChecker {
 	private Account account = null;	
 	
+
+	/**
+	 * This function compare the real password, and the password entered by the user (in parameter).
+	 * The password is transformed in sha2.
+	 * 
+	 * @author Pierre Casati
+	 * @version 1.0
+	 * @since 2016-03-03
+	 * @param String password : the password to be compared.
+	 * @return a boolean, true is the password are equals.
+	 */
 	public boolean isValidPassword(String password) {
 		if (this.account == null) {
 			throw new NullPointerException() ;
@@ -32,7 +50,15 @@ public class LoginChecker {
 		return false ;
 		
 	}
-	
+
+	/**
+	 * This function create an account.
+	 * Throw an error if the login contains invalid caracters.
+	 * 
+	 * @author Pierre Casati
+	 * @version 1.0
+	 * @since 2016-03-03
+	 */
 	public void createAccount(String login) throws UnknowLoginException, ErrorConnectionException, IncorrectLoginException {
 		Pattern pattern = Pattern.compile("[[^ \\w] && [^ \\p{javaLowerCase}] && [^ \\p{javaUpperCase}]]");
 		Matcher matcher = pattern.matcher(login);

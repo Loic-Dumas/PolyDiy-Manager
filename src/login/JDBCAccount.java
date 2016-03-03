@@ -9,12 +9,18 @@ import common.JDBConnection;
 import common.UnknowLoginException;
 
 /**
- * This class create an account
+ * This class extends from account. 
+ * (So you need the login(String) to create the account)
+ * When you create the JDBCaccount you connect to the database to get the real password and the id.
+ * If the login don't exist, throws UnknowLoginExcetion.
+ * If the connection fail, throws EroorConnectionException.
  * 
  * @author loicd_000
+ * @version 1.0
+ * @since 2016-03-02
  *
  */
-public class JDBCAccount  extends Account {
+public class JDBCAccount extends Account {
 	public JDBCAccount(String login) throws ErrorConnectionException, UnknowLoginException {
 		super(login);
 		String query = "SELECT * FROM account WHERE login = '" + login + "';";

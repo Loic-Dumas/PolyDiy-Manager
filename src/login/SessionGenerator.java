@@ -8,7 +8,14 @@ import java.util.UUID;
 import common.ErrorConnectionException;
 import common.JDBConnection;
 import common.SessionErrorException;
-
+//TODO add Javadoc
+/**
+* 
+* 
+* @author Pierre Casati
+* @version 1.0
+* @since 2016-03-03
+*/
 public class SessionGenerator {
 	public String generateSession(int ID) throws SessionErrorException, ErrorConnectionException {
 		JDBConnection connection = JDBConnection.getInstance();

@@ -9,16 +9,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import common.ErrorConnectionException;
-import common.ErrorPasswordException;
-import common.SessionErrorException;
-import common.UnknowLoginException;
+import login.FacadeAccount;
 
+/**
+ * This panel is the UI for the login.
+ * Displays two textfields for the login and the password. 
+ * And a button to valid
+ * 
+ * @author Pierre Casati
+ * @version 1.0
+ * @since 2016-03-03
+ */
 public class LoginUI extends JPanel implements ActionListener{
 
 	private JButton connection = new JButton();
 	private JTextField login = new JTextField();
 	private JTextField password = new JTextField();
+	
 	private String token = null;
 	
 	public LoginUI() {
@@ -35,6 +42,14 @@ public class LoginUI extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * The ActionPerformed execute the connection.
+	 * And create the token.
+	 * 
+	 * @author Pierre Casati
+	 * @version 1.0
+	 * @since 2016-03-03
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeAccount facade = new FacadeAccount();

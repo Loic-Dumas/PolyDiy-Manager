@@ -1,5 +1,12 @@
 package common;
 
+/**
+ * This exception is thrown when the user enter an unkwhon password.
+ * 
+ * @author Pierre Casati
+ * @version 1.0
+ * @since 2016-03-03
+ */
 public class UnknowLoginException extends Exception {
 	/**
 	 * 

@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @author loicd_000
  * @version 1.0
  * @since 2016-03-02
- */
+ */ 
 public class JDBConnection {
 	//postgres login
 	private Connection connection;
