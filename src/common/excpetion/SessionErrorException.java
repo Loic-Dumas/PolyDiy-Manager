@@ -1,4 +1,4 @@
-package common;
+package common.excpetion;
 
 /**
  * This exception is thrown when the user is already connected.

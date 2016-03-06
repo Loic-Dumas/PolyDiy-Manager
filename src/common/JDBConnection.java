@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.excpetion.ErrorConnectionException;
+
 /**
  * This class crate a connection to the DB with JDBC.
  * This class use the pattern Singleton, because we cannot have more than one connection.

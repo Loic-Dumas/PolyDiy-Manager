@@ -1,4 +1,4 @@
-package common;
+package common.excpetion;
 
 /**
  * This exception is thrown when connection to the database is impossible.

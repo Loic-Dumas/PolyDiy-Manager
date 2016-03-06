@@ -1,4 +1,4 @@
-package common;
+package common.excpetion;
 
 /**
  * This exception is thrown when the user try to connect him with a password with an incorrect password.

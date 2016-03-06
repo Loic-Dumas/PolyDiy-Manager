@@ -13,9 +13,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import common.ErrorConnectionException;
-import common.IncorrectLoginException;
-import common.UnknowLoginException;
+import common.excpetion.ErrorConnectionException;
+import common.excpetion.IncorrectLoginException;
+import common.excpetion.UnknownLoginException;
 
 public class LoginChecker {
 	private Account account = null;	
@@ -59,7 +59,7 @@ public class LoginChecker {
 	 * @version 1.0
 	 * @since 2016-03-03
 	 */
-	public void createAccount(String login) throws UnknowLoginException, ErrorConnectionException, IncorrectLoginException {
+	public void createAccount(String login) throws UnknownLoginException, ErrorConnectionException, IncorrectLoginException {
 		Pattern pattern = Pattern.compile("[[^ \\w] && [^ \\p{javaLowerCase}] && [^ \\p{javaUpperCase}]]");
 		Matcher matcher = pattern.matcher(login);
 		
