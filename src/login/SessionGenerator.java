@@ -6,8 +6,8 @@ import java.sql.Statement;
 import java.util.UUID;
 
 import common.JDBConnection;
-import common.excpetion.ErrorConnectionException;
-import common.excpetion.SessionErrorException;
+import common.exception.ErrorConnectionException;
+import common.exception.SessionErrorException;
 //TODO add Javadoc
 /**
 * 

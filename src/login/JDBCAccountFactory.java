@@ -1,7 +1,7 @@
 package login;
 
-import common.excpetion.ErrorConnectionException;
-import common.excpetion.UnknownLoginException;
+import common.exception.ErrorConnectionException;
+import common.exception.UnknownLoginException;
 
 /**
  * This class is a factory who implements the AccountFactory interface.

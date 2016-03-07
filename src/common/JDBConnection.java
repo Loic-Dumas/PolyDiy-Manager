@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import common.excpetion.ErrorConnectionException;
+import common.exception.ErrorConnectionException;
 
 /**
  * This class crate a connection to the DB with JDBC.

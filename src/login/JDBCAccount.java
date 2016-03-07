@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import common.JDBConnection;
-import common.excpetion.ErrorConnectionException;
-import common.excpetion.UnknownLoginException;
+import common.exception.ErrorConnectionException;
+import common.exception.UnknownLoginException;
 
 /**
  * This class extends from account. 

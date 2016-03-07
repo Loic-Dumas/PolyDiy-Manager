@@ -13,9 +13,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import common.excpetion.ErrorConnectionException;
-import common.excpetion.IncorrectLoginException;
-import common.excpetion.UnknownLoginException;
+import common.exception.ErrorConnectionException;
+import common.exception.IncorrectLoginException;
+import common.exception.UnknownLoginException;
 
 public class LoginChecker {
 	private Account account = null;	
