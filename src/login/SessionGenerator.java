@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-import common.ErrorConnectionException;
 import common.JDBConnection;
-import common.SessionErrorException;
+import common.excpetion.ErrorConnectionException;
+import common.excpetion.SessionErrorException;
 //TODO add Javadoc
 /**
 * 

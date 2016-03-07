@@ -1,4 +1,4 @@
-package common;
+package common.excpetion;
 
 /**
  * This exception is thrown when the user enter an unkwhon password.
@@ -7,19 +7,19 @@ package common;
  * @version 1.0
  * @since 2016-03-03
  */
-public class UnknowLoginException extends Exception {
+public class UnknownLoginException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String unknowLogin;
+	private String unknownLogin;
 	
-	public UnknowLoginException(String login){
-		this.unknowLogin = login;
+	public UnknownLoginException(String login){
+		this.unknownLogin = login;
 	}
 	
 	@Override
 	public String getMessage() {
-		return "" + unknowLogin + " is unknown.";
+		return "" + unknownLogin + " is unknown.";
 	}
 }

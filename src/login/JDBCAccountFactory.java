@@ -1,7 +1,7 @@
 package login;
 
-import common.ErrorConnectionException;
-import common.UnknowLoginException;
+import common.excpetion.ErrorConnectionException;
+import common.excpetion.UnknownLoginException;
 
 /**
  * This class is a factory who implements the AccountFactory interface.
@@ -13,7 +13,7 @@ import common.UnknowLoginException;
  */
 public class JDBCAccountFactory implements AccountFactory {
 
-	public Account build(String login) throws ErrorConnectionException, UnknowLoginException {
+	public Account build(String login) throws ErrorConnectionException, UnknownLoginException {
 		return new JDBCAccount(login);
 	}
 

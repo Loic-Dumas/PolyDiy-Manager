@@ -1,4 +1,4 @@
-package common;
+package common.excpetion;
 
 /**
  * This exception is thrown when the user enter an invalid password.
@@ -7,12 +7,12 @@ package common;
  * @version 1.0
  * @since 2016-03-03
  */
-public class PasswordErrorException extends Exception {
+public class ErrorPasswordException extends Exception {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	public String getMessage() {
-		return "The password is incorrect.";
+		return "Error : Wrong password.";
 	}
 
 }

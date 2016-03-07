@@ -1,6 +1,6 @@
 package login;
 
-import common.PasswordErrorException;
+import common.excpetion.PasswordErrorException;
 
 /**
  * This class contains a function to connect the user.

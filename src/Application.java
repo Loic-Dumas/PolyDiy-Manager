@@ -21,7 +21,7 @@ public class Application extends JFrame{
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(400, 100);
+		this.setSize(400, 250);
 	}
 	
 	public void addUI(String ui)

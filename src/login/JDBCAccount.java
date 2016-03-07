@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import common.ErrorConnectionException;
 import common.JDBConnection;
-import common.UnknowLoginException;
+import common.excpetion.ErrorConnectionException;
+import common.excpetion.UnknownLoginException;
 
 /**
  * This class extends from account. 
@@ -21,7 +21,7 @@ import common.UnknowLoginException;
  *
  */
 public class JDBCAccount extends Account {
-	public JDBCAccount(String login) throws ErrorConnectionException, UnknowLoginException {
+	public JDBCAccount(String login) throws ErrorConnectionException, UnknownLoginException {
 		super(login);
 		String query = "SELECT * FROM account WHERE login = '" + login + "';";
 		JDBConnection connection = JDBConnection.getInstance();
@@ -34,7 +34,7 @@ public class JDBCAccount extends Account {
 				this.ID = result.getInt("id");
 				
 			} else {
-				throw new UnknowLoginException(login);
+				throw new UnknownLoginException(login);
 			}
 			
 			result.close();
