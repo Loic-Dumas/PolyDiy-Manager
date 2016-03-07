@@ -21,6 +21,7 @@ import login.FacadeAccount;
  * @since 2016-03-03
  */
 public class LoginUI extends JPanel implements ActionListener{
+	private static final long serialVersionUID = 1L;
 
 	private JButton connection = new JButton();
 	private JTextField login = new JTextField();
