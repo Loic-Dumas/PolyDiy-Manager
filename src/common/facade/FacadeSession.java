@@ -1,6 +1,8 @@
-package login;
+package common.facade;
 
-import common.exception.PasswordErrorException;
+import common.exception.ErrorConnectionException;
+import logic.session.LoginChecker;
+import logic.session.SessionHandler;
 
 /**
  * This class contains a function to connect the user.
@@ -9,8 +11,8 @@ import common.exception.PasswordErrorException;
  * @version 1.0
  * @since 2016-03-03
  */
-public class FacadeAccount {
-	public FacadeAccount() {
+public class FacadeSession {
+	public FacadeSession() {
 		
 	}
 
@@ -28,16 +30,17 @@ public class FacadeAccount {
 	public String login(String login, String password) throws Exception {
 		String token = "";
 		LoginChecker checker = new LoginChecker();
-		checker.createAccount(login);
-		
-		int ID = checker.getAccount().getID();
+		checker.generateAccount(login);
 		if(checker.isValidPassword(password)) {
-			SessionGenerator generator = new SessionGenerator();	
-			token = generator.generateSession(ID);
-		} else {
-			throw new PasswordErrorException();
+			SessionHandler handler = new SessionHandler();
+			token = handler.login(checker.getAccount().getID());
 		}
 		return token;
+	}
+	
+	public void logout(String token) throws ErrorConnectionException {
+		SessionHandler handler = new SessionHandler();
+		handler.logout(token);
 	}
 	
 }

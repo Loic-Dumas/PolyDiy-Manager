@@ -1,8 +1,9 @@
-package common;
+package common.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -50,7 +51,9 @@ public class JDBConnection {
 	}
 	
 	public Statement getStatement() throws SQLException {
-		return this.connection.createStatement();
+		return this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+											   ResultSet.CONCUR_READ_ONLY,
+											   ResultSet.HOLD_CURSORS_OVER_COMMIT);
 	}
 	
 	public PreparedStatement getPreparedStatement(String query) throws SQLException {

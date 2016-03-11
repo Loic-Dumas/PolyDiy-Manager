@@ -1,16 +1,17 @@
-package login;
+package graphic.ui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import common.facade.FacadeSession;
+import graphic.engine.AbstractUI;
 
 /**
  * This panel is the UI for the login.
@@ -22,9 +23,7 @@ import javax.swing.SwingConstants;
  * @since 2016-03-03
  */
 
-public class LoginUI extends JPanel implements ActionListener{
-	private static final long serialVersionUID = 1L;
-
+public class LoginUI extends AbstractUI{
 	private JButton connection = new JButton();
 	private JTextField login = new JTextField();
 	private JPasswordField password = new JPasswordField();
@@ -33,38 +32,38 @@ public class LoginUI extends JPanel implements ActionListener{
 	private String token = null;
 	
 	public LoginUI() {
-		this.setLayout(null);
+		this.panel.setLayout(null);
 		// label welcome
 		this.lblWelcome.setText("PolyDIY Manager");
 		this.lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblWelcome.setBounds(0, 31, 400, 30);
-		this.add(lblWelcome);
+		this.panel.add(lblWelcome);
 		
 		// login
 		//this.login.setPreferredSize(new Dimension(150,30));
 		this.login.setBounds(56, 92, 105, 20);
-		this.add(login);
+		this.panel.add(login);
 		this.login.setColumns(10);
 		
 		// password 
 		//this.password.setPreferredSize(new Dimension(150,30));
 		this.password.setBounds(231, 92, 105, 20);
-		this.add(password);
+		this.panel.add(password);
 		
 		// connection
 		//this.connection.setPreferredSize(new Dimension(150,30));
 		//this.connection.setText("Connect");
 		this.connection.setText("Connect");
 		this.connection.setBounds(146, 147, 89, 23);
-		this.add(connection);
+		this.panel.add(connection);
 		
 		/*this.add(login);
 		this.add(password);
 		this.add(connection);
 		*/
 		this.connection.addActionListener(this);
-		this.setVisible(true);
+		this.panel.setVisible(true);
 	}
 	
 	/**
@@ -77,10 +76,11 @@ public class LoginUI extends JPanel implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		FacadeAccount facade = new FacadeAccount();
+		FacadeSession facade = new FacadeSession();
 		try {
-			this.token = facade.login(this.login.getText(), this.password.getPassword().toString());
-			//TODO Voir le getPassword. S'il y a un truc plus propore à faire.
+			this.token = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
+			this.setChanged();
+			this.notifyObservers("login");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			this.token = null;
@@ -88,6 +88,10 @@ public class LoginUI extends JPanel implements ActionListener{
 	}
 	
 	public Boolean isConnected() {
-		return this.token == null;
+		return this.token != null;
+	}
+	
+	public String getToken() {
+		return this.token;
 	}
 }
