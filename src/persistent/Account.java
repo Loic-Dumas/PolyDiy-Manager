@@ -1,4 +1,4 @@
-package login;
+package persistent;
 
 /**
  * An account contain a login, a password and and ID.

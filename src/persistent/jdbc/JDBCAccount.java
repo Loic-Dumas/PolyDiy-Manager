@@ -1,12 +1,13 @@
-package login;
+package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import common.JDBConnection;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownLoginException;
+import common.jdbc.JDBConnection;
+import persistent.Account;
 
 /**
  * This class extends from account. 

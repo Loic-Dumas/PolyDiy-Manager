@@ -1,4 +1,4 @@
-package login;
+package logic.session;
 
 /**
  * This class make the compares the paswword entered by the user and the real account.
@@ -13,9 +13,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import common.exception.ErrorConnectionException;
 import common.exception.IncorrectLoginException;
-import common.exception.UnknownLoginException;
+import common.factory.SessionFactory;
+import persistent.Account;
+import common.factory.JDBCSessionFactory;
 
 public class LoginChecker {
 	private Account account = null;	
@@ -57,15 +58,16 @@ public class LoginChecker {
 	 * 
 	 * @author Pierre Casati
 	 * @version 1.0
+	 * @throws Exception 
 	 * @since 2016-03-03
 	 */
-	public void createAccount(String login) throws UnknownLoginException, ErrorConnectionException, IncorrectLoginException {
+	public void generateAccount(String login) throws Exception {
 		Pattern pattern = Pattern.compile("[[^ \\w] && [^ \\p{javaLowerCase}] && [^ \\p{javaUpperCase}]]");
 		Matcher matcher = pattern.matcher(login);
 		
 		if(!matcher.find()) {
-			AccountFactory factory = new JDBCAccountFactory();
-			this.account = factory.build(login);
+			SessionFactory factory = new JDBCSessionFactory();
+			this.account = factory.buildAccount(login);
 		} else {
 			throw new IncorrectLoginException();
 		}
