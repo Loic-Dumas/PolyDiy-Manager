@@ -1,6 +1,7 @@
 package common.facade;
 
 import common.exception.ErrorConnectionException;
+import common.exception.ErrorPasswordException;
 import logic.session.LoginChecker;
 import logic.session.SessionHandler;
 
@@ -28,12 +29,14 @@ public class FacadeSession {
 	 * @return String : the token of the connection is returned.
 	 */
 	public String login(String login, String password) throws Exception {
-		String token = "";
+		String token = null;
 		LoginChecker checker = new LoginChecker();
 		checker.generateAccount(login);
 		if(checker.isValidPassword(password)) {
 			SessionHandler handler = new SessionHandler();
 			token = handler.login(checker.getAccount().getID());
+		} else {
+			throw new ErrorPasswordException();
 		}
 		return token;
 	}
