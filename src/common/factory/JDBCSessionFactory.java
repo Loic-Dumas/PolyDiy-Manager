@@ -14,7 +14,7 @@ public class JDBCSessionFactory extends SessionFactory {
 	}
 
 	@Override
-	public Session buildSession(String tokenIn, int IDin) {
+	public Session buildSession(String tokenIn, int IDin) throws ErrorConnectionException {
 		return new JDBCSession(tokenIn, IDin);
 	}
 
@@ -24,7 +24,7 @@ public class JDBCSessionFactory extends SessionFactory {
 	}
 
 	@Override
-	public Session buildSessionWithToken(String tokenIn) {
+	public Session buildSessionWithToken(String tokenIn) throws ErrorConnectionException {
 		return new JDBCSession(tokenIn);
 	}
 }

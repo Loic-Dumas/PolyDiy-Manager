@@ -72,6 +72,7 @@ public class Application extends JFrame implements Observer{
 				this.token = null;
 				this.panels.remove("logout");
 				this.addUI("login");
+				break;
 			default:
 				System.err.println("problème de cas");
 				break;
@@ -82,11 +83,13 @@ public class Application extends JFrame implements Observer{
 	}
 	
 	private void endSession() {
-		FacadeSession facade = new FacadeSession();
-		try {
-			facade.logout(this.token);
-		} catch (ErrorConnectionException e) {
-			System.err.println(e.getMessage());
+		if (this.token != null) {
+			FacadeSession facade = new FacadeSession();
+			try {
+				facade.logout(this.token);
+			} catch (ErrorConnectionException e) {
+				System.err.println(e.getMessage());
+			}
 		}
 	}
 }
