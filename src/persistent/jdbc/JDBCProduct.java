@@ -19,14 +19,12 @@ import persistent.Product;
 public class JDBCProduct extends Product {
 	private JDBCComponent component = new JDBCComponent();
 
-	public JDBCProduct(int ID) throws ErrorConnectionException, UnknownIDException, SQLException {
+	public JDBCProduct(int ID) throws ErrorConnectionException, UnknownIDException {
 		super(ID);
 		
-		ResultSet result = null;
 		try {
-			result = this.component.select("*", "product", "id = " + this.ID);
-			if (result.next()) {
-				
+			ResultSet result = this.component.select("*", "product", "id = '" + this.ID + "'");
+			if (result.first()) {
 				this.name = result.getString("name");
 				this.description = result.getString("description");
 				this.unitPrice = result.getFloat("unitPrice");
@@ -36,6 +34,8 @@ public class JDBCProduct extends Product {
 				throw new UnknownIDException(ID);
 			}
 		} catch (JDBCQueryException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
