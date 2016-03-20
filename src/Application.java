@@ -83,11 +83,13 @@ public class Application extends JFrame implements Observer{
 	}
 	
 	private void endSession() {
-		FacadeSession facade = new FacadeSession();
-		try {
-			facade.logout(this.token);
-		} catch (ErrorConnectionException e) {
-			System.err.println(e.getMessage());
+		if (this.token != null) {
+			FacadeSession facade = new FacadeSession();
+			try {
+				facade.logout(this.token);
+			} catch (ErrorConnectionException e) {
+				System.err.println(e.getMessage());
+			}
 		}
 	}
 }
