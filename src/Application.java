@@ -72,6 +72,7 @@ public class Application extends JFrame implements Observer{
 				this.token = null;
 				this.panels.remove("logout");
 				this.addUI("login");
+				break;
 			default:
 				System.err.println("problème de cas");
 				break;
