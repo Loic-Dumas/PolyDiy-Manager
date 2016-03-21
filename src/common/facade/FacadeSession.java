@@ -2,8 +2,8 @@ package common.facade;
 
 import common.exception.ErrorConnectionException;
 import common.exception.ErrorPasswordException;
-import logic.session.LoginChecker;
-import logic.session.SessionHandler;
+import logic.LoginChecker;
+import logic.SessionHandler;
 
 /**
  * This class contains a function to connect the user.

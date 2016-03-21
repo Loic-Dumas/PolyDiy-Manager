@@ -8,9 +8,7 @@ package common.exception;
  * @since 2016-03-03
  */
 public class UnknownLoginException extends Exception {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String unknownLogin;
 	

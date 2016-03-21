@@ -8,7 +8,7 @@ package persistent;
  * @version 1.0
  * @since 2016-03-19
  */
-public class Product {
+public abstract class Product {
 	protected int ID;
 	protected String name;
 	protected String description;

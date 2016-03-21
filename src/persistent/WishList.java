@@ -5,11 +5,12 @@ import common.Set;
  * @author loicd_000
  *
  */
-public class WishList extends Set{
-	private String label;
+public abstract class WishList extends Set{
+	protected String label;
+	protected int ID;
 	
-	public WishList(String label){
-		this.label = label;
+	public WishList(int ID){
+		this.setID(ID);
 	}
 
 	public String getLabel() {
@@ -18,6 +19,14 @@ public class WishList extends Set{
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 }
