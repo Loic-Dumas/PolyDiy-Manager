@@ -1,4 +1,4 @@
-package logic.session;
+package logic;
 
 /**
  * This class make the compares the paswword entered by the user and the real account.
@@ -15,8 +15,8 @@ import java.util.regex.Pattern;
 
 import common.exception.IncorrectLoginException;
 import common.factory.SessionFactory;
+import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
-import common.factory.JDBCSessionFactory;
 
 public class LoginChecker {
 	private Account account = null;	

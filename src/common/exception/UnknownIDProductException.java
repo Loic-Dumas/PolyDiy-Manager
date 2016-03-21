@@ -7,12 +7,12 @@ package common.exception;
  * @version 1.0
  * @since 2016-03-03
  */
-public class UnknownIDException extends Exception {
+public class UnknownIDProductException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	private int unknownID;
 	
-	public UnknownIDException(int ID){
+	public UnknownIDProductException(int ID){
 		this.unknownID = ID;
 	}
 	
