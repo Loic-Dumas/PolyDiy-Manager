@@ -1,7 +1,7 @@
 package common.exception;
 
 /**
- * This exception is thrown when the user enter an unkwhon password.
+ * This exception is thrown when the user enter an unkwnown login.
  * 
  * @author Pierre Casati
  * @version 1.0

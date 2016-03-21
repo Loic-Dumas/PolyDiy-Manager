@@ -2,11 +2,11 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import common.exception.ErrorConnectionException;
+import common.exception.JDBCQueryException;
 import common.exception.UnknownLoginException;
-import common.jdbc.JDBConnection;
+import common.jdbc.JDBCComponent;
 import persistent.Account;
 
 /**
@@ -22,28 +22,22 @@ import persistent.Account;
  *
  */
 public class JDBCAccount extends Account {
+	private JDBCComponent component = new JDBCComponent();
+	
 	public JDBCAccount(String login) throws ErrorConnectionException, UnknownLoginException {
 		super(login);
-		String query = "SELECT * FROM account WHERE login = '" + login + "';";
-		JDBConnection connection = JDBConnection.getInstance();
-		Statement statement;
 		try {
-			statement = connection.getStatement();
-			ResultSet result = statement.executeQuery(query);
-			if (result.next()) {
+			ResultSet result = this.component.select("*", "Account", "login = '" + login + "'");
+			if (result.first()) {
 				this.password = result.getString("password");
 				this.ID = result.getInt("id");
-				
 			} else {
 				throw new UnknownLoginException(login);
 			}
-			
-			result.close();
-			statement.close();
-			
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
+		} catch (JDBCQueryException e) {
+			e.printStackTrace();
 		}
-		
 	}
 }

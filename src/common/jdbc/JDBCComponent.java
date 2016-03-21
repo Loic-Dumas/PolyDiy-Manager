@@ -8,6 +8,16 @@ import common.exception.ErrorConnectionException;
 import common.exception.JDBCQueryException;
 
 public class JDBCComponent {
+	private Statement stmt = null;
+	
+	public JDBCComponent() throws ErrorConnectionException {
+		try {
+			this.stmt = JDBConnection.getInstance().getStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ResultSet select(String selectionIn, String objectIn, String conditionIn) throws JDBCQueryException, ErrorConnectionException {
 		if(selectionIn == "" || objectIn == "") {
 			throw new JDBCQueryException();
@@ -17,17 +27,12 @@ public class JDBCComponent {
 			query += " WHERE " + conditionIn;
 		}
 		query += ";";
-		
-		JDBConnection connection = JDBConnection.getInstance();
-		Statement statement;
 		ResultSet result;
 		try {
-			statement = connection.getStatement();
-			result = statement.executeQuery(query);
+			result = this.stmt.executeQuery(query);
 			if (!result.first()) {
 				result = null;
 			}
-			statement.close();
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
 		}
@@ -39,12 +44,8 @@ public class JDBCComponent {
 			throw new JDBCQueryException();
 		}
 		String query = "DELETE FROM " + objectIn + " WHERE " + conditionIn + ";";
-		JDBConnection connection = JDBConnection.getInstance();
-		Statement statement;
 		try {
-			statement = connection.getStatement();
-			statement.executeQuery(query);
-			statement.close();
+			this.stmt.executeQuery(query);
 		} catch (SQLException e) {
 			if(!e.getMessage().equals("Aucun résultat retourné par la requête.")) {
 				throw new ErrorConnectionException();
@@ -53,6 +54,27 @@ public class JDBCComponent {
 	}
 	
 	public void update(String newValueIn, String objectIn, String conditionIn) {
-		
+	}
+	
+	public void insert(String objectIn, String valuesIn) throws ErrorConnectionException, JDBCQueryException {
+		if(objectIn == "" || valuesIn == "") {
+			throw new JDBCQueryException();
+		}
+		String query = "INSERT INTO " + objectIn + " VALUES(" + valuesIn + ");";
+		try {
+			this.stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			if(!e.getMessage().equals("Aucun résultat retourné par la requête.")) {
+				throw new ErrorConnectionException();
+			}
+		}
+	}
+	
+	public void clear() {
+		try {
+			this.stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -80,7 +80,9 @@ public class LoginUI extends AbstractUI{
 		try {
 			this.token = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
 			this.setChanged();
-			this.notifyObservers("login");
+			if(this.token != null) {
+				this.notifyObservers("login");
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			this.token = null;
