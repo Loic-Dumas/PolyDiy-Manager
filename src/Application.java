@@ -32,7 +32,7 @@ public class Application extends JFrame implements Observer{
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(400, 250);
+		this.setSize(1000, 600);
 		
 		this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

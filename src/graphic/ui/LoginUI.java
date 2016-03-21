@@ -37,25 +37,25 @@ public class LoginUI extends AbstractUI{
 		this.lblWelcome.setText("PolyDIY Manager");
 		this.lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		this.lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblWelcome.setBounds(0, 31, 400, 30);
+		this.lblWelcome.setBounds(0, 31, 1000, 30);
 		this.panel.add(lblWelcome);
 		
 		// login
 		//this.login.setPreferredSize(new Dimension(150,30));
-		this.login.setBounds(56, 92, 105, 20);
+		this.login.setBounds(356, 92, 105, 20);
 		this.panel.add(login);
 		this.login.setColumns(10);
 		
 		// password 
 		//this.password.setPreferredSize(new Dimension(150,30));
-		this.password.setBounds(231, 92, 105, 20);
+		this.password.setBounds(531, 92, 105, 20);
 		this.panel.add(password);
 		
 		// connection
 		//this.connection.setPreferredSize(new Dimension(150,30));
 		//this.connection.setText("Connect");
 		this.connection.setText("Connect");
-		this.connection.setBounds(146, 147, 89, 23);
+		this.connection.setBounds(450, 147, 89, 23);
 		this.panel.add(connection);
 		
 		/*this.add(login);
