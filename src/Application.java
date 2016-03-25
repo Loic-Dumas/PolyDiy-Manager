@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -6,12 +7,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import common.exception.ErrorConnectionException;
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.ui.LoginUI;
+import persistent.Session;
 
 /**
  * 
@@ -26,17 +29,23 @@ public class Application extends JFrame implements Observer{
 	
 	Map<String, AbstractUI> panels = new HashMap<String, AbstractUI>();
 	
-	String token = null;
+	Session session = null;
 	
 	public Application()
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 600);
+		this.setSize(1366, 700);
+		this.setResizable(false);
+		this.setLayout(new BorderLayout());
 		
 		this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                endSession();
+                try {
+					endSession();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
             }
         });
 	}
@@ -46,10 +55,16 @@ public class Application extends JFrame implements Observer{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
 		case "login":
-			this.panels.put(ui, factory.buildLoginUI()); //appelle la fonction buildLoginUI de la classe FactoryUI
+			this.panels.put(ui, factory.buildLoginUI());
 			break;
 		case "logout":
-			this.panels.put(ui, factory.buildLogoutUI(this.token)); //appelle la fonction buildLogoutUI de la classe FactoryUI
+			this.panels.put(ui, factory.buildLogoutUI(this.session));
+			break;
+		case "advertisement":
+			this.panels.put(ui, factory.buildAdvertisementUI());
+			break;
+		case "createAccount":
+			this.panels.put(ui, factory.buildCreateAccountUI());
 			break;
 		case "updateAccount":
 			this.panels.put(ui, factory.buildModifyIdentityUI(this.token)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
@@ -61,7 +76,7 @@ public class Application extends JFrame implements Observer{
 			break;
 		}
 		this.panels.get(ui).addObserver(this);
-		this.setContentPane(this.panels.get(ui).getPanel());
+		this.add(this.panels.get(ui).getPanel(), position);
 		this.setVisible(true);
 	}
 
@@ -72,14 +87,16 @@ public class Application extends JFrame implements Observer{
 			switch((String)arg) {
 			case "login":
 				LoginUI login = (LoginUI)this.panels.get("login");
-				this.token = login.getToken();
-				this.panels.remove("login");
-				this.addUI("logout"); //appelle la fonction addUI ci-dessus
+				this.session = login.getSession();
+				this.clearUI();
+				this.addUI("logout", BorderLayout.CENTER);
 				break;
 			case "logout":
-				this.token = null;
-				this.panels.remove("logout");
-				this.addUI("login"); //appelle la fonction addUI ci-dessus
+				this.session = null;
+				this.clearUI();
+				this.addUI("login", BorderLayout.CENTER);
+				this.addUI("createAccount", BorderLayout.EAST);
+				this.addUI("advertisement", BorderLayout.SOUTH);
 				break;
 			case "updateAccount":
 				this.panels.remove("logout");
@@ -93,19 +110,26 @@ public class Application extends JFrame implements Observer{
 				System.err.println("problème de cas");
 				break;
 			}
+			this.getContentPane().validate();
+			this.repaint();
 		} else {
 			System.err.println("Problème d'observable");
 		}
 	}
 	
-	private void endSession() {
-		if (this.token != null) {
+	private void endSession() throws Exception {
+		if (this.session != null) {
 			FacadeSession facade = new FacadeSession();
 			try {
-				facade.logout(this.token);
+				facade.logout(this.session.getID());
 			} catch (ErrorConnectionException e) {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+	
+	private void clearUI() {
+		this.getContentPane().removeAll();
+		this.panels.clear();
 	}
 }

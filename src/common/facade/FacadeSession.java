@@ -4,6 +4,7 @@ import common.exception.ErrorConnectionException;
 import common.exception.ErrorPasswordException;
 import logic.LoginChecker;
 import logic.SessionHandler;
+import persistent.Session;
 
 /**
  * This class contains a function to connect the user.
@@ -28,23 +29,22 @@ public class FacadeSession {
 	 * @param String : password
 	 * @return String : the token of the connection is returned.
 	 */
-	
-	public String login(String login, String password) throws Exception {
-		String token = null;
+	public Session login(String login, String password) throws Exception {
+		Session session = null;
 		LoginChecker checker = new LoginChecker();
 		checker.generateAccount(login);
 		if(checker.isValidPassword(password)) {
 			SessionHandler handler = new SessionHandler();
-			token = handler.login(checker.getAccount().getID());
+			session = handler.login(checker.getAccount().getID());
 		} else {
 			throw new ErrorPasswordException();
 		}
-		return token;
+		return session;
 	}
 	
-	public void logout(String token) throws ErrorConnectionException {
+	public void logout(int ID) throws Exception {
 		SessionHandler handler = new SessionHandler();
-		handler.logout(token);
+		handler.logout(ID);
 	}
 	
 }

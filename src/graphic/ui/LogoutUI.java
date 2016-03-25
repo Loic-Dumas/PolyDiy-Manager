@@ -8,14 +8,16 @@ import javax.swing.UIManager;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
+import persistent.Session;
 
 public class LogoutUI extends AbstractUI {
 	private JButton updateAccount = new JButton();
 	private JButton logout = new JButton();
-	private String token = null;
+	private Session session = null;
 	
-	public LogoutUI(String token) {
-		this.token = token;
+	public LogoutUI(Session session) {
+		this.session = session;
+		
 		this.panel.setLayout(null);
 		//modify the background colors
 		getPanel().setForeground(UIManager.getColor("Tree.selectionBorderColor"));
@@ -25,7 +27,7 @@ public class LogoutUI extends AbstractUI {
 		//this.connection.setPreferredSize(new Dimension(150,30));
 		//this.connection.setText("Connect");
 		this.logout.setText("Logout");
-		this.logout.setBounds(260, 147, 89, 23);
+		this.logout.setBounds(146, 147, 89, 23);
 		this.panel.add(logout);
 		this.updateAccount.setText("Update your account");
 		this.updateAccount.setBounds(146, 147, 89, 23);
@@ -39,10 +41,10 @@ public class LogoutUI extends AbstractUI {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
 		//FacadeModifyAccount facade2 = new FacadeModifyAccount();
-		try {
+				try {
 			
 			if(arg0.getSource() == logout){
-				facade.logout(this.token);
+				facade.logout(this.session.getID());
 				this.setChanged();
 				this.notifyObservers("logout");
 			}
@@ -56,4 +58,5 @@ public class LogoutUI extends AbstractUI {
 		}
 		
 	}
+
 }

@@ -3,10 +3,11 @@ package persistent.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.exception.AlertDriver;
+import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
-import common.exception.JDBCQueryException;
-import common.exception.UnknowIDException;
-import common.exception.UnknownLoginException;
+import common.exception.NotExistingTuple;
+import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
 import persistent.Account;
 
@@ -20,53 +21,101 @@ import persistent.Account;
  * @author loicd_000
  * @version 1.0
  * @since 2016-03-02
- * 
  *
  */
 public class JDBCAccount extends Account {
-	private JDBCComponent component = new JDBCComponent();
+	private JDBCComponent component = null;
 	
-	public JDBCAccount(String login) throws ErrorConnectionException, UnknownLoginException {
-		super(login);
-		try {
-			ResultSet result = this.component.select("*", "Account", "login = '" + login + "'");
-			if (result.first()) {
-				this.password = result.getString("password");
-				this.ID = result.getInt("id");
-			} else {
-				throw new UnknownLoginException(login);
-			}
-		} catch (SQLException e) {
-			throw new ErrorConnectionException();
-		} catch (JDBCQueryException e) {
-			e.printStackTrace();
-		}
+	public JDBCAccount() throws ErrorConnectionException, AlertDriver{
+		super();
+		this.component = new JDBCComponent();
 	}
-	
-	/**
-	 *  @author faustine Geoffray
-	 * @version 1.0
-	 * @since 2016-22-03
-	 * 
-	 */
-	public JDBCAccount(int ID) throws ErrorConnectionException, UnknowIDException {
-		super(ID);
-		try {
-			ResultSet result = this.component.select("*", "Account", "ID = '" + ID + "'");
-			if (result.first()) {
-				this.password = result.getString("password");
-				this.ID = result.getInt("id");
-				this.lastName = result.getString("lastName");
-				this.firstName = result.getString("firstName");
+
+	@Override
+	public Boolean isExisting() {
+		ResultSet result = this.component.select("*", "Account", "ID = '" + this.ID + "'");
+		return result != null;
+	}
+
+	@Override
+	public void loadFromIntKey(String name, int value) throws NotUniqueAttribute {
+		ResultSet result = null;
+
+		result = this.component.select("*", "Account", name + "=" + value);
+		
+		if(result != null) {
+			try {
+				result.first();
+				if(result.next()) {
+					throw new NotUniqueAttribute(name, "Account");
+				} else {
+					result.first();
+				}
 				this.login = result.getString("login");
-			} else {
-				throw new UnknowIDException(ID);
+				this.password = result.getString("password");
+				this.ID = result.getInt("ID");
+				this.email = result.getString("email");
+				this.firstName = result.getString("firstName");
+				this.lastName = result.getString("lastName");
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			throw new ErrorConnectionException();
-		} catch (JDBCQueryException e) {
-			e.printStackTrace();
 		}
 	}
-	
+
+	@Override
+	public void loadFromStringKey(String name, String value) throws NotUniqueAttribute {
+		ResultSet result = null;
+
+		result = this.component.select("*", "Account", name + "='" + value + "'");
+		
+		if(result != null) {
+			try {
+				result.first();
+				if(result.next()) {
+					throw new NotUniqueAttribute(name, "Account");
+				} else {
+					result.first();
+				}
+				this.login = result.getString("login");
+				this.password = result.getString("password");
+				this.ID = result.getInt("ID");
+				this.email = result.getString("email");
+				this.firstName = result.getString("firstName");
+				this.lastName = result.getString("lastName");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void insert() throws AlreadyExistTuple {
+		if(!this.isExisting()) {
+			this.component.insert("Account", "'" + this.login + "', '" + this.password + "', '" + this.email 
+				                 	+ "', '" + this.firstName + "', '" + this.lastName + "'");
+		} else {
+			throw new AlreadyExistTuple("Account");
+		}
+	}
+
+	@Override
+	public void update() throws NotExistingTuple {
+		if(this.isExisting()) {
+			this.component.update("(login, password, ID, email, firstName, lastName) = (" + this.login + "," 
+		                           + this.password + "," + this.ID + "," + this.firstName + "," + this.lastName + ")",
+		                           "Account", "");
+		} else {
+			throw new NotExistingTuple("Account");
+		}
+	}
+
+	@Override
+	public void delete() throws NotExistingTuple {
+		if(this.isExisting()) {
+			this.component.delete("Account", "ID=" + this.ID);
+		} else {
+			throw new NotExistingTuple("Account");
+		}
+	}
 }

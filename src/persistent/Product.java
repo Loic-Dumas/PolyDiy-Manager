@@ -8,7 +8,7 @@ package persistent;
  * @version 1.0
  * @since 2016-03-19
  */
-public class Product {
+public abstract class Product {
 	protected int ID;
 	protected String name;
 	protected String description;
@@ -20,7 +20,13 @@ public class Product {
 		this.ID = ID;
 		
 	}
-	
+
+	public int getID() {
+		return this.ID;
+	}
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 	public String getName() {
 		return name;
 	}
