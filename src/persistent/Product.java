@@ -20,7 +20,13 @@ public abstract class Product {
 		this.ID = ID;
 		
 	}
-	
+
+	public int getID() {
+		return this.ID;
+	}
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 	public String getName() {
 		return name;
 	}

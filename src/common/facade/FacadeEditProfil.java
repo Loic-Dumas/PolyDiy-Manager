@@ -2,7 +2,6 @@ package common.facade;
 
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
-import logic.SessionHandler;
 import logic.UpdateProfilHandler;
 import persistent.Session;
 
