@@ -3,8 +3,8 @@ package persistent.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.exception.JDBCQueryException;
 import common.exception.UnknownIDProductException;
 import common.factory.ProductFactory;
 import common.factory.jdbcFactory.JDBCProductFactory;
@@ -12,11 +12,13 @@ import common.jdbc.JDBCComponent;
 import persistent.Cart;
 
 public class JDBCCart extends Cart {
-	private JDBCComponent component = new JDBCComponent();
+	private JDBCComponent component = null;
 	ProductFactory productFactory = new JDBCProductFactory();
 	
-	public JDBCCart(int ID) throws ErrorConnectionException {
+	public JDBCCart(int ID) throws ErrorConnectionException, AlertDriver {
 		super(ID);
+		this.component = new JDBCComponent() ;
+		
 		this.setLabel("Cart");	
 		
 		try {
@@ -40,9 +42,7 @@ public class JDBCCart extends Cart {
 			}
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
-		} catch (JDBCQueryException e) {
-			e.printStackTrace();
-		}
+		} 
 		
 		
 	}
