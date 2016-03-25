@@ -1,4 +1,4 @@
-package logic.session;
+package logic;
 
 /**
  * This class make the compares the paswword entered by the user and the real account.

@@ -12,18 +12,36 @@ public abstract class Account {
 	
 	protected String login;
 	protected String password; // the real password (present in db)
+	protected String firstName;
+	protected String lastName;
 	protected int ID;
 	
 	public Account (String login) {
 		this.login = login;
 	}
 	
+	public Account (int ID) {
+		this.ID = ID;
+	}
+	
 	public String getPassword() {
 		return this.password;
 	}
 	
+	public String getLogin() {
+		return this.login;
+	}
+	
 	public int getID() {
 		return this.ID;
+	}
+	
+	public String getfirstName() {
+		return this.firstName;
+	}
+	
+	public String getlastName() {
+		return this.lastName;
 	}
 	
 }

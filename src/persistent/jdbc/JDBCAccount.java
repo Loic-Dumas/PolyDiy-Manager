@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import common.exception.ErrorConnectionException;
 import common.exception.JDBCQueryException;
+import common.exception.UnknowIDException;
 import common.exception.UnknownLoginException;
 import common.jdbc.JDBCComponent;
 import persistent.Account;
@@ -19,6 +20,7 @@ import persistent.Account;
  * @author loicd_000
  * @version 1.0
  * @since 2016-03-02
+ * 
  *
  */
 public class JDBCAccount extends Account {
@@ -40,4 +42,31 @@ public class JDBCAccount extends Account {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 *  @author faustine Geoffray
+	 * @version 1.0
+	 * @since 2016-22-03
+	 * 
+	 */
+	public JDBCAccount(int ID) throws ErrorConnectionException, UnknowIDException {
+		super(ID);
+		try {
+			ResultSet result = this.component.select("*", "Account", "ID = '" + ID + "'");
+			if (result.first()) {
+				this.password = result.getString("password");
+				this.ID = result.getInt("id");
+				this.lastName = result.getString("lastName");
+				this.firstName = result.getString("firstName");
+				this.login = result.getString("login");
+			} else {
+				throw new UnknowIDException(ID);
+			}
+		} catch (SQLException e) {
+			throw new ErrorConnectionException();
+		} catch (JDBCQueryException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

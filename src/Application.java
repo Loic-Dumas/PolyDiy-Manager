@@ -41,15 +41,22 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
-	public void addUI(String ui)
+	public void addUI(String ui) //ajouter un case pour chaque UI
 	{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
 		case "login":
-			this.panels.put(ui, factory.buildLoginUI());
+			this.panels.put(ui, factory.buildLoginUI()); //appelle la fonction buildLoginUI de la classe FactoryUI
 			break;
 		case "logout":
-			this.panels.put(ui, factory.buildLogoutUI(this.token));
+			this.panels.put(ui, factory.buildLogoutUI(this.token)); //appelle la fonction buildLogoutUI de la classe FactoryUI
+			break;
+		case "updateAccount":
+			this.panels.put(ui, factory.buildModifyIdentityUI(this.token)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+			break;
+		case "btReturn":
+			this.panels.put(ui, factory.buildLogoutUI(this.token)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+			break;
 		default:
 			break;
 		}
@@ -59,6 +66,7 @@ public class Application extends JFrame implements Observer{
 	}
 
 	@Override
+	//cette fonction sert à gérer les UI, on ajoute un case pour chaque choix
 	public void update(Observable o, Object arg) {
 		if(arg instanceof String) {
 			switch((String)arg) {
@@ -66,12 +74,20 @@ public class Application extends JFrame implements Observer{
 				LoginUI login = (LoginUI)this.panels.get("login");
 				this.token = login.getToken();
 				this.panels.remove("login");
-				this.addUI("logout");
+				this.addUI("logout"); //appelle la fonction addUI ci-dessus
 				break;
 			case "logout":
 				this.token = null;
 				this.panels.remove("logout");
-				this.addUI("login");
+				this.addUI("login"); //appelle la fonction addUI ci-dessus
+				break;
+			case "updateAccount":
+				this.panels.remove("logout");
+				this.addUI("updateAccount"); //appelle la fonction addUI ci-dessus
+				break;
+			case "btReturn":
+				this.panels.remove("updateAccount");
+				this.addUI("logout"); //appelle la fonction addUI ci-dessus
 				break;
 			default:
 				System.err.println("problème de cas");

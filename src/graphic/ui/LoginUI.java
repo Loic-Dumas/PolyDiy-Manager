@@ -81,6 +81,7 @@ public class LoginUI extends AbstractUI{
 			this.token = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
 			this.setChanged();
 			if(this.token != null) {
+				//on appelle le update de l'observeur
 				this.notifyObservers("login");
 			}
 		} catch (Exception e) {

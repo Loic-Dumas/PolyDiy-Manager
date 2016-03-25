@@ -2,8 +2,8 @@ package common.facade;
 
 import common.exception.ErrorConnectionException;
 import common.exception.ErrorPasswordException;
-import logic.session.LoginChecker;
-import logic.session.SessionHandler;
+import logic.LoginChecker;
+import logic.SessionHandler;
 
 /**
  * This class contains a function to connect the user.
@@ -28,6 +28,7 @@ public class FacadeSession {
 	 * @param String : password
 	 * @return String : the token of the connection is returned.
 	 */
+	
 	public String login(String login, String password) throws Exception {
 		String token = null;
 		LoginChecker checker = new LoginChecker();

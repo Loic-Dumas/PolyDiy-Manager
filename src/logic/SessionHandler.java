@@ -1,4 +1,4 @@
-package logic.session;
+package logic;
 
 import common.exception.ErrorConnectionException;
 import common.exception.SessionErrorException;
