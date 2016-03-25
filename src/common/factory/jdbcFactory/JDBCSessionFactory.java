@@ -1,7 +1,8 @@
-package common.factory;
+package common.factory.jdbcFactory;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.factory.SessionFactory;
 import persistent.Account;
 import persistent.Session;
 import persistent.jdbc.JDBCAccount;

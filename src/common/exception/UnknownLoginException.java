@@ -1,16 +1,14 @@
 package common.exception;
 
 /**
- * This exception is thrown when the user enter an unkwhon password.
+ * This exception is thrown when the user enter an unkwnown login.
  * 
  * @author Pierre Casati
  * @version 1.0
  * @since 2016-03-03
  */
 public class UnknownLoginException extends Exception {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String unknownLogin;
 	
