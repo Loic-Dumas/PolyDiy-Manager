@@ -53,7 +53,18 @@ public class JDBCComponent {
 		}
 	}
 	
-	public void update(String newValueIn, String objectIn, String conditionIn) {
+	public void update(String newValueIn, String objectIn, String conditionIn) throws JDBCQueryException, ErrorConnectionException {
+		if(objectIn == "" || newValueIn == "" || conditionIn == "" ) {
+			throw new JDBCQueryException();
+		}
+		String query = "UPDATE"+ objectIn + "SET VALUES(" + newValueIn + ")" + "WHERE" + conditionIn + ";";
+		try{
+			this.stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			if(!e.getMessage().equals("Aucun résultat retourné par la requête.")) {
+				throw new ErrorConnectionException();
+			}
+		}
 	}
 	
 	public void insert(String objectIn, String valuesIn) throws ErrorConnectionException, JDBCQueryException {

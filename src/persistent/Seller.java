@@ -12,7 +12,7 @@ public class Seller {
 	protected int ID;
 	protected String nameShop;
 	protected String description;
-	protected String  siret;
+	protected String siret;
 	protected String website;
 	public Seller (int ID) {
 		this.ID = ID;
