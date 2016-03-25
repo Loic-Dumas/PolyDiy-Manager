@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 
 /**
@@ -22,9 +23,17 @@ public class JDBConnection {
 	private Connection connection;
 	static JDBConnection instance;
 	
-	private JDBConnection(String user, String password, String URL) throws Exception {
-		Class.forName("org.postgresql.Driver");
-		this.connection = DriverManager.getConnection(URL , user, password);
+	private JDBConnection(String user, String password, String URL) throws ErrorConnectionException, AlertDriver {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e1) {
+			throw new AlertDriver();
+		}
+		try {
+			this.connection = DriverManager.getConnection(URL , user, password);
+		} catch (SQLException e) {
+			throw new ErrorConnectionException();
+		}
 	}
 	
 	/**
@@ -35,17 +44,12 @@ public class JDBConnection {
 	 * @version 1.0
 	 * @since 2016-03-02
 	 * @return JDBConnection
+	 * @throws AlertDriver 
 	 */
-	public static JDBConnection getInstance() throws ErrorConnectionException {
+	public static JDBConnection getInstance() throws ErrorConnectionException, AlertDriver {
 		if (JDBConnection.instance == null) {
-			try {
-				JDBConnection.instance = new JDBConnection("postgres", "postgres", "jdbc:postgresql://localhost:5432/PolyDIYManager");
-			} catch (SQLException e) {
-				throw new ErrorConnectionException();
-			} catch (Exception e) {
-				System.err.println("Driver not found.");
-				e.printStackTrace();
-			}
+			//JDBConnection.instance = new JDBConnection("postgres", "postgres", "jdbc:postgresql://localhost:5432/PolyDIYManager");
+			JDBConnection.instance = new JDBConnection("pzloelfnjglnhj", "O3SE1wvyhy5mG0sHpuPnuQV-fA", "jdbc:postgresql://ec2-107-22-246-250.compute-1.amazonaws.com:5432/dcpgi43j5ks0gi?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 		}
 		return JDBConnection.instance;
 	}

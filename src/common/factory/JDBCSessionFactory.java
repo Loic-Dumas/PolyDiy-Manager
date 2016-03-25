@@ -1,5 +1,6 @@
 package common.factory;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import persistent.Account;
 import persistent.Session;
@@ -10,21 +11,26 @@ public class JDBCSessionFactory extends SessionFactory {
 
 	@Override
 	public Account buildAccount(String loginIn) throws Exception {
-		return new JDBCAccount(loginIn);
+		Account account = new JDBCAccount();
+		account.loadFromStringKey("login", loginIn);;
+		return account;
 	}
 
 	@Override
-	public Session buildSession(String tokenIn, int IDin) throws ErrorConnectionException {
-		return new JDBCSession(tokenIn, IDin);
+	public Account buildAccount(String login, String password, String email, String firstName, String lastName) throws ErrorConnectionException, AlertDriver {
+		Account account = new JDBCAccount();
+		account.setLogin(login);
+		account.setPassword(password);
+		account.setEmail(email);
+		account.setFirstName(firstName);
+		account.setLastName(lastName);
+		return account;
 	}
 
 	@Override
-	public Session buildSessionWithID(int IDin) throws ErrorConnectionException {
-		return new JDBCSession(IDin);
-	}
-
-	@Override
-	public Session buildSessionWithToken(String tokenIn) throws ErrorConnectionException {
-		return new JDBCSession(tokenIn);
+	public Session buildSessionWithID(int IDin) throws ErrorConnectionException, AlertDriver {
+		Session session = new JDBCSession();
+		session.setID(IDin);
+		return session;
 	}
 }

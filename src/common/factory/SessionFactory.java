@@ -1,13 +1,13 @@
 package common.factory;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import persistent.Account;
 import persistent.Session;
 
 public abstract class SessionFactory {
 	public abstract Account buildAccount(String loginIn) throws Exception;
+	public abstract Account buildAccount(String login, String password, String email, String firstName, String lastName) throws ErrorConnectionException, AlertDriver;
 	
-	public abstract Session buildSession(String tokenIn, int IDin) throws ErrorConnectionException;
-	public abstract Session buildSessionWithID(int IDin) throws ErrorConnectionException;
-	public abstract Session buildSessionWithToken(String tokenIn) throws ErrorConnectionException;
+	public abstract Session buildSessionWithID(int IDin) throws ErrorConnectionException, AlertDriver;
 }
