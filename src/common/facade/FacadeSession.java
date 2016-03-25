@@ -2,7 +2,6 @@ package common.facade;
 
 import common.exception.ErrorPasswordException;
 import logic.LoginChecker;
-import logic.SessionHandler;
 import persistent.Session;
 
 /**
