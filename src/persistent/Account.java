@@ -1,5 +1,7 @@
 package persistent;
 
+import common.AbstractModel;
+
 /**
  * An account contain a login, a password and and ID.
  * The constructor need a login (String).
@@ -8,14 +10,20 @@ package persistent;
  * @version 1.0
  * @since 2016-03-02
  */
-public abstract class Account { 
+public abstract class Account extends AbstractModel { 
 	
-	protected String login;
-	protected String password; // the real password (present in db)
-	protected int ID;
+	protected String login = "";
+	protected String password = "";
+	protected int ID = -1;
+	protected String email = "";
+	protected String firstName = "";
+	protected String lastName = "";
 	
-	public Account (String login) {
-		this.login = login;
+	public Account() {
+	}
+	
+	public String getLogin() {
+		return this.login;
 	}
 	
 	public String getPassword() {
@@ -26,4 +34,39 @@ public abstract class Account {
 		return this.ID;
 	}
 	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public String getLastName() {
+		return this.lastName;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 }

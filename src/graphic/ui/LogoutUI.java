@@ -7,13 +7,14 @@ import javax.swing.JOptionPane;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
+import persistent.Session;
 
 public class LogoutUI extends AbstractUI {
 	private JButton logout = new JButton();
-	private String token = null;
+	private Session session = null;
 	
-	public LogoutUI(String token) {
-		this.token = token;
+	public LogoutUI(Session session) {
+		this.session = session;
 		
 		this.panel.setLayout(null);
 		
@@ -31,7 +32,7 @@ public class LogoutUI extends AbstractUI {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
 		try {
-			facade.logout(this.token);
+			facade.logout(this.session.getID());
 			this.setChanged();
 			this.notifyObservers("logout");
 		} catch (Exception e) {

@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
+import persistent.Session;
 
 /**
  * This panel is the UI for the login.
@@ -29,7 +30,7 @@ public class LoginUI extends AbstractUI{
 	private JPasswordField password = new JPasswordField();
 	private JLabel lblWelcome = new JLabel();
 	
-	private String token = null;
+	private Session session = null;
 	
 	public LoginUI() {
 		this.panel.setLayout(null);
@@ -78,22 +79,22 @@ public class LoginUI extends AbstractUI{
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
 		try {
-			this.token = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
+			this.session = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
 			this.setChanged();
-			if(this.token != null) {
+			if(this.session != null) {
 				this.notifyObservers("login");
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			this.token = null;
+			this.session = null;
 		}
 	}
 	
 	public Boolean isConnected() {
-		return this.token != null;
+		return this.session != null;
 	}
 	
-	public String getToken() {
-		return this.token;
+	public Session getSession() {
+		return this.session;
 	}
 }
