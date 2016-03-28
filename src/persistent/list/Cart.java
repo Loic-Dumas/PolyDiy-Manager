@@ -1,4 +1,4 @@
-package persistent;
+package persistent.list;
 
 public abstract class Cart extends WishList{
 	

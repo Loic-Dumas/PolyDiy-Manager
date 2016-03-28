@@ -1,17 +1,14 @@
-package persistent;
-import java.util.Iterator;
-
-import common.Set;
-import common.exception.InvalidPriceException;
-import common.exception.InvalidQuantityException;
+package persistent.list;
+import common.InterfaceModel;
+import common.SetWithKey;
 
 /**
  * @author loicd_000
  *
  */
-public abstract class WishList extends Set<ProductWishList>{
+public abstract class WishList extends SetWithKey<ProductWishList> implements InterfaceModel {
 	protected String label;
-	protected int ID;
+	protected int IDWishList;
 	
 	public WishList(int ID){
 		this.setID(ID);
@@ -26,13 +23,16 @@ public abstract class WishList extends Set<ProductWishList>{
 	}
 
 	public int getID() {
-		return ID;
+		return IDWishList;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		IDWishList = iD;
 	}
 	
+	/*
+	Different methods when WishList where extending from Set
+	 
 	public ProductWishList getProductWithIDProduct(int IDProduct) {
 		Iterator<ProductWishList> iterator = this.set.iterator();
 		boolean found = false;
@@ -85,5 +85,5 @@ public abstract class WishList extends Set<ProductWishList>{
 			}
 		}
 	}
-	
+	*/
 }

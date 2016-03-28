@@ -18,7 +18,7 @@ public class AdvertisementUI extends AbstractUI{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO AdvertisementUI Auto-generated method stub
 		
 	}
 

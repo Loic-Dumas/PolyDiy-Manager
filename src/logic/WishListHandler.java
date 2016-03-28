@@ -1,5 +1,9 @@
 package logic;
 
+import java.util.Iterator;
+import java.util.Set;
+
+import common.exception.AlertDriver;
 import common.exception.DifferentWishListException;
 import common.exception.ErrorConnectionException;
 import common.exception.InvalidPriceException;
@@ -10,18 +14,18 @@ import common.factory.ListFactory;
 import common.factory.ProductFactory;
 import common.factory.jdbcFactory.JDBCListFactory;
 import common.factory.jdbcFactory.JDBCProductFactory;
-import persistent.ProductWishList;
-import persistent.WishList;
+import persistent.list.ProductWishList;
+import persistent.list.WishList;
 
 /**
- * To handle user interactions with a wishlist.
+ * To handle user interactions with a wish list.
  * @author loicd_000
  * @since 2016-03-21
  */
 public class WishListHandler {
-	private ListFactory listFactory = new JDBCListFactory();
-	private ProductFactory productFactory = new JDBCProductFactory();
-	private WishList wishList = null;
+	ListFactory listFactory = new JDBCListFactory();
+	ProductFactory productFactory = new JDBCProductFactory();
+	WishList wishList = null;
 	
 	/**
 	 * This method create and return the WishList with the ID in parameter. 
@@ -30,12 +34,15 @@ public class WishListHandler {
 	 * @author loicd_000
 	 * @since 2016-03-21
 	 * @param int IDWishList
-	 * @return return the WishList. 
 	 */
-	public WishList createWishList(int IDWishList) throws DifferentWishListException {
+	public WishList createAndGetExistingWishList(int IDWishList) {
 		if (this.wishList == null) { // if there's no wishList
 			try {
-				this.wishList = listFactory.buildWishList(IDWishList);
+				try {
+					this.wishList = listFactory.buildWishList(IDWishList);
+				} catch (AlertDriver e) {
+					e.printStackTrace();
+				}
 			} catch (ErrorConnectionException e) {
 				System.err.println("Impossible to return the WishList");
 				e.printStackTrace();
@@ -43,6 +50,21 @@ public class WishListHandler {
 		}
 
 		return this.wishList;
+	}
+
+	
+	/**
+	 * This method return a set of the keys contained in this WishList
+	 * 
+	 * @author loicd_000
+	 * @since 2016-03-21
+	 * @return a set of the keys contained in this WishList
+	 */
+	public Set<String> getListID() {
+		if (this.wishList == null) {
+			System.err.println("No wishlist initialized.");
+		} 
+		return this.wishList.getAllKeys() ; 
 	}
 	
 	
@@ -53,15 +75,12 @@ public class WishListHandler {
 	 * @since 2016-03-21
 	 * @param int IDProduct
 	 * @return The ProductWishList if the WishList contain a ProductWishList with this ID. Or null.
-	 * @throws NoWishListException 
 	 */
-	public ProductWishList getProductWithIDInWishList(int IDProduct)
-			throws NoWishListException {
+	public ProductWishList getProductWithIDInWishList(int IDProduct) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
-		
-		return this.wishList.getProductWithIDProduct(IDProduct);
+		return this.wishList.getElementByKey(String.valueOf(IDProduct));
 	}
 	
 	
@@ -72,36 +91,44 @@ public class WishListHandler {
 	 * @since 2016-03-21
 	 * @param int IDProduct, int quantity, float unitPrice
 	 * @return true if the product is added to WwishList. False if an error occur.
-	 * @throws NoWishListException 
-	 * @throws InvalidQuantityException 
-	 * @throws InvalidPriceException 
-	 * @throws UnknownIDProductException 
 	 */
-	public boolean addProductToWishList(int IDProduct, int quantity, float unitPrice) 
-			throws NoWishListException, InvalidQuantityException, InvalidPriceException, UnknownIDProductException  {
+	public boolean addProductToWishList(int IDProduct, int quantity, float unitPrice) {
+		Boolean result = false;
 		
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
-		
 		try {
-			if (quantity <= 0) { 
-				throw new InvalidQuantityException(quantity);
+			if (quantity <= 0) {
+				System.err.println("Error : The quantity should be > 0.");
 			} else if (unitPrice < 0 ) {
-				throw new InvalidPriceException(unitPrice);
+				System.err.println("Error : The price should be >= 0.");
 			}
 			
-			this.wishList.addElement(this.productFactory.buildProductWishList(IDProduct, quantity, unitPrice));
+			try {
+				this.wishList.addElement(String.valueOf(IDProduct), 
+						this.productFactory.buildProductWishList(IDProduct, this.wishList.getID(),  quantity, unitPrice));
+				result = true;
+			} catch (AlertDriver e1) {
+				e1.printStackTrace();
+			}
+			
+			try {
+				this.wishList.update();
+			} catch (Exception e) {
+				// TODO gerer les exceptions de cet update
+				e.printStackTrace();
+			}
 			
 			return true ;
 		} catch (UnknownIDProductException e) {
 			System.err.println(e);
 			e.printStackTrace();
-			throw new UnknownIDProductException(IDProduct);	
 		} catch (ErrorConnectionException e) {
 			e.printStackTrace();
-			return false;
 		}
+		
+		return result;
 	}
 
 	
@@ -110,17 +137,31 @@ public class WishListHandler {
 	 * 
 	 * @author loicd_000
 	 * @since 2016-03-21
-	 * @param int IDProduct,
-	 * @return void
-	 * @throws NoWishListException 
+	 * @param IDProduct - int
 	 */
-	public void removeProductToWishList(int IDProduct) 
-			throws NoWishListException {
+	public void removeProductToWishList(int IDProduct) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
+		}
+		String stringIDProduct = String.valueOf(IDProduct);
+		
+		//first we remove the product in the persistent layer.
+		try {
+			this.wishList.getElementByKey(stringIDProduct).delete();
+		} catch (Exception e1) {
+			// TODO gerer les exceptions de ce remove
+			e1.printStackTrace();
 		}
 		
-		this.wishList.removeProductWithIDProduct(IDProduct);
+		this.wishList.removeElementByKey(stringIDProduct);
+		
+		//now we update the wishList
+		try {
+			this.wishList.update();
+		} catch (Exception e) {
+			// TODO gerer les exceptions de ce remove
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -129,18 +170,23 @@ public class WishListHandler {
 	 * 
 	 * @author loicd_000
 	 * @since 2016-03-21
-	 * @param  int IDProduct, float unitPrice
+	 * @param IDProduct
+	 * @param unitPrice
 	 * @return void
-	 * @throws NoWishListException 
-	 * @throws InvalidPriceException 
 	 */
-	public void updatePriceProductToWishList( int IDProduct, float unitPrice) 
-			throws NoWishListException, InvalidPriceException {
+	public void updatePriceProductToWishList( int IDProduct, float unitPrice) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
 
-		this.wishList.updateNewUnitPriceProductWithIDProduct(IDProduct, unitPrice);
+		this.wishList.getElementByKey(String.valueOf(IDProduct)).setUnitPrice(unitPrice);
+		
+		try {
+			this.wishList.getElementByKey(String.valueOf(IDProduct)).update();
+		} catch (Exception e) {
+			// TODO gerer cette exception en détail.
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -151,19 +197,24 @@ public class WishListHandler {
 	 * @since 2016-03-23
 	 * @param int IDProduct, int quantity
 	 * @return void
-	 * @throws NoWishListException 
-	 * @throws InvalidQuantityException 
 	 */
-	public void updateProductToWishList( int IDProduct, int quantity) 
-			throws NoWishListException, InvalidQuantityException {
+	public void updateQuantityProductToWishList( int IDProduct, int quantity) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
 
-		this.wishList.updateNewQuantityProductWithIDProduct(IDProduct, quantity);
+		this.wishList.getElementByKey(String.valueOf(IDProduct)).setQuantity(quantity);
+		
+		
+		try {
+			this.wishList.getElementByKey(String.valueOf(IDProduct)).update();
+		} catch (Exception e) {
+			// TODO gerer cette exception en détail.
+			e.printStackTrace();
+		}
 	}
 	
-	
+
 	/**
 	 * This method set the name of the WishList.
 	 * 
@@ -173,12 +224,54 @@ public class WishListHandler {
 	 * @return void
 	 * @throws NoWishListException 
 	 */
-	public void renameWishList(String newName) throws NoWishListException {
+	public void setNameWishList(String newName) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
 		
 		this.wishList.setLabel(newName);
+		try {
+			this.wishList.update();
+		} catch (Exception e) {
+			// TODO gerer cette exception en detail.
+			e.printStackTrace();
+		}
+	}
+	
+
+	/**
+	 * Return The name of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The name of the wishList
+	 * @throws NoWishListException 
+	 */
+	public String getNameWishList() {
+		if (this.wishList == null) {
+			System.err.println("No wishlist initialized.");
+		}
+		return this.wishList.getLabel();
+	}
+
+	
+	/**
+	 * Return the total price of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The total price of the wishList
+	 */
+	public float getTotalPriceWishList() {
+		if (this.wishList == null) {
+			System.err.println("No wishlist initialized.");
+		}
+		float totalPrice = 0;
+		
+		for(Iterator<String> i = this.wishList.getAllKeys().iterator() ; i.hasNext(); ) {
+		    String key = i.next();
+		    totalPrice += this.wishList.getElementByKey(key).getUnitPrice() * this.wishList.getElementByKey(key).getQuantity() ;
+		}
+		
+		return totalPrice;
 	}
 	
 	
@@ -189,14 +282,13 @@ public class WishListHandler {
 	 * @since 2016-03-23
 	 * @param int IDProduct
 	 * @return void
-	 * @throws NoWishListException 
 	 */
-	public void addProductToCart(int IdProduct) throws NoWishListException {
+	public void addProductToCart(int IdProduct) {
 		if (this.wishList == null) {
-			throw new NoWishListException();
+			System.err.println("No wishlist initialized.");
 		}
 		
-		// TODO Implement addProductToCart.
+		// TODO WishListHandler Implement addProductToCart.
 	}
 	
 
@@ -209,26 +301,7 @@ public class WishListHandler {
 	 */
 	public void addProductAllProducrsToCart(int IDWishList) {
 		
-		// TODO Implement addProductAllProducrsToCart
+		// TODO WishListHandler Implement addProductAllProducrsToCart
 	}
-	
-	
-	/**
-	 * This method save in the database all modifications in the database.
-	 * 
-	 * @author loicd_000
-	 * @since 2016-03-23
-	 * @param 
-	 * @return void
-	 * @throws NoWishListException 
-	 */
-	public void saveWishList() throws NoWishListException {
-		if (this.wishList == null) {
-			throw new NoWishListException();
-		}
-		
-		// TODO Implement saveWishList. Register all informations to the database.
-	}
-	
 	
 }

@@ -8,6 +8,8 @@ import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
+import common.exception.loadFromIntKeyException;
+import common.exception.loadFromStringKeyException;
 import common.jdbc.JDBCComponent;
 import persistent.Account;
 
@@ -38,7 +40,7 @@ public class JDBCAccount extends Account {
 	}
 
 	@Override
-	public void loadFromIntKey(String name, int value) throws NotUniqueAttribute {
+	public void loadFromIntKey(String name, int value) throws NotUniqueAttribute, loadFromIntKeyException {
 		ResultSet result = null;
 
 		result = this.component.select("*", "Account", name + "=" + value);
@@ -60,11 +62,13 @@ public class JDBCAccount extends Account {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else {
+			throw new loadFromIntKeyException("Account", name, value);
 		}
 	}
 
 	@Override
-	public void loadFromStringKey(String name, String value) throws NotUniqueAttribute {
+	public void loadFromStringKey(String name, String value) throws NotUniqueAttribute, loadFromStringKeyException {
 		ResultSet result = null;
 
 		result = this.component.select("*", "Account", name + "='" + value + "'");
@@ -86,6 +90,8 @@ public class JDBCAccount extends Account {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else {
+			throw new loadFromStringKeyException("Account", name, value);
 		}
 	}
 

@@ -1,22 +1,22 @@
-package common.facade;
+package common.facade.list;
 
-import common.exception.DifferentWishListException;
-import common.exception.InvalidPriceException;
-import common.exception.InvalidQuantityException;
+import java.util.Iterator;
+import java.util.Set;
+
 import common.exception.NoWishListException;
-import common.exception.UnknownIDProductException;
+import logic.SetWishListHandler;
 import logic.WishListHandler;
-import persistent.ProductWishList;
-import persistent.WishList;
+import persistent.list.ProductWishList;
+import persistent.list.SetWishList;
+import persistent.list.WishList;
 
 /**
- * This is the facade to manage all interactions with lists.
+ * This is a facade to manage all interactions with a wish list.
  * @author loicd_000
  *
  */
-public class FacadeManageList {
+public class FacadeManageWishList {
 	WishListHandler wishListHandler = new WishListHandler();
-
 	/**
 	 * This method create and return the WishList with the ID in parameter. 
 	 * If the instance has already a wish list, return the wishList.
@@ -25,10 +25,21 @@ public class FacadeManageList {
 	 * @since 2016-03-23
 	 * @param int IDWishList
 	 * @return return the WishList. 
-	 * @throws DifferentWishListException 
 	 */
-	public WishList createWishList(int IDWishList) throws DifferentWishListException{
-		return this.wishListHandler.createWishList(IDWishList);
+	public WishList createAndGetWishList(int IDWishList){
+		return this.wishListHandler.createAndGetExistingWishList(IDWishList);
+	}
+	
+	
+	/**
+	 * This method return a set of the keys contained in this WishList
+	 * 
+	 * @author loicd_000
+	 * @since 2016-03-21
+	 * @return a set of the keys contained in this WishList
+	 */
+	public Set<String> getListIDProduct() { 
+		return this.wishListHandler.getListID() ; 
 	}
 	
 	
@@ -41,8 +52,7 @@ public class FacadeManageList {
 	 * @return The ProductWishList if the WishList contain a ProductWishList with this ID. Or null.
 	 * @throws NoWishListException 
 	 */
-	public ProductWishList getProductWithIDInWishList(int IDProduct) 
-			throws NoWishListException {
+	public ProductWishList getProductWithIDInWishList(int IDProduct) {
 		return this.wishListHandler.getProductWithIDInWishList(IDProduct);
 	}
 	
@@ -54,13 +64,8 @@ public class FacadeManageList {
 	 * @since 2016-03-21
 	 * @param int IDProduct, int quantity, float unitPrice
 	 * @return true if the product is added to WwishList. False if an error occur.
-	 * @throws UnknownIDProductException 
-	 * @throws InvalidPriceException 
-	 * @throws InvalidQuantityException 
-	 * @throws NoWishListException 
 	 */
-	public boolean addProductToWishList(int IDProduct, int quantity, float unitPrice) 
-			throws NoWishListException, InvalidQuantityException, InvalidPriceException, UnknownIDProductException  {
+	public boolean addProductToWishList(int IDProduct, int quantity, float unitPrice) {
 		return this.wishListHandler.addProductToWishList(IDProduct, quantity, unitPrice)
 		;
 	}
@@ -73,9 +78,8 @@ public class FacadeManageList {
 	 * @since 2016-03-21
 	 * @param int IDProduct,
 	 * @return void
-	 * @throws NoWishListException 
 	 */
-	public void removeProductToWishList(int IDProduct) throws NoWishListException {
+	public void removeProductToWishList(int IDProduct) {
 		this.wishListHandler.removeProductToWishList(IDProduct);
 	}
 	
@@ -86,12 +90,8 @@ public class FacadeManageList {
 	 * @author loicd_000
 	 * @since 2016-03-21
 	 * @param  int IDProduct, float unitPrice
-	 * @throws InvalidPriceException 
-	 * @throws NoWishListException 
 	 */
-	public void updatePriceProductToWishList( int IDProduct, float unitPrice) 
-			throws NoWishListException, InvalidPriceException {
-
+	public void updatePriceProductToWishList( int IDProduct, float unitPrice) {
 		this.wishListHandler.updatePriceProductToWishList(IDProduct, unitPrice);
 	}
 
@@ -102,12 +102,9 @@ public class FacadeManageList {
 	 * @author loicd_000
 	 * @since 2016-03-23
 	 * @param int IDProduct, int quantity
-	 * @throws InvalidQuantityException 
-	 * @throws NoWishListException 
 	 */
-	public void updateProductToWishList( int IDProduct, int quantity) 
-			throws NoWishListException, InvalidQuantityException{
-		this.wishListHandler.updateProductToWishList(IDProduct, quantity);
+	public void updateProductToWishList( int IDProduct, int quantity) {
+		this.wishListHandler.updateQuantityProductToWishList(IDProduct, quantity);
 	}
 
 	
@@ -117,13 +114,37 @@ public class FacadeManageList {
 	 * @author loicd_000
 	 * @since 2016-03-23
 	 * @param String newName
-	 * @throws NoWishListException 
 	 */
-	public void renameWishList(String newName) throws NoWishListException{
-		this.wishListHandler.renameWishList(newName);
+	public void renameWishList(String newName) {
+		this.wishListHandler.setNameWishList(newName);
 	}
 	
-	// TODO Continue to implements all methods for this facade.
+
+	/**
+	 * Return The name of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The name of the wishList
+	 */
+	public String getNameWishList()  {	
+		return this.wishListHandler.getNameWishList();
+	}
+
+	
+	/**
+	 * Return the total price of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The total price of the wishList
+	 */
+	public float getTotalPriceWishList() {
+		return this.wishListHandler.getTotalPriceWishList();
+	}
+	
+	
+	
+	
+	// TODO Facade Continue to implements all methods for this facade.
 		
 
 	
