@@ -19,6 +19,31 @@ public class JDBCComponent {
 		}
 	}
 	
+public ResultSet select(String selectionIn, String objectIn, String conditionIn) {
+		String query = "SELECT " + selectionIn + " FROM " + objectIn;
+		if(conditionIn != "") {
+			query += " WHERE " + conditionIn;
+		}
+		query += ";";
+		Boolean result = false;
+		try {
+			System.out.println(query);
+			result = this.stmt.execute(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(result) {
+			try {
+				return this.stmt.getResultSet();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
 	public ResultSet select(List<String> selectionIn, String objectIn, SQLCondition conditionIn) {
 		String query = "SELECT ";
 		if(selectionIn.isEmpty()) {
@@ -79,6 +104,40 @@ public class JDBCComponent {
 		}
 	}
 	
+	public void delete(String objectIn, String conditionIn){
+		String query = "DELETE FROM " + objectIn + " WHERE " + conditionIn + ";";
+		try {
+			System.out.println(query);
+			this.stmt.execute(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void update(String newValueIn, String objectIn, String conditionIn) {
+		String query = "UPDATE " + objectIn + " SET " + newValueIn;
+		if(conditionIn != "") {
+			System.out.println(query);
+			query += " WHERE " + conditionIn; 
+		}
+		query += ";";
+		try {
+			this.stmt.execute(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void insert(String objectIn, String valuesIn) {
+		String query = "INSERT INTO " + objectIn + " VALUES(" + valuesIn + ");";
+		try {
+			System.out.println(query);
+			this.stmt.execute(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void clear() {
 		try {
 			this.stmt.close();

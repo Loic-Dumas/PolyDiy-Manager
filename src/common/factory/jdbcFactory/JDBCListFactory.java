@@ -3,21 +3,28 @@ package common.factory.jdbcFactory;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.factory.ListFactory;
-import persistent.Cart;
-import persistent.WishList;
-import persistent.jdbc.JDBCCart;
-import persistent.jdbc.JDBCWishList;
+import persistent.jdbc.list.JDBCCart;
+import persistent.jdbc.list.JDBCSetWishList;
+import persistent.jdbc.list.JDBCWishList;
+import persistent.list.Cart;
+import persistent.list.SetWishList;
+import persistent.list.WishList;
 
 public class JDBCListFactory extends ListFactory{
 
 	@Override
-	public WishList buildWishList(int ID) throws ErrorConnectionException, AlertDriver {
-		return new JDBCWishList(ID);
+	public WishList buildWishList(int IDWishList) throws ErrorConnectionException, AlertDriver {
+		return new JDBCWishList(IDWishList);
 	}
 
 	@Override
-	public Cart buildCart(int ID) throws ErrorConnectionException, AlertDriver {
-		return new JDBCCart(ID);
+	public SetWishList buildSetWishList(int IDUser) throws  AlertDriver, ErrorConnectionException {
+		return new JDBCSetWishList(IDUser);
+	}
+
+	@Override
+	public Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver {
+		return new JDBCCart(IDWishList);
 	}
 
 }

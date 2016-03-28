@@ -5,9 +5,9 @@ import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDProductException;
 import common.factory.ProductFactory;
 import persistent.Product;
-import persistent.ProductWishList;
 import persistent.jdbc.JDBCProduct;
-import persistent.jdbc.JDBCProductWishList;
+import persistent.jdbc.list.JDBCProductWishList;
+import persistent.list.ProductWishList;
 
 public class JDBCProductFactory extends ProductFactory{
 
@@ -17,9 +17,9 @@ public class JDBCProductFactory extends ProductFactory{
 	}
 
 	@Override
-	public ProductWishList buildProductWishList(int ID, int quantity, float unitPrice)
+	public ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrice)
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver {
-		return new JDBCProductWishList(ID, quantity, unitPrice);
+		return new JDBCProductWishList(ID, IDWishList, quantity, unitPrice);
 	}
 
 }

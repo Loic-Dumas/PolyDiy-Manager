@@ -1,4 +1,7 @@
-package persistent;
+package persistent.list;
+
+import persistent.Product;
+
 /**
  * This is a product for a list, like wish list.
  * This product have a price and his own quantity.
@@ -9,9 +12,19 @@ package persistent;
  */
 public abstract class ProductWishList extends Product{
 	protected int quantity;
+	protected int IDWishList;
 
-	public ProductWishList(int ID) {
+	public int getIDWishList() {
+		return IDWishList;
+	}
+
+	public void setIDWishList(int iDWishList) {
+		IDWishList = iDWishList;
+	}
+
+	public ProductWishList(int ID, int IDWishList) {
 		super(ID);
+		this.IDWishList = IDWishList;
 	}
 
 	public int getQuantity() {
