@@ -3,8 +3,8 @@ package persistent.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.exception.JDBCQueryException;
 import common.exception.UnknownIDProductException;
 import common.factory.ProductFactory;
 import common.factory.jdbcFactory.JDBCProductFactory;
@@ -12,11 +12,12 @@ import common.jdbc.JDBCComponent;
 import persistent.WishList;
 
 public class JDBCWishList extends WishList {
-	private JDBCComponent component = new JDBCComponent();
+	private JDBCComponent component = null;
 	ProductFactory productFactory = new JDBCProductFactory();
 	
-	public JDBCWishList(int ID) throws ErrorConnectionException {
+	public JDBCWishList(int ID) throws ErrorConnectionException, AlertDriver {
 		super(ID);
+		this.component = new JDBCComponent();
 		try {
 			//we get all items of the wish list.
 			ResultSet result = this.component.select(
@@ -44,8 +45,6 @@ public class JDBCWishList extends WishList {
 			} while(result.next());
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
-		} catch (JDBCQueryException e) {
-			e.printStackTrace();
 		}
 		
 		

@@ -89,14 +89,14 @@ public class Application extends JFrame implements Observer{
 				LoginUI login = (LoginUI)this.panels.get("login");
 				this.session = login.getSession();
 				this.clearUI();
-				this.addUI("logout", BorderLayout.CENTER);
+				this.addUI("logout");
 				break;
 			case "logout":
 				this.session = null;
 				this.clearUI();
-				this.addUI("login", BorderLayout.CENTER);
-				this.addUI("createAccount", BorderLayout.EAST);
-				this.addUI("advertisement", BorderLayout.SOUTH);
+				this.addUI("login");
+				this.addUI("createAccount");
+				this.addUI("advertisement");
 				break;
 			case "updateAccount":
 				this.panels.remove("logout");

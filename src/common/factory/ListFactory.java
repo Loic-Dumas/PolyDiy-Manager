@@ -1,5 +1,6 @@
 package common.factory;
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import persistent.Cart;
 import persistent.WishList;
@@ -12,6 +13,6 @@ import persistent.WishList;
  * @version 1.0
  */
 public abstract class ListFactory {
-	public abstract WishList buildWishList(int ID) throws ErrorConnectionException;
-	public abstract Cart buildCart(int ID) throws ErrorConnectionException;
+	public abstract WishList buildWishList(int ID) throws ErrorConnectionException, AlertDriver;
+	public abstract Cart buildCart(int ID) throws ErrorConnectionException, AlertDriver;
 }

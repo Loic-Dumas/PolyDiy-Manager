@@ -2,8 +2,8 @@ package logic;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.JDBCSessionFactory;
 import common.factory.SessionFactory;
+import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
 
 public class AccountRegister {
