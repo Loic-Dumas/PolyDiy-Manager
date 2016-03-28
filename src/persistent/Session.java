@@ -1,12 +1,12 @@
 package persistent;
 
-import common.AbstractModel;
+import common.InterfaceModel;
 import common.exception.ErrorConnectionException;
 
-public abstract class Session extends AbstractModel{
+public abstract class Session implements InterfaceModel{
 	protected int ID;
 	protected String token;
-
+	
 	public abstract void generateToken() throws ErrorConnectionException;
 	
 	public int getID() {

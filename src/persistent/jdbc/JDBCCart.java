@@ -2,6 +2,7 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
@@ -9,6 +10,7 @@ import common.exception.UnknownIDProductException;
 import common.factory.ProductFactory;
 import common.factory.jdbcFactory.JDBCProductFactory;
 import common.jdbc.JDBCComponent;
+import common.jdbc.SQLCondition;
 import persistent.Cart;
 
 public class JDBCCart extends Cart {
@@ -24,9 +26,10 @@ public class JDBCCart extends Cart {
 		try {
 			//we get all items of the wish list.
 			ResultSet result = this.component.select(
-					"i.id_wishlist, i.id_product, i.quantity, i.unitPrice", 
-					"wishlist w, item_wishlist i", 
-					"w.id_wishlist = '" + ID + "' AND ' i.id_wishlist = w.id_wishlist" );
+					Arrays.asList("i.id_wishlist","i.id_product", "i.quantity", "i.unitPrice"), 
+					"wishlist w, item_wishlist i",
+					new SQLCondition(Arrays.asList("w.id_wishlist","w.id_wishlist"),
+									Arrays.asList(Integer.toString(ID), "w.id_wishlist")));
 			
 			//we add all the elements found to the set
 			while(result.next()) {
@@ -42,6 +45,9 @@ public class JDBCCart extends Cart {
 			}
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} 
 		
 		

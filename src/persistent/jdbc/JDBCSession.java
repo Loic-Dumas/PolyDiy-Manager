@@ -2,6 +2,8 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import common.exception.AlertDriver;
@@ -10,6 +12,7 @@ import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
+import common.jdbc.SQLCondition;
 import persistent.Session;
 
 public class JDBCSession extends Session {
@@ -32,41 +35,36 @@ public class JDBCSession extends Session {
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "Session", "ID = '" + this.ID + "'");
+		ResultSet result = this.component.select(Arrays.asList("*"), "Session",
+												new SQLCondition(Arrays.asList("ID"),
+														          Arrays.asList(Integer.toString(this.ID))));
+		return result != null && result.first();
+	}
+	
+	@Override
+	public Boolean hasChanged() throws Exception {
+		ResultSet result = this.component.select(Arrays.asList("*"), "Session", 
+												new SQLCondition(Arrays.asList("ID", "token"),
+														         Arrays.asList(Integer.toString(this.ID), this.token)));
 		return result != null && result.first();
 	}
 
 	@Override
-	public void loadFromIntKey(String name, int value) throws NotUniqueAttribute {
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws NotUniqueAttribute {
 		ResultSet result = null;
 
-		result = this.component.select("*", "Session", name + "=" + value);
-		
-		if(result != null) {
-			try {
-				result.first();
-				if(result.next()) {
-					throw new NotUniqueAttribute(name, "Session");
-				}
-				this.ID = result.getInt("ID");
-				this.token = result.getString("token");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			result = this.component.select(Arrays.asList("*"), "Session",
+											new SQLCondition(columnNames, columnValues));
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
-	}
-
-	@Override
-	public void loadFromStringKey(String name, String value) throws NotUniqueAttribute {
-		ResultSet result = null;
-
-		result = this.component.select("*", "Session", name + "='" + value + "'");
 		
 		if(result != null) {
 			try {
 				result.first();
 				if(result.next()) {
-					throw new NotUniqueAttribute(name, "Session");
+					throw new NotUniqueAttribute(columnNames, "Session");
 				}
 				this.ID = result.getInt("ID");
 				this.token = result.getString("token");
@@ -88,7 +86,8 @@ public class JDBCSession extends Session {
 	@Override
 	public void update() throws Exception {
 		if(this.isExisting()) {
-			this.component.update("(token, ID) = (" + this.token + "," + this.ID + ")", "Session", "");
+			this.component.update("(token, ID) = (" + this.token + "," + this.ID + ")", "Session",
+									new SQLCondition());
 		} else {
 			throw new NotExistingTuple("Session");
 		}
@@ -97,7 +96,8 @@ public class JDBCSession extends Session {
 	@Override
 	public void delete() throws Exception {
 		if(this.isExisting()) {
-			this.component.delete("Session", "ID=" + this.ID);
+			this.component.delete("Session", new SQLCondition(Arrays.asList("ID"), 
+																Arrays.asList(Integer.toString(this.ID))));
 		} else {
 			throw new NotExistingTuple("Session");
 		}

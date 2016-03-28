@@ -2,11 +2,13 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDProductException;
 import common.jdbc.JDBCComponent;
+import common.jdbc.SQLCondition;
 import persistent.ProductWishList;
 
 public class JDBCProductWishList extends ProductWishList{
@@ -18,7 +20,9 @@ public class JDBCProductWishList extends ProductWishList{
 		this.component = new JDBCComponent();
 				
 		try {
-			ResultSet result = this.component.select("*", "product", "id = '" + this.ID + "'");
+			ResultSet result = this.component.select(Arrays.asList("*"), "product", 
+													new SQLCondition(Arrays.asList("id"),
+																	Arrays.asList(Integer.toString(this.ID))));
 			if (result.first()) {
 				this.name = result.getString("name");
 				this.description = result.getString("description");
@@ -28,6 +32,8 @@ public class JDBCProductWishList extends ProductWishList{
 				throw new UnknownIDProductException(ID);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
