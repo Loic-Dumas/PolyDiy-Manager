@@ -22,6 +22,10 @@ public abstract class Session implements InterfaceModel{
 		return this.token;
 	}
 	
+	public String getLogin() {
+		return this.login;
+	}
+	
 	public int getIDUser() {
 		return this.ID_user;
 	}
@@ -40,6 +44,10 @@ public abstract class Session implements InterfaceModel{
 	
 	public void setToken(String token) {
 		this.token = token;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	public void setIDUser(int ID_user) {
