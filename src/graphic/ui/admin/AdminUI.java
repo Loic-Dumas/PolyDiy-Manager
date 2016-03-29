@@ -1,4 +1,4 @@
-package graphic.ui;
+package graphic.ui.admin;
 
 import java.awt.event.ActionEvent;
 
@@ -9,14 +9,14 @@ import javax.swing.JOptionPane;
 import graphic.engine.AbstractUI;
 import persistent.Session;
 
-public class SellerUI extends AbstractUI {
+public class AdminUI extends AbstractUI {
 	private JButton account = new JButton();
 	private JLabel label = new JLabel();
 
 	private Session session = null;
 	
 	
-	public SellerUI(Session session) {
+	public AdminUI(Session session) {
 		this.session = session;
 		
 		this.panel.setLayout(null);
@@ -27,12 +27,11 @@ public class SellerUI extends AbstractUI {
 		this.panel.add(account);
 		this.account.addActionListener(this);
 		
-
+		
 		// text label lambda
-		this.label.setText("Cet view est pour le seller");
+		this.label.setText("Cet view est pour l'admin");
 		this.label.setBounds(200, 2, 300, 23);
 		this.panel.add(label);
-		
 	}
 
 	@Override

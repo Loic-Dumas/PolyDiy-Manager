@@ -1,4 +1,4 @@
-package graphic.ui.list;
+package graphic.ui.user.list;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
