@@ -1,5 +1,7 @@
 package common.factory.jdbcFactory;
 
+import java.util.Arrays;
+
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.factory.SessionFactory;
@@ -13,7 +15,7 @@ public class JDBCSessionFactory extends SessionFactory {
 	@Override
 	public Account buildAccount(String loginIn) throws Exception {
 		Account account = new JDBCAccount();
-		account.loadFromStringKey("login", loginIn);;
+		account.loadFromKeys(Arrays.asList("login"), Arrays.asList(loginIn));
 		return account;
 	}
 

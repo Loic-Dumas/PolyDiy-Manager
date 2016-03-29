@@ -1,6 +1,6 @@
 package persistent;
 
-import common.AbstractModel;
+import common.InterfaceModel;
 
 /**
  * An account contain a login, a password and and ID.
@@ -10,7 +10,7 @@ import common.AbstractModel;
  * @version 1.0
  * @since 2016-03-02
  */
-public abstract class Account extends AbstractModel { 
+public abstract class Account implements InterfaceModel { 
 	
 	protected String login = "";
 	protected String password = "";
