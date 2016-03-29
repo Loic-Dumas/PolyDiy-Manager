@@ -1,17 +1,17 @@
 package graphic.engine;
 
-import graphic.ui.AccountUI;
-import graphic.ui.AdminUI;
 import graphic.ui.AdvertisementUI;
 import graphic.ui.CreateAccountUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
-import graphic.ui.SellerUI;
-import graphic.ui.UserUI;
-import graphic.ui.list.CartUI;
-import graphic.ui.list.WishListUI;
-import graphic.ui.list.WishListsUI;
+import graphic.ui.account.AccountUI;
+import graphic.ui.admin.AdminUI;
+import graphic.ui.seller.SellerUI;
+import graphic.ui.user.list.CartUI;
+import graphic.ui.user.list.UserUI;
+import graphic.ui.user.list.WishListUI;
+import graphic.ui.user.list.WishListsUI;
 import persistent.Session;
 
 public class FactoryUI {

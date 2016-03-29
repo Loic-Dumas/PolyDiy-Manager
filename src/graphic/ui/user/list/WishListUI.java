@@ -1,4 +1,4 @@
-package graphic.ui.list;
+package graphic.ui.user.list;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -12,29 +12,28 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-import common.facade.list.FacadeManageCart;
+import common.facade.list.FacadeManageWishList;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import persistent.Session;
 import persistent.list.ProductWishList;
 
-public class CartUI extends AbstractUI {
+public class WishListUI extends AbstractUI {
 	private JButton logout = new JButton();
 	private JButton backUser = new JButton();
-	private JButton wishLists = new JButton();
-	private JButton cart = new JButton();
+	private JButton backWishLists = new JButton();
 	private JLabel wishListLabel = new JLabel();
-	private JLabel cartTotalPriceLabel = new JLabel();
+	private JLabel wishListTotalPriceLabel = new JLabel();
 	private JTable table = new JTable();
     private JPanel tablePanel = new JPanel(); 
 	
 	private Session session = null;
-	private FacadeManageCart facadeList = new FacadeManageCart(); 
+	private FacadeManageWishList facadeList = new FacadeManageWishList(); 
 
 	
-	public CartUI(Session session, int IDUser) {
+	public WishListUI(Session session, int IDWishList) {
 		this.session = session;
-		this.facadeList.createAndGetCart(IDUser);
+		this.facadeList.createAndGetWishList(IDWishList);
 		
 		this.panel.setLayout(null);
 
@@ -51,36 +50,30 @@ public class CartUI extends AbstractUI {
 		this.backUser.addActionListener(this);
 		
 		// wish lists button
-		this.wishLists.setText("Wish Lists");
-		this.wishLists.setBounds(2, 30, 150, 23);
-		this.panel.add(wishLists);
-		this.wishLists.addActionListener(this);
+		this.backWishLists.setText("Back to WishLists");
+		this.backWishLists.setBounds(2 , 60, 150, 23);
+		this.panel.add(backWishLists);
+		this.backWishLists.addActionListener(this);
 
-		// Cart button
-		this.cart.setText("Cart");
-		this.cart.setBounds(160 , 30, 150, 23);
-		this.panel.add(cart);
-		this.cart.addActionListener(this);
-
-		this.wishListLabel.setText("Your wish lists :");
-		this.wishListLabel.setBounds(2, 60, 300, 23);
+		this.wishListLabel.setText("WishList : " + this.facadeList.getNameWishList());
+		this.wishListLabel.setBounds(2, 30, 300, 23);
 		this.panel.add(wishListLabel);
-		
-		this.cartTotalPriceLabel.setText("Total Price  : " + this.facadeList.getTotalPriceCart() + " €");
-		this.cartTotalPriceLabel.setBounds(200, 500, 300, 23);
-		this.panel.add(cartTotalPriceLabel);
+
+		this.wishListTotalPriceLabel.setText("Total Price  : " + this.facadeList.getTotalPriceWishList() + " €");
+		this.wishListTotalPriceLabel.setBounds(200, 500, 300, 23);
+		this.panel.add(wishListTotalPriceLabel);
 
 		
 		//Table : 
-		int nbOfRow = this.facadeList.createAndGetCart(IDUser).count();
+		int nbOfRow = this.facadeList.createAndGetWishList(IDWishList).count();
 		int nbOfColumn = 4; // the name, the quantity and the unitPrice
 		String[] title = { "Product Name", "Quantity", "Price"};
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
 		
 		int j = 0;
-		for(Iterator<String> i = this.facadeList.getListIDCart().iterator() ; i.hasNext(); ) {
+		for(Iterator<String> i = this.facadeList.getListIDProduct().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
-		    ProductWishList product = this.facadeList.createAndGetCart(IDUser).getElementByKey(key);
+		    ProductWishList product = this.facadeList.createAndGetWishList(IDWishList).getElementByKey(key);
 		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice()}; 
 			data[j] = newLine;
 			j ++;
@@ -94,28 +87,12 @@ public class CartUI extends AbstractUI {
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		this.panel.add(this.tablePanel);	
 	}
-	
-	/**
-	 * This method is an equivalent to actionPerformed, but with a String and not an ActionEvent.
-	 * Specially created for when we click on a product in the wishList.
-	 * 
-	 * @author loicd_000
-	 * @param event
-	 */
-	public void stringActionPerformed(String event) {
-		try {
-			this.setChanged();
-			this.notifyObservers(event);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//FacadeSession facade = new FacadeSession();
 		
 		if (arg0.getActionCommand().equals("Back to User")) {
+			//System.out.println("UserUI - actionPerformed - case user");
 			try {
 				this.setChanged();
 				this.notifyObservers("user");
@@ -124,7 +101,9 @@ public class CartUI extends AbstractUI {
 			}
 		} 
 
+		
 		else if (arg0.getActionCommand().equals("Back to logout")) {
+			//System.out.println("logoutUI - actionPerformed - case logout");
 			try {
 				this.setChanged();
 				this.notifyObservers("back to logout");
@@ -133,24 +112,16 @@ public class CartUI extends AbstractUI {
 			}
 		}
 		
-		else if (arg0.getActionCommand().equals("Wish Lists")) {
+
+		
+		else if (arg0.getActionCommand().equals("Back to WishLists")) {
 			try {
 				this.setChanged();
 				this.notifyObservers("wishLists");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
-		}
-		
-		
-		else if (arg0.getActionCommand().equals("Cart")) {
-			try {
-				this.setChanged();
-				this.notifyObservers("cart");
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		}  else {
+		} else {
 			System.err.println("Button action not catch.");
 		}
 	}
