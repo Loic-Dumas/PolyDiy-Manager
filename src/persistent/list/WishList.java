@@ -1,15 +1,14 @@
-package persistent;
-import java.util.Iterator;
-
-import common.Set;
+package persistent.list;
+import common.InterfaceModel;
+import common.SetWithKey;
 
 /**
  * @author loicd_000
  *
  */
-public abstract class WishList extends Set<ProductWishList>{
+public abstract class WishList extends SetWithKey<ProductWishList> implements InterfaceModel {
 	protected String label;
-	protected int ID;
+	protected int IDWishList;
 	
 	public WishList(int ID){
 		this.setID(ID);
@@ -24,11 +23,26 @@ public abstract class WishList extends Set<ProductWishList>{
 	}
 
 	public int getID() {
-		return ID;
+		return IDWishList;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		IDWishList = iD;
+	}
+	
+	/*
+	Different methods when WishList where extending from Set
+	 
+	public ProductWishList getProductWithIDProduct(int IDProduct) {
+		Iterator<ProductWishList> iterator = this.set.iterator();
+		boolean found = false;
+		while (!found && iterator.hasNext()) {
+			if (iterator.next().getID() == IDProduct) {
+				return iterator.next();
+			}
+		}
+		
+		return null;
 	}
 	
 	public void removeProductWithIDProduct(int IDProduct) {
@@ -42,7 +56,11 @@ public abstract class WishList extends Set<ProductWishList>{
 		}
 	}
 
-	public void updateNewUnitPriceProductWithIDProduct(int IDProduct, float newPrice) {
+	public void updateNewUnitPriceProductWithIDProduct(int IDProduct, float newPrice) throws InvalidPriceException {
+		if (newPrice < 0 ) {
+			throw new InvalidPriceException(newPrice);
+		} 
+		
 		Iterator<ProductWishList> iterator = this.set.iterator();
 		boolean found = false;
 		while (!found && iterator.hasNext()) {
@@ -53,7 +71,11 @@ public abstract class WishList extends Set<ProductWishList>{
 		}
 	}
 	
-	public void updateNewQuantityProductWithIDProduct(int IDProduct, int quantity) {
+	public void updateNewQuantityProductWithIDProduct(int IDProduct, int quantity) throws InvalidQuantityException {
+		if (quantity <=0 ) {
+			throw new InvalidQuantityException(quantity);
+		} 
+		
 		Iterator<ProductWishList> iterator = this.set.iterator();
 		boolean found = false;
 		while (!found && iterator.hasNext()) {
@@ -63,5 +85,5 @@ public abstract class WishList extends Set<ProductWishList>{
 			}
 		}
 	}
-	
+	*/
 }

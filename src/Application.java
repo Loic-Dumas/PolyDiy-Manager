@@ -20,9 +20,9 @@ import persistent.Session;
 /**
  * 
  * 
- * @author Pierre Casati
- * @version 1.0
- * @since 2016-03-03
+ * @author Pierre Casati - LoicD000
+ * @version 1.1
+ * @since 2016-03-028
  */
 
 public class Application extends JFrame implements Observer{
@@ -73,7 +73,23 @@ public class Application extends JFrame implements Observer{
 		case "update":
 			this.panels.put(ui, factory.buildUpdateUI(session));
 			break;
+		case "user":
+			this.panels.put(ui, factory.buildUserUI(this.session));
+			break;
+		case "wishLists":
+			this.panels.put(ui, factory.buildWishListsUI(this.session, 1));
+			break;
+		case "cart":
+			this.panels.put(ui, factory.buildCartUI(this.session, 1));
+			break;
 		default:
+			
+			if (ui.contains("wishList selected : ")) {
+				this.panels.put(ui, factory.buildWishListUI(this.session, Integer.valueOf(ui.replaceAll("wishList selected : ", ""))));	
+			} else {
+				System.err.println("No panel to add");
+			}
+			
 			break;
 		}
 		this.panels.get(ui).addObserver(this);
@@ -108,9 +124,29 @@ public class Application extends JFrame implements Observer{
 			    this.addUI("edit", BorderLayout.LINE_START);
 				this.addUI("logout", BorderLayout.CENTER);
 				break;
-				
+			case "user":
+				this.clearUI();
+				this.addUI("user", BorderLayout.CENTER);
+				break;
+			case "back to logout":
+				this.clearUI();
+				this.addUI("logout", BorderLayout.CENTER);
+				break;
+			case "wishLists":
+				this.clearUI();
+				this.addUI("wishLists", BorderLayout.CENTER);
+				break;
+			case "cart":
+				this.clearUI();
+				this.addUI("cart", BorderLayout.CENTER);
+				break;
 			default:
-				System.err.println("problème de cas");
+				if (((String) arg).contains("wishList selected :")) {
+					this.clearUI();
+					this.addUI(((String) arg), BorderLayout.CENTER);
+				} else {
+					System.err.println("problème de cas");
+				}
 				break;
 			}
 			this.getContentPane().validate();
