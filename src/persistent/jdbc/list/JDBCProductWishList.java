@@ -32,7 +32,6 @@ public class JDBCProductWishList extends ProductWishList{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("J'ai ajouté un JDBCProductWishList de nom : " + this.getName());
 	}
 
 	@Override

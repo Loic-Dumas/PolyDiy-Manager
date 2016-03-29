@@ -21,7 +21,6 @@ public class JDBCWishList extends WishList {
 		this.component = new JDBCComponent();
 		try {
 			//we get all items of the wish list.
-			System.out.println("\nJe prepare le ResultSet pour la création de ma WishList");
 			ResultSet result = this.component.select(
 					"i.id_wishlist, i.id_product, i.quantity, i.unitPrice, w.label", 
 					"wishlist w, item_wishlist i", 
@@ -30,13 +29,11 @@ public class JDBCWishList extends WishList {
 			//we add the label (name) of the wish list
 			if (result.first()) {
 				this.setLabel(result.getString("label"));	
-				System.out.println("J'ai ajouté le nom de ma wishlist : " + this.getLabel());
 			} else {
 				System.err.println("No wish list returned.");
 			}
 			//we add all the elements found to the set
 			do {
-				System.out.println("\nJ'essaye d'ajouter un produit à ma wishlist");
 				try {
 					this.addElement( String.valueOf(result.getInt("id_product")) ,
 							productFactory.buildProductWishList( result.getInt("id_product"), result.getInt("id_wishlist"), 
