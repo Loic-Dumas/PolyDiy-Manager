@@ -15,7 +15,8 @@ public class EditProfilUI extends AbstractUI {
 	public EditProfilUI(Session session) {
 		this.session = session;
 		this.edit.setText("Edit Profil");
-		this.edit.setPreferredSize(new Dimension(150, 30));
+		//this.edit.setPreferredSize(new Dimension(150, 30));
+		this.edit.setBounds(146, 240, 89, 23);
 		this.panel.add(this.edit);
 		this.edit.addActionListener(this);
 		/*this.cancel.setText("Cancel");

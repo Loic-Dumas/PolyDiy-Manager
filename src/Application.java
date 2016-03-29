@@ -14,7 +14,6 @@ import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.ui.LoginUI;
-import graphic.ui.EditProfilUI;
 import persistent.Session;
 
 /**
@@ -106,7 +105,7 @@ public class Application extends JFrame implements Observer{
 				this.session = login.getSession();
 				this.clearUI();
 				this.addUI("logout", BorderLayout.CENTER);
-				this.addUI("edit", BorderLayout.LINE_START);
+				this.addUI("edit", BorderLayout.NORTH);
 				break;
 			case "logout":
 				this.session = null;

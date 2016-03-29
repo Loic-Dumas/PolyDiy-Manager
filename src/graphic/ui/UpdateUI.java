@@ -73,7 +73,8 @@ public class UpdateUI extends AbstractUI {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeEditProfil facade = new FacadeEditProfil(session);
 		try {
-			if (arg0.getSource()== update){
+			if (arg0.getSource()==
+					update){
 			facade.createSeller(session.getID(), this.nameShop.getText(), this.description.getText(), this.siret.getText(), this.website.getText());
 			facade.Validate();
 			this.setChanged();
