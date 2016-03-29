@@ -1,4 +1,7 @@
 package persistent;
+
+import common.AbstractModel;
+
 /**
  * A seller contains ID, nameShop, description, siret and website.
  * A seller is created with his ID.
@@ -8,19 +11,30 @@ package persistent;
  * @since 2016-03-21
  */
 
-public class Seller {
+public class Seller extends AbstractModel{
 	protected int ID;
 	protected String nameShop;
 	protected String description;
 	protected String siret;
 	protected String website;
+	
+	public Seller(){
+		
+	}
+	
 	public Seller (int ID) {
 		this.ID = ID;
+	}
+	public int getId(){
+		return ID;
+	}
+	public void setId(int id){
+		this.ID = id;
 	}
 	public String getNameShop() {
 		return nameShop;
 	}
-	public void setName(String nameShop) {
+	public void setNameShop(String nameShop) {
 		this.nameShop = nameShop;
 	}
 	public String getDescription() {
@@ -41,5 +55,35 @@ public class Seller {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
+	@Override
+	public Boolean isExisting() throws Exception {
+	
+		return null;
+	}
+	@Override
+	public void loadFromIntKey(String name, int value) throws Exception {
+	
+		
+	}
+	@Override
+	public void loadFromStringKey(String name, String value) throws Exception {
+
+	}
+	@Override
+	public void insert() throws Exception {
+	
+		
+	}
+	@Override
+	public void update() throws Exception {
+		
+		
+	}
+	@Override
+	public void delete() throws Exception {
+		
+		
+	}
+	
 	
 }

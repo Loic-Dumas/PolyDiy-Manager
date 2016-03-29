@@ -6,23 +6,31 @@ package persistent.jdbc;
  * @since 2016-03-21
  */
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import common.exception.AlertDriver;
+import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
-import common.exception.JDBCQueryException;
+import common.exception.NotExistingTuple;
 import common.exception.UnknownIDSellerException;
 import common.jdbc.JDBCComponent;
 import persistent.Seller;
 
-public class JDBCSeller extends Seller{
-	private JDBCComponent component = new JDBCComponent();
 
-	public JDBCSeller(int ID) throws ErrorConnectionException, UnknownIDSellerException {
+public class JDBCSeller extends Seller{
+	private JDBCComponent component = null;
+	
+	public JDBCSeller () throws ErrorConnectionException, AlertDriver {
+		super();
+		this .component = new JDBCComponent();
+	}
+	public JDBCSeller(int ID) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
 		super(ID);
+		this .component = new JDBCComponent();
 		
 		try {
-			ResultSet result = this.component.select("*", "seller_account", "id = '" + this.ID + "'");
+			ResultSet result = this.component.select("*", "seller_account", "id_account = '" + this.ID + "'");
 			if (result.first()) {
 				this.nameShop = result.getString("nameShop");
 				this.description = result.getString("description");
@@ -31,13 +39,44 @@ public class JDBCSeller extends Seller{
 			} else {
 				throw new UnknownIDSellerException(ID);
 			}
-		} catch (JDBCQueryException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} 
+	}
+
+	@Override
+	public Boolean isExisting() throws Exception {
+		ResultSet result = this.component.select("*", "Seller_account", "Id_account = '" + this.ID + "'");
+		return result != null && result.first();
+	}
+
+
+	@Override
+	public void insert() throws Exception {
+		if(!this.isExisting()) {
+			this.component.insert("Seller_account", "'" + this.ID + "', '" + this.nameShop + "', '"  + this.description + "', '"  + this.siret + "', '"  + this.website + "'");
+		} else {
+			throw new AlreadyExistTuple("Seller");
 		}
 	}
-	
-	
 
+	@Override
+	public void update() throws Exception {
+		if(this.isExisting()) {
+			this.component.update("( nameShop, description, siret, website) = ('" + this.nameShop + "','" + this.description + "','" + this.siret + "','" +this.website + "')", "Seller_account","id_account = '" + this.ID + "'");
+		} else {
+			throw new NotExistingTuple("Seller");
+		}
+	}
+
+	/*@Override
+	public void delete() throws Exception {
+		if(this.isExisting()) {
+			this.component.delete("Session", "ID=" + this.ID);
+		} else {
+			throw new NotExistingTuple("Session");
+		}
+	}*/
+	
+	
 }

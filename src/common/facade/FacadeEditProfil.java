@@ -1,5 +1,10 @@
 package common.facade;
-
+/**
+ * @author nassim vachor
+ * @version 1.0
+ * @since 2016-03-21
+ */
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
 import logic.UpdateProfilHandler;
@@ -11,37 +16,49 @@ public class FacadeEditProfil {
 	public FacadeEditProfil (Session s){
 		this.session = s;
 	}
-	public String getNameShop() throws UnknownIDSellerException, ErrorConnectionException{
-		
-		return handler.getNameShop(session.getID());
-		}
-	public void SetNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException{
-		
-	                  handler.SetNameShop(name, session.getID());     
-	}
-	public String getSiret() throws UnknownIDSellerException, ErrorConnectionException {
-		
-		return handler.getSiret(session.getID());
-		}	
-	public void SetSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException{
-		
-		handler.SetSiert(siret, session.getID());
-	}
-	public String getWebsite() throws UnknownIDSellerException, ErrorConnectionException {
-		
-		return handler.getWebsite(session.getID());
-		}
-		
-	public void setWebsite(String site) throws UnknownIDSellerException, ErrorConnectionException {
-		
-		handler.settWebsite(session.getID(), site);
-		}
-	public String getDescription () throws ErrorConnectionException, UnknownIDSellerException{
-		return handler.getDescription(session.getID());
-	}
-	public void setDescription(String desc) throws UnknownIDSellerException, ErrorConnectionException {
-		    handler.setDescription(session.getID(), desc);
-		}
 	
+public void createSeller(int ID, String nameShop, String description, String siret, String website) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
+		
+		this.handler.createSeller(session.getID(), nameShop, description, siret, website);
+		
+	}
+	
+	
+	
+	public String getNameShop() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver{
+		
+		return this.handler.getNameShop();
+		}
+	public void SetNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+		
+	                  this.handler.SetNameShop(name);     
+	}
+	public String getSiret() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
+		
+		return this.handler.getSiret();
+		}	
+	public void SetSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+		
+		this.handler.SetSiert(siret);
+	}
+	public String getWebsite() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
+		
+		return this.handler.getWebsite();
+		}
+		
+	public void setWebsite(String site) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
+		
+		this.handler.settWebsite(site);
+		}
+	public String getDescription () throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+		return this.handler.getDescription();
+	}
+	public void setDescription(String desc) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
+		    this.handler.setDescription(desc);
+		}
+	public void Validate() throws Exception{
+		
+		this.handler.Validate();
+	}
 	
 }

@@ -1,5 +1,6 @@
 package logic;
 
+import common.exception.AlertDriver;
 import common.exception.DifferentWishListException;
 import common.exception.ErrorConnectionException;
 import common.exception.InvalidPriceException;
@@ -27,8 +28,9 @@ public class WishListHandler {
 	 * @since 2016-03-21
 	 * @param int ID (of the product to add), int quantity, float unitPrice
 	 * @return true if the product is added to WwishList. False if an error occur.
+	 * @throws AlertDriver 
 	 */
-	public WishList createWishList(int ID) {	
+	public WishList createWishList(int ID) throws AlertDriver {	
 		try {
 			return listFactory.buildWishList(ID);
 		} catch (ErrorConnectionException e) {
@@ -47,9 +49,10 @@ public class WishListHandler {
 	 * @param int IDWishList, int IDProduct (of the product to add), int quantity, float unitPrice
 	 * @return true if the product is added to WwishList. False if an error occur.
 	 * @throws DifferentWishListException 
+	 * @throws AlertDriver 
 	 */
 	public boolean addProductToWishList(int IDWishList, int IDProduct, int quantity, float unitPrice) 
-			throws UnknownIDProductException, InvalidQuantityException, InvalidPriceException, DifferentWishListException {
+			throws UnknownIDProductException, InvalidQuantityException, InvalidPriceException, DifferentWishListException, AlertDriver {
 		// first we create the WishList.
 		if (wishList == null) {
 			try {
@@ -110,8 +113,9 @@ public class WishListHandler {
 	 * @since 2016-03-21
 	 * @param int IDWishList, int IDProduct,
 	 * @return void
+	 * @throws AlertDriver 
 	 */
-	private void wishListExist(int IDWishList) {
+	private void wishListExist(int IDWishList) throws AlertDriver {
 		if (wishList == null) {
 			try {
 				this.wishList = listFactory.buildWishList(IDWishList);

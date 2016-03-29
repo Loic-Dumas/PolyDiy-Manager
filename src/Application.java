@@ -14,6 +14,7 @@ import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.ui.LoginUI;
+import graphic.ui.EditProfilUI;
 import persistent.Session;
 
 /**
@@ -66,6 +67,12 @@ public class Application extends JFrame implements Observer{
 		case "createAccount":
 			this.panels.put(ui, factory.buildCreateAccountUI());
 			break;
+		case "edit":
+			this.panels.put(ui, factory.buildEditProfilUI(this.session));
+			break;
+		case "update":
+			this.panels.put(ui, factory.buildUpdateUI(session));
+			break;
 		default:
 			break;
 		}
@@ -83,6 +90,7 @@ public class Application extends JFrame implements Observer{
 				this.session = login.getSession();
 				this.clearUI();
 				this.addUI("logout", BorderLayout.CENTER);
+				this.addUI("edit", BorderLayout.LINE_START);
 				break;
 			case "logout":
 				this.session = null;
@@ -91,6 +99,16 @@ public class Application extends JFrame implements Observer{
 				this.addUI("createAccount", BorderLayout.EAST);
 				this.addUI("advertisement", BorderLayout.SOUTH);
 				break;
+			case "edit":
+				this.clearUI();
+				this.addUI("update", BorderLayout.CENTER);
+				break;
+			case "update":
+				this.clearUI();
+			    this.addUI("edit", BorderLayout.LINE_START);
+				this.addUI("logout", BorderLayout.CENTER);
+				break;
+				
 			default:
 				System.err.println("problème de cas");
 				break;

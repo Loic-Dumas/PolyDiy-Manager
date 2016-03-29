@@ -8,8 +8,15 @@ package common.factory;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
 import persistent.Seller;
+import common.exception.AlertDriver;
 
 public abstract class ProfilFactory {
 	
-	public abstract Seller  buildSeller(int ID) throws ErrorConnectionException, UnknownIDSellerException;
+	public abstract Seller  buildSeller(int ID) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver ;
+
+	public abstract Seller  buildSeller(int ID, String nameShop, String description, String siret, String webSite) throws ErrorConnectionException, AlertDriver ;
+
+
+
 }
+   

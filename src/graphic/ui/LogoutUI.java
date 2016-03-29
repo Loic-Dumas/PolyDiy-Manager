@@ -15,7 +15,6 @@ public class LogoutUI extends AbstractUI {
 	
 	public LogoutUI(Session session) {
 		this.session = session;
-		
 		this.panel.setLayout(null);
 		
 		// connection
@@ -24,7 +23,6 @@ public class LogoutUI extends AbstractUI {
 		this.logout.setText("Logout");
 		this.logout.setBounds(146, 147, 89, 23);
 		this.panel.add(logout);
-		
 		this.logout.addActionListener(this);
 	}
 
