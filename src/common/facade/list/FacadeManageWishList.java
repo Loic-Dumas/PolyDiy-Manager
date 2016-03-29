@@ -1,13 +1,10 @@
 package common.facade.list;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import common.exception.NoWishListException;
-import logic.SetWishListHandler;
 import logic.WishListHandler;
 import persistent.list.ProductWishList;
-import persistent.list.SetWishList;
 import persistent.list.WishList;
 
 /**

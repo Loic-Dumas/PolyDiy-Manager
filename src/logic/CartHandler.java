@@ -5,14 +5,13 @@ import java.util.Set;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.exception.NoWishListException;
 import common.exception.UnknownIDProductException;
 import common.factory.ListFactory;
 import common.factory.ProductFactory;
 import common.factory.jdbcFactory.JDBCListFactory;
 import common.factory.jdbcFactory.JDBCProductFactory;
-import persistent.list.ProductWishList;
 import persistent.list.Cart;
+import persistent.list.ProductWishList;
 
 public class CartHandler {
 	ListFactory listFactory = new JDBCListFactory();

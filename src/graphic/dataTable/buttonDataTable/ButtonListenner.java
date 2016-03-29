@@ -3,17 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
-
-import graphic.ui.list.WishListUI;
-import persistent.list.WishList;
 
 class ButtonListener implements ActionListener {
 
-	private int column, row;
+	private int column;
+	private int  row;
+	@SuppressWarnings("unused")
 	private JTable table;
-	private int nbre = 0;
+	
 	private JButton button;
 
 	public void setColumn(int col) {
@@ -33,10 +31,8 @@ class ButtonListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		
-		System.out.println("coucou, le bouton marche !");
-		
 		System.out.println("coucou du bouton : " + ((JButton) event.getSource()).getText());
+		System.out.println("Info : " + column + " - " + row );
 			
 		
 		//this.button = ((JButton) event.getSource());

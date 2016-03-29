@@ -4,10 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import common.exception.AlertDriver;
-import common.exception.DifferentWishListException;
 import common.exception.ErrorConnectionException;
-import common.exception.InvalidPriceException;
-import common.exception.InvalidQuantityException;
 import common.exception.NoWishListException;
 import common.exception.UnknownIDProductException;
 import common.factory.ListFactory;

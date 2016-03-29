@@ -1,11 +1,7 @@
 package common.facade.list;
 
-import java.util.Iterator;
 import java.util.Set;
 
-import common.exception.AlertDriver;
-import common.exception.ErrorConnectionException;
-import common.exception.UnknownIDProductException;
 import logic.CartHandler;
 import persistent.list.Cart;
 import persistent.list.ProductWishList;
