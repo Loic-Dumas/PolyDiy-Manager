@@ -72,8 +72,20 @@ public class Application extends JFrame implements Observer{
 		case "update":
 			this.panels.put(ui, factory.buildUpdateUI(session));
 			break;
+		case "navBar":
+			this.panels.put(ui, factory.buildNavBarUI(this.session));
+			break;
+		case "account":
+			this.panels.put(ui, factory.buildAccountUI(this.session));
+			break;
 		case "user":
 			this.panels.put(ui, factory.buildUserUI(this.session));
+			break;
+		case "seller":
+			this.panels.put(ui, factory.buildSellerUI(this.session));
+			break;
+		case "admin":
+			this.panels.put(ui, factory.buildAdminUI(this.session));
 			break;
 		case "wishLists":
 			this.panels.put(ui, factory.buildWishListsUI(this.session, 1));
@@ -104,8 +116,8 @@ public class Application extends JFrame implements Observer{
 				LoginUI login = (LoginUI)this.panels.get("login");
 				this.session = login.getSession();
 				this.clearUI();
-				this.addUI("logout", BorderLayout.CENTER);
-				this.addUI("edit", BorderLayout.NORTH);
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("account", BorderLayout.CENTER);
 				break;
 			case "logout":
 				this.session = null;
@@ -123,25 +135,45 @@ public class Application extends JFrame implements Observer{
 			    this.addUI("edit", BorderLayout.LINE_START);
 				this.addUI("logout", BorderLayout.CENTER);
 				break;
+			case "account":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("account", BorderLayout.CENTER);
+				break;
 			case "user":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("user", BorderLayout.CENTER);
+				break;
+			case "seller":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("seller", BorderLayout.CENTER);
+				break;
+			case "admin":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("admin", BorderLayout.CENTER);
 				break;
 			case "back to logout":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("logout", BorderLayout.CENTER);
 				break;
 			case "wishLists":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("wishLists", BorderLayout.CENTER);
 				break;
 			case "cart":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("cart", BorderLayout.CENTER);
 				break;
 			default:
 				if (((String) arg).contains("wishList selected :")) {
 					this.clearUI();
+					this.addUI("navBar", BorderLayout.NORTH);
 					this.addUI(((String) arg), BorderLayout.CENTER);
 				} else {
 					System.err.println("problème de cas");

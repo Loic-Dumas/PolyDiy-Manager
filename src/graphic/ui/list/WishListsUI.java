@@ -161,6 +161,8 @@ public class WishListsUI extends AbstractUI {
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
+		} else {
+			System.err.println("Button action not catch.");
 		}
 	}
 

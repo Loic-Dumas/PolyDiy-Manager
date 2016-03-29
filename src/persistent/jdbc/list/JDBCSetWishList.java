@@ -20,21 +20,16 @@ public class JDBCSetWishList extends SetWishList {
 		
 		try {
 			//we get all items of the wish list.
-			System.out.println("\nJe prepare le ResultSet pour la création de toutes mes WishLists pour le l'utilisateur d'ID: " + IDUser);
 			ResultSet result = this.component.select(
 					"*", //SELECT
 					"wishlist", //FROM
 					"id_user = '" + this.IDUser + "' AND label != 'Cart' " ); //WHERE
 			
-			//we add the label (name) of the wish list
-			if (result.first()) {
-				System.out.println("J'ai au moins une wish list ");
-			} else {
+			if (!result.first()) {
 				System.err.println("No wish list returned.");
 			}
 			//we add all the wish lists found to the set
 			do {
-				System.out.println("\nJ'essaye d'ajouter une wishlist à mon set ");
 				this.addElement( String.valueOf(result.getInt("id_wishList")) ,
 						wishListFactory.buildWishList(result.getInt("id_wishList"))); 
 				// Maybe I can do a cleaner version who don't construct all the wishList

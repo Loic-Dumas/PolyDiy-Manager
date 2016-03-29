@@ -49,6 +49,6 @@ public class DataModelSetWishList extends AbstractTableModel {
 		if (col == 0) {
 			return false ;
 		}
-		return true;
+		return false;
 	}
 }
