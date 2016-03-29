@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
 import common.facade.list.FacadeManageSetWishList;
@@ -25,7 +26,10 @@ public class WishListsUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton wishLists = new JButton();
 	private JButton cart = new JButton();
+	private JButton addNewWishListButton = new JButton();
 	private JLabel wishListLabel = new JLabel();
+	private JLabel labelNewWishList = new JLabel();
+	private JTextField newWishList = new JTextField();
 	private JTable table = new JTable();
     private JPanel tablePanel = new JPanel(); 
 	
@@ -66,6 +70,20 @@ public class WishListsUI extends AbstractUI {
 		this.wishListLabel.setText("Your wish lists :");
 		this.wishListLabel.setBounds(2, 60, 300, 23);
 		this.panel.add(wishListLabel);
+		
+		
+		// add new WishList
+		this.labelNewWishList.setText("Name of the wishList : ");
+		this.labelNewWishList.setBounds(2, 500, 150, 23);
+		this.panel.add(labelNewWishList);
+		
+		this.newWishList.setBounds(130, 500, 302, 23);
+		this.panel.add(newWishList);
+		
+		this.addNewWishListButton.setText("Add");
+		this.addNewWishListButton.setBounds(442, 500, 60, 23);
+		this.panel.add(this.addNewWishListButton);
+		
 
 		
 		//Table : 

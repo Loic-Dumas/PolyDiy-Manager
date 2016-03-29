@@ -1,4 +1,4 @@
-package graphic.ui.user.list;
+package graphic.ui.user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
