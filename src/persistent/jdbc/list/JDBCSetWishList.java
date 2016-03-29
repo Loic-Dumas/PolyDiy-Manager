@@ -2,6 +2,7 @@ package persistent.jdbc.list;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
@@ -55,24 +56,6 @@ public class JDBCSetWishList extends SetWishList {
 	}
 
 	@Override
-	public Boolean haschanged() throws Exception {
-		// TODO JDBCSetWishList Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void loadFromIntKey(String name, int value) throws Exception {
-		// TODO JDBCSetWishList Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loadFromStringKey(String name, String value) throws Exception {
-		// TODO JDBCSetWishList Auto-generated method stub
-		
-	}
-
-	@Override
 	public void insert() throws Exception {
 		// TODO JDBCSetWishList Auto-generated method stub
 		
@@ -87,6 +70,18 @@ public class JDBCSetWishList extends SetWishList {
 	@Override
 	public void delete() throws Exception {
 		// TODO JDBCSetWishList Auto-generated method stub
+		
+	}
+
+	@Override
+	public Boolean hasChanged() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 

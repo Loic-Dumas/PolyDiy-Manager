@@ -127,16 +127,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 			e.printStackTrace();
 		}
 	}
-	
-	public void insert(String objectIn, String valuesIn) {
-		String query = "INSERT INTO " + objectIn + " VALUES(" + valuesIn + ");";
-		try {
-			System.out.println(query);
-			this.stmt.execute(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void clear() {
 		try {

@@ -1,6 +1,7 @@
 package persistent.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
@@ -11,7 +12,6 @@ import common.exception.UnknownIDProductException;
 import common.exception.loadFromIntKeyException;
 import common.exception.loadFromStringKeyException;
 import common.jdbc.JDBCComponent;
-
 /**
  * The JDBC object of a product.
  * Request to the db the name, description, unitPrice and stockQuantity.
@@ -36,12 +36,6 @@ public class JDBCProduct extends Product {
 		return result != null;
 	}
 
-	@Override
-	public Boolean haschanged() throws Exception {
-		return this.hasChanged;
-	}
-
-	@Override
 	public void loadFromIntKey(String name, int value) throws loadFromIntKeyException, NotUniqueAttribute {
 		ResultSet result = this.component.select("*", "product", name + " = " + value );
 		
@@ -68,7 +62,7 @@ public class JDBCProduct extends Product {
 
 	}
 
-	@Override
+	
 	public void loadFromStringKey(String name, String value) throws loadFromStringKeyException, NotUniqueAttribute  {
 ResultSet result = this.component.select("*", "product", value +" = '" + value + "'");
 		
@@ -122,6 +116,17 @@ ResultSet result = this.component.select("*", "product", value +" = '" + value +
 		} else {
 			throw new NotExistingTuple("Product");
 		}
+	}
+
+	@Override
+	public Boolean hasChanged() throws Exception {
+		return this.hasChanged;
+	}
+
+	@Override
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

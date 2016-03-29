@@ -8,6 +8,11 @@ public class NotUniqueAttribute extends Exception {
 	private String attributes = "";
 	private String component = "";
 	
+	public NotUniqueAttribute(String attribute, String component) {
+		this.attributes = attribute;
+		this.component = component;
+	}
+	
 	public NotUniqueAttribute(List<String> attributes, String component) {
 		for(String element : attributes) {
 			this.attributes += element + ",";

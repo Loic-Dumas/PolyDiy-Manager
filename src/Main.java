@@ -9,5 +9,3 @@ public class Main {
 		app.addUI("advertisement", BorderLayout.SOUTH);
 	}
 }
-
-
