@@ -5,14 +5,14 @@ import java.util.Map;
 
 import graphic.ui.AdvertisementUI;
 import graphic.ui.CreateAccountUI;
-import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
-import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.admin.AdminUI;
+//import graphic.ui.seller.EditSellerUI;
 import graphic.ui.seller.SellerUI;
+import graphic.ui.seller.UpdateSellerUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
@@ -35,7 +35,6 @@ public class FactoryUI {
 		this.ui.put("wishlist", WishListUI.class);
 		this.ui.put("wishlists", WishListsUI.class);
 		this.ui.put("cart", CartUI.class);
-		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
 	}
 	

@@ -12,13 +12,18 @@ import graphic.engine.UIMessage;
 public class SellerUI extends AbstractUI {
 	private JButton account = new JButton();
 	private JLabel label = new JLabel();
-	
+	private JButton edit = new JButton();
 	
 	public SellerUI(UIMessage communication) {
 		super(communication);
 		
 		this.panel.setLayout(null);
-
+		//edit Profil Button
+		this.edit.setText("Edit Profil");
+		this.edit.setBounds(300, 300, 89, 23);
+		this.panel.add(this.edit);
+		this.edit.addActionListener(this);
+		
 		// logout button
 		this.account.setText("Back to logout");
 		this.account.setBounds(2, 2, 150, 23);
@@ -41,6 +46,13 @@ public class SellerUI extends AbstractUI {
 			action = "back to logout";
 		} 
 		
+		if (!action.equals(arg0.getSource()== edit)) {
+			try {
+				this.notifyObservers("edit");
+				this.setChanged();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		
 		// we have an action, so we notify observers.
 		if (!action.equals("")) {
@@ -56,4 +68,5 @@ public class SellerUI extends AbstractUI {
 		}
 	}
 
+}
 }

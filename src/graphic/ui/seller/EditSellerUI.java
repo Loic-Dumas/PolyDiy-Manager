@@ -1,4 +1,4 @@
-package graphic.ui;
+/*package graphic.ui.seller;
 
 import java.awt.event.ActionEvent;
 
@@ -16,13 +16,13 @@ public class EditSellerUI extends AbstractUI {
 		
 		this.edit.setText("Edit Profil");
 		//this.edit.setPreferredSize(new Dimension(150, 30));
-		this.edit.setBounds(146, 240, 89, 23);
+		this.edit.setBounds(146, 300, 89, 23);
 		this.panel.add(this.edit);
 		this.edit.addActionListener(this);
 		/*this.cancel.setText("Cancel");
 		this.cancel.setPreferredSize(new Dimension(150, 30));
 		this.cancel.add(this.cancel);
-		this.cancel.addActionListener(this);*/
+		this.cancel.addActionListener(this);
 		this.panel.setVisible(true);
 	}
 
@@ -39,4 +39,5 @@ public class EditSellerUI extends AbstractUI {
 		}
 
 }
+*/
 

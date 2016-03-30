@@ -1,4 +1,4 @@
-package graphic.ui;
+package graphic.ui.seller;
 
 
 import java.awt.event.ActionEvent;
@@ -73,8 +73,7 @@ public class UpdateSellerUI extends AbstractUI {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeEditProfil facade = new FacadeEditProfil((int)this.communication.getElement("id_account"));
 		try {
-			if (arg0.getSource()==
-					update){
+			if (arg0.getSource()==update){
 			facade.createSeller((int)this.communication.getElement("id_account"), this.nameShop.getText(), this.description.getText(), this.siret.getText(), this.website.getText());
 			facade.Validate();
 			this.setChanged();
