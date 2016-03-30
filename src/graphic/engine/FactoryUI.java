@@ -5,9 +5,11 @@ import java.util.Map;
 
 import graphic.ui.AdvertisementUI;
 import graphic.ui.CreateAccountUI;
+import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
+import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
@@ -33,6 +35,8 @@ public class FactoryUI {
 		this.ui.put("wishList", WishListUI.class);
 		this.ui.put("wishLists", WishListsUI.class);
 		this.ui.put("cart", CartUI.class);
+		this.ui.put("edit", EditSellerUI.class);
+		this.ui.put("update", UpdateSellerUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -64,6 +68,14 @@ public class FactoryUI {
 
 	public AbstractUI buildCreateAccountUI() {
 		return new CreateAccountUI();
+	}
+
+	public AbstractUI buildEditProfilUI(Session session) {
+		return new EditProfilUI(session);
+	}
+	public AbstractUI buildUpdateUI(Session session){
+		
+		return new UpdateUI(session);
 	}
 	
 	public AbstractUI buildNavBarUI(Session session) {

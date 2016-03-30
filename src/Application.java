@@ -74,6 +74,12 @@ public class Application extends JFrame implements Observer{
 		case "createAccount":
 			this.panels.put(ui, factory.buildCreateAccountUI());
 			break;
+		case "edit":
+			this.panels.put(ui, factory.buildEditProfilUI(this.session));
+			break;
+		case "update":
+			this.panels.put(ui, factory.buildUpdateUI(session));
+			break;
 		case "navBar":
 			this.panels.put(ui, factory.buildNavBarUI(this.session));
 			break;
@@ -126,6 +132,15 @@ public class Application extends JFrame implements Observer{
 				this.addUI("login", BorderLayout.CENTER);
 				this.addUI("createAccount", BorderLayout.EAST);
 				this.addUI("advertisement", BorderLayout.SOUTH);
+				break;
+			case "edit":
+				this.clearUI();
+				this.addUI("update", BorderLayout.CENTER);
+				break;
+			case "update":
+				this.clearUI();
+			    this.addUI("edit", BorderLayout.LINE_START);
+				this.addUI("logout", BorderLayout.CENTER);
 				break;
 			case "account":
 				this.clearUI();
