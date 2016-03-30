@@ -30,8 +30,8 @@ public class FactoryUI {
 		this.ui.put("user", UserUI.class);
 		this.ui.put("seller", SellerUI.class);
 		this.ui.put("admin", AdminUI.class);
-		this.ui.put("wishlist", WishListUI.class);
-		this.ui.put("wishlists", WishListsUI.class);
+		this.ui.put("wishList", WishListUI.class);
+		this.ui.put("wishLists", WishListsUI.class);
 		this.ui.put("cart", CartUI.class);
 	}
 	
@@ -44,6 +44,7 @@ public class FactoryUI {
 				throw new Exception("Unknow ui " + name + " !");
 			}
 		} catch (Exception e) {
+			System.err.println(name);
 			e.printStackTrace();
 			return null;
 		}

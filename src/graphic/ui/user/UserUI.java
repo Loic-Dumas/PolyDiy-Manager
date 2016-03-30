@@ -60,6 +60,7 @@ public class UserUI extends AbstractUI {
 				this.setChanged();
 				this.notifyObservers("wishLists");
 			} catch (Exception e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} 

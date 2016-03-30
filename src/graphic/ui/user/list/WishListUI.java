@@ -116,7 +116,7 @@ public class WishListUI extends AbstractUI {
 		try {
 			this.communication.shareElement("id_wishlist", this.facadeList.getIDWishList());
 			this.setChanged();
-			this.notifyObservers("wishlist");
+			this.notifyObservers("wishList");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
