@@ -15,7 +15,7 @@ import graphic.ui.account.AccountUI;
 import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
-import graphic.ui.user.PDMShopUI;
+//import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
@@ -33,7 +33,7 @@ public class FactoryUI {
 		this.ui.put("navBar", NavBarUI.class);
 		this.ui.put("account", AccountUI.class);
 		this.ui.put("user", UserUI.class);
-		this.ui.put("PDMShop", PDMShopUI.class);
+		//this.ui.put("PDMShop", PDMShopUI.class);
 		this.ui.put("seller", SellerUI.class);
 		this.ui.put("admin", AdminUI.class);
 		this.ui.put("wishList", WishListUI.class);
@@ -41,7 +41,7 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
-		this.ui.put("productInShop", ProductInShopUI.class);
+		//this.ui.put("productInShop", ProductInShopUI.class);
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 		this.ui.put("updateAccount", UpdateAccountUI.class);
 	}

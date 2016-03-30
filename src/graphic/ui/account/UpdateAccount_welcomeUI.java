@@ -12,7 +12,6 @@ import graphic.engine.UIMessage;
 
 public class UpdateAccount_welcomeUI extends AbstractUI {
 	private JButton updateInfo = new JButton();
-	private String textLogin;
 	private JLabel labelLoginUser = new JLabel();
 	/**
 	 * Create the panel to give the information of the user's account.
@@ -31,7 +30,7 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		System.out.println(ID);
 		//
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		textLogin = facade.getLogin(ID);
+		String textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);
 		String textFirstName = facade.getFirstName(ID);
 		
@@ -103,15 +102,16 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		
 		//JButton updateInfo = new JButton("update informations"); A NE SURTOUT PAS DELARER COMME CA!!!
 		this.updateInfo.setText("update informations");
-		this.updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		//this.updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
 		this.updateInfo.setBounds(243, 505, 178, 49);
 		this.panel.add(updateInfo);
 		this.updateInfo.addActionListener(this);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {				
-			if (arg0.getSource() == updateInfo) {
+	public void actionPerformed(ActionEvent arg0) {		
+		String action = "";
+			if (arg0.getActionCommand().equals("update informations")) { //arg0.getSource() == updateInfo
 				this.notifyObservers("updateAccount");
 				this.setChanged();
 			}
