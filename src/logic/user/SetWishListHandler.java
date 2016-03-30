@@ -99,8 +99,6 @@ public class SetWishListHandler {
 		return this.setWishList.getElementByKey(IDWishList);
 	}
 	
-	//public boolean addProductToWishList(int IDProduct, int quantity, float unitPrice)  (addWishList)
-	//update name
 	
 	/**
 	 * Return The name of the wishList 
@@ -108,7 +106,6 @@ public class SetWishListHandler {
 	 * @author loicd_000
 	 * @param IDWishList - String
 	 * @return The name of the wishList
-	 * @throws NoWishListException 
 	 */
 	public String getNameWishList(String IDWishList) {
 		if (this.setWishList == null) {

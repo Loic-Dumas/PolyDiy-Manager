@@ -13,11 +13,12 @@ import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
-import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
 import graphic.ui.user.list.WishListsUI;
+import graphic.ui.user.shop.PDMShopUI;
+import graphic.ui.user.shop.ProductInShopUI;
 
 public class FactoryUI {
 	@SuppressWarnings("rawtypes")
@@ -39,6 +40,7 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
+		this.ui.put("productInShop", ProductInShopUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

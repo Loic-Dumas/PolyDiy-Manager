@@ -116,6 +116,11 @@ public class Application extends JFrame implements Observer{
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("PDMShop", BorderLayout.CENTER);
 				break;
+			case "productInShop":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("productInShop", BorderLayout.CENTER);
+				break;
 			case "wishLists":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
