@@ -7,17 +7,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class SellerUI extends AbstractUI {
 	private JButton account = new JButton();
 	private JLabel label = new JLabel();
-
-	private Session session = null;
 	
 	
-	public SellerUI(Session session) {
-		this.session = session;
+	public SellerUI(UIMessage communication) {
+		super(communication);
 		
 		this.panel.setLayout(null);
 

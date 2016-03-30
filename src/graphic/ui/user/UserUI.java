@@ -13,26 +13,25 @@ import javax.swing.JScrollPane;
 
 import common.exception.wishListAlreadyExistException;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class UserUI extends AbstractUI {
 	private JButton myList = new JButton();
 	private JButton shop = new JButton();
-	private JPanel journalPanel = new JPanel();
-
-	private Session session = null;
-
-	public UserUI(Session session) {
-		this.session = session;
-
+    private JPanel journalPanel = new JPanel(); 
+	
+	public UserUI(UIMessage communication) {
+		super(communication);
+		
 		this.panel.setLayout(null);
+
 
 		// wish list button
 		this.myList.setText("My lists");
-		this.myList.setBounds(2, 2, 150, 23);
+		this.myList.setBounds(2 , 2, 150, 23);
 		this.panel.add(myList);
 		this.myList.addActionListener(this);
-
+		
 		// shop button
 		this.shop.setText("PDM - Shop");
 		this.shop.setBounds(160, 2, 150, 23);

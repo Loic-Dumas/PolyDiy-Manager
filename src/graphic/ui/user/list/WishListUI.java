@@ -17,7 +17,7 @@ import javax.swing.table.TableModel;
 import common.facade.list.FacadeManageWishList;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 import persistent.list.ProductWishList;
 
 public class WishListUI extends AbstractUI {
@@ -27,13 +27,13 @@ public class WishListUI extends AbstractUI {
 	private JLabel wishListTotalPriceLabel = new JLabel();
 	private JTable table = new JTable();
     private JPanel tablePanel = new JPanel(); 
-	
-	private Session session = null;
+
 	private FacadeManageWishList facadeList = new FacadeManageWishList(); 
 
 	
-	public WishListUI(Session session, int IDWishList) {
-		this.session = session;
+	public WishListUI(UIMessage communication) {
+		super(communication);
+		int IDWishList = (int)this.communication.getElement("id_wishlist");
 		this.facadeList.createAndGetWishList(IDWishList);
 		
 		this.panel.setLayout(null);
@@ -114,8 +114,9 @@ public class WishListUI extends AbstractUI {
 		}
 		System.out.println("Je vais maintenant changer de vue");
 		try {
+			this.communication.shareElement("id_wishlist", this.facadeList.getIDWishList());
 			this.setChanged();
-			this.notifyObservers("wishList selected : " + this.facadeList.getIDWishList());
+			this.notifyObservers("wishlist");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}

@@ -15,7 +15,7 @@ import javax.swing.table.TableModel;
 import common.facade.list.FacadeManageCart;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 import persistent.list.ProductWishList;
 
 public class CartUI extends AbstractUI {
@@ -26,14 +26,13 @@ public class CartUI extends AbstractUI {
 	private JLabel cartTotalPriceLabel = new JLabel();
 	private JTable table = new JTable();
     private JPanel tablePanel = new JPanel(); 
-	
-	private Session session = null;
+
 	private FacadeManageCart facadeList = new FacadeManageCart(); 
 
 	
-	public CartUI(Session session, int IDUser) {
-		this.session = session;
-		this.facadeList.createAndGetCart(IDUser);
+	public CartUI(UIMessage communication) {
+		super(communication);
+		this.facadeList.createAndGetCart((int)this.communication.getElement("id_user"));
 		
 		this.panel.setLayout(null);
 
@@ -65,7 +64,7 @@ public class CartUI extends AbstractUI {
 
 		
 		//Table : 
-		int nbOfRow = this.facadeList.createAndGetCart(IDUser).count();
+		int nbOfRow = this.facadeList.createAndGetCart((int)this.communication.getElement("id_user")).count();
 		int nbOfColumn = 4; // the name, the quantity and the unitPrice
 		String[] title = { "Product Name", "Quantity", "Price"};
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
@@ -73,8 +72,8 @@ public class CartUI extends AbstractUI {
 		int j = 0;
 		for(Iterator<String> i = this.facadeList.getListIDCart().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
-		    ProductWishList product = this.facadeList.createAndGetCart(IDUser).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , "" + product.getUnitPrice() + " €"}; 
+		    ProductWishList product = this.facadeList.createAndGetCart((int)this.communication.getElement("id_user")).getElementByKey(key);
+		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice()}; 
 			data[j] = newLine;
 			j ++;
 		}

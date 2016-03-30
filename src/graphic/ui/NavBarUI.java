@@ -8,24 +8,22 @@ import javax.swing.JOptionPane;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
-public class NavBarUI extends AbstractUI {
+public class NavBarUI extends AbstractUI{
 	private JButton account = new JButton();
 	private JButton user = new JButton();
 	private JButton seller = new JButton();
 	private JButton admin = new JButton();
 	private JButton logout = new JButton();
 	private JLabel userLabel = new JLabel();
-
-	private Session session = null;
-
-	public NavBarUI(Session session) {
-		this.session = session;
-
-		// this.panel.setLayout(null);
-
-		this.userLabel.setText("Welcome " + session.getLogin());
+	
+	public NavBarUI(UIMessage communication) {
+		super(communication);
+		
+//		this.panel.setLayout(null);
+		
+		this.userLabel.setText("Welcome " + (int)this.communication.getElement("id_account"));
 		this.panel.add(userLabel);
 
 		// account button
@@ -34,21 +32,21 @@ public class NavBarUI extends AbstractUI {
 		this.account.addActionListener(this);
 
 		// user button
-		if (this.session.getIDUser() != -1) {
+		if (this.communication.isExisting("id_user")) {
 			this.user.setText("User");
 			this.panel.add(user);
 			this.user.addActionListener(this);
 		}
 
 		// Seller button
-		if (this.session.getIDSeller() != -1) {
+		if (this.communication.isExisting("id_seller")) {
 			this.seller.setText("Seller");
 			this.panel.add(seller);
 			this.seller.addActionListener(this);
 		}
 
 		// Admin button
-		if (this.session.getIDAdmin() != -1) {
+		if (this.communication.isExisting("id_admin")) {
 			this.admin.setText("Admin");
 			this.panel.add(admin);
 			this.admin.addActionListener(this);
@@ -85,7 +83,7 @@ public class NavBarUI extends AbstractUI {
 		else if (arg0.getActionCommand().equals("Logout")) {
 
 			try {
-				facade.logout(this.session.getID());
+				facade.logout((int)this.communication.getElement("id_account"));
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

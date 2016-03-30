@@ -19,7 +19,7 @@ import common.exception.wishListAlreadyExistException;
 import common.facade.list.FacadeManageSetWishList;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 import persistent.list.WishList;
 
 public class WishListsUI extends AbstractUI {
@@ -32,13 +32,12 @@ public class WishListsUI extends AbstractUI {
 	private JTextField newWishList = new JTextField();
 	private JTable table = new JTable();
 	private JPanel tablePanel = new JPanel();
-
-	private Session session = null;
+	
 	private FacadeManageSetWishList facadeList = new FacadeManageSetWishList();
 
-	public WishListsUI(Session session, int IDUser) {
-		this.session = session;
-		this.facadeList.createAndGetSetWishList(IDUser);
+	public WishListsUI(UIMessage communication) {
+		super(communication);
+		this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user"));
 
 		this.panel.setLayout(null);
 
@@ -79,7 +78,7 @@ public class WishListsUI extends AbstractUI {
 		this.addNewWishListButton.addActionListener(this);
 
 		// Table :
-		int nbOfRow = this.facadeList.createAndGetSetWishList(IDUser).count();
+		int nbOfRow = this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user")).count();
 		int nbOfColumn = 2;
 		String[] title = { "WishList Name", "ID", "Remove", "number of products" };
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
@@ -87,7 +86,7 @@ public class WishListsUI extends AbstractUI {
 		int j = 0;
 		for (Iterator<String> i = this.facadeList.getListIDWishList().iterator(); i.hasNext();) {
 			String key = i.next();
-			WishList wishList = this.facadeList.createAndGetSetWishList(IDUser).getElementByKey(key);
+			WishList wishList = this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user")).getElementByKey(key);
 			Object[] newLine = { wishList.getLabel(), wishList.getID(), "Remove wish list",
 					this.facadeList.getNumberOfProductsInWishList(wishList.getID()) };
 			data[j] = newLine;
@@ -112,7 +111,7 @@ public class WishListsUI extends AbstractUI {
 					if (column == 2) {
 						deteteWishListActionPerformed((int) table.getValueAt(row, 1));
 					} else {
-						stringActionPerformed("wishList selected : " + table.getValueAt(row, 1));
+						stringActionPerformed((int)table.getValueAt(row, 1));
 					}
 				}
 			}
@@ -128,10 +127,11 @@ public class WishListsUI extends AbstractUI {
 	 * @author loicd_000
 	 * @param event
 	 */
-	public void stringActionPerformed(String event) {
+	public void stringActionPerformed(int event) {
 		try {
+			this.communication.shareElement("id_wishlist", event);
 			this.setChanged();
-			this.notifyObservers(event);
+			this.notifyObservers("wishlist");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -171,7 +171,7 @@ public class WishListsUI extends AbstractUI {
 			result = "cart";
 		} else if (arg0.getActionCommand().equals("Add")) {
 			try {
-				this.facadeList.createWishList(this.session.getIDUser(), this.newWishList.getText());
+				this.facadeList.createWishList((int)this.communication.getElement("id_user"), this.newWishList.getText());
 				result = "wishLists";
 			} catch (wishListAlreadyExistException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

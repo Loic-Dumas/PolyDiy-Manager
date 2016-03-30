@@ -15,7 +15,7 @@ public class UIMessage {
 		this.transition = transition;
 	}
 	
-	void shareElement(String key, Object element) {
+	public void shareElement(String key, Object element) {
 		if(this.isExisting(key)) {
 			this.sharedElements.replace(key, element);
 		} else {
@@ -23,17 +23,17 @@ public class UIMessage {
 		}
 	}
 	
-	void removeElement(String key) {
+	public void removeElement(String key) {
 		if(this.isExisting(key)) {
 			this.sharedElements.remove(key);
 		}
 	}
 	
-	Boolean isExisting(String key) {
+	public Boolean isExisting(String key) {
 		return this.sharedElements.containsKey(key);
 	}
 	
-	Object getElement(String key) {
+	public Object getElement(String key) {
 		return this.sharedElements.get(key);
 	}
 }
