@@ -23,6 +23,13 @@ public class JDBConnection {
 	private Connection connection;
 	static JDBConnection instance;
 	
+	/**
+	 * @param user
+	 * @param password
+	 * @param URL
+	 * @throws ErrorConnectionException
+	 * @throws AlertDriver
+	 */
 	private JDBConnection(String user, String password, String URL) throws ErrorConnectionException, AlertDriver {
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -48,22 +55,26 @@ public class JDBConnection {
 	 */
 	public static JDBConnection getInstance() throws ErrorConnectionException, AlertDriver {
 		if (JDBConnection.instance == null) {
-			try {
-				JDBConnection.instance = new JDBConnection("pzloelfnjglnhj", "O3SE1wvyhy5mG0sHpuPnuQV-fA", "jdbc:postgresql://ec2-107-22-246-250.compute-1.amazonaws.com:5432/dcpgi43j5ks0gi?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
-			} catch (Exception e) {
-				System.err.println("Driver not found.");
-				e.printStackTrace();
-			}
+			JDBConnection.instance = new JDBConnection("pzloelfnjglnhj", "O3SE1wvyhy5mG0sHpuPnuQV-fA", "jdbc:postgresql://ec2-107-22-246-250.compute-1.amazonaws.com:5432/dcpgi43j5ks0gi?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 		}
 		return JDBConnection.instance;
 	}
 	
+	/**
+	 * @return a statement provided by the connection
+	 * @throws SQLException
+	 */
 	public Statement getStatement() throws SQLException {
 		return this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 											   ResultSet.CONCUR_READ_ONLY,
 											   ResultSet.HOLD_CURSORS_OVER_COMMIT);
 	}
 	
+	/**
+	 * @param query
+	 * @return a prepared statement provided by the connection.
+	 * @throws SQLException
+	 */
 	public PreparedStatement getPreparedStatement(String query) throws SQLException {
 		return this.connection.prepareStatement(query);
 	}

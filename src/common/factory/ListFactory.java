@@ -2,8 +2,10 @@ package common.factory;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import persistent.Cart;
-import persistent.WishList;
+import common.exception.wishListAlreadyExistException;
+import persistent.list.Cart;
+import persistent.list.SetWishList;
+import persistent.list.WishList;
 
 /**
  * Builds wishList and cart.
@@ -13,6 +15,8 @@ import persistent.WishList;
  * @version 1.0
  */
 public abstract class ListFactory {
-	public abstract WishList buildWishList(int ID) throws ErrorConnectionException, AlertDriver;
-	public abstract Cart buildCart(int ID) throws ErrorConnectionException, AlertDriver;
+	public abstract WishList buildWishList(int IDWishList) throws ErrorConnectionException, AlertDriver;
+	public abstract SetWishList buildSetWishList(int IDUser) throws ErrorConnectionException, AlertDriver ;
+	public abstract Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver;
+	public abstract WishList buildWishList(int IDUser, String labelWishList) throws wishListAlreadyExistException ;
 }

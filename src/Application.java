@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -13,30 +14,29 @@ import common.exception.ErrorConnectionException;
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
-import graphic.ui.LoginUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 /**
  * 
  * 
- * @author Pierre Casati
- * @version 1.0
- * @since 2016-03-03
+ * @author Pierre Casati - LoicD000
+ * @version 1.1
+ * @since 2016-03-028
  */
 
 public class Application extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	
 	Map<String, AbstractUI> panels = new HashMap<String, AbstractUI>();
-	
-	Session session = null;
-	
+
+	UIMessage message = new UIMessage();
+
 	public Application()
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1366, 700);
-		this.setResizable(false);
+		this.setMinimumSize(new Dimension(1366, 700));
+		//this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		
 		this.addWindowListener(new WindowAdapter() {
@@ -50,7 +50,15 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
-	public void addUI(String ui, String position) throws Exception //ajouter un case pour chaque UI
+	public void addUI(String ui, String position) {
+		FactoryUI factory = new FactoryUI();
+		this.panels.put(ui, factory.build(ui, this.message));
+		this.panels.get(ui).addObserver(this);
+		this.add(this.panels.get(ui).getPanel(), position);
+		this.setVisible(true);
+	}
+	
+	/*public void addUI(String ui, String position)
 	{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
@@ -66,75 +74,132 @@ public class Application extends JFrame implements Observer{
 		case "createAccount":
 			this.panels.put(ui, factory.buildCreateAccountUI());
 			break;
-		case "yourAccount":
-			this.panels.put(ui, factory.buildModifyIdentityUI_welcome(this.session)); //appelle la fonction buildModifyIdentityUI_welcome de la classe FactoryUI
+		case "edit":
+			this.panels.put(ui, factory.buildEditProfilUI(this.session));
 			break;
-		case "updateInfo":
-//beug ici
-			this.panels.put(ui, factory.buildModifyIdentityUI(this.session)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+		case "update":
+			this.panels.put(ui, factory.buildUpdateUI(session));
 			break;
-		case "btReturn":
-			this.panels.put(ui, factory.buildLogoutUI(this.session)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+		case "navBar":
+			this.panels.put(ui, factory.buildNavBarUI(this.session));
+			break;
+		case "account":
+			this.panels.put(ui, factory.buildAccountUI(this.session));
+			break;
+		case "user":
+			this.panels.put(ui, factory.buildUserUI(this.session));
+			break;
+		case "seller":
+			this.panels.put(ui, factory.buildSellerUI(this.session));
+			break;
+		case "admin":
+			this.panels.put(ui, factory.buildAdminUI(this.session));
+			break;
+		case "wishLists":
+			this.panels.put(ui, factory.buildWishListsUI(this.session, 1));
+			break;
+		case "cart":
+			this.panels.put(ui, factory.buildCartUI(this.session, 1));
 			break;
 		default:
+			
+			if (ui.contains("wishList selected : ")) {
+				this.panels.put(ui, factory.buildWishListUI(this.session, Integer.valueOf(ui.replaceAll("wishList selected : ", ""))));	
+			} else {
+				System.err.println("No panel to add");
+			}
+			
 			break;
 		}
 		this.panels.get(ui).addObserver(this);
 		this.add(this.panels.get(ui).getPanel(), position);
 		this.setVisible(true);
-	}
+	}*/
 
 	@Override
-	//cette fonction sert à gérer les UI, on ajoute un case pour chaque choix
-	public void update(Observable o, Object arg){
-		try {
-		if(arg instanceof String) {
-			switch((String)arg) {
+	public void update(Observable o, Object arg) {
+		if(arg instanceof UIMessage) {
+			this.message = (UIMessage)arg;
+			switch(message.getTransition()) {
 			case "login":
-				LoginUI login = (LoginUI)this.panels.get("login");
-				this.session = login.getSession();
 				this.clearUI();
-				this.addUI("logout", BorderLayout.CENTER);
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("account", BorderLayout.CENTER);
 				break;
 			case "logout":
-				this.session = null;
+				this.message = null;
 				this.clearUI();
-				this.addUI("login",BorderLayout.CENTER);
-				this.addUI("createAccount",BorderLayout.EAST);
-				this.addUI("advertisement",BorderLayout.SOUTH);
+				this.addUI("login", BorderLayout.CENTER);
+				this.addUI("createAccount", BorderLayout.EAST);
+				this.addUI("advertisement", BorderLayout.SOUTH);
 				break;
-			case "updateInfo":
+			case "edit":
 				this.clearUI();
-				this.addUI("updateInfo",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
+				this.addUI("update", BorderLayout.CENTER);
 				break;
-			case "yourAccount":
+			case "update":
 				this.clearUI();
-				this.addUI("yourAccount",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
+			    this.addUI("edit", BorderLayout.LINE_START);
+				this.addUI("logout", BorderLayout.CENTER);
 				break;
-			case "btReturn":
+			case "account":
 				this.clearUI();
-				this.addUI("logout",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("account", BorderLayout.CENTER);
+				break;
+			case "user":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("user", BorderLayout.CENTER);
+				break;
+			case "seller":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("seller", BorderLayout.CENTER);
+				break;
+			case "admin":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("admin", BorderLayout.CENTER);
+				break;
+			case "back to logout":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("logout", BorderLayout.CENTER);
+				break;
+			case "wishLists":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("wishLists", BorderLayout.CENTER);
+				break;
+			case "cart":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("cart", BorderLayout.CENTER);
 				break;
 			default:
-				System.err.println("problème de cas");
+				if (((String) arg).contains("wishList selected :")) {
+					this.clearUI();
+					this.addUI("navBar", BorderLayout.NORTH);
+					this.addUI(((String) arg), BorderLayout.CENTER);
+				} else {
+					System.err.println("problème de cas");
+				}
 				break;
 			}
 			this.getContentPane().validate();
 			this.repaint();
+			this.pack();
 		} else {
-			System.err.println("Problème d'observable");
-		}
-		}catch(Exception e){
-			e.printStackTrace();
+			System.err.println("UIMessage not send by the UI to application");
 		}
 	}
-		
 	
 	private void endSession() throws Exception {
-		if (this.session != null) {
+		if (this.message != null) {
 			FacadeSession facade = new FacadeSession();
 			try {
-				facade.logout(this.session.getID());
+				facade.logout((int)this.message.getElement("id_account"));
 			} catch (ErrorConnectionException e) {
 				System.err.println(e.getMessage());
 			}

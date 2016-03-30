@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
+import graphic.engine.UIMessage;
 import persistent.Session;
 
 /**
@@ -32,7 +33,8 @@ public class LoginUI extends AbstractUI{
 	
 	private Session session = null;
 	
-	public LoginUI() {
+	public LoginUI(UIMessage communication) {
+		super(communication);
 		this.panel.setLayout(null);
 		// label welcome
 		this.lblWelcome.setText("PolyDIY Manager");
@@ -77,16 +79,29 @@ public class LoginUI extends AbstractUI{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		FacadeSession facade = new FacadeSession();
-		try {
-			this.session = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
-			this.setChanged();
-			if(this.session != null) {
-				this.notifyObservers("login");
+		if(arg0.getActionCommand().equals("Connect")) {
+			FacadeSession facade = new FacadeSession();
+			try {
+				this.session = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
+				if(this.session != null) {
+					this.communication.shareElement("id_account", this.session.getID());
+					if(this.session.getIDUser() != -1) {
+						this.communication.shareElement("id_user", this.session.getIDUser());
+					}
+					if(this.session.getIDSeller() != -1) {
+						this.communication.shareElement("id_seller", this.session.getIDSeller());
+					}
+					if(this.session.getIDAdmin() != -1) {
+						this.communication.shareElement("id_admin", this.session.getIDAdmin());
+					}
+					this.setChanged();
+					this.notifyObservers("login");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				this.session = null;
 			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			this.session = null;
 		}
 	}
 	
@@ -94,7 +109,7 @@ public class LoginUI extends AbstractUI{
 		return this.session != null;
 	}
 	
-	public Session getSession() {
+	/*public Session getSession() {
 		return this.session;
-	}
+	}*/
 }
