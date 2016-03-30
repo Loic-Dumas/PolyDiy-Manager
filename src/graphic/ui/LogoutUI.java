@@ -39,7 +39,6 @@ public class LogoutUI extends AbstractUI {
 		FacadeSession facade = new FacadeSession();
 		
 		if (arg0.getActionCommand().equals("User")) {
-			//System.out.println("logoutUI - actionPerformed - case user");
 			try {
 				this.setChanged();
 				this.notifyObservers("user");
@@ -50,7 +49,6 @@ public class LogoutUI extends AbstractUI {
 		
 		
 		else if (arg0.getActionCommand().equals("Logout")) {
-			//System.out.println("logoutUI - actionPerformed - case logout");
 			try {
 				facade.logout((int)this.communication.getElement("id_account"));
 				this.setChanged();

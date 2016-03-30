@@ -11,6 +11,7 @@ import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
+import common.exception.SessionErrorException;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
 import persistent.Session;
@@ -23,13 +24,22 @@ public class JDBCSession extends Session {
 		this.component = new JDBCComponent();
 	}
 
-	public void generateToken() throws ErrorConnectionException {
-		try {
-			do {
-				this.token = UUID.randomUUID().toString();
-			} while (this.isExisting());
-		} catch (Exception exception) {
-			exception.printStackTrace();
+	public void generateToken() throws Exception {
+		if(this.isExisting()) {
+			throw new SessionErrorException(this.ID);
+		} else {
+			try {
+				ResultSet result;
+				Boolean validToken = false;
+				do {
+					this.token = UUID.randomUUID().toString();
+					result = this.component.select(Arrays.asList("*"), "Session",
+											new SQLCondition(Arrays.asList("token"), Arrays.asList(this.token)));
+					validToken = (result == null) || (!result.first());
+				} while (!validToken);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
 		}
 	}
 

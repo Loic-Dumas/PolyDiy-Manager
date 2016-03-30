@@ -46,8 +46,8 @@ public class JDBCAccount extends Account {
 	@Override
 	public Boolean hasChanged() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "Account",
-												new SQLCondition(Arrays.asList("login", "password", "id_account", "email", "first_name", "last_name"),
-														Arrays.asList(this.login, this.password, Integer.toString(this.ID), this.email, this.firstName, this.lastName)));
+												new SQLCondition(Arrays.asList("login", "password", "email", "first_name", "last_name"),
+														Arrays.asList(this.login, this.password, this.email, this.firstName, this.lastName)));
 		return result != null && result.first();
 	}
 
@@ -124,9 +124,4 @@ public class JDBCAccount extends Account {
 			throw new NotExistingTuple("Account");
 		}
 	}
-	
-	//fuction to build an accout with a Session
-	
-	
-	
 }

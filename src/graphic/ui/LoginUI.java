@@ -43,28 +43,17 @@ public class LoginUI extends AbstractUI{
 		this.lblWelcome.setBounds(0, 31, 400, 30);
 		this.panel.add(lblWelcome);
 		
-		// login
-		//this.login.setPreferredSize(new Dimension(150,30));
 		this.login.setBounds(56, 92, 105, 20);
 		this.panel.add(login);
 		this.login.setColumns(10);
 		
-		// password 
-		//this.password.setPreferredSize(new Dimension(150,30));
 		this.password.setBounds(231, 92, 105, 20);
 		this.panel.add(password);
 		
-		// connection
-		//this.connection.setPreferredSize(new Dimension(150,30));
-		//this.connection.setText("Connect");
 		this.connection.setText("Connect");
 		this.connection.setBounds(146, 147, 89, 23);
 		this.panel.add(connection);
 		
-		/*this.add(login);
-		this.add(password);
-		this.add(connection);
-		*/
 		this.connection.addActionListener(this);
 		this.panel.setVisible(true);
 	}
@@ -98,7 +87,6 @@ public class LoginUI extends AbstractUI{
 					this.notifyObservers("login");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				this.session = null;
 			}

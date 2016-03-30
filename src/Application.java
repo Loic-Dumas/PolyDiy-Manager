@@ -57,64 +57,6 @@ public class Application extends JFrame implements Observer{
 		this.add(this.panels.get(ui).getPanel(), position);
 		this.setVisible(true);
 	}
-	
-	/*public void addUI(String ui, String position)
-	{
-		FactoryUI factory = new FactoryUI();
-		switch(ui) {
-		case "login":
-			this.panels.put(ui, factory.buildLoginUI());
-			break;
-		case "logout":
-			this.panels.put(ui, factory.buildLogoutUI(this.session));
-			break;
-		case "advertisement":
-			this.panels.put(ui, factory.buildAdvertisementUI());
-			break;
-		case "createAccount":
-			this.panels.put(ui, factory.buildCreateAccountUI());
-			break;
-		case "edit":
-			this.panels.put(ui, factory.buildEditProfilUI(this.session));
-			break;
-		case "update":
-			this.panels.put(ui, factory.buildUpdateUI(session));
-			break;
-		case "navBar":
-			this.panels.put(ui, factory.buildNavBarUI(this.session));
-			break;
-		case "account":
-			this.panels.put(ui, factory.buildAccountUI(this.session));
-			break;
-		case "user":
-			this.panels.put(ui, factory.buildUserUI(this.session));
-			break;
-		case "seller":
-			this.panels.put(ui, factory.buildSellerUI(this.session));
-			break;
-		case "admin":
-			this.panels.put(ui, factory.buildAdminUI(this.session));
-			break;
-		case "wishLists":
-			this.panels.put(ui, factory.buildWishListsUI(this.session, 1));
-			break;
-		case "cart":
-			this.panels.put(ui, factory.buildCartUI(this.session, 1));
-			break;
-		default:
-			
-			if (ui.contains("wishList selected : ")) {
-				this.panels.put(ui, factory.buildWishListUI(this.session, Integer.valueOf(ui.replaceAll("wishList selected : ", ""))));	
-			} else {
-				System.err.println("No panel to add");
-			}
-			
-			break;
-		}
-		this.panels.get(ui).addObserver(this);
-		this.add(this.panels.get(ui).getPanel(), position);
-		this.setVisible(true);
-	}*/
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -212,7 +154,7 @@ public class Application extends JFrame implements Observer{
 	}
 	
 	private void endSession() throws Exception {
-		if (this.message != null) {
+		if (this.message != null && this.message.isExisting("id_account")) {
 			FacadeSession facade = new FacadeSession();
 			try {
 				facade.logout((int)this.message.getElement("id_account"));
