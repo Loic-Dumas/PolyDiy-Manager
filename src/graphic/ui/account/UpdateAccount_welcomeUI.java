@@ -26,7 +26,10 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		
 		//to take the actual account informations
 		int ID = (int) this.communication.getElement("id_account");
+		//
+		System.out.println("si l ID marche il devrait s'afficher ");
 		System.out.println(ID);
+		//
 		FacadeModifyAccount facade = new FacadeModifyAccount();
 		textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);
