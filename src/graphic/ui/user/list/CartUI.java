@@ -19,7 +19,6 @@ import persistent.Session;
 import persistent.list.ProductWishList;
 
 public class CartUI extends AbstractUI {
-	private JButton logout = new JButton();
 	private JButton backUser = new JButton();
 	private JButton wishLists = new JButton();
 	private JButton cart = new JButton();
@@ -38,36 +37,30 @@ public class CartUI extends AbstractUI {
 		
 		this.panel.setLayout(null);
 
-		// logout button
-		this.logout.setText("Back to logout");
-		this.logout.setBounds(2, 2, 150, 23);
-		this.panel.add(logout);
-		this.logout.addActionListener(this);
-
 		// user button
 		this.backUser.setText("Back to User");
-		this.backUser.setBounds(160 , 2, 150, 23);
+		this.backUser.setBounds(2, 2, 150, 23);
 		this.panel.add(backUser);
 		this.backUser.addActionListener(this);
-		
+
 		// wish lists button
 		this.wishLists.setText("Wish Lists");
-		this.wishLists.setBounds(2, 30, 150, 23);
+		this.wishLists.setBounds(160, 2, 150, 23);
 		this.panel.add(wishLists);
 		this.wishLists.addActionListener(this);
 
 		// Cart button
 		this.cart.setText("Cart");
-		this.cart.setBounds(160 , 30, 150, 23);
+		this.cart.setBounds(320, 2, 150, 23);
 		this.panel.add(cart);
 		this.cart.addActionListener(this);
 
 		this.wishListLabel.setText("Your wish lists :");
-		this.wishListLabel.setBounds(2, 60, 300, 23);
+		this.wishListLabel.setBounds(2, 30, 300, 23);
 		this.panel.add(wishListLabel);
 		
 		this.cartTotalPriceLabel.setText("Total Price  : " + this.facadeList.getTotalPriceCart() + " €");
-		this.cartTotalPriceLabel.setBounds(200, 500, 300, 23);
+		this.cartTotalPriceLabel.setBounds(200, 470, 300, 23);
 		this.panel.add(cartTotalPriceLabel);
 
 		
@@ -86,7 +79,7 @@ public class CartUI extends AbstractUI {
 			j ++;
 		}
 		
-	    this.tablePanel.setBounds(2, 90, 500, 400);
+	    this.tablePanel.setBounds(2, 60, 500, 400);
 	    this.tablePanel.setLayout(new BorderLayout());
 	    //prepare the JTable
 		TableModel dataModel = new DataModelSetWishList(data, title);
@@ -123,15 +116,6 @@ public class CartUI extends AbstractUI {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} 
-
-		else if (arg0.getActionCommand().equals("Back to logout")) {
-			try {
-				this.setChanged();
-				this.notifyObservers("back to logout");
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		}
 		
 		else if (arg0.getActionCommand().equals("Wish Lists")) {
 			try {

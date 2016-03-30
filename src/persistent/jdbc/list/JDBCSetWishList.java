@@ -18,30 +18,29 @@ public class JDBCSetWishList extends SetWishList {
 	public JDBCSetWishList(int iDUser) throws ErrorConnectionException, AlertDriver {
 		super(iDUser);
 		this.component = new JDBCComponent();
-		
+
 		try {
-			//we get all items of the wish list.
-			ResultSet result = this.component.select(
-					"*", //SELECT
-					"wishlist", //FROM
-					"id_user = '" + this.IDUser + "' AND label != 'Cart' " ); //WHERE
-			
+			// we get all items of the wish list.
+			ResultSet result = this.component.select("*", // SELECT
+					"wishlist", // FROM
+					"id_user = '" + this.IDUser + "' AND label != 'Cart' "); // WHERE
+
 			if (!result.first()) {
-				System.err.println("No wish list returned.");
+				System.out.println("No wish list returned.");
 			}
-			//we add all the wish lists found to the set
-			do {
-				this.addElement( String.valueOf(result.getInt("id_wishList")) ,
-						wishListFactory.buildWishList(result.getInt("id_wishList"))); 
-				// Maybe I can do a cleaner version who don't construct all the wishList
-			} while(result.next());
+			else {
+				// we add all the wish lists found to the set
+				do {
+					this.addElement(String.valueOf(result.getInt("id_wishList")),
+							wishListFactory.buildWishList(result.getInt("id_wishList")));
+					// Maybe I can do a cleaner version who don't construct all
+					// the wishList
+				} while (result.next());
+			}
 		} catch (SQLException e) {
 			throw new ErrorConnectionException();
 		}
-		
-		
-		
-		
+
 	}
 
 	@Override
@@ -53,19 +52,19 @@ public class JDBCSetWishList extends SetWishList {
 	@Override
 	public void insert() throws Exception {
 		// TODO JDBCSetWishList Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update() throws Exception {
 		// TODO JDBCSetWishList Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete() throws Exception {
 		// TODO JDBCSetWishList Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class JDBCSetWishList extends SetWishList {
 	@Override
 	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -1,4 +1,7 @@
 package persistent.list;
+
+import java.util.Iterator;
+
 import common.InterfaceModel;
 import common.SetWithKey;
 
@@ -9,9 +12,23 @@ import common.SetWithKey;
 public abstract class WishList extends SetWithKey<ProductWishList> implements InterfaceModel {
 	protected String label;
 	protected int IDWishList;
-	
-	public WishList(int ID){
-		this.setID(ID);
+	protected int IDUser;
+
+	public WishList(int IDWishList) {
+		this.setID(IDWishList);
+	}
+
+	public WishList(int IDUser, String label) {
+		this.setIDUser(IDUser);
+		this.setLabel(label);
+	}
+
+	public int getIDUser() {
+		return IDUser;
+	}
+
+	public void setIDUser(int iDUser) {
+		IDUser = iDUser;
 	}
 
 	public String getLabel() {
@@ -29,61 +46,32 @@ public abstract class WishList extends SetWithKey<ProductWishList> implements In
 	public void setID(int iD) {
 		IDWishList = iD;
 	}
-	
-	/*
-	Different methods when WishList where extending from Set
-	 
-	public ProductWishList getProductWithIDProduct(int IDProduct) {
-		Iterator<ProductWishList> iterator = this.set.iterator();
-		boolean found = false;
-		while (!found && iterator.hasNext()) {
-			if (iterator.next().getID() == IDProduct) {
-				return iterator.next();
-			}
+
+	/**
+	 * @return - int : the number of products in the wishlist
+	 */
+	public int getNumberOfProductInWishList() {
+		int count = 0;
+
+		for (Iterator<String> i = this.getAllKeys().iterator(); i.hasNext();) {
+			String key = i.next();
+			count += this.getElementByKey(key).getQuantity();
 		}
-		
-		return null;
-	}
-	
-	public void removeProductWithIDProduct(int IDProduct) {
-		Iterator<ProductWishList> iterator = this.set.iterator();
-		boolean found = false;
-		while (!found && iterator.hasNext()) {
-			if (iterator.next().getID() == IDProduct) {
-				iterator.remove();
-				found = true;
-			}
-		}
+
+		return count;
 	}
 
-	public void updateNewUnitPriceProductWithIDProduct(int IDProduct, float newPrice) throws InvalidPriceException {
-		if (newPrice < 0 ) {
-			throw new InvalidPriceException(newPrice);
-		} 
-		
-		Iterator<ProductWishList> iterator = this.set.iterator();
-		boolean found = false;
-		while (!found && iterator.hasNext()) {
-			if (iterator.next().getID() == IDProduct) {
-				iterator.next().setUnitPrice(newPrice);
-				found = true;
-			}
+	/**
+	 * @return - float : the total price of the wishList
+	 */
+	public float getTotalPriceWishList() {
+		float totalPrice = 0;
+
+		for (Iterator<String> i = this.getAllKeys().iterator(); i.hasNext();) {
+			String key = i.next();
+			totalPrice += this.getElementByKey(key).getUnitPrice() * this.getElementByKey(key).getQuantity();
 		}
+
+		return totalPrice;
 	}
-	
-	public void updateNewQuantityProductWithIDProduct(int IDProduct, int quantity) throws InvalidQuantityException {
-		if (quantity <=0 ) {
-			throw new InvalidQuantityException(quantity);
-		} 
-		
-		Iterator<ProductWishList> iterator = this.set.iterator();
-		boolean found = false;
-		while (!found && iterator.hasNext()) {
-			if (iterator.next().getID() == IDProduct) {
-				iterator.next().setUnitPrice(quantity);
-				found = true;
-			}
-		}
-	}
-	*/
 }

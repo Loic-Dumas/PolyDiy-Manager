@@ -2,6 +2,8 @@ package common.factory.jdbcFactory;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.exception.needHaveBothIDUserAndLabelException;
+import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
 import persistent.jdbc.list.JDBCCart;
 import persistent.jdbc.list.JDBCSetWishList;
@@ -16,6 +18,22 @@ public class JDBCListFactory extends ListFactory{
 	public WishList buildWishList(int IDWishList) throws ErrorConnectionException, AlertDriver {
 		return new JDBCWishList(IDWishList);
 	}
+	
+	/**
+	 * this method build a wish list from an IDUser and a labelWishList
+	 * @return The WishList created;
+	 */
+	@Override
+	public WishList buildWishList(int IDUser, String labelWishList) throws wishListAlreadyExistException {
+		JDBCWishList wishList = null;
+		try {
+			wishList = new JDBCWishList(IDUser, labelWishList);
+		} catch (needHaveBothIDUserAndLabelException e) {
+			e.printStackTrace();
+		} 
+		
+		return wishList;
+	}
 
 	@Override
 	public SetWishList buildSetWishList(int IDUser) throws  AlertDriver, ErrorConnectionException {
@@ -26,5 +44,4 @@ public class JDBCListFactory extends ListFactory{
 	public Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver {
 		return new JDBCCart(IDWishList);
 	}
-
 }

@@ -48,7 +48,7 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public void update() throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
+		this.component = new JDBCComponent();
 		if(this.isExisting()) {
 			this.component.update("(id_product, name, description, unitPrice, stockQuantity) = (" + this.ID + "," 
 		                           + this.name + "," + this.description + "," + this.unitPrice + "," + this.stockQuantity + ")",
@@ -60,7 +60,9 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public void delete() throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
+		this.component = new JDBCComponent();
+		this.component.delete("item_wishList", "id_product = " + this.ID + " AND id_wishlist = " + this.IDWishList);
+		
 		
 	}
 

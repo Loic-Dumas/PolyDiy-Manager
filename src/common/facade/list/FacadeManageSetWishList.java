@@ -3,19 +3,14 @@ package common.facade.list;
 import java.util.Set;
 
 import common.exception.NoWishListException;
-import logic.SetWishListHandler;
+import common.exception.wishListAlreadyExistException;
+import logic.user.SetWishListHandler;
 import persistent.list.SetWishList;
 import persistent.list.WishList;
 
 public class FacadeManageSetWishList {
 	SetWishListHandler setWishListHandler = new SetWishListHandler();
 	
-
-	
-	/***********************************************************************************************
-	  SetWishListHandler
-	***********************************************************************************************/
-
 
 	/**
 	 * This method create and return the SetWishList with the IDUser in parameter. 
@@ -30,6 +25,17 @@ public class FacadeManageSetWishList {
 		return this.setWishListHandler.createAndGetExistingWishList(IDUser);
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @author loicd_000
+	 * @param IDUser
+	 * @param label
+	 * @throws wishListAlreadyExistException 
+	 */
+	public void  createWishList(int IDUser, String label) throws wishListAlreadyExistException {
+		this.setWishListHandler.createWishList(IDUser, label);
+	}
 	
 
 	/**
@@ -70,7 +76,25 @@ public class FacadeManageSetWishList {
 	public String getNameWishList(String IDWishList) {
 		return this.setWishListHandler.getNameWishList(IDWishList);
 	}
+
+	/**
+	 * Delete all elements of the IDwishlist in parameter
+	 * @param iDWishList - the wishliste to delete
+	 * @throws Exception 
+	 */
+	public void deleteWishList(int iDWishList) throws Exception {
+		this.setWishListHandler.deleteWishList(iDWishList);
+	}
 	
+	
+	/**
+	 * the number of products in the wishlist
+	 * @param IDWishList
+	 * @return the number of products in the wishlist
+	 */
+	public int getNumberOfProductsInWishList(int IDWishList) {
+		return this.setWishListHandler.getNumberOfProductsInWishList(IDWishList);
+	}
 	
 	
 
