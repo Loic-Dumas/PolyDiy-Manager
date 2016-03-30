@@ -12,11 +12,12 @@ import common.InterfaceModel;
  */
 
 public abstract class Seller implements InterfaceModel{
-	protected int ID;
-	protected String nameShop;
-	protected String description;
-	protected String siret;
-	protected String website;
+	protected int ID = -1;
+	protected int IDaccount = -1;
+	protected String nameShop = "";
+	protected String description = "";
+	protected String siret = "";
+	protected String website = "";
 	
 	public Seller(){
 		
@@ -31,6 +32,15 @@ public abstract class Seller implements InterfaceModel{
 	public void setId(int id){
 		this.ID = id;
 	}
+	
+	public int getIDaccount() {
+		return this.IDaccount;
+	}
+	
+	public void setIDaccount(int IDaccount) {
+		this.IDaccount = IDaccount;
+	}
+	
 	public String getNameShop() {
 		return nameShop;
 	}

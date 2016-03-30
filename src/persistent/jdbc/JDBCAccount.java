@@ -35,22 +35,18 @@ public class JDBCAccount extends Account {
 	}
 
 	@Override
-	public Boolean isExisting() {
+	public Boolean isExisting() throws Exception{
 		ResultSet result = null;
-		try {
 			result = this.component.select(Arrays.asList("*"), "Account",
-													new SQLCondition(Arrays.asList("ID"),
+													new SQLCondition(Arrays.asList("id"),
 																	Arrays.asList(Integer.toString(this.ID))));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result != null;
+		return result != null && result.first();
 	}
 
 	@Override
 	public Boolean hasChanged() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "Account",
-												new SQLCondition(Arrays.asList("login", "password", "ID", "email", "firstName", "lastName"),
+												new SQLCondition(Arrays.asList("login", "password", "id", "email", "first_name", "last_name"),
 														Arrays.asList(this.login, this.password, Integer.toString(this.ID), this.email, this.firstName, this.lastName)));
 		return result != null && result.first();
 	}
@@ -76,10 +72,10 @@ public class JDBCAccount extends Account {
 					}
 					this.login = result.getString("login");
 					this.password = result.getString("password");
-					this.ID = result.getInt("ID");
+					this.ID = result.getInt("id_account");
 					this.email = result.getString("email");
-					this.firstName = result.getString("firstName");
-					this.lastName = result.getString("lastName");
+					this.firstName = result.getString("first_name");
+					this.lastName = result.getString("last_name");
 				} else {
 					throw new NotExistingTuple("Account");
 				}
@@ -90,9 +86,9 @@ public class JDBCAccount extends Account {
 	}
 
 	@Override
-	public void insert() throws AlreadyExistTuple {
+	public void insert() throws Exception {
 		if(!this.isExisting()) {
-			this.component.insert("Account", "'" + this.login + "', '" + this.password + "', '" + this.email 
+			this.component.insert("Account(login, password,email,first_name,last_name)", "'" + this.login + "', '" + this.password + "', '" + this.email 
 				                 	+ "', '" + this.firstName + "', '" + this.lastName + "'");
 		} else {
 			throw new AlreadyExistTuple("Account");
@@ -100,12 +96,12 @@ public class JDBCAccount extends Account {
 	}
 
 	@Override
-	public void update() throws NotExistingTuple {
+	public void update() throws Exception {
 		if(this.isExisting()) {
 			try {
-				this.component.update("(login, password, ID, email, firstName, lastName) = (" + this.login + "," 
-				                       + this.password + "," + this.ID + "," + this.email + "," + this.firstName + "," + this.lastName + ")",
-				                       "Account", new SQLCondition(Arrays.asList("ID"),
+				this.component.update("(login, password, email, first_name, last_name) = (" + this.login + "," 
+				                       + this.password + "," + this.email + "," + this.firstName + "," + this.lastName + ")",
+				                       "Account", new SQLCondition(Arrays.asList("id"),
 				                    		   						Arrays.asList(Integer.toString(this.ID))));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -116,10 +112,10 @@ public class JDBCAccount extends Account {
 	}
 
 	@Override
-	public void delete() throws NotExistingTuple {
+	public void delete() throws Exception {
 		if(this.isExisting()) {
 			try {
-				this.component.delete("Account", new SQLCondition(Arrays.asList("ID"),
+				this.component.delete("Account", new SQLCondition(Arrays.asList("id"),
 																	Arrays.asList(Integer.toString(this.ID))));
 			} catch (Exception e) {
 				e.printStackTrace();

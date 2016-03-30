@@ -32,39 +32,65 @@ public class NavBarUI extends AbstractUI{
 		this.account.addActionListener(this);
 
 		// user button
-		this.user.setText("User");
-		this.panel.add(user);
-		this.user.addActionListener(this);
+		if (this.communication.isExisting("id_user")) {
+			this.user.setText("User");
+			this.panel.add(user);
+			this.user.addActionListener(this);
+		}
 
 		// Seller button
-		this.seller.setText("Seller");
-		this.panel.add(seller);
-		this.seller.addActionListener(this);
+		if (this.communication.isExisting("id_seller")) {
+			this.seller.setText("Seller");
+			this.panel.add(seller);
+			this.seller.addActionListener(this);
+		}
 
 		// Admin button
-		this.admin.setText("Admin");
-		this.panel.add(admin);
-		this.admin.addActionListener(this);
+		if (this.communication.isExisting("id_admin")) {
+			this.admin.setText("Admin");
+			this.panel.add(admin);
+			this.admin.addActionListener(this);
+		}
 
 		// logout button
 		this.logout.setText("Logout");
 		this.panel.add(logout);
-		this.logout.addActionListener(this);		
+		this.logout.addActionListener(this);
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
-		String action = arg0.getActionCommand().toLowerCase();
-		
-		if (action.equals("logout")) {
+		String action = "";
+
+		if (arg0.getActionCommand().equals("Account")) {
+			action = "account";
+		}
+
+		else if (arg0.getActionCommand().equals("User")) {
+			action = "user";
+		}
+
+		else if (arg0.getActionCommand().equals("Seller")) {
+			action = "seller";
+		}
+
+		else if (arg0.getActionCommand().equals("Admin")) {
+			action = "admin";
+		}
+
+		else if (arg0.getActionCommand().equals("Logout")) {
+
 			try {
 				facade.logout((int)this.communication.getElement("id_account"));
 			} catch (Exception e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
-		} 
-		
+
+			action = "logout";
+		}
+
 		// we have an action, so we notify observers.
 		if (!action.equals("")) {
 			try {
@@ -73,8 +99,7 @@ public class NavBarUI extends AbstractUI{
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
-		}
-		else {
+		} else {
 			System.err.println("Button action not catch.");
 		}
 	}
