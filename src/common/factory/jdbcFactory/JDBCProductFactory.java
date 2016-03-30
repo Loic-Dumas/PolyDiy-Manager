@@ -17,9 +17,14 @@ public class JDBCProductFactory extends ProductFactory{
 	}
 
 	@Override
+	public Product buildProduct(int IDProduct, String name, String description, float unitPrice, int stockQuantity,
+			int IDSeller, int IDCategory, String categoryName) {
+		return null;
+	}
+
+	@Override
 	public ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrice)
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver {
 		return new JDBCProductWishList(ID, IDWishList, quantity, unitPrice);
 	}
-
 }

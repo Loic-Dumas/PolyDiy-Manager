@@ -25,14 +25,26 @@ import persistent.Product;
 public class JDBCProduct extends Product {
 	private JDBCComponent component = null;
 
-	public JDBCProduct(int ID) throws ErrorConnectionException, UnknownIDProductException, AlertDriver {
-		super(ID);
-		this.component = new JDBCComponent();
+	public JDBCProduct(int IDProduct, String name, String description, float unitPrice, int stockQuantity,
+			int IDSeller, int IDCategory, String categoryName) {
+		super(IDProduct);
+		this.setName(name);
+		this.setDescription(description);
+		this.setUnitPrice(unitPrice);
+		this.setStockQuantity(stockQuantity);
+		this.setIDSeller(IDSeller);
+		this.setIDCategory(IDCategory);
+		this.setCategoryName(categoryName);	
+	}
+	
+	
+	public JDBCProduct(int IDProduct) {
+		super(IDProduct);
 	}
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "Product", "id_product = " + this.ID );
+		ResultSet result = this.component.select("*", "Product", "id_product = " + this.IDProduct );
 		return result != null;
 	}
 
@@ -47,7 +59,7 @@ public class JDBCProduct extends Product {
 					result.first();
 				}
 				// load informations
-				this.ID = result.getInt("id_product");
+				this.IDProduct = result.getInt("id_product");
 				this.name = result.getString("name");
 				this.description = result.getString("description");
 				this.unitPrice = result.getFloat("unitPrice");
@@ -74,7 +86,7 @@ ResultSet result = this.component.select("*", "product", value +" = '" + value +
 					result.first();
 				}
 				// load informations
-				this.ID = result.getInt("id_product");
+				this.IDProduct = result.getInt("id_product");
 				this.name = result.getString("name");
 				this.description = result.getString("description");
 				this.unitPrice = result.getFloat("unitPrice");
@@ -103,7 +115,7 @@ ResultSet result = this.component.select("*", "product", value +" = '" + value +
 		if(this.isExisting()) {
 			this.component.update("(name, description, unitPrice, stockQuantity) = (" + this.name 
 					+ "," + this.description + "," + this.unitPrice + "," + this.stockQuantity + ")",
-		                           "Account", "id_product = " + this.ID);
+		                           "Account", "id_product = " + this.IDProduct);
 		} else {
 			throw new NotExistingTuple("Product");
 		}
@@ -112,7 +124,7 @@ ResultSet result = this.component.select("*", "product", value +" = '" + value +
 	@Override
 	public void delete() throws Exception {
 		if(this.isExisting()) {
-			this.component.delete("Product", " id_product = " + this.ID);
+			this.component.delete("Product", " id_product = " + this.IDProduct);
 		} else {
 			throw new NotExistingTuple("Product");
 		}

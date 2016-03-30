@@ -7,8 +7,12 @@ import persistent.Product;
 import persistent.list.ProductWishList;
 
 public abstract class ProductFactory {
-	public abstract Product buildProduct(int ID) throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
-	
-	public abstract ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrices) 
+	public abstract Product buildProduct(int ID)
+			throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
+
+	public abstract Product buildProduct(int IDProduct, String name, String description, float unitPrice,
+			int stockQuantity, int IDSeller, int IDCategory, String categoryName);
+
+	public abstract ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrices)
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
 }

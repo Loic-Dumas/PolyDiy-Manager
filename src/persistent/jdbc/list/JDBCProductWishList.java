@@ -20,7 +20,7 @@ public class JDBCProductWishList extends ProductWishList{
 		this.component = new JDBCComponent();
 				
 		try {
-			ResultSet result = this.component.select("*", "product", "id_product = '" + this.ID + "'");
+			ResultSet result = this.component.select("*", "product", "id_product = '" + this.IDProduct + "'");
 			if (result.first()) {
 				this.name = result.getString("name");
 				this.description = result.getString("description");
@@ -36,7 +36,7 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "item_wishlist ", "id_product = " + this.ID );
+		ResultSet result = this.component.select("*", "item_wishlist ", "id_product = " + this.IDProduct );
 		return result != null;
 	}
 
@@ -50,9 +50,9 @@ public class JDBCProductWishList extends ProductWishList{
 	public void update() throws Exception {
 		this.component = new JDBCComponent();
 		if(this.isExisting()) {
-			this.component.update("(id_product, name, description, unitPrice, stockQuantity) = (" + this.ID + "," 
+			this.component.update("(id_product, name, description, unitPrice, stockQuantity) = (" + this.IDProduct + "," 
 		                           + this.name + "," + this.description + "," + this.unitPrice + "," + this.stockQuantity + ")",
-		                           "item_wishlist", "id_product = " + this.ID + "AND id_wishlist = " + this.IDWishList );
+		                           "item_wishlist", "id_product = " + this.IDProduct + "AND id_wishlist = " + this.IDWishList );
 		} else {
 			throw new NotExistingTuple("item_wishlist");
 		}
@@ -61,7 +61,7 @@ public class JDBCProductWishList extends ProductWishList{
 	@Override
 	public void delete() throws Exception {
 		this.component = new JDBCComponent();
-		this.component.delete("item_wishList", "id_product = " + this.ID + " AND id_wishlist = " + this.IDWishList);
+		this.component.delete("item_wishList", "id_product = " + this.IDProduct + " AND id_wishlist = " + this.IDWishList);
 		
 		
 	}
