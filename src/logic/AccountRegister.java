@@ -2,9 +2,9 @@ package logic;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ProfilFactory;
+import common.factory.SellerProfilFactory;
 import common.factory.SessionFactory;
-import common.factory.jdbcFactory.JDBCProfilFactory;
+import common.factory.jdbcFactory.JDBCSellerProfilFactory;
 import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
 import persistent.Seller;
@@ -20,7 +20,7 @@ public class AccountRegister {
 		SessionFactory factory = new JDBCSessionFactory();
 		this.account = factory.buildAccount(login, password, email, firstName, lastName);
 		
-		ProfilFactory factory2 = new JDBCProfilFactory();
+		SellerProfilFactory factory2 = new JDBCSellerProfilFactory();
 		if(isUser) {
 			this.user = factory2.buildUserEmpty();
 		}

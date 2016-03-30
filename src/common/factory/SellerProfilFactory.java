@@ -11,7 +11,7 @@ import common.exception.UnknownIDSellerException;
 import persistent.Seller;
 import persistent.User;
 
-public abstract class ProfilFactory {
+public abstract class SellerProfilFactory {
 	
 	public abstract Seller buildSeller(int ID) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver ;
 	public abstract Seller buildSeller(int ID, String nameShop, String description, String siret, String webSite) throws ErrorConnectionException, AlertDriver ;

@@ -1,4 +1,10 @@
 package graphic.ui.seller;
+/**
+ * 
+ * @author nassim vachor
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 
 import java.awt.event.ActionEvent;

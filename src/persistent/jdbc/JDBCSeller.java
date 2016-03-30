@@ -49,7 +49,7 @@ public class JDBCSeller extends Seller{
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "seller_account", "Id_account = '" + this.ID + "'");
+		ResultSet result = this.component.select("*", "Seller_account", "id_account = '" + this.ID + "'");
 		return result != null && result.first();
 	}
 

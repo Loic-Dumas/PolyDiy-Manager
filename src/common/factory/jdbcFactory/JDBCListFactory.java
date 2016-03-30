@@ -5,6 +5,8 @@ import common.exception.ErrorConnectionException;
 import common.exception.needHaveBothIDUserAndLabelException;
 import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
+import persistent.SetProduct;
+import persistent.jdbc.JDBCSetProduct;
 import persistent.jdbc.list.JDBCCart;
 import persistent.jdbc.list.JDBCSetWishList;
 import persistent.jdbc.list.JDBCWishList;
@@ -43,5 +45,15 @@ public class JDBCListFactory extends ListFactory{
 	@Override
 	public Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver {
 		return new JDBCCart(IDWishList);
+	}
+
+	@Override
+	public SetProduct buildSetProduct(int IDSeller) throws ErrorConnectionException, AlertDriver {
+		return new JDBCSetProduct(IDSeller);
+	}
+
+	@Override
+	public SetProduct buildSetProduct() throws ErrorConnectionException, AlertDriver {
+		return new JDBCSetProduct();
 	}
 }

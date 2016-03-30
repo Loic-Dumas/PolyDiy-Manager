@@ -5,6 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+/**
+ * 
+ * @author nassim vachor
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
