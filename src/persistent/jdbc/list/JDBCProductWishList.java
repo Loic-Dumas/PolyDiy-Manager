@@ -2,6 +2,7 @@ package persistent.jdbc.list;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
@@ -40,23 +41,6 @@ public class JDBCProductWishList extends ProductWishList{
 	}
 
 	@Override
-	public Boolean haschanged() throws Exception {
-		return this.hasChanged;
-	}
-
-	@Override
-	public void loadFromIntKey(String name, int value) throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loadFromStringKey(String name, String value) throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
-		
-	}
-
-	@Override
 	public void insert() throws Exception {
 		// TODO JDBCProductWishList Auto-generated method stub
 		
@@ -64,7 +48,7 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public void update() throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
+		this.component = new JDBCComponent();
 		if(this.isExisting()) {
 			this.component.update("(id_product, name, description, unitPrice, stockQuantity) = (" + this.ID + "," 
 		                           + this.name + "," + this.description + "," + this.unitPrice + "," + this.stockQuantity + ")",
@@ -76,7 +60,21 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public void delete() throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
+		this.component = new JDBCComponent();
+		this.component.delete("item_wishList", "id_product = " + this.ID + " AND id_wishlist = " + this.IDWishList);
+		
+		
+	}
+
+	@Override
+	public Boolean hasChanged() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 

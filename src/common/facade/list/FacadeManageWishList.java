@@ -3,7 +3,7 @@ package common.facade.list;
 import java.util.Set;
 
 import common.exception.NoWishListException;
-import logic.WishListHandler;
+import logic.user.WishListHandler;
 import persistent.list.ProductWishList;
 import persistent.list.WishList;
 
@@ -126,6 +126,17 @@ public class FacadeManageWishList {
 	public String getNameWishList()  {	
 		return this.wishListHandler.getNameWishList();
 	}
+	
+
+	/**
+	 * Return The ID of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The ID of the wishList
+	 */
+	public int getIDWishList()  {	
+		return this.wishListHandler.getIDWishList();
+	}
 
 	
 	/**
@@ -138,12 +149,6 @@ public class FacadeManageWishList {
 		return this.wishListHandler.getTotalPriceWishList();
 	}
 	
-	
-	
-	
-	// TODO Facade Continue to implements all methods for this facade.
-		
-
 	
 
 }

@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -13,8 +14,7 @@ import common.exception.ErrorConnectionException;
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
-import graphic.ui.LoginUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 /**
  * 
@@ -29,14 +29,14 @@ public class Application extends JFrame implements Observer{
 	
 	Map<String, AbstractUI> panels = new HashMap<String, AbstractUI>();
 	
-	Session session = null;
+	UIMessage message = new UIMessage();
 	
 	public Application()
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1366, 700);
-		this.setResizable(false);
+		this.setMinimumSize(new Dimension(1366, 700));
+		//this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		
 		this.addWindowListener(new WindowAdapter() {
@@ -50,7 +50,15 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
-	public void addUI(String ui, String position)
+	public void addUI(String ui, String position) {
+		FactoryUI factory = new FactoryUI();
+		this.panels.put(ui, factory.build(ui, this.message));
+		this.panels.get(ui).addObserver(this);
+		this.add(this.panels.get(ui).getPanel(), position);
+		this.setVisible(true);
+	}
+	
+	/*public void addUI(String ui, String position)
 	{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
@@ -106,21 +114,20 @@ public class Application extends JFrame implements Observer{
 		this.panels.get(ui).addObserver(this);
 		this.add(this.panels.get(ui).getPanel(), position);
 		this.setVisible(true);
-	}
+	}*/
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof String) {
-			switch((String)arg) {
+		if(arg instanceof UIMessage) {
+			this.message = (UIMessage)arg;
+			switch(message.getTransition()) {
 			case "login":
-				LoginUI login = (LoginUI)this.panels.get("login");
-				this.session = login.getSession();
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("account", BorderLayout.CENTER);
 				break;
 			case "logout":
-				this.session = null;
+				this.message = null;
 				this.clearUI();
 				this.addUI("login", BorderLayout.CENTER);
 				this.addUI("createAccount", BorderLayout.EAST);
@@ -182,16 +189,17 @@ public class Application extends JFrame implements Observer{
 			}
 			this.getContentPane().validate();
 			this.repaint();
+			this.pack();
 		} else {
-			System.err.println("Problème d'observable");
+			System.err.println("UIMessage not send by the UI to application");
 		}
 	}
 	
 	private void endSession() throws Exception {
-		if (this.session != null) {
+		if (this.message != null) {
 			FacadeSession facade = new FacadeSession();
 			try {
-				facade.logout(this.session.getID());
+				facade.logout((int)this.message.getElement("id_account"));
 			} catch (ErrorConnectionException e) {
 				System.err.println(e.getMessage());
 			}

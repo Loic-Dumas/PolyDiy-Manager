@@ -14,6 +14,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import common.exception.IncorrectLoginException;
+import common.exception.NotExistingTuple;
+import common.exception.UnknownLoginException;
 import common.factory.SessionFactory;
 import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
@@ -67,7 +69,11 @@ public class LoginChecker {
 		
 		if(!matcher.find()) {
 			SessionFactory factory = new JDBCSessionFactory();
-			this.account = factory.buildAccount(login);
+			try {
+				this.account = factory.buildAccount(login);
+			}  catch(NotExistingTuple e) {
+				throw new UnknownLoginException(login);
+			}
 		} else {
 			throw new IncorrectLoginException();
 		}

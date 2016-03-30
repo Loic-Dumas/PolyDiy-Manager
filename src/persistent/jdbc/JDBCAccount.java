@@ -2,15 +2,16 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
-import common.exception.loadFromIntKeyException;
-import common.exception.loadFromStringKeyException;
 import common.jdbc.JDBCComponent;
+import common.jdbc.SQLCondition;
 import persistent.Account;
 
 /**
@@ -18,7 +19,7 @@ import persistent.Account;
  * (So you need the login(String) to create the account)
  * When you create the JDBCaccount you connect to the database to get the real password and the id.
  * If the login don't exist, throws UnknowLoginExcetion.
- * If the connection fail, throws EroorConnectionException.
+ * If the connection fail, throws ErrorConnectionException.
  * 
  * @author loicd_000
  * @version 1.0
@@ -35,63 +36,56 @@ public class JDBCAccount extends Account {
 
 	@Override
 	public Boolean isExisting() {
-		ResultSet result = this.component.select("*", "Account", "ID = '" + this.ID + "'");
+		ResultSet result = null;
+		try {
+			result = this.component.select(Arrays.asList("*"), "Account",
+													new SQLCondition(Arrays.asList("ID"),
+																	Arrays.asList(Integer.toString(this.ID))));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result != null;
 	}
 
 	@Override
-	public void loadFromIntKey(String name, int value) throws NotUniqueAttribute, loadFromIntKeyException {
-		ResultSet result = null;
-
-		result = this.component.select("*", "Account", name + "=" + value);
-		
-		if(result != null) {
-			try {
-				result.first();
-				if(result.next()) {
-					throw new NotUniqueAttribute(name, "Account");
-				} else {
-					result.first();
-				}
-				this.login = result.getString("login");
-				this.password = result.getString("password");
-				this.ID = result.getInt("ID");
-				this.email = result.getString("email");
-				this.firstName = result.getString("firstName");
-				this.lastName = result.getString("lastName");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			throw new loadFromIntKeyException("Account", name, value);
-		}
+	public Boolean hasChanged() throws Exception {
+		ResultSet result = this.component.select(Arrays.asList("*"), "Account",
+												new SQLCondition(Arrays.asList("login", "password", "ID", "email", "firstName", "lastName"),
+														Arrays.asList(this.login, this.password, Integer.toString(this.ID), this.email, this.firstName, this.lastName)));
+		return result != null && result.first();
 	}
 
 	@Override
-	public void loadFromStringKey(String name, String value) throws NotUniqueAttribute, loadFromStringKeyException {
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws NotUniqueAttribute, NotExistingTuple {
 		ResultSet result = null;
 
-		result = this.component.select("*", "Account", name + "='" + value + "'");
+		try {
+			result = this.component.select(Arrays.asList("*"), "Account", 
+											new SQLCondition(columnNames, columnValues));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		if(result != null) {
 			try {
-				result.first();
-				if(result.next()) {
-					throw new NotUniqueAttribute(name, "Account");
+				if(result.first()) {
+					if(result.next()) {
+						throw new NotUniqueAttribute(columnNames, "Account");
+					} else {
+						result.first();
+					}
+					this.login = result.getString("login");
+					this.password = result.getString("password");
+					this.ID = result.getInt("ID");
+					this.email = result.getString("email");
+					this.firstName = result.getString("firstName");
+					this.lastName = result.getString("lastName");
 				} else {
-					result.first();
+					throw new NotExistingTuple("Account");
 				}
-				this.login = result.getString("login");
-				this.password = result.getString("password");
-				this.ID = result.getInt("ID");
-				this.email = result.getString("email");
-				this.firstName = result.getString("firstName");
-				this.lastName = result.getString("lastName");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
-			throw new loadFromStringKeyException("Account", name, value);
 		}
 	}
 
@@ -108,9 +102,14 @@ public class JDBCAccount extends Account {
 	@Override
 	public void update() throws NotExistingTuple {
 		if(this.isExisting()) {
-			this.component.update("(login, password, ID, email, firstName, lastName) = (" + this.login + "," 
-		                           + this.password + "," + this.ID + "," + this.firstName + "," + this.lastName + ")",
-		                           "Account", "");
+			try {
+				this.component.update("(login, password, ID, email, firstName, lastName) = (" + this.login + "," 
+				                       + this.password + "," + this.ID + "," + this.email + "," + this.firstName + "," + this.lastName + ")",
+				                       "Account", new SQLCondition(Arrays.asList("ID"),
+				                    		   						Arrays.asList(Integer.toString(this.ID))));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			throw new NotExistingTuple("Account");
 		}
@@ -119,7 +118,12 @@ public class JDBCAccount extends Account {
 	@Override
 	public void delete() throws NotExistingTuple {
 		if(this.isExisting()) {
-			this.component.delete("Account", "ID=" + this.ID);
+			try {
+				this.component.delete("Account", new SQLCondition(Arrays.asList("ID"),
+																	Arrays.asList(Integer.toString(this.ID))));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			throw new NotExistingTuple("Account");
 		}
