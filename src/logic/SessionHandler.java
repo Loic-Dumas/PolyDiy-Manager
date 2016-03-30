@@ -12,7 +12,7 @@ public class SessionHandler {
 		Session session = factory.buildSessionWithID(ID);
 		session.generateToken();
 		session.insert();
-		session.loadFromKeys(Arrays.asList("id"), Arrays.asList(Integer.toString((session.getID()))));
+		session.loadFromKeys(Arrays.asList("id_account"), Arrays.asList(Integer.toString((session.getID()))));
 		return session;
 	}
 	

@@ -50,6 +50,7 @@ public class FactoryUI {
 				throw new Exception("Unknow ui " + name + " !");
 			}
 		} catch (Exception e) {
+			System.err.println(name);
 			e.printStackTrace();
 			return null;
 		}
