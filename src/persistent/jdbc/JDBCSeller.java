@@ -9,6 +9,8 @@ package persistent.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
@@ -67,6 +69,21 @@ public class JDBCSeller extends Seller{
 		} else {
 			throw new NotExistingTuple("Seller");
 		}
+	}
+	@Override
+	public Boolean hasChanged() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void delete() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*@Override

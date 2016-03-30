@@ -5,10 +5,11 @@ import java.util.Map;
 
 import graphic.ui.AdvertisementUI;
 import graphic.ui.CreateAccountUI;
+import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
-import graphic.ui.UpdateUI;
 import graphic.ui.NavBarUI;
+import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
@@ -16,7 +17,6 @@ import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
 import graphic.ui.user.list.WishListsUI;
-import graphic.ui.EditProfilUI;
 
 public class FactoryUI {
 	@SuppressWarnings("rawtypes")
@@ -35,8 +35,8 @@ public class FactoryUI {
 		this.ui.put("wishlist", WishListUI.class);
 		this.ui.put("wishlists", WishListsUI.class);
 		this.ui.put("cart", CartUI.class);
-		this.ui.put("edit", EditProfileUI.class);
-		this.ui.put("update", UpdateUI.class);
+		this.ui.put("edit", EditSellerUI.class);
+		this.ui.put("update", UpdateSellerUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -8,18 +8,17 @@ import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
 import logic.UpdateProfilHandler;
-import persistent.Session;
 
 public class FacadeEditProfil {
-	Session session;
+	int IDaccount = -1;
 	UpdateProfilHandler handler = new UpdateProfilHandler();
-	public FacadeEditProfil (Session s){
-		this.session = s;
+	public FacadeEditProfil (int IDaccount){
+		this.IDaccount = IDaccount;
 	}
 	
 public void createSeller(int ID, String nameShop, String description, String siret, String website) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
 		
-		this.handler.createSeller(session.getID(), nameShop, description, siret, website);
+		this.handler.createSeller(IDaccount, nameShop, description, siret, website);
 		
 	}
 	

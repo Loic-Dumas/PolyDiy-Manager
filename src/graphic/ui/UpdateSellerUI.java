@@ -2,6 +2,7 @@ package graphic.ui;
 
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -9,9 +10,9 @@ import javax.swing.JTextField;
 
 import common.facade.FacadeEditProfil;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
-public class UpdateUI extends AbstractUI {
+public class UpdateSellerUI extends AbstractUI {
 		 private JTextField nameShop;
 		 private JLabel label;
 		 private JTextField description; 
@@ -22,10 +23,9 @@ public class UpdateUI extends AbstractUI {
 		 private JLabel label3;
 		 JButton cancel = new JButton();
 		 JButton update = new JButton();
-		 Session session = null;
 	
-	public UpdateUI(Session session) {
-		this.session = session;
+	public UpdateSellerUI(UIMessage communication) {
+		super(communication);
 			//this.nameShop.setPreferredSize(new Dimension(150, 30));
 		this.panel.setLayout(null);
 		label = new JLabel("Name of Shop");
@@ -71,11 +71,11 @@ public class UpdateUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		FacadeEditProfil facade = new FacadeEditProfil(session);
+		FacadeEditProfil facade = new FacadeEditProfil((int)this.communication.getElement("id_account"));
 		try {
 			if (arg0.getSource()==
 					update){
-			facade.createSeller(session.getID(), this.nameShop.getText(), this.description.getText(), this.siret.getText(), this.website.getText());
+			facade.createSeller((int)this.communication.getElement("id_account"), this.nameShop.getText(), this.description.getText(), this.siret.getText(), this.website.getText());
 			facade.Validate();
 			this.setChanged();
 			this.notifyObservers("edit");

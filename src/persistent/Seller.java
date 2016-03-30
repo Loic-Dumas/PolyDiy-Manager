@@ -1,6 +1,6 @@
 package persistent;
 
-import common.AbstractModel;
+import common.InterfaceModel;
 
 /**
  * A seller contains ID, nameShop, description, siret and website.
@@ -11,7 +11,7 @@ import common.AbstractModel;
  * @since 2016-03-21
  */
 
-public class Seller extends AbstractModel{
+public abstract class Seller implements InterfaceModel{
 	protected int ID;
 	protected String nameShop;
 	protected String description;
@@ -55,35 +55,7 @@ public class Seller extends AbstractModel{
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	@Override
-	public Boolean isExisting() throws Exception {
-	
-		return null;
-	}
-	@Override
-	public void loadFromIntKey(String name, int value) throws Exception {
-	
-		
-	}
-	@Override
-	public void loadFromStringKey(String name, String value) throws Exception {
 
-	}
-	@Override
-	public void insert() throws Exception {
-	
-		
-	}
-	@Override
-	public void update() throws Exception {
-		
-		
-	}
-	@Override
-	public void delete() throws Exception {
-		
-		
-	}
 	
 	
 }
