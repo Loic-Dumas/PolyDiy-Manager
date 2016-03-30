@@ -12,7 +12,7 @@ public abstract class Session implements InterfaceModel{
 	protected int ID_seller = -1;
 	protected int ID_admin = -1;
 	
-	public abstract void generateToken() throws ErrorConnectionException;
+	public abstract void generateToken() throws ErrorConnectionException, Exception;
 	
 	public int getID() {
 		return this.ID;
