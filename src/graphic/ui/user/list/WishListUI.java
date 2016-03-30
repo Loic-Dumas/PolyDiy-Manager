@@ -71,8 +71,8 @@ public class WishListUI extends AbstractUI {
 		for(Iterator<String> i = this.facadeList.getListIDProduct().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
 		    ProductWishList product = this.facadeList.createAndGetWishList(IDWishList).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , "" +product.getUnitPrice() + " €", "Remove product", product.getIDProduct()}; 
-			data[j] = newLine;
+		 //   Object[] newLine = {product.getName() , product.getQuantity() , "" +product.getUnitPrice() + " €", "Remove product", product.getIDProduct()}; 
+		//	data[j] = newLine;
 			j ++;
 		}
 		

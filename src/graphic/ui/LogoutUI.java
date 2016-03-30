@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
@@ -17,7 +18,10 @@ public class LogoutUI extends AbstractUI {
 		super(communication);
 		
 		this.panel.setLayout(null);
-		
+		//modify the background colors
+		getPanel().setForeground(UIManager.getColor("Tree.selectionBorderColor"));
+		getPanel().setBackground(UIManager.getColor("controlHighlight"));
+
 		this.logout.setText("Logout");
 		this.logout.setBounds(146, 147, 89, 23);
 		this.panel.add(logout);
