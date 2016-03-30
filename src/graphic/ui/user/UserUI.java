@@ -62,7 +62,7 @@ public class UserUI extends AbstractUI {
 		if (arg0.getActionCommand().equals("My lists")) {
 			result = "wishLists";
 		} else if (arg0.getActionCommand().equals("PDM - Shop")) {
-			result = "PDM - Shop";
+			result = "PDMShop";
 		} 
 
 		// now if there are a change of UI, we notifyObservers

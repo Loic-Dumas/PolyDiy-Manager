@@ -20,6 +20,7 @@ import common.exception.wishListAlreadyExistException;
 import common.facade.list.FacadeManageSetWishList;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
+import graphic.engine.UIMessage;
 import persistent.Session;
 import persistent.list.WishList;
 
@@ -38,9 +39,9 @@ public class PDMShopUI extends AbstractUI {
 	private Session session = null;
 	private FacadeManageSetWishList facadeList = new FacadeManageSetWishList();
 
-	public PDMShopUI(Session session, int IDUser) {
-		this.session = session;
-		this.facadeList.createAndGetSetWishList(IDUser);
+	public PDMShopUI(UIMessage communication) {
+		super(communication);
+		this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user"));
 
 		this.panel.setLayout(null);
 
