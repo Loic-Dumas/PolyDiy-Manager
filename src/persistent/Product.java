@@ -11,25 +11,28 @@ import common.InterfaceModel;
  * @since 2016-03-19
  */
 public abstract class Product implements InterfaceModel {
-	protected int ID;
+	protected int IDProduct;
 	protected String name;
 	protected String description;
 	protected float unitPrice;
 	protected int stockQuantity;
+	protected int IDSeller;
+	protected int IDCategory;
+	protected String categoryName;
 	
 	protected Boolean hasChanged = false;
 	
 	// the product is created from is ID
 	public Product(int ID) {
-		this.ID = ID;
+		this.IDProduct = ID;
 		this.hasChanged = true;
 	}
 
-	public int getID() {
-		return this.ID;
+	public int getIDProduct() {
+		return this.IDProduct;
 	}
-	public void setID(int ID) {
-		this.ID = ID;
+	public void setIDProduct(int ID) {
+		this.IDProduct = ID;
 		this.hasChanged = true;
 	}
 	public String getName() {
@@ -59,6 +62,29 @@ public abstract class Product implements InterfaceModel {
 	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
 		this.hasChanged = true;
+	}
+	public int getIDSeller() {
+		return IDSeller;
+	}
+
+	public void setIDSeller(int iDSeller) {
+		IDSeller = iDSeller;
+	}
+
+	public int getIDCategory() {
+		return IDCategory;
+	}
+
+	public void setIDCategory(int iDCategory) {
+		IDCategory = iDCategory;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	
 }

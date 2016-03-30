@@ -41,9 +41,9 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
+		this.ui.put("productInShop", ProductInShopUI.class);
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 		this.ui.put("updateAccount", UpdateAccountUI.class);
-
 	}
 	
 	@SuppressWarnings("unchecked")

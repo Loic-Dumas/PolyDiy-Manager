@@ -138,7 +138,7 @@ public class WishListsUI extends AbstractUI {
 	}
 
 	/**
-	 * This method is an equivalent to actionPerformed, but delete a wishlist
+	 * This method is an equivalent to actionPerformed, but delete a wish list
 	 * and refresh the page
 	 * 
 	 * @author loicd_000

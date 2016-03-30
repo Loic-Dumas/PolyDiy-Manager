@@ -3,6 +3,7 @@ package common.factory;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.wishListAlreadyExistException;
+import persistent.SetProduct;
 import persistent.list.Cart;
 import persistent.list.SetWishList;
 import persistent.list.WishList;
@@ -19,4 +20,6 @@ public abstract class ListFactory {
 	public abstract SetWishList buildSetWishList(int IDUser) throws ErrorConnectionException, AlertDriver ;
 	public abstract Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver;
 	public abstract WishList buildWishList(int IDUser, String labelWishList) throws wishListAlreadyExistException ;
+	public abstract SetProduct buildSetProduct(int IDSeller) throws ErrorConnectionException, AlertDriver;
+	public abstract SetProduct buildSetProduct() throws ErrorConnectionException, AlertDriver;
 }

@@ -44,7 +44,7 @@ public class JDBCWishList extends WishList {
 						this.addElement(String.valueOf(result.getInt("id_product")),
 								productFactory.buildProductWishList(result.getInt("id_product"),
 										result.getInt("id_wishlist"), result.getInt("quantity"),
-										result.getInt("unitPrice")));
+										result.getFloat("unitPrice")));
 
 					} catch (UnknownIDProductException e) {
 						System.err.println("Impossible to create the product with id : " + result.getInt("id_product"));
