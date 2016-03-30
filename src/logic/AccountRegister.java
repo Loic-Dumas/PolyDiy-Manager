@@ -2,9 +2,13 @@ package logic;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.factory.ProfilFactory;
 import common.factory.SessionFactory;
+import common.factory.jdbcFactory.JDBCProfilFactory;
 import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
+import persistent.Seller;
+import persistent.User;
 
 public class AccountRegister {
 	private Account account = null;
@@ -16,18 +20,20 @@ public class AccountRegister {
 		SessionFactory factory = new JDBCSessionFactory();
 		this.account = factory.buildAccount(login, password, email, firstName, lastName);
 		
-		ProfileFactory factory2 = new JDBCProfileFactory();
+		ProfilFactory factory2 = new JDBCProfilFactory();
 		if(isUser) {
-			this.user = factory.buildUser(this.account.getID());
+			this.user = factory2.buildUserEmpty();
 		}
 		if(isSeller) {
-			this.seller = factory.buildSeller(this.account.getID());
+			this.seller = factory2.buildSellerEmpty();
 		}
 	}
 	
 	public void registerAccount() throws Exception {
 		// TODO faire les regex sur chaque élément
 		this.account.insert();
+		this.user.setIDaccount(this.account.getID());
+		this.seller.setIDaccount(this.account.getID());
 		this.user.insert();
 		this.seller.insert();
 	}
