@@ -110,7 +110,6 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {		
-		String action = "";
 			if (arg0.getActionCommand().equals("update informations")) { //arg0.getSource() == updateInfo
 				this.setChanged();
 				this.notifyObservers("updateAccount");
