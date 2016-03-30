@@ -1,4 +1,4 @@
-package graphic.ui;
+package graphic.ui.account;
 
 import java.awt.event.ActionEvent;
 
