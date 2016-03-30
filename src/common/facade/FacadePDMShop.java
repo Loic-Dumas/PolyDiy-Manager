@@ -18,8 +18,8 @@ public class FacadePDMShop {
 	 * @since 2016-03-30
 	 * @return SetProduct
 	 */
-	public SetProduct createAndGetExistingWishList() {
-		return this.pdmShopHandler.createAndGetExistingWishList();
+	public SetProduct createAndGetExistingSetProduct() {
+		return this.pdmShopHandler.createAndGetExistingSetProduct();
 	}
 	
 

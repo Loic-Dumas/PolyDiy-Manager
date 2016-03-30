@@ -1,4 +1,4 @@
-package graphic.ui.user;
+package graphic.ui.user.shop;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -16,32 +16,30 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import common.exception.wishListAlreadyExistException;
-import common.facade.list.FacadeManageSetWishList;
+import common.facade.FacadePDMShop;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Session;
-import persistent.list.WishList;
+import persistent.Product;
 
 public class PDMShopUI extends AbstractUI {
 	private JButton searchProductButton = new JButton();
-	
+
 	private JLabel welcome = new JLabel();
-	
+
 	private JTextField searchProductFiekd = new JTextField();
-	
+
 	private JComboBox<String> selectCategory = new JComboBox<String>();
-	
+
 	private JTable table = new JTable();
 	private JPanel tablePanel = new JPanel();
 
-	private Session session = null;
-	private FacadeManageSetWishList facadeList = new FacadeManageSetWishList();
+	private FacadePDMShop facadeList = new FacadePDMShop();
 
 	public PDMShopUI(UIMessage communication) {
 		super(communication);
-		this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user"));
+
+		this.facadeList.createAndGetExistingSetProduct();
 
 		this.panel.setLayout(null);
 
@@ -51,41 +49,46 @@ public class PDMShopUI extends AbstractUI {
 		this.panel.add(welcome);
 
 		// searchProductFiekd textField
-		this.searchProductFiekd.setBounds(1, 30, 145, 23);
+		this.searchProductFiekd.setBounds(1, 30, 250, 23);
 		this.panel.add(searchProductFiekd);
-		
+
 		// searchProductButton button
 		this.searchProductButton.setText("Search");
-		this.searchProductButton.setBounds(150, 30, 80, 23);
+		this.searchProductButton.setBounds(255, 30, 80, 23);
 		this.panel.add(searchProductButton);
 		this.searchProductButton.addActionListener(this);
-		
-		this.selectCategory.setBounds(260, 30, 150, 23);
+
+		this.selectCategory.setBounds(350, 30, 150, 23);
 		this.selectCategory.addItem("cat1");
 		this.selectCategory.addItem("Peluche");
 		this.selectCategory.addItem("Drogue");
+		this.panel.add(this.selectCategory);
 
 		// Table :
-		int nbOfRow = 4;//this.facadeList.createAndGetSetWishList(IDUser).count();
+		int nbOfRow = this.facadeList.createAndGetExistingSetProduct().count();
 		int nbOfColumn = 2;
-		String[] title = { "Product", "ID", "Price" };
+		String[] title = { "Product", "Price", " Stock", "ID" };
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
 
-		for (int i = 0 ; i < nbOfRow ; i++) {
-			Object[] newLine = { "Lama " + i, "24", "15 €"};
-			data[i] = newLine;
+		// for (int i = 0 ; i < nbOfRow ; i++) {
+		// Object[] newLine = { "Lama " + i, "24", "15 €", "155"};
+		// data[i] = newLine;
+		//
+		// }
 
+		int j = 0;
+		for (Iterator<String> i = this.facadeList.getListID().iterator(); i.hasNext();) {
+			String key = i.next();
+			Product product = this.facadeList.createAndGetExistingSetProduct().getElementByKey(key);
+			Object[] newLine = { product.getName(), "" + product.getUnitPrice() + " €",
+					inStock(product.getStockQuantity()), product.getIDProduct() };
+			System.out.println("J'ai le produit " + product.getName() + " - " + product.getUnitPrice() + " -  "
+					+ inStock(product.getStockQuantity()) + " - " + product.getIDProduct());
+			data[j] = newLine;
+			j++;
 		}
-//		
-//		int j = 0;
-//		for (Iterator<String> i = this.facadeList.getListIDWishList().iterator(); i.hasNext();) {
-//			String key = i.next();
-//			WishList wishList = this.facadeList.createAndGetSetWishList(IDUser).getElementByKey(key);
-//			Object[] newLine = { wishList.getLabel(), wishList.getID(), "Remove wish list",
-//					this.facadeList.getNumberOfProductsInWishList(wishList.getID()) };
-//			data[j] = newLine;
-//			j++;
-//		}
+
+		//
 
 		// prepare the tablePanel
 		this.tablePanel.setBounds(2, 60, 500, 400);
@@ -96,20 +99,19 @@ public class PDMShopUI extends AbstractUI {
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		this.panel.add(this.tablePanel);
 
-//		table.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent e) {
-//				if (e.getClickCount() == 1) {
-//					JTable target = (JTable) e.getSource();
-//					int row = target.getSelectedRow();
-//					int column = target.getSelectedColumn();
-//					if (column == 2) {
-//						deteteWishListActionPerformed((int) table.getValueAt(row, 1));
-//					} else {
-//						stringActionPerformed("wishList selected : " + table.getValueAt(row, 1));
-//					}
-//				}
-//			}
-//		});
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					JTable target = (JTable) e.getSource();
+					int row = target.getSelectedRow();
+					int column = target.getSelectedColumn();
+					
+					System.out.println("click on : row : " + row  +" column : " + column + " ID : " + table.getValueAt(row, 3));
+					stringActionPerformed(String.valueOf(table.getValueAt(row, 3)));
+
+				}
+			}
+		});
 
 	}
 
@@ -122,31 +124,10 @@ public class PDMShopUI extends AbstractUI {
 	 * @param event
 	 */
 	public void stringActionPerformed(String event) {
+		this.communication.shareElement("id_product", event);
 		try {
 			this.setChanged();
-			this.notifyObservers(event);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	/**
-	 * This method is an equivalent to actionPerformed, but delete a wish list
-	 * and refresh the page
-	 * 
-	 * @author loicd_000
-	 * @param IDWishlist
-	 *            - int : IDWishList to delete
-	 */
-	public void deteteWishListActionPerformed(int IDWishList) {
-		try {
-			this.facadeList.deleteWishList(IDWishList);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		try {
-			this.setChanged();
-			this.notifyObservers("wishLists");
+			this.notifyObservers("productInShop");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -162,14 +143,6 @@ public class PDMShopUI extends AbstractUI {
 			result = "wishLists";
 		} else if (arg0.getActionCommand().equals("Cart")) {
 			result = "cart";
-//		} else if (arg0.getActionCommand().equals("Add")) {
-//			try {
-//				this.facadeList.createWishList(this.session.getIDUser(), this.newWishList.getText());
-//				result = "wishLists";
-//			} catch (wishListAlreadyExistException e) {
-//				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//				result = "nothing changes";
-//			}
 		}
 
 		// now if there are a change of UI, we notifyObservers
@@ -188,6 +161,14 @@ public class PDMShopUI extends AbstractUI {
 		else {
 			System.err.println("Button action not catch.");
 		}
+	}
+
+	public String inStock(int stock) {
+		String result = "not in stock";
+		if (stock > 0) {
+			result = "in stock";
+		}
+		return result;
 	}
 
 }

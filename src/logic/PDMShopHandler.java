@@ -22,8 +22,8 @@ public class PDMShopHandler {
 	 * @since 2016-03-30
 	 * @return SetProduct
 	 */
-	public SetProduct createAndGetExistingWishList() {
-		if (this.setProduct == null) { // if there's no wishList
+	public SetProduct createAndGetExistingSetProduct() {
+		if (this.setProduct == null) { 
 			try {
 				try {
 					this.setProduct = listFactory.buildSetProduct();
