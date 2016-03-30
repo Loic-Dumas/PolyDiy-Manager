@@ -15,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 import common.facade.list.FacadeManageWishList;
-import common.facade.shop.FacadeProductInShop;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;

@@ -20,6 +20,8 @@ import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
 import graphic.ui.user.list.WishListsUI;
+import graphic.ui.user.shop.PDMShopUI;
+import graphic.ui.user.shop.ProductInShopUI;
 
 public class FactoryUI {
 	@SuppressWarnings("rawtypes")
@@ -33,7 +35,7 @@ public class FactoryUI {
 		this.ui.put("navBar", NavBarUI.class);
 		this.ui.put("account", AccountUI.class);
 		this.ui.put("user", UserUI.class);
-		//this.ui.put("PDMShop", PDMShopUI.class);
+		this.ui.put("PDMShop", PDMShopUI.class);
 		this.ui.put("seller", SellerUI.class);
 		this.ui.put("admin", AdminUI.class);
 		this.ui.put("wishList", WishListUI.class);
@@ -41,7 +43,7 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
-		//this.ui.put("productInShop", ProductInShopUI.class);
+		this.ui.put("productInShop", ProductInShopUI.class);
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 		this.ui.put("updateAccount", UpdateAccountUI.class);
 	}
@@ -55,7 +57,6 @@ public class FactoryUI {
 				throw new Exception("Unknow ui " + name + " !");
 			}
 		} catch (Exception e) {
-			System.err.println(name);
 			e.printStackTrace();
 			return null;
 		}
