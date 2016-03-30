@@ -28,11 +28,6 @@ public class ProductInShopUI extends AbstractUI {
 	private JTextField quantityTextField = new JTextField();
 	
 	
-//	JScrollPane areaScrollPane = new JScrollPane(textArea);
-//	areaScrollPane.setVerticalScrollBarPolicy(
-//	                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//	areaScrollPane.setPreferredSize(new Dimension(250, 250));
-	
 	private FacadeProductInShop facadeProduct = new FacadeProductInShop();
 	
 	Border border = BorderFactory.createLineBorder(Color.black, 1);
@@ -48,9 +43,6 @@ public class ProductInShopUI extends AbstractUI {
 		
 		Product product = this.facadeProduct.createAndGetProduct(IDProduct);
 
-		System.out.println("UI : J'ai construit le produit");
-		System.out.println("UI : C'est le produit : " + product.getName());
-		
 		this.panel.setLayout(null);
 
 
@@ -68,9 +60,9 @@ public class ProductInShopUI extends AbstractUI {
 		this.unitPriceProduct.setText("Price  : " +  product.getUnitPrice() + " €");
 		this.unitPriceProduct.setBounds(15 , 80, 150, 23);
 		this.panel.add(this.unitPriceProduct);
-
+		
 		this.descriptionProduct.setText(" Description : \n " +  product.getDescription());
-		this.descriptionProduct.setBounds(15 , 110, 300, 100);
+		this.descriptionProduct.setBounds(15 , 110, 350, 100);
 		this.descriptionProduct.setBorder(border);
 		this.panel.add(this.descriptionProduct);
 		
@@ -89,8 +81,8 @@ public class ProductInShopUI extends AbstractUI {
 		this.quantityTextField.setBounds(200 , 230, 60, 23);
 		this.panel.add(this.quantityTextField);
 
-		this.order.setText("Order");
-		this.order.setBounds(270 , 230, 80, 23);
+		this.order.setText("Add to cart");
+		this.order.setBounds(270 , 230, 150, 23);
 		this.panel.add(order);
 		this.order.addActionListener(this);
 		
@@ -98,11 +90,10 @@ public class ProductInShopUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// FacadeSession facade = new FacadeSession();
-
-
 		String result = "";
 		if (arg0.getActionCommand().equals("Back to PDM shop")) {
+			result = "PDMShop";
+		} if (arg0.getActionCommand().equals("Add to cart")) {
 			result = "PDMShop";
 		} 
 

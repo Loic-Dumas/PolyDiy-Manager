@@ -18,7 +18,6 @@ public class ProductInShopHandler {
 	 * @return SetProduct
 	 */
 	public Product createAndGetProduct(int IDProduct) {
-		System.out.println("Début Handler " );
 		if (this.product == null) { 
 			try {
 				try {
@@ -33,8 +32,6 @@ public class ProductInShopHandler {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Handler : LAMAMAMAMAMAMMAMAMAMAMA : " + this.product.getIDProduct());
-		System.out.println("Handler : LAMAMAMAMAMAMMAMAMAMAMA : " + this.product.getCategoryName());
 		return this.product;
 	}
 	
