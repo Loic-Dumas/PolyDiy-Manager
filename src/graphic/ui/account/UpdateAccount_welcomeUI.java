@@ -12,18 +12,23 @@ import graphic.engine.UIMessage;
 
 public class UpdateAccount_welcomeUI extends AbstractUI {
 	private JButton updateInfo = new JButton();
-	
+	private String textLogin;
+	private JLabel labelLoginUser = new JLabel();
 	/**
 	 * Create the panel to give the information of the user's account.
 	 * @throws Exception 
 	 */
 	
 	public UpdateAccount_welcomeUI(UIMessage communication) throws Exception {
+		
 		super(communication);
 		this.panel.setLayout(null);
-		int ID = (int) this.communication.getElement("ID_user");
+		
+		//to take the actual account informations
+		int ID = (int) this.communication.getElement("id_account");
+		System.out.println(ID);
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		String textLogin = facade.getLogin(ID);
+		textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);
 		String textFirstName = facade.getFirstName(ID);
 		
@@ -32,7 +37,8 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		labelWelcome.setBounds(204, 72, 166, 68);
 		this.panel.add(labelWelcome);
 		
-		JLabel labelLoginUser = new JLabel(textLogin);
+		//
+		labelLoginUser.setText(textLogin);
 		labelLoginUser.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
 		labelLoginUser.setBounds(380, 85, 239, 42);
 		this.panel.add(labelLoginUser);
@@ -94,8 +100,8 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		
 		//JButton updateInfo = new JButton("update informations"); A NE SURTOUT PAS DELARER COMME CA!!!
 		this.updateInfo.setText("update informations");
-		updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
-		updateInfo.setBounds(243, 505, 178, 49);
+		this.updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		this.updateInfo.setBounds(243, 505, 178, 49);
 		this.panel.add(updateInfo);
 		this.updateInfo.addActionListener(this);
 	}
@@ -103,8 +109,8 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {				
 			if (arg0.getSource() == updateInfo) {
+				this.notifyObservers("updateAccount");
 				this.setChanged();
-				this.notifyObservers("updateInfo");
 			}
 		
 	}

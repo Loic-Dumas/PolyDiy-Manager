@@ -22,16 +22,16 @@ public class ModifyIdentityUI_test extends AbstractUI{
 	private JTextField firstName;
 	private JButton btReturn = new JButton();
 	private JButton btValidate = new JButton();
-	private int ID;
-
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
 	public ModifyIdentityUI_test(UIMessage communication) throws Exception {
+		
 		super(communication);
 		this.panel.setLayout(null);
-		ID = (int) this.communication.getElement("ID");
+		
+		int ID = (int) this.communication.getElement("id_account");
 		FacadeModifyAccount facade = new FacadeModifyAccount();
 		String textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);

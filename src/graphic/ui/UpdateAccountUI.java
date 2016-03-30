@@ -11,7 +11,7 @@ import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
 
-public class ModifyIdentityUI extends AbstractUI {
+public class UpdateAccountUI extends AbstractUI {
 	private JTextField tfLogin;
 	private JTextField tfLastName;
 	private JTextField tfFirstName;
@@ -20,7 +20,6 @@ public class ModifyIdentityUI extends AbstractUI {
 	private JTextField tfAddressPostalCode;
 	private JButton btCancel = new JButton();
 	private JButton btValidate = new JButton();
-	private int ID;
 	
 	/**
 	 * Create the panel ModifyIdentityUI.
@@ -28,12 +27,13 @@ public class ModifyIdentityUI extends AbstractUI {
 	 * and your address.
 	 */
 	
-	public ModifyIdentityUI(UIMessage communication) throws Exception {
-
+	public UpdateAccountUI(UIMessage communication) throws Exception {
 		
 		super(communication);
 		this.panel.setLayout(null);
-		ID = (int) this.communication.getElement("ID_account");
+		
+		
+		int ID = (int) this.communication.getElement("id_account");
 		FacadeModifyAccount facade = new FacadeModifyAccount();
 		String textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);

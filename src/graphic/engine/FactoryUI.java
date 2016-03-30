@@ -9,6 +9,7 @@ import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
+import graphic.ui.UpdateAccountUI;
 import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.account.UpdateAccount_welcomeUI;
@@ -41,6 +42,8 @@ public class FactoryUI {
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
+		this.ui.put("updateAccount", UpdateAccountUI.class);
+
 	}
 	
 	@SuppressWarnings("unchecked")

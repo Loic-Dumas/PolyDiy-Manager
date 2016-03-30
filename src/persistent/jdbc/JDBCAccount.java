@@ -38,7 +38,7 @@ public class JDBCAccount extends Account {
 	public Boolean isExisting() throws Exception{
 		ResultSet result = null;
 			result = this.component.select(Arrays.asList("*"), "Account",
-													new SQLCondition(Arrays.asList("id"),
+													new SQLCondition(Arrays.asList("id_account"),
 																	Arrays.asList(Integer.toString(this.ID))));
 		return result != null && result.first();
 	}
@@ -46,7 +46,7 @@ public class JDBCAccount extends Account {
 	@Override
 	public Boolean hasChanged() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "Account",
-												new SQLCondition(Arrays.asList("login", "password", "id", "email", "first_name", "last_name"),
+												new SQLCondition(Arrays.asList("login", "password", "id_account", "email", "first_name", "last_name"),
 														Arrays.asList(this.login, this.password, Integer.toString(this.ID), this.email, this.firstName, this.lastName)));
 		return result != null && result.first();
 	}
@@ -101,7 +101,7 @@ public class JDBCAccount extends Account {
 			try {
 				this.component.update("(login, password, email, first_name, last_name) = (" + this.login + "," 
 				                       + this.password + "," + this.email + "," + this.firstName + "," + this.lastName + ")",
-				                       "Account", new SQLCondition(Arrays.asList("id"),
+				                       "Account", new SQLCondition(Arrays.asList("id_account"),
 				                    		   						Arrays.asList(Integer.toString(this.ID))));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -115,7 +115,7 @@ public class JDBCAccount extends Account {
 	public void delete() throws Exception {
 		if(this.isExisting()) {
 			try {
-				this.component.delete("Account", new SQLCondition(Arrays.asList("id"),
+				this.component.delete("Account", new SQLCondition(Arrays.asList("id_account"),
 																	Arrays.asList(Integer.toString(this.ID))));
 			} catch (Exception e) {
 				e.printStackTrace();
