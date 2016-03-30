@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import common.facade.FacadePDMShop;
+import common.facade.shop.FacadePDMShop;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
@@ -24,13 +24,9 @@ import persistent.Product;
 
 public class PDMShopUI extends AbstractUI {
 	private JButton searchProductButton = new JButton();
-
 	private JLabel welcome = new JLabel();
-
 	private JTextField searchProductFiekd = new JTextField();
-
 	private JComboBox<String> selectCategory = new JComboBox<String>();
-
 	private JTable table = new JTable();
 	private JPanel tablePanel = new JPanel();
 
@@ -70,12 +66,6 @@ public class PDMShopUI extends AbstractUI {
 		String[] title = { "Product", "Price", " Stock", "ID" };
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
 
-		// for (int i = 0 ; i < nbOfRow ; i++) {
-		// Object[] newLine = { "Lama " + i, "24", "15 €", "155"};
-		// data[i] = newLine;
-		//
-		// }
-
 		int j = 0;
 		for (Iterator<String> i = this.facadeList.getListID().iterator(); i.hasNext();) {
 			String key = i.next();
@@ -107,7 +97,7 @@ public class PDMShopUI extends AbstractUI {
 					int column = target.getSelectedColumn();
 					
 					System.out.println("click on : row : " + row  +" column : " + column + " ID : " + table.getValueAt(row, 3));
-					stringActionPerformed(String.valueOf(table.getValueAt(row, 3)));
+					stringActionPerformed((int) table.getValueAt(row, 3));
 
 				}
 			}
@@ -123,7 +113,7 @@ public class PDMShopUI extends AbstractUI {
 	 * @author loicd_000
 	 * @param event
 	 */
-	public void stringActionPerformed(String event) {
+	public void stringActionPerformed(int event) {
 		this.communication.shareElement("id_product", event);
 		try {
 			this.setChanged();
@@ -164,9 +154,9 @@ public class PDMShopUI extends AbstractUI {
 	}
 
 	public String inStock(int stock) {
-		String result = "not in stock";
+		String result = "Not available";
 		if (stock > 0) {
-			result = "in stock";
+			result = "Available";
 		}
 		return result;
 	}
