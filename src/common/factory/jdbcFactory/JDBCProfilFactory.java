@@ -10,7 +10,9 @@ import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
 import common.factory.ProfilFactory;
 import persistent.Seller;
+import persistent.User;
 import persistent.jdbc.JDBCSeller;
+import persistent.jdbc.JDBCUser;
 
 public class JDBCProfilFactory extends ProfilFactory {
 	@Override
@@ -29,5 +31,13 @@ public class JDBCProfilFactory extends ProfilFactory {
 		return seller;
 		
 	}
-	
+	@Override
+	public Seller buildSellerEmpty() throws ErrorConnectionException, AlertDriver {
+		return new JDBCSeller();
+	}
+	@Override
+	public User buildUserEmpty() throws ErrorConnectionException, AlertDriver {
+		return new JDBCUser();
+	}
+
 }

@@ -33,6 +33,7 @@ public class JDBCSeller extends Seller{
 		
 		try {
 			ResultSet result = this.component.select("*", "seller_account", "id_account = '" + this.ID + "'");
+			System.out.println(result);
 			if (result.first()) {
 				this.nameShop = result.getString("nameShop");
 				this.description = result.getString("description");
@@ -48,7 +49,7 @@ public class JDBCSeller extends Seller{
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "Seller_account", "Id_account = '" + this.ID + "'");
+		ResultSet result = this.component.select("*", "seller_account", "Id_account = '" + this.ID + "'");
 		return result != null && result.first();
 	}
 
@@ -56,7 +57,7 @@ public class JDBCSeller extends Seller{
 	@Override
 	public void insert() throws Exception {
 		if(!this.isExisting()) {
-			this.component.insert("Seller_account", "'" + this.ID + "', '" + this.nameShop + "', '"  + this.description + "', '"  + this.siret + "', '"  + this.website + "'");
+			this.component.insert("Seller_account(id_account,nmmeshop,siret,website,description)", "'" + this.IDaccount + "', '" + this.nameShop + "', '"  + this.description + "', '"  + this.siret + "', '"  + this.website + "'");
 		} else {
 			throw new AlreadyExistTuple("Seller");
 		}

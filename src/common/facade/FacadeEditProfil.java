@@ -22,38 +22,38 @@ public void createSeller(int ID, String nameShop, String description, String sir
 		
 	}
 	
-	
-	
 	public String getNameShop() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver{
 		
-		return this.handler.getNameShop();
-		}
+		this.handler.createSellerId(IDaccount);
+		return this.handler.getNameShop();		}
 	public void SetNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
-		
-	                  this.handler.SetNameShop(name);     
+				this.handler.createSellerId(IDaccount);
+	             this.handler.setNameShop(name);     
 	}
 	public String getSiret() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
-		
+		this.handler.createSellerId(IDaccount);
 		return this.handler.getSiret();
 		}	
 	public void SetSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
-		
-		this.handler.SetSiert(siret);
+		this.handler.createSellerId(IDaccount);
+		this.handler.setSiert(siret);
 	}
 	public String getWebsite() throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
-		
+		this.handler.createSellerId(IDaccount);
 		return this.handler.getWebsite();
 		}
 		
 	public void setWebsite(String site) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
-		
+		this.handler.createSellerId(IDaccount);
 		this.handler.settWebsite(site);
 		}
 	public String getDescription () throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+		this.handler.createSellerId(IDaccount);
 		return this.handler.getDescription();
 	}
 	public void setDescription(String desc) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
-		    this.handler.setDescription(desc);
+		this.handler.createSellerId(IDaccount);    
+		this.handler.setDescription(desc);
 		}
 	public void Validate() throws Exception{
 		

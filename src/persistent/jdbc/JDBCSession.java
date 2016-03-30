@@ -36,14 +36,14 @@ public class JDBCSession extends Session {
 	@Override
 	public Boolean isExisting() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "Session",
-				new SQLCondition(Arrays.asList("ID"), Arrays.asList(Integer.toString(this.ID))));
+				new SQLCondition(Arrays.asList("id_account"), Arrays.asList(Integer.toString(this.ID))));
 		return result != null && result.first();
 	}
 
 	@Override
 	public Boolean hasChanged() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "Session",
-				new SQLCondition(Arrays.asList("ID", "token"), Arrays.asList(Integer.toString(this.ID), this.token)));
+				new SQLCondition(Arrays.asList("id_account", "token"), Arrays.asList(Integer.toString(this.ID), this.token)));
 		return result != null && result.first();
 	}
 
@@ -65,11 +65,11 @@ public class JDBCSession extends Session {
 				} else {
 					result.first();
 				}
-				this.ID = result.getInt("ID");
+				this.ID = result.getInt("id_account");
 				this.token = result.getString("token");
 
 				result = this.component.select(Arrays.asList("login"), "Account",
-						new SQLCondition(Arrays.asList("id"), Arrays.asList(Integer.toString(this.ID))));
+						new SQLCondition(Arrays.asList("id_account"), Arrays.asList(Integer.toString(this.ID))));
 				if (result.first()) {
 					this.login = result.getString("login");
 				}
@@ -112,7 +112,7 @@ public class JDBCSession extends Session {
 	@Override
 	public void update() throws Exception {
 		if (this.isExisting()) {
-			this.component.update("(token, ID) = (" + this.token + "," + this.ID + ")", "Session", new SQLCondition());
+			this.component.update("(token, id_account) = (" + this.token + "," + this.ID + ")", "Session", new SQLCondition());
 		} else {
 			throw new NotExistingTuple("Session");
 		}
@@ -122,7 +122,7 @@ public class JDBCSession extends Session {
 	public void delete() throws Exception {
 		if (this.isExisting()) {
 			this.component.delete("Session",
-					new SQLCondition(Arrays.asList("ID"), Arrays.asList(Integer.toString(this.ID))));
+					new SQLCondition(Arrays.asList("id_account"), Arrays.asList(Integer.toString(this.ID))));
 		} else {
 			throw new NotExistingTuple("Session");
 		}

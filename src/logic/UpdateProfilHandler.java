@@ -22,15 +22,20 @@ public class UpdateProfilHandler {
 		
 		this.seller = ProfilFactory.buildSeller( ID, nameShop, description, siret, website);
 	}
+	public void createSellerId(int ID) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
+		
+		this.seller = ProfilFactory.buildSeller(ID);
+	}
+	
 	
 	public String getNameShop( ) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
 		
-		return this.seller.getNameShop();
+		return  this.seller.getNameShop();
 	}
 	
 	
 
-	public void SetNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+	public void setNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
 	
 		this.seller.setNameShop(name);
 	}
@@ -44,7 +49,7 @@ public class UpdateProfilHandler {
 		
 		
 		
-	public void SetSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+	public void setSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
 		
 		this.seller.setSiret(siret);
 	}
