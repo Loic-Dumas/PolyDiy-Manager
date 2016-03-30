@@ -74,7 +74,7 @@ public class CartUI extends AbstractUI {
 		for(Iterator<String> i = this.facadeList.getListIDCart().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
 		    ProductWishList product = this.facadeList.createAndGetCart(IDUser).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice()}; 
+		    Object[] newLine = {product.getName() , product.getQuantity() , "" + product.getUnitPrice() + " €"}; 
 			data[j] = newLine;
 			j ++;
 		}
