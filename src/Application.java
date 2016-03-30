@@ -50,7 +50,7 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
-	public void addUI(String ui) //ajouter un case pour chaque UI
+	public void addUI(String ui, String position) throws Exception //ajouter un case pour chaque UI
 	{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
@@ -66,11 +66,15 @@ public class Application extends JFrame implements Observer{
 		case "createAccount":
 			this.panels.put(ui, factory.buildCreateAccountUI());
 			break;
-		case "updateAccount":
-			this.panels.put(ui, factory.buildModifyIdentityUI(this.token)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+		case "yourAccount":
+			this.panels.put(ui, factory.buildModifyIdentityUI_welcome(this.session)); //appelle la fonction buildModifyIdentityUI_welcome de la classe FactoryUI
+			break;
+		case "updateInfo":
+//beug ici
+			this.panels.put(ui, factory.buildModifyIdentityUI(this.session)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
 			break;
 		case "btReturn":
-			this.panels.put(ui, factory.buildLogoutUI(this.token)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
+			this.panels.put(ui, factory.buildLogoutUI(this.session)); //appelle la fonction buildModifyIdentityUI de la classe FactoryUI
 			break;
 		default:
 			break;
@@ -82,29 +86,34 @@ public class Application extends JFrame implements Observer{
 
 	@Override
 	//cette fonction sert à gérer les UI, on ajoute un case pour chaque choix
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg){
+		try {
 		if(arg instanceof String) {
 			switch((String)arg) {
 			case "login":
 				LoginUI login = (LoginUI)this.panels.get("login");
 				this.session = login.getSession();
 				this.clearUI();
-				this.addUI("logout");
+				this.addUI("logout", BorderLayout.CENTER);
 				break;
 			case "logout":
 				this.session = null;
 				this.clearUI();
-				this.addUI("login");
-				this.addUI("createAccount");
-				this.addUI("advertisement");
+				this.addUI("login",BorderLayout.CENTER);
+				this.addUI("createAccount",BorderLayout.EAST);
+				this.addUI("advertisement",BorderLayout.SOUTH);
 				break;
-			case "updateAccount":
-				this.panels.remove("logout");
-				this.addUI("updateAccount"); //appelle la fonction addUI ci-dessus
+			case "updateInfo":
+				this.clearUI();
+				this.addUI("updateInfo",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
+				break;
+			case "yourAccount":
+				this.clearUI();
+				this.addUI("yourAccount",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
 				break;
 			case "btReturn":
-				this.panels.remove("updateAccount");
-				this.addUI("logout"); //appelle la fonction addUI ci-dessus
+				this.clearUI();
+				this.addUI("logout",BorderLayout.CENTER); //appelle la fonction addUI ci-dessus
 				break;
 			default:
 				System.err.println("problème de cas");
@@ -115,7 +124,11 @@ public class Application extends JFrame implements Observer{
 		} else {
 			System.err.println("Problème d'observable");
 		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
+		
 	
 	private void endSession() throws Exception {
 		if (this.session != null) {

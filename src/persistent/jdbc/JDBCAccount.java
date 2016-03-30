@@ -118,4 +118,9 @@ public class JDBCAccount extends Account {
 			throw new NotExistingTuple("Account");
 		}
 	}
+	
+	//fuction to build an accout with a Session
+	
+	
+	
 }

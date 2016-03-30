@@ -11,7 +11,7 @@ import graphic.engine.AbstractUI;
 import persistent.Session;
 
 public class LogoutUI extends AbstractUI {
-	private JButton updateAccount = new JButton();
+	private JButton yourAccount = new JButton();
 	private JButton logout = new JButton();
 	private Session session = null;
 	
@@ -29,28 +29,26 @@ public class LogoutUI extends AbstractUI {
 		this.logout.setText("Logout");
 		this.logout.setBounds(146, 147, 89, 23);
 		this.panel.add(logout);
-		this.updateAccount.setText("Update your account");
-		this.updateAccount.setBounds(146, 147, 89, 23);
-		this.panel.add(updateAccount);
+		this.yourAccount.setText("Update your account");
+		this.yourAccount.setBounds(230, 147, 89, 23);
+		this.panel.add(yourAccount);
 		
 		this.logout.addActionListener(this);
-		this.updateAccount.addActionListener(this);
+		this.yourAccount.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
-		//FacadeModifyAccount facade2 = new FacadeModifyAccount();
-				try {
-			
-			if(arg0.getSource() == logout){
+		try {
+				if(arg0.getSource() == logout){
 				facade.logout(this.session.getID());
 				this.setChanged();
 				this.notifyObservers("logout");
 			}
-			if(arg0.getSource() == updateAccount){
+			if(arg0.getSource() == yourAccount){
 				this.setChanged();
-				this.notifyObservers("updateAccount");
+				this.notifyObservers("yourAccount");
 			}
 
 		} catch (Exception e) {

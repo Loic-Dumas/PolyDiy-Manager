@@ -50,8 +50,6 @@ public class JDBConnection {
 		if (JDBConnection.instance == null) {
 			try {
 				JDBConnection.instance = new JDBConnection("pzloelfnjglnhj", "O3SE1wvyhy5mG0sHpuPnuQV-fA", "jdbc:postgresql://ec2-107-22-246-250.compute-1.amazonaws.com:5432/dcpgi43j5ks0gi?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
-			} catch (SQLException e) {
-				throw new ErrorConnectionException();
 			} catch (Exception e) {
 				System.err.println("Driver not found.");
 				e.printStackTrace();

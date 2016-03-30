@@ -1,18 +1,18 @@
 package graphic.ui;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import common.facade.FacadeModifyAccount;
-import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
+import persistent.Session;
 
 public class ModifyIdentityUI_test extends AbstractUI{
 	
@@ -20,20 +20,24 @@ public class ModifyIdentityUI_test extends AbstractUI{
 	private JTextField login;
 	private JTextField lastName;
 	private JTextField firstName;
-	private String token = null;
+	@SuppressWarnings("unused")
+	private Session session = null;
 	private JButton btReturn = new JButton();
 	private JButton btValidate = new JButton();
 
 
 	/**
 	 * Create the panel.
+	 * @throws Exception 
 	 */
-	public ModifyIdentityUI_test(String token) {
+	public ModifyIdentityUI_test(Session session) throws Exception {
+		this.session = session;
+		
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		String textLogin = facade.getLogin(accountID);
+		String textLogin = facade.getLogin(session);
+		String textLastName = facade.getLastName(session);
+		String textFirstName = facade.getFirstName(session);
 		
-		
-		this.token = token;
 		this.panel.setLayout(null);
 		//modify the background colors
 		this.panel.setForeground(UIManager.getColor("Tree.selectionBorderColor"));
@@ -59,9 +63,9 @@ public class ModifyIdentityUI_test extends AbstractUI{
 		JButton btValidate = new JButton("Validate");
 		
 		//informations we have in the DB
-		JLabel dblastName =new JLabel ("YourlastName");
-		JLabel dbfirstName =new JLabel ("YourfirstName");
-		JLabel dblogin =new JLabel ("Yourlogin");
+		JLabel dblastName =new JLabel (textLastName);
+		JLabel dbfirstName =new JLabel (textFirstName);
+		JLabel dblogin =new JLabel (textLogin);
 				
 		//on créé le groupLayout
 		GroupLayout groupLayout = new GroupLayout(this.panel);
@@ -120,7 +124,7 @@ public class ModifyIdentityUI_test extends AbstractUI{
 			if(arg0.getSource() == btValidate){
 				//A MODIFIER 
 				int accountID=1; 
-				facade.updateAccount(accountID, this.login.getText(), this.firstName.getText(), this.lastName.getText());
+				//facade.updateAccount(accountID, this.login.getText(), this.firstName.getText(), this.lastName.getText());
 				this.setChanged();
 				this.notifyObservers("Validate");
 			}
