@@ -36,7 +36,6 @@ public class JDBCSetProduct extends SetProduct {
 
 	public JDBCSetProduct() throws ErrorConnectionException, AlertDriver {
 		super(-1);
-		System.out.println("Je suis dans le JDBCSetProduct");
 		this.component = new JDBCComponent();
 		ResultSet result = this.component.select("*", "product p, product_category c", "c.id_category = p.id_category");
 		try {
