@@ -28,9 +28,9 @@ public class Application extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	
 	Map<String, AbstractUI> panels = new HashMap<String, AbstractUI>();
-	
+
 	UIMessage message = new UIMessage();
-	
+
 	public Application()
 	{
 		super();
@@ -89,7 +89,12 @@ public class Application extends JFrame implements Observer{
 			case "account":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
-				this.addUI("account", BorderLayout.CENTER);
+				this.addUI("account_welcome", BorderLayout.CENTER);
+				break;
+			case "updateAccount":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("updateAccount", BorderLayout.CENTER);
 				break;
 			case "user":
 				this.clearUI();

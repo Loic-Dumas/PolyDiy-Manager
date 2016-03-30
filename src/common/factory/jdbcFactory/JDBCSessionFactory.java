@@ -20,6 +20,13 @@ public class JDBCSessionFactory extends SessionFactory {
 	}
 
 	@Override
+	public Account buildAccountWithID(int ID) throws Exception {
+		Account account = new JDBCAccount();
+		account.loadFromKeys(Arrays.asList("id_account"),Arrays.asList(Integer.toString(ID)));;
+		return account;
+	}
+	
+	@Override
 	public Account buildAccount(String login, String password, String email, String firstName, String lastName) throws ErrorConnectionException, AlertDriver {
 		Account account = new JDBCAccount();
 		account.setLogin(login);
