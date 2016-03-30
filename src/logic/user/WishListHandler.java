@@ -1,6 +1,5 @@
-package logic;
+package logic.user;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import common.exception.AlertDriver;
@@ -137,26 +136,11 @@ public class WishListHandler {
 	 * @param IDProduct - int
 	 */
 	public void removeProductToWishList(int IDProduct) {
-		if (this.wishList == null) {
-			System.err.println("No wishlist initialized.");
-		}
-		String stringIDProduct = String.valueOf(IDProduct);
-		
-		//first we remove the product in the persistent layer.
 		try {
-			this.wishList.getElementByKey(stringIDProduct).delete();
-		} catch (Exception e1) {
-			// TODO gerer les exceptions de ce remove
-			e1.printStackTrace();
-		}
-		
-		this.wishList.removeElementByKey(stringIDProduct);
-		
-		//now we update the wishList
-		try {
-			this.wishList.update();
+			System.out.println("-------------" + this.wishList.getElementByKey(String.valueOf(IDProduct)).getName());
+			this.wishList.getElementByKey(String.valueOf(IDProduct)).delete();
 		} catch (Exception e) {
-			// TODO gerer les exceptions de ce remove
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -249,6 +233,21 @@ public class WishListHandler {
 		}
 		return this.wishList.getLabel();
 	}
+	
+
+	/**
+	 * Return The id of the wishList
+	 * 
+	 * @author loicd_000
+	 * @return The id of the wishList
+	 * @throws NoWishListException 
+	 */
+	public int getIDWishList() {
+		if (this.wishList == null) {
+			System.err.println("No wishlist initialized.");
+		}
+		return this.wishList.getID();
+	}
 
 	
 	/**
@@ -261,14 +260,8 @@ public class WishListHandler {
 		if (this.wishList == null) {
 			System.err.println("No wishlist initialized.");
 		}
-		float totalPrice = 0;
 		
-		for(Iterator<String> i = this.wishList.getAllKeys().iterator() ; i.hasNext(); ) {
-		    String key = i.next();
-		    totalPrice += this.wishList.getElementByKey(key).getUnitPrice() * this.wishList.getElementByKey(key).getQuantity() ;
-		}
-		
-		return totalPrice;
+		return this.wishList.getTotalPriceWishList();
 	}
 	
 	
@@ -302,3 +295,4 @@ public class WishListHandler {
 	}
 	
 }
+	

@@ -1,10 +1,12 @@
-package logic;
+package logic.user;
 
 import java.util.Set;
 
 import common.exception.AlertDriver;
+import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NoWishListException;
+import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
 import common.factory.jdbcFactory.JDBCListFactory;
 import persistent.list.SetWishList;
@@ -39,6 +41,27 @@ public class SetWishListHandler {
 		}
 
 		return this.setWishList;
+	}
+	
+	
+	/**
+	 * 
+	 * 
+	 * @author loicd_000
+	 * @param IDUser
+	 * @param label
+	 * @throws wishListAlreadyExistException 
+	 */
+	public void createWishList(int IDUser, String label) throws wishListAlreadyExistException {
+		this.setWishList.addElement("0", listFactory.buildWishList(IDUser, label));
+		
+		try {
+			this.setWishList.getElementByKey("0").insert();
+		} catch (AlreadyExistTuple e) {
+			throw new  wishListAlreadyExistException(label) ;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -98,4 +121,25 @@ public class SetWishListHandler {
 	}
 	
 
+
+	/**
+	 * Delete all elements of the IDwishlist in parameter
+	 * @param iDWishList - the wishliste to delete
+	 * @throws Exception 
+	 */
+	
+	public void deleteWishList(int IDWishList) throws Exception {
+		this.setWishList.getElementByKey(String.valueOf(IDWishList)).delete();
+	}
+
+
+	/**
+	 * the number of products in the wishlist
+	 * @param IDWishList
+	 * @return the number of products in the wishlist
+	 */
+	public int getNumberOfProductsInWishList(int IDWishList) {
+		return this.setWishList.getElementByKey(String.valueOf(IDWishList)).getNumberOfProductInWishList();
+	}
+	
 }

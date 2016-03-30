@@ -25,37 +25,31 @@ public class NavBarUI extends AbstractUI{
 		
 //		this.panel.setLayout(null);
 		
-		this.userLabel.setText("User : " + session.getID());
-		this.userLabel.setBounds(2 , 2, 145 , 23);
+		this.userLabel.setText("Welcome " + session.getLogin());
 		this.panel.add(userLabel);
 
 		// account button
 		this.account.setText("Account");
-		this.account.setBounds(150, 2, 145, 23);
 		this.panel.add(account);
 		this.account.addActionListener(this);
 
 		// user button
 		this.user.setText("User");
-		this.user.setBounds(300, 2, 145, 23);
 		this.panel.add(user);
 		this.user.addActionListener(this);
 
 		// Seller button
 		this.seller.setText("Seller");
-		this.seller.setBounds(450, 2, 145, 23);
 		this.panel.add(seller);
 		this.seller.addActionListener(this);
 
 		// Admin button
 		this.admin.setText("Admin");
-		this.admin.setBounds(600, 2, 145, 23);
 		this.panel.add(admin);
 		this.admin.addActionListener(this);
 
 		// logout button
 		this.logout.setText("Logout");
-		this.logout.setBounds(900, 2, 145, 23);
 		this.panel.add(logout);
 		this.logout.addActionListener(this);		
 	}

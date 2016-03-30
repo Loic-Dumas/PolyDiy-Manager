@@ -60,6 +60,7 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		query += ";";
 		Boolean result = false;
 		try {
+			System.out.println(query);
 			result = this.stmt.execute(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,6 +80,7 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 	public void delete(String objectIn, SQLCondition conditionIn){
 		String query = "DELETE FROM " + objectIn + conditionIn.get() + ";";
 		try {
+			System.out.println(query);
 			this.stmt.execute(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,6 +91,7 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		String query = "UPDATE " + objectIn + " SET " + newValueIn + conditionIn.get();
 		query += ";";
 		try {
+			System.out.println(query);
 			this.stmt.execute(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,6 +101,7 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 	public void insert(String objectIn, String valuesIn) {
 		String query = "INSERT INTO " + objectIn + " VALUES(" + valuesIn + ");";
 		try {
+			System.out.println(query);
 			this.stmt.execute(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
