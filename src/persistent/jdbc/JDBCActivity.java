@@ -73,7 +73,7 @@ public class JDBCActivity extends Activity {
 	public void insert() throws Exception {
 		if (!this.isExisting()) {
 			this.component.insert("activity_category(title, description, deadline, id_activity_category, id_user)", 
-									"'" + this.title + "', '" + this.description + "', '" + this.deadline + "'"
+									"'" + this.title + "', '" + this.description + "', '" + this.deadline + "','"
 									+ this.idActivityCategory + "','" + this.idUser + "'");
 		} else {
 			throw new AlreadyExistTuple("activity");
