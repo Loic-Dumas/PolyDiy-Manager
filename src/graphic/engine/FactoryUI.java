@@ -13,6 +13,7 @@ import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
+import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
@@ -30,6 +31,7 @@ public class FactoryUI {
 		this.ui.put("navBar", NavBarUI.class);
 		this.ui.put("account", AccountUI.class);
 		this.ui.put("user", UserUI.class);
+		this.ui.put("PDMShop", PDMShopUI.class);
 		this.ui.put("seller", SellerUI.class);
 		this.ui.put("admin", AdminUI.class);
 		this.ui.put("wishList", WishListUI.class);

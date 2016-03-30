@@ -146,6 +146,8 @@ public class WishListsUI extends AbstractUI {
 	 *            - int : IDWishList to delete
 	 */
 	public void deteteWishListActionPerformed(int IDWishList) {
+		this.communication.shareElement("IDWishList", IDWishList);
+		
 		try {
 			this.facadeList.deleteWishList(IDWishList);
 		} catch (Exception e1) {
