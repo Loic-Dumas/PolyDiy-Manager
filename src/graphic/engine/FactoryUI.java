@@ -15,7 +15,6 @@ import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
 import graphic.ui.user.list.WishListsUI;
-import persistent.Session;
 
 public class FactoryUI {
 	@SuppressWarnings("rawtypes")
@@ -37,10 +36,10 @@ public class FactoryUI {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public AbstractUI build(String name, Session session) {
+	public AbstractUI build(String name, UIMessage message) {
 		try {
 			if(this.ui.containsKey(name)) {
-				return (AbstractUI)this.ui.get(name).getConstructor(Session.class).newInstance(session);
+				return (AbstractUI)this.ui.get(name).getConstructor(UIMessage.class).newInstance(message);
 			} else {
 				throw new Exception("Unknow ui " + name + " !");
 			}

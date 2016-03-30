@@ -12,17 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class UserUI extends AbstractUI {
 	private JButton myList = new JButton();
 	private JButton shop = new JButton();
     private JPanel journalPanel = new JPanel(); 
 	
-	private Session session = null;
-	
-	public UserUI(Session session) {
-		this.session = session;
+	public UserUI(UIMessage communication) {
+		super(communication);
 		
 		this.panel.setLayout(null);
 

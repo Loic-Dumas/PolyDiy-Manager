@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class NavBarUI extends AbstractUI{
 	private JButton account = new JButton();
@@ -18,14 +18,12 @@ public class NavBarUI extends AbstractUI{
 	private JButton logout = new JButton();
 	private JLabel userLabel = new JLabel();
 	
-	private Session session = null;
-	
-	public NavBarUI(Session session) {
-		this.session = session;
+	public NavBarUI(UIMessage communication) {
+		super(communication);
 		
 //		this.panel.setLayout(null);
 		
-		this.userLabel.setText("Welcome " + session.getLogin());
+		this.userLabel.setText("Welcome " + (int)this.communication.getElement("id_account"));
 		this.panel.add(userLabel);
 
 		// account button
@@ -61,7 +59,7 @@ public class NavBarUI extends AbstractUI{
 		
 		if (action.equals("logout")) {
 			try {
-				facade.logout(this.session.getID());
+				facade.logout((int)this.communication.getElement("id_account"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
