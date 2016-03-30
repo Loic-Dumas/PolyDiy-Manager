@@ -70,7 +70,7 @@ public class WishListUI extends AbstractUI {
 		for(Iterator<String> i = this.facadeList.getListIDProduct().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
 		    ProductWishList product = this.facadeList.createAndGetWishList(IDWishList).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice(), "Remove product", product.getID()}; 
+		    Object[] newLine = {product.getName() , product.getQuantity() , "" +product.getUnitPrice() + " €", "Remove product", product.getID()}; 
 			data[j] = newLine;
 			j ++;
 		}
@@ -116,7 +116,7 @@ public class WishListUI extends AbstractUI {
 		try {
 			this.communication.shareElement("id_wishlist", this.facadeList.getIDWishList());
 			this.setChanged();
-			this.notifyObservers("wishlist");
+			this.notifyObservers("wishList");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}

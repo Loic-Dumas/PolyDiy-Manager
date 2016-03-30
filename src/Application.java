@@ -120,6 +120,8 @@ public class Application extends JFrame implements Observer{
 	public void update(Observable o, Object arg) {
 		if(arg instanceof UIMessage) {
 			this.message = (UIMessage)arg;
+
+			
 			switch(message.getTransition()) {
 			case "login":
 				this.clearUI();
@@ -127,7 +129,7 @@ public class Application extends JFrame implements Observer{
 				this.addUI("account", BorderLayout.CENTER);
 				break;
 			case "logout":
-				this.message = null;
+				this.message = new UIMessage();
 				this.clearUI();
 				this.addUI("login", BorderLayout.CENTER);
 				this.addUI("createAccount", BorderLayout.EAST);
@@ -167,10 +169,20 @@ public class Application extends JFrame implements Observer{
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("logout", BorderLayout.CENTER);
 				break;
+			case "PDMShop":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("PDMShop", BorderLayout.CENTER);
+				break;
 			case "wishLists":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("wishLists", BorderLayout.CENTER);
+				break;
+			case "wishList":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("wishList", BorderLayout.CENTER);
 				break;
 			case "cart":
 				this.clearUI();
