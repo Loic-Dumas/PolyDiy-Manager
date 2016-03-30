@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import common.facade.FacadeCreateAccount;
 import graphic.engine.AbstractUI;
+import persistent.Session;
 
 public class CreateAccountUI extends AbstractUI {
 	JTextField login = new JTextField();
@@ -19,7 +20,7 @@ public class CreateAccountUI extends AbstractUI {
 	JTextField lastName = new JTextField();
 	JButton register = new JButton();
 	
-	public CreateAccountUI() {
+	public CreateAccountUI(Session session) {
 		super();
 		
 		this.login.setPreferredSize(new Dimension(150, 30));

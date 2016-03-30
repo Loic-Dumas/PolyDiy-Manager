@@ -57,45 +57,21 @@ public class NavBarUI extends AbstractUI{
 		this.logout.setText("Logout");
 		this.logout.setBounds(900, 2, 145, 23);
 		this.panel.add(logout);
-		this.logout.addActionListener(this);
-
-		
+		this.logout.addActionListener(this);		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeSession facade = new FacadeSession();
-		String action = "";
+		String action = arg0.getActionCommand().toLowerCase();
 		
-		if (arg0.getActionCommand().equals("Account")) {
-			action = "account";
-		} 
-
-		
-		else if (arg0.getActionCommand().equals("User")) {
-			action = "user";
-		} 
-
-		
-		else if (arg0.getActionCommand().equals("Seller")) {
-			action = "seller";
-		} 
-
-		
-		else if (arg0.getActionCommand().equals("Admin")) {
-			action = "admin";
-		} 
-
-		
-		else if (arg0.getActionCommand().equals("Logout")) {
+		if (action.equals("logout")) {
 			try {
 				facade.logout(this.session.getID());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			action = "logout";
 		} 
-		
 		
 		// we have an action, so we notify observers.
 		if (!action.equals("")) {

@@ -32,7 +32,7 @@ public class LoginUI extends AbstractUI{
 	
 	private Session session = null;
 	
-	public LoginUI() {
+	public LoginUI(Session session) {
 		this.panel.setLayout(null);
 		// label welcome
 		this.lblWelcome.setText("PolyDIY Manager");

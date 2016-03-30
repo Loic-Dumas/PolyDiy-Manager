@@ -50,7 +50,16 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
-	public void addUI(String ui, String position)
+	public void addUI(String ui, String position) {
+		System.err.println(ui);
+		FactoryUI factory = new FactoryUI();
+		this.panels.put(ui, factory.build(ui, this.session));
+		this.panels.get(ui).addObserver(this);
+		this.add(this.panels.get(ui).getPanel(), position);
+		this.setVisible(true);
+	}
+	
+	/*public void addUI(String ui, String position)
 	{
 		FactoryUI factory = new FactoryUI();
 		switch(ui) {
@@ -100,7 +109,7 @@ public class Application extends JFrame implements Observer{
 		this.panels.get(ui).addObserver(this);
 		this.add(this.panels.get(ui).getPanel(), position);
 		this.setVisible(true);
-	}
+	}*/
 
 	@Override
 	public void update(Observable o, Object arg) {
