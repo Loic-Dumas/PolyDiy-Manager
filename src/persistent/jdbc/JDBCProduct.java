@@ -3,12 +3,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
-import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
-import common.exception.UnknownIDProductException;
 import common.exception.loadFromIntKeyException;
 import common.exception.loadFromStringKeyException;
 import common.jdbc.JDBCComponent;

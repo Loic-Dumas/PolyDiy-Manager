@@ -2,8 +2,6 @@ package common.facade;
 
 import java.util.Set;
 
-import common.exception.AlertDriver;
-import common.exception.ErrorConnectionException;
 import logic.PDMShopHandler;
 import persistent.Product;
 import persistent.SetProduct;
