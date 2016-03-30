@@ -1,8 +1,8 @@
-package common.facade;
+package common.facade.shop;
 
 import java.util.Set;
 
-import logic.PDMShopHandler;
+import logic.user.PDMShopHandler;
 import persistent.Product;
 import persistent.SetProduct;
 
