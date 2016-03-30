@@ -1,6 +1,5 @@
 package common.facade;
 
-import common.exception.ErrorConnectionException;
 import common.exception.ErrorPasswordException;
 import logic.LoginChecker;
 import logic.SessionHandler;

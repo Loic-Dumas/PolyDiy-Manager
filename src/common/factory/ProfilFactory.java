@@ -5,10 +5,10 @@ package common.factory;
  * @since 2016-03-21
  */
 
+import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
 import persistent.Seller;
-import common.exception.AlertDriver;
 
 public abstract class ProfilFactory {
 	

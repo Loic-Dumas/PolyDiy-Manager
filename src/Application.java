@@ -145,7 +145,7 @@ public class Application extends JFrame implements Observer{
 			case "account":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
-				this.addUI("account", BorderLayout.CENTER);
+				this.addUI("account_welcome", BorderLayout.CENTER);
 				break;
 			case "user":
 				this.clearUI();

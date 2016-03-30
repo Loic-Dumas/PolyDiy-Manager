@@ -1,19 +1,16 @@
-package graphic.ui;
+package graphic.ui.account;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
-public class ModifyIdentityUI_welcome extends AbstractUI {
-	@SuppressWarnings("unused")
-	private Session session = null;
+public class UpdateAccount_welcomeUI extends AbstractUI {
 	private JButton updateInfo = new JButton();
 	
 	/**
@@ -21,14 +18,14 @@ public class ModifyIdentityUI_welcome extends AbstractUI {
 	 * @throws Exception 
 	 */
 	
-	public ModifyIdentityUI_welcome(Session session) throws Exception {
-		super();
-		this.session = session;
+	public UpdateAccount_welcomeUI(UIMessage communication) throws Exception {
+		super(communication);
 		this.panel.setLayout(null);
+		int ID = (int) this.communication.getElement("ID_user");
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		String textLogin = facade.getLogin(session);
-		String textLastName = facade.getLastName(session);
-		String textFirstName = facade.getFirstName(session);
+		String textLogin = facade.getLogin(ID);
+		String textLastName = facade.getLastName(ID);
+		String textFirstName = facade.getFirstName(ID);
 		
 		JLabel labelWelcome = new JLabel("Welcome ");
 		labelWelcome.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));

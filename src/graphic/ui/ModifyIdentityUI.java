@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class ModifyIdentityUI extends AbstractUI {
 	private JTextField tfLogin;
@@ -18,26 +18,26 @@ public class ModifyIdentityUI extends AbstractUI {
 	private JTextField tfAddressRoad;
 	private JTextField tfAddressCity;
 	private JTextField tfAddressPostalCode;
-	@SuppressWarnings("unused")
-	private Session session = null;
 	private JButton btCancel = new JButton();
 	private JButton btValidate = new JButton();
-
+	private int ID;
+	
 	/**
 	 * Create the panel ModifyIdentityUI.
 	 * Here you can modify your login, last name, first name
 	 * and your address.
 	 */
 	
-	public ModifyIdentityUI(Session session) throws Exception {
-		super();
-		this.session = session;
-		this.panel.setLayout(null);
+	public ModifyIdentityUI(UIMessage communication) throws Exception {
+
 		
+		super(communication);
+		this.panel.setLayout(null);
+		ID = (int) this.communication.getElement("ID_account");
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		String textLogin = facade.getLogin(session);
-		String textLastName = facade.getLastName(session);
-		String textFirstName = facade.getFirstName(session);
+		String textLogin = facade.getLogin(ID);
+		String textLastName = facade.getLastName(ID);
+		String textFirstName = facade.getFirstName(ID);
 		/* String textAddressCity = facade.getFirstName(session);
 		 * String textAddressRoad = facade.getFirstName(session);
 		 * String textFirstName = facade.getFirstName(session);

@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
-import persistent.Session;
+import graphic.engine.UIMessage;
 
 public class ModifyIdentityUI_test extends AbstractUI{
 	
@@ -20,23 +20,22 @@ public class ModifyIdentityUI_test extends AbstractUI{
 	private JTextField login;
 	private JTextField lastName;
 	private JTextField firstName;
-	@SuppressWarnings("unused")
-	private Session session = null;
 	private JButton btReturn = new JButton();
 	private JButton btValidate = new JButton();
-
+	private int ID;
 
 	/**
 	 * Create the panel.
 	 * @throws Exception 
 	 */
-	public ModifyIdentityUI_test(Session session) throws Exception {
-		this.session = session;
-		
+	public ModifyIdentityUI_test(UIMessage communication) throws Exception {
+		super(communication);
+		this.panel.setLayout(null);
+		ID = (int) this.communication.getElement("ID");
 		FacadeModifyAccount facade = new FacadeModifyAccount();
-		String textLogin = facade.getLogin(session);
-		String textLastName = facade.getLastName(session);
-		String textFirstName = facade.getFirstName(session);
+		String textLogin = facade.getLogin(ID);
+		String textLastName = facade.getLastName(ID);
+		String textFirstName = facade.getFirstName(ID);
 		
 		this.panel.setLayout(null);
 		//modify the background colors

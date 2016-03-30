@@ -22,7 +22,7 @@ public class JDBCSessionFactory extends SessionFactory {
 	@Override
 	public Account buildAccountWithID(int ID) throws Exception {
 		Account account = new JDBCAccount();
-		account.loadFromIntKey("ID", ID);;
+		account.loadFromKeys(Arrays.asList("ID"),Arrays.asList(Integer.toString(ID)));;
 		return account;
 	}
 	

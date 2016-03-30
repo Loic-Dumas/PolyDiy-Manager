@@ -11,6 +11,7 @@ import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
 import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
+import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
 import graphic.ui.user.UserUI;
@@ -37,6 +38,7 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("edit", EditSellerUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
+		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -1,9 +1,7 @@
 package logic;
 
-import common.factory.ModifyAccountFactory;
 import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
-import persistent.Session;
 
 public class ModifyAccountHandler {
 
@@ -24,30 +22,27 @@ public class ModifyAccountHandler {
 
 	
 	/**
-	 * @param session
+	 * @param ID
 	 * @return 
 	 * @throws Exception
 	 */
-	public String getLogin(Session session) throws Exception{
+	public String getLogin(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
-		int ident = session.getID();
-		Account account = factory.buildAccountWithID(ident);
+		Account account = factory.buildAccountWithID(ID);
 		String loginBD = account.getLogin();
 	return loginBD;
 	}
 	
-	public String getLastName(Session session) throws Exception{
+	public String getLastName(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
-		int ident = session.getID();
-		Account account = factory.buildAccountWithID(ident);
+		Account account = factory.buildAccountWithID(ID);
 		String lastNameBD = account.getLastName();
 	return lastNameBD;
 	}
 	
-	public String getFirstName(Session session) throws Exception{
+	public String getFirstName(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
-		int ident = session.getID();
-		Account account = factory.buildAccountWithID(ident);
+		Account account = factory.buildAccountWithID(ID);
 		String firstNameBD = account.getFirstName();
 	return firstNameBD;
 	}

@@ -1,7 +1,6 @@
 package common.facade;
 
 import logic.ModifyAccountHandler;
-import persistent.Session;
 
 
 /**
@@ -22,21 +21,21 @@ public class FacadeModifyAccount {
 		handler.update(accountID, updateLogin, updatefirstName, updatelastName);
 	}*/
 
-	public String getLogin(Session session) throws Exception{
+	public String getLogin(int ID) throws Exception{
 		ModifyAccountHandler handler = new ModifyAccountHandler();
-		String login = handler.getLogin(session); // récupérer le login : cf modifyAccountHandler
+		String login = handler.getLogin(ID); // récupérer le login : cf modifyAccountHandler
 		return login;
 	}
 	
-	public String getFirstName(Session session) throws Exception{
+	public String getFirstName(int ID) throws Exception{
 		ModifyAccountHandler handler = new ModifyAccountHandler();
-		String firstName = handler.getFirstName(session); // récupérer le first name : cf modifyAccountHandler
+		String firstName = handler.getFirstName(ID); // récupérer le first name : cf modifyAccountHandler
 		return firstName;
 	}
 	
-	public String getLastName(Session session) throws Exception{
+	public String getLastName(int ID) throws Exception{
 		ModifyAccountHandler handler = new ModifyAccountHandler();
-		String lastName = handler.getLastName(session); // récupérer le last name : cf modifyAccountHandler
+		String lastName = handler.getLastName(ID); // récupérer le last name : cf modifyAccountHandler
 		return lastName;
 	}
 	
