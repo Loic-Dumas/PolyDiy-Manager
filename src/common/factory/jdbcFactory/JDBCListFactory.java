@@ -7,15 +7,18 @@ package common.factory.jdbcFactory;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.exception.NoCartException;
 import common.exception.needHaveBothIDUserAndLabelException;
 import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
 import persistent.SetProduct;
 import persistent.jdbc.JDBCSetProduct;
 import persistent.jdbc.list.JDBCCart;
+import persistent.jdbc.list.JDBCSetInfoWishList;
 import persistent.jdbc.list.JDBCSetWishList;
 import persistent.jdbc.list.JDBCWishList;
 import persistent.list.Cart;
+import persistent.list.SetInfoWishList;
 import persistent.list.SetWishList;
 import persistent.list.WishList;
 
@@ -48,8 +51,13 @@ public class JDBCListFactory extends ListFactory{
 	}
 
 	@Override
-	public Cart buildCart(int IDWishList) throws ErrorConnectionException, AlertDriver {
-		return new JDBCCart(IDWishList);
+	public SetInfoWishList buildSetInfoWishList(int IDUser) throws  AlertDriver, ErrorConnectionException {
+		return new JDBCSetInfoWishList(IDUser);
+	}
+
+	@Override
+	public Cart buildCart(int IDUser) throws ErrorConnectionException, AlertDriver, NoCartException {
+		return new JDBCCart(IDUser);
 	}
 
 	@Override

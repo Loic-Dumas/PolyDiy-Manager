@@ -1,11 +1,10 @@
-package logic.user;
+package logic.user.list;
 
 import java.util.Set;
 
 import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
-import common.exception.NoWishListException;
 import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
 import common.factory.jdbcFactory.JDBCListFactory;

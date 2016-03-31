@@ -2,9 +2,7 @@ package common.facade.shop;
 
 import java.util.Set;
 
-import common.exception.AlertDriver;
-import common.exception.ErrorConnectionException;
-import logic.user.PDMShopHandler;
+import logic.user.list.PDMShopHandler;
 import persistent.Product;
 import persistent.SetProduct;
 

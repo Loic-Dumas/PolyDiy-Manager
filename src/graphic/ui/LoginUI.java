@@ -74,6 +74,7 @@ public class LoginUI extends AbstractUI{
 				this.session = facade.login(this.login.getText(), String.valueOf(this.password.getPassword()));
 				if(this.session != null) {
 					this.communication.shareElement("id_account", this.session.getID());
+					this.communication.shareElement("login", this.session.getLogin());
 					if(this.session.getIDUser() != -1) {
 						this.communication.shareElement("id_user", this.session.getIDUser());
 					}

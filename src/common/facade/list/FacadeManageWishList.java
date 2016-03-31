@@ -3,7 +3,7 @@ package common.facade.list;
 import java.util.Set;
 
 import common.exception.NoWishListException;
-import logic.user.WishListHandler;
+import logic.user.list.WishListHandler;
 import persistent.list.ProductWishList;
 import persistent.list.WishList;
 

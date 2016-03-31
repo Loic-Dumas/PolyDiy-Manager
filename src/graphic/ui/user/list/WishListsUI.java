@@ -89,12 +89,13 @@ public class WishListsUI extends AbstractUI {
 			WishList wishList = this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user")).getElementByKey(key);
 			Object[] newLine = { wishList.getLabel(), wishList.getID(), "Remove wish list",
 					this.facadeList.getNumberOfProductsInWishList(wishList.getID()) };
+			
 			data[j] = newLine;
 			j++;
 		}
 
 		// prepare the tablePanel
-		this.tablePanel.setBounds(2, 60, 500, 400);
+		this.tablePanel.setBounds(2, 60, 600, 400);
 		this.tablePanel.setLayout(new BorderLayout());
 		// prepare the JTable
 		TableModel dataModel = new DataModelSetWishList(data, title);

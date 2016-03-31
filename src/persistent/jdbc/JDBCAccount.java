@@ -76,6 +76,9 @@ public class JDBCAccount extends Account {
 					this.email = result.getString("email");
 					this.firstName = result.getString("first_name");
 					this.lastName = result.getString("last_name");
+					this.addressCity = result.getString("city");
+					this.addressPostal = result.getString("postal_code");
+					this.addressRoad = result.getString("road");
 				} else {
 					throw new NotExistingTuple("Account");
 				}

@@ -15,8 +15,8 @@ public class JDBCSetWishList extends SetWishList {
 	private JDBCComponent component = null;
 	ListFactory wishListFactory = new JDBCListFactory();
 
-	public JDBCSetWishList(int iDUser) throws ErrorConnectionException, AlertDriver {
-		super(iDUser);
+	public JDBCSetWishList(int idUser) throws ErrorConnectionException, AlertDriver {
+		super(idUser);
 		this.component = new JDBCComponent();
 
 		try {

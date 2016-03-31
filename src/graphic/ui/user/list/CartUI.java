@@ -2,6 +2,8 @@ package graphic.ui.user.list;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import javax.swing.JButton;
@@ -66,26 +68,65 @@ public class CartUI extends AbstractUI {
 		//Table : 
 		int nbOfRow = this.facadeList.createAndGetCart((int)this.communication.getElement("id_user")).count();
 		int nbOfColumn = 4; // the name, the quantity and the unitPrice
-		String[] title = { "Product Name", "Quantity", "Price"};
+		String[] title = { "Product Name", "Quantity", "Price", "ID", "Remove"};
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
 		
 		int j = 0;
 		for(Iterator<String> i = this.facadeList.getListIDCart().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
 		    ProductWishList product = this.facadeList.createAndGetCart((int)this.communication.getElement("id_user")).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice()}; 
+		    Object[] newLine = {product.getName() , product.getQuantity() , product.getUnitPrice(), product.getIDProduct(), "RemoveProduct"}; 
 			data[j] = newLine;
 			j ++;
 		}
 		
-	    this.tablePanel.setBounds(2, 60, 500, 400);
+	    this.tablePanel.setBounds(2, 60, 600, 400);
 	    this.tablePanel.setLayout(new BorderLayout());
 	    //prepare the JTable
 		TableModel dataModel = new DataModelSetWishList(data, title);
 		this.table.setModel(dataModel);
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		this.panel.add(this.tablePanel);	
+		
+
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					JTable target = (JTable) e.getSource();
+					int row = target.getSelectedRow();
+					int column = target.getSelectedColumn();
+					if (column == 4) {
+						deteteProductActionPerformed((int) table.getValueAt(row, 3));
+					}
+				}
+			}
+		});
 	}
+	
+
+	/**
+	 * This method is an equivalent to actionPerformed, but delete a wishlist
+	 * and refresh the page
+	 * 
+	 * @author loicd_000
+	 * @param IDWishlist
+	 *            - int : IDWishList to delete
+	 */
+	public void deteteProductActionPerformed(int IDProduct) {
+		try {
+			this.facadeList.removeProductToWishList(IDProduct);;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		try {
+			this.setChanged();
+			this.notifyObservers("cart");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	
 	
 	/**
 	 * This method is an equivalent to actionPerformed, but with a String and not an ActionEvent.

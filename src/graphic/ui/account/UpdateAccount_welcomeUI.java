@@ -25,21 +25,19 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		
 		//to take the actual account informations
 		int ID = (int) this.communication.getElement("id_account");
-		//
-		System.out.println("si l ID marche il devrait s'afficher ");
-		System.out.println(ID);
-		//
 		FacadeModifyAccount facade = new FacadeModifyAccount();
 		String textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);
 		String textFirstName = facade.getFirstName(ID);
+		String textAdressRoad = facade.getAddressRoad(ID); 
+		String textAddressCity = facade.getAddressCity(ID); 
+		String textAddressPostal =facade.getAddressPostal(ID); 
 		
 		JLabel labelWelcome = new JLabel("Welcome ");
 		labelWelcome.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
 		labelWelcome.setBounds(204, 72, 166, 68);
 		this.panel.add(labelWelcome);
 		
-		//
 		labelLoginUser.setText(textLogin);
 		labelLoginUser.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
 		labelLoginUser.setBounds(380, 85, 239, 42);
@@ -85,24 +83,24 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 		lblLastnameuser.setBounds(316, 324, 201, 35);
 		this.panel.add(lblLastnameuser);
 		
-		JLabel lblAddress = new JLabel("address1");
-		lblAddress.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblAddress.setBounds(316, 380, 201, 35);
-		this.panel.add(lblAddress);
+		JLabel lblAddressRoad = new JLabel(textAdressRoad);
+		lblAddressRoad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		lblAddressRoad.setBounds(316, 380, 201, 35);
+		this.panel.add(lblAddressRoad);
 		
-		JLabel lblAddress_1 = new JLabel("address2");
-		lblAddress_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblAddress_1.setBounds(316, 412, 201, 35);
-		this.panel.add(lblAddress_1);
+		JLabel lblAddressPostal = new JLabel(textAddressPostal);
+		lblAddressPostal.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		lblAddressPostal.setBounds(316, 412, 201, 35);
+		this.panel.add(lblAddressPostal);
 		
-		JLabel lblAddress_2 = new JLabel("address3");
-		lblAddress_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblAddress_2.setBounds(316, 447, 201, 35);
-		this.panel.add(lblAddress_2);
+		JLabel lblAddressCity = new JLabel(textAddressCity);
+		lblAddressCity.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		lblAddressCity.setBounds(316, 447, 201, 35);
+		this.panel.add(lblAddressCity);
 		
 		//JButton updateInfo = new JButton("update informations"); A NE SURTOUT PAS DELARER COMME CA!!!
 		this.updateInfo.setText("update informations");
-		//this.updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		this.updateInfo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
 		this.updateInfo.setBounds(243, 505, 178, 49);
 		this.panel.add(updateInfo);
 		this.updateInfo.addActionListener(this);
@@ -110,10 +108,9 @@ public class UpdateAccount_welcomeUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {		
-		String action = "";
-			if (arg0.getActionCommand().equals("update informations")) { //arg0.getSource() == updateInfo
-				this.notifyObservers("updateAccount");
+			if (arg0.getActionCommand().equals("update informations")) { 
 				this.setChanged();
+				this.notifyObservers("updateAccount");
 			}
 		
 	}

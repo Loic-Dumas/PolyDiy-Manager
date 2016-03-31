@@ -19,6 +19,6 @@ public abstract class ProductFactory {
 	public abstract Product buildProduct( int idP, String name, String description, float unitPrice,
 			int stockQuantity, int IDSeller, int IDCategory, String categoryName);
 
-	public abstract ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrices)
+	public abstract ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrice)
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
 }

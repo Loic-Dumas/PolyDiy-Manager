@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 import common.exception.ErrorConnectionException;
 import common.facade.FacadeSession;
@@ -98,6 +99,7 @@ public class Application extends JFrame implements Observer{
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("updateAccount", BorderLayout.CENTER);
+				break;
 			case "user":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
@@ -142,6 +144,11 @@ public class Application extends JFrame implements Observer{
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("cart", BorderLayout.CENTER);
+				break;
+			case "activityPanel":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("activityPanel", BorderLayout.CENTER);
 				break;
 			case "manage":
 				this.clearUI();
