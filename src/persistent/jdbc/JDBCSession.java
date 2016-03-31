@@ -99,7 +99,7 @@ public class JDBCSession extends Session {
 				result = this.component.select(Arrays.asList("id_admin"), "Admin_account",
 						new SQLCondition(Arrays.asList("id_account"), Arrays.asList(Integer.toString(this.ID))));
 				if (result.first()) {
-					this.ID_user = result.getInt("id_admin");
+					this.ID_admin = result.getInt("id_admin");
 				}
 
 			} catch (SQLException e) {

@@ -89,6 +89,7 @@ public class WishListsUI extends AbstractUI {
 			WishList wishList = this.facadeList.createAndGetSetWishList((int)this.communication.getElement("id_user")).getElementByKey(key);
 			Object[] newLine = { wishList.getLabel(), wishList.getID(), "Remove wish list",
 					this.facadeList.getNumberOfProductsInWishList(wishList.getID()) };
+			
 			data[j] = newLine;
 			j++;
 		}

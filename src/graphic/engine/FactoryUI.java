@@ -9,9 +9,9 @@ import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
-import graphic.ui.UpdateAccountUI;
 import graphic.ui.UpdateSellerUI;
 import graphic.ui.account.AccountUI;
+import graphic.ui.account.UpdateAccountUI;
 import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
@@ -57,7 +57,6 @@ public class FactoryUI {
 				throw new Exception("Unknow ui " + name + " !");
 			}
 		} catch (Exception e) {
-			System.err.println(name);
 			e.printStackTrace();
 			return null;
 		}

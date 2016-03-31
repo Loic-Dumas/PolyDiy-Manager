@@ -1,10 +1,16 @@
 package common.facade.shop;
 
+import common.factory.ListFactory;
+import common.factory.jdbcFactory.JDBCListFactory;
 import logic.user.ProductInShopHandler;
 import persistent.Product;
+import persistent.list.Cart;
 
 public class FacadeProductInShop {
 	ProductInShopHandler productHandler = new ProductInShopHandler();
+	Cart cart = null;
+	ListFactory listFactory = new JDBCListFactory();
+	
 	/**
 	 * This method return a product
 	 * 
@@ -26,7 +32,7 @@ public class FacadeProductInShop {
 	 * @param IDWishList
 	 */
 	public void addToCart(int IDProduct, float unitPrice, int quantity, int IDUser) {
-		
+		this.productHandler.addToCart(IDProduct, unitPrice, quantity, IDUser);
 	}
 	
 	/**
@@ -39,7 +45,7 @@ public class FacadeProductInShop {
 	 * @param IDWishList
 	 */
 	public void addToWishList(int IDProduct, float unitPrice, int quantity, int IDWishList) {
-		
+		this.productHandler.addToWishList(IDProduct, unitPrice, quantity, IDWishList);
 	}
 	
 	
