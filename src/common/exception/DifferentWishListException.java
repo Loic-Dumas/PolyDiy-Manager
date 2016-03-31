@@ -11,11 +11,19 @@ public class DifferentWishListException extends Exception{
 	private int IDWishList;
 	private int realIDWishList;
 	
+	/**
+	 * Constructor of the exception.
+	 * @param IDWishList - the incorrect whislist' id.
+	 * @param realIDWishList - the true wishlist' id.
+	 */
 	public DifferentWishListException(int IDWishList, int realIDWishList){
 		this.IDWishList = IDWishList;
 		this.realIDWishList = realIDWishList;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		return "The WishList with this ID : " + this.IDWishList + " is invalid. Should be " + this.realIDWishList + ".";

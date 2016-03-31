@@ -10,6 +10,9 @@ package common.exception;
 public class IncorrectLoginException extends Exception {
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		return "You use incorrect characters in this login.";
