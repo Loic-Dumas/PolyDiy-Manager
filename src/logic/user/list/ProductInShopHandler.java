@@ -13,6 +13,11 @@ import persistent.factory.ProductFactory;
 import persistent.factory.jdbcFactory.JDBCListFactory;
 import persistent.factory.jdbcFactory.JDBCProductFactory;
 
+/**
+ * Handler for the ProductInShopHandler (logic part)
+ * @author loicd_000
+ *
+ */
 public class ProductInShopHandler {
 	Product product = null;
 	Cart cart = null;

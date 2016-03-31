@@ -18,6 +18,11 @@ public class JDBCSetInfoWishList extends SetInfoWishList {
 	private JDBCComponent component = null;
 	
 	
+	/**
+	 * @param IDUser
+	 * @throws ErrorConnectionException
+	 * @throws AlertDriver
+	 */
 	public JDBCSetInfoWishList(int IDUser) throws ErrorConnectionException, AlertDriver {
 		super(IDUser);
 		this.component = new JDBCComponent();

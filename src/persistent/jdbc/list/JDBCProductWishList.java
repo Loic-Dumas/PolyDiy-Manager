@@ -12,9 +12,23 @@ import common.exception.UnknownIDProductException;
 import common.jdbc.JDBCComponent;
 import persistent.abstractclass.list.ProductWishList;
 
+/**
+ * the jdbc version of ProductWishList
+ * @author loicd_000
+ *
+ */
 public class JDBCProductWishList extends ProductWishList{
 	private JDBCComponent component = null;
 
+	/**
+	 * @param ID
+	 * @param IDWishList
+	 * @param quantity
+	 * @param unitPrice
+	 * @throws ErrorConnectionException
+	 * @throws UnknownIDProductException
+	 * @throws AlertDriver
+	 */
 	public JDBCProductWishList(int ID, int IDWishList, int quantity, float unitPrice) 
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver {
 		super(ID, IDWishList);
@@ -35,6 +49,9 @@ public class JDBCProductWishList extends ProductWishList{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#isExisting()
+	 */
 	@Override
 	public Boolean isExisting() throws Exception {
 		this.component = new JDBCComponent();
@@ -43,6 +60,9 @@ public class JDBCProductWishList extends ProductWishList{
 		return result.first();
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#insert()
+	 */
 	@Override
 	public void insert() throws Exception {
 		this.component = new JDBCComponent();
@@ -56,6 +76,9 @@ public class JDBCProductWishList extends ProductWishList{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#update()
+	 */
 	@Override
 	public void update() throws Exception {
 		this.component = new JDBCComponent();
@@ -68,6 +91,9 @@ public class JDBCProductWishList extends ProductWishList{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#delete()
+	 */
 	@Override
 	public void delete() throws Exception {
 		this.component = new JDBCComponent();
@@ -76,12 +102,18 @@ public class JDBCProductWishList extends ProductWishList{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#hasChanged()
+	 */
 	@Override
 	public Boolean hasChanged() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#loadFromKeys(java.util.List, java.util.List)
+	 */
 	@Override
 	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
 		// TODO Auto-generated method stub

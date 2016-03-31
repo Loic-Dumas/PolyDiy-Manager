@@ -8,6 +8,10 @@ import persistent.abstractclass.list.SetInfoWishList;
 import persistent.factory.ListFactory;
 import persistent.factory.jdbcFactory.JDBCListFactory;
 
+/**Handler for the SetInfoWishListHandler (logic part)
+ * @author loicd_000
+ *
+ */
 public class SetInfoWishListHandler {
 
 	ListFactory listFactory = new JDBCListFactory();

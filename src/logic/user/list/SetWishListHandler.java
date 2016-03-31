@@ -11,6 +11,11 @@ import persistent.abstractclass.list.WishList;
 import persistent.factory.ListFactory;
 import persistent.factory.jdbcFactory.JDBCListFactory;
 
+/**
+ * Handler for the SetWishListHandler (logic part)
+ * @author loicd_000
+ *
+ */
 public class SetWishListHandler {
 	ListFactory listFactory = new JDBCListFactory();
 	protected SetWishList setWishList = null;
