@@ -63,14 +63,14 @@ public class WishListUI extends AbstractUI {
 		//Table : 
 		int nbOfRow = this.facadeList.createAndGetWishList(IDWishList).count();
 		int nbOfColumn = 4; // the name, the quantity and the unitPrice
-		String[] title = { "Product Name", "Quantity", "Price", "Remove", "ID"};
+		String[] title = { "Product Name", "Quantity", "Price", "ID", "Remove"};
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
 		
 		int j = 0;
 		for(Iterator<String> i = this.facadeList.getListIDProduct().iterator() ; i.hasNext(); ) {
 		    String key = i.next();
 		    ProductWishList product = this.facadeList.createAndGetWishList(IDWishList).getElementByKey(key);
-		    Object[] newLine = {product.getName() , product.getQuantity() , "" +product.getUnitPrice() + " €", "Remove product", product.getIDProduct()}; 
+		    Object[] newLine = {product.getName() , product.getQuantity() , "" +product.getUnitPrice() + " €", product.getIDProduct(), "Remove product"}; 
 			data[j] = newLine;
 			j ++;
 		}
@@ -89,8 +89,8 @@ public class WishListUI extends AbstractUI {
 					JTable target = (JTable) e.getSource();
 					int row = target.getSelectedRow();
 					int column = target.getSelectedColumn();
-					if (column == 3) {
-						deteteProductActionPerformed((int) table.getValueAt(row, 4));
+					if (column == 4) {
+						deteteProductActionPerformed((int) table.getValueAt(row, 3));
 					}
 				}
 			}
@@ -112,7 +112,6 @@ public class WishListUI extends AbstractUI {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		System.out.println("Je vais maintenant changer de vue");
 		try {
 			this.communication.shareElement("id_wishlist", this.facadeList.getIDWishList());
 			this.setChanged();

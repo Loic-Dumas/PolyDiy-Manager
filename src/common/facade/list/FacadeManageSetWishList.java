@@ -4,7 +4,7 @@ import java.util.Set;
 
 import common.exception.NoWishListException;
 import common.exception.wishListAlreadyExistException;
-import logic.user.SetWishListHandler;
+import logic.user.list.SetWishListHandler;
 import persistent.list.SetWishList;
 import persistent.list.WishList;
 

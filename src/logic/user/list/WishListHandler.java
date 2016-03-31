@@ -1,4 +1,4 @@
-package logic.user;
+package logic.user.list;
 
 import java.util.Set;
 
@@ -137,7 +137,6 @@ public class WishListHandler {
 	 */
 	public void removeProductToWishList(int IDProduct) {
 		try {
-			System.out.println("-------------" + this.wishList.getElementByKey(String.valueOf(IDProduct)).getName());
 			this.wishList.getElementByKey(String.valueOf(IDProduct)).delete();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

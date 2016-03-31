@@ -2,7 +2,7 @@ package common.facade.shop;
 
 import common.factory.ListFactory;
 import common.factory.jdbcFactory.JDBCListFactory;
-import logic.user.ProductInShopHandler;
+import logic.user.list.ProductInShopHandler;
 import persistent.Product;
 import persistent.list.Cart;
 

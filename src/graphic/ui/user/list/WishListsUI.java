@@ -95,7 +95,7 @@ public class WishListsUI extends AbstractUI {
 		}
 
 		// prepare the tablePanel
-		this.tablePanel.setBounds(2, 60, 500, 400);
+		this.tablePanel.setBounds(2, 60, 600, 400);
 		this.tablePanel.setLayout(new BorderLayout());
 		// prepare the JTable
 		TableModel dataModel = new DataModelSetWishList(data, title);
