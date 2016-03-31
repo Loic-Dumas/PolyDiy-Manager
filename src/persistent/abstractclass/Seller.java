@@ -16,21 +16,48 @@ public abstract class Seller implements InterfaceModel{
 	protected String description = "";
 	protected String siret = "";
 	protected String website = "";
-	
+	/**
+	 * This is Constructor of Seller.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 */
 	public Seller(){
 		
 	}
 	
+	/**
+	 * This is Constructor of Seller with id.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 */
 	public Seller (int ID) {
 		this.ID = ID;
 	}
+	/**
+	 * This is a getter of the ID.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * return ID
+	 */
 	public int getId(){
 		return ID;
 	}
+	/**
+	 * The Setter of ID.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * 
+	 */
 	public void setId(int id){
 		this.ID = id;
 	}
 	
+	/**
+	 * This a getter of  id_account.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * return ID
+	 */
 	public int getIDaccount() {
 		return this.IDaccount;
 	}

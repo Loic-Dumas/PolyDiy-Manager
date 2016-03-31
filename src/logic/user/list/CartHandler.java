@@ -14,6 +14,11 @@ import persistent.factory.ProductFactory;
 import persistent.factory.jdbcFactory.JDBCListFactory;
 import persistent.factory.jdbcFactory.JDBCProductFactory;
 
+/**
+ * Handler for a Cart (logic)
+ * @author loicd_000
+ *
+ */
 public class CartHandler {
 	ListFactory listFactory = new JDBCListFactory();
 	ProductFactory productFactory = new JDBCProductFactory();

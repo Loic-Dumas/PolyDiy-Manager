@@ -12,10 +12,19 @@ import persistent.abstractclass.list.Cart;
 import persistent.factory.ProductFactory;
 import persistent.factory.jdbcFactory.JDBCProductFactory;
 
+/** JDBC version of Cart
+ * @author loicd_000
+ *
+ */
 public class JDBCCart extends Cart {
 	private JDBCComponent component = null;
 	ProductFactory productFactory = new JDBCProductFactory();
 	
+	/**
+	 * @param IDUser
+	 * @throws ErrorConnectionException
+	 * @throws AlertDriver
+	 */
 	public JDBCCart(int IDUser) throws ErrorConnectionException, AlertDriver {
 		super(IDUser);
 		this.component = new JDBCComponent() ;
@@ -77,6 +86,9 @@ public class JDBCCart extends Cart {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#isExisting()
+	 */
 	@Override
 	public Boolean isExisting() throws Exception {
 		this.component = new JDBCComponent();
@@ -85,36 +97,56 @@ public class JDBCCart extends Cart {
 		return result != null;
 	}
 	
+	/**
+	 * @param IDUser
+	 * @return
+	 * @throws Exception
+	 */
 	public Boolean isExisting(int IDUser) throws Exception {
 		this.IDUser = IDUser;
 		return this.isExisting();
 	}
 
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#insert()
+	 */
 	@Override
 	public void insert() throws Exception {
 		
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#update()
+	 */
 	@Override
 	public void update() throws Exception {
 		// TODO JDBCCart Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#delete()
+	 */
 	@Override
 	public void delete() throws Exception {
 		// TODO JDBCCart Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#hasChanged()
+	 */
 	@Override
 	public Boolean hasChanged() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#loadFromKeys(java.util.List, java.util.List)
+	 */
 	@Override
 	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
 		

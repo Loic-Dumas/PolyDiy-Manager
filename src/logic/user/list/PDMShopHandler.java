@@ -9,6 +9,11 @@ import persistent.abstractclass.SetProduct;
 import persistent.factory.ListFactory;
 import persistent.factory.jdbcFactory.JDBCListFactory;
 
+/**
+ * Handler for the PDMShop (logic part)
+ * @author loicd_000
+ *
+ */
 public class PDMShopHandler {
 	protected SetProduct setProduct = null;
 	ListFactory listFactory = new JDBCListFactory();

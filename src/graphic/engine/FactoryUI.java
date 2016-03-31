@@ -9,6 +9,7 @@ import graphic.ui.account.CreateAccountUI;
 import graphic.ui.account.UpdateAccountUI;
 import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
+import graphic.ui.seller.AddProductUI;
 import graphic.ui.seller.ManageShopUI;
 import graphic.ui.seller.SellerUI;
 import graphic.ui.seller.UpdateSellerUI;
@@ -51,6 +52,8 @@ public class FactoryUI {
 		this.ui.put("modifyActivity", ModifyActivityUI.class);
 		this.ui.put("modifyTask", ModifyTaskUI.class);
 		this.ui.put("modifyObjective", ModifyObjectiveUI.class);
+		this.ui.put("addProduct", AddProductUI.class);
+		
 	}
 	
 	@SuppressWarnings("unchecked")
