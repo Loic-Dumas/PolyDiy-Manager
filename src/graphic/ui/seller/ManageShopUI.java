@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.Iterator;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,6 +24,8 @@ import logic.facade.FacadeProduct;
 import persistent.abstractclass.Product;
 
 public class ManageShopUI extends AbstractUI {
+	
+		private JButton add;
 		private JTable table;
 		private JPanel tablePanel;
 		private FacadeProduct facade =  new FacadeProduct((int)this.communication.getElement("id_seller"));
@@ -31,6 +35,12 @@ public class ManageShopUI extends AbstractUI {
 		 tablePanel = new JPanel();
 		 this.facade.createAndGetExistingSetProduct((int)this.communication.getElement("id_seller"));		
 		 this.panel.setLayout(null);
+		 // add product 
+		 	add = new JButton();
+		 	this.add.setText("Add New Product");
+			this.add.setBounds(600, 60, 150, 35);
+			this.panel.add(this.add);
+			this.add.addActionListener(this);
 		 
 			// Table :
 			int nbOfRow = this.facade.createAndGetExistingSetProduct((int)this.communication.getElement("id_seller")).count();
@@ -70,7 +80,14 @@ public class ManageShopUI extends AbstractUI {
 			}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
+		if (arg0.getActionCommand()== "Add New Product") {
+			try {
+				this.setChanged();
+				this.notifyObservers("addProduct");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
 	}
 
+	}
 }
