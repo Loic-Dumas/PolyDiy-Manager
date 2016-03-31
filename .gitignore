@@ -5,3 +5,4 @@ src/postgresql-9.4.1208.jre6.jar
 *.orig
 /bin/
 .classpath
+/.apt_generated/

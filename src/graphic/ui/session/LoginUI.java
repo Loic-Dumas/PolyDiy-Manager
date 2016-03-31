@@ -27,7 +27,9 @@ import persistent.abstractclass.Session;
 
 public class LoginUI extends AbstractUI{
 	private JButton connection = new JButton();
+	private JLabel loginLabel = new JLabel("Login :");
 	private JTextField login = new JTextField();
+	private JLabel passwordLabel = new JLabel("Password :");
 	private JPasswordField password = new JPasswordField();
 	private JLabel lblWelcome = new JLabel();
 	
@@ -35,24 +37,24 @@ public class LoginUI extends AbstractUI{
 	
 	public LoginUI(UIMessage communication) {
 		super(communication);
-		//this.panel.setLayout(null);
+		
 		// label welcome
 		this.lblWelcome.setText("PolyDIY Manager");
 		this.lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		this.lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		//this.lblWelcome.setBounds(0, 31, 400, 30);
+		this.lblWelcome.setHorizontalAlignment(SwingConstants.LEFT);
 		this.panel.add(lblWelcome);
 		
-		//this.login.setBounds(56, 92, 105, 20);
+		this.panel.add(loginLabel);
+		
 		this.panel.add(login);
 		this.login.setColumns(10);
 		
-		//this.password.setBounds(231, 92, 105, 20);
+		this.panel.add(passwordLabel);
+		
 		this.panel.add(password);
 		this.password.setColumns(10);
 		
 		this.connection.setText("Connect");
-		//this.connection.setBounds(146, 147, 89, 23);
 		this.panel.add(connection);
 		
 		this.connection.addActionListener(this);
@@ -98,8 +100,4 @@ public class LoginUI extends AbstractUI{
 	public Boolean isConnected() {
 		return this.session != null;
 	}
-	
-	/*public Session getSession() {
-		return this.session;
-	}*/
 }

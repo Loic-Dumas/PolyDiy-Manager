@@ -2,17 +2,11 @@ package test;
 
 import org.junit.Test;
 
-import common.exception.AlertDriver;
-import common.exception.ErrorConnectionException;
 import junit.framework.TestCase;
 import persistent.jdbc.JDBCTask;
 
 public class JDBCTask_Test extends TestCase {
 	private JDBCTask task;
-	
-	public JDBCTask_Test(String name) {
-		super(name);
-	}
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -25,7 +19,7 @@ public class JDBCTask_Test extends TestCase {
 	}
 
 	@Test
-	public void testTask() throws ErrorConnectionException, AlertDriver {
+	public void testTask(){
 		assertNotNull("Not yet implemented", this.task);
 	}
 	
