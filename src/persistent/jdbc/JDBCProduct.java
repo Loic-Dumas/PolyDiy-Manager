@@ -9,8 +9,8 @@ import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
-import common.exception.loadFromIntKeyException;
-import common.exception.loadFromStringKeyException;
+import common.exception.LoadFromIntKeyException;
+import common.exception.LoadFromStringKeyException;
 import common.jdbc.JDBCComponent;
 import persistent.abstractclass.Product;
 
@@ -95,7 +95,7 @@ public class JDBCProduct extends Product {
 	}
 
 	// not working
-	public void loadFromIntKey(String name, int value) throws loadFromIntKeyException, NotUniqueAttribute {
+	public void loadFromIntKey(String name, int value) throws LoadFromIntKeyException, NotUniqueAttribute {
 		ResultSet result = this.component.select("*", "product", name + " = " + value);
 
 		try {
@@ -113,7 +113,7 @@ public class JDBCProduct extends Product {
 				this.stockQuantity = result.getInt("stockQuantity");
 
 			} else {
-				throw new loadFromIntKeyException("Product", name, value);
+				throw new LoadFromIntKeyException("Product", name, value);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +121,7 @@ public class JDBCProduct extends Product {
 
 	}
 
-	public void loadFromStringKey(String name, String value) throws loadFromStringKeyException, NotUniqueAttribute {
+	public void loadFromStringKey(String name, String value) throws LoadFromStringKeyException, NotUniqueAttribute {
 		ResultSet result = this.component.select("*", "product", value + " = '" + value + "'");
 
 		try {
@@ -139,7 +139,7 @@ public class JDBCProduct extends Product {
 				this.stockQuantity = result.getInt("stockQuantity");
 
 			} else {
-				throw new loadFromStringKeyException("Product", name, value);
+				throw new LoadFromStringKeyException("Product", name, value);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

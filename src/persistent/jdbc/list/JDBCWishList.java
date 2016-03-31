@@ -9,8 +9,8 @@ import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDProductException;
-import common.exception.needHaveBothIDUserAndLabelException;
-import common.exception.wishListAlreadyExistException;
+import common.exception.NeedHaveBothIDUserAndLabelException;
+import common.exception.WishListAlreadyExistException;
 import common.jdbc.JDBCComponent;
 import persistent.abstractclass.list.WishList;
 import persistent.factory.ProductFactory;
@@ -60,7 +60,7 @@ public class JDBCWishList extends WishList {
 	}
 
 	public JDBCWishList(int IDUser, String label)
-			throws needHaveBothIDUserAndLabelException, wishListAlreadyExistException {
+			throws NeedHaveBothIDUserAndLabelException, WishListAlreadyExistException {
 		super(IDUser, label);
 		// if (isExistingWithIDUserAndLabel()) {
 		// throw new wishListAlreadyExistException(label);
@@ -68,11 +68,11 @@ public class JDBCWishList extends WishList {
 	}
 
 	public Boolean isExistingWithIDUserAndLabel()
-			throws needHaveBothIDUserAndLabelException, ErrorConnectionException, AlertDriver {
+			throws NeedHaveBothIDUserAndLabelException, ErrorConnectionException, AlertDriver {
 		this.component = new JDBCComponent();
 		if ((new Integer(this.IDUser) == null) || (this.label == null)) {
 			System.err.println();
-			throw new needHaveBothIDUserAndLabelException();
+			throw new NeedHaveBothIDUserAndLabelException();
 		}
 		
 		ResultSet result = this.component.select("*", "wishList",
@@ -94,7 +94,7 @@ public class JDBCWishList extends WishList {
 
 	@Override
 	public void insert()
-			throws AlreadyExistTuple, needHaveBothIDUserAndLabelException, ErrorConnectionException, AlertDriver {
+			throws AlreadyExistTuple, NeedHaveBothIDUserAndLabelException, ErrorConnectionException, AlertDriver {
 		this.component = new JDBCComponent();
 		if (!this.isExistingWithIDUserAndLabel()) {
 			this.component.insert("wishList(id_user, label)", " '" + this.IDUser + "', '" + this.label + "'");

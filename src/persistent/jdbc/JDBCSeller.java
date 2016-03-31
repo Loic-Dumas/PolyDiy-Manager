@@ -33,7 +33,6 @@ public class JDBCSeller extends Seller{
 		
 		try {
 			ResultSet result = this.component.select("*", "seller_account", "id_account = '" + this.ID + "'");
-			System.out.println(result);
 			if (result.first()) {
 				this.nameShop = result.getString("nameShop");
 				this.description = result.getString("description");

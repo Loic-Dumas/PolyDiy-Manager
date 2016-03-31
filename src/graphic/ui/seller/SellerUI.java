@@ -21,8 +21,6 @@ import logic.facade.FacadeEditProfil;
 
 public class SellerUI extends AbstractUI {
 	FacadeEditProfil facade;
-	private JButton account = new JButton();
-	private JLabel label = new JLabel();
 	private JLabel labNom = new JLabel();
 	private JLabel labDesc = new JLabel();
 	private JLabel labSiret = new JLabel();
@@ -46,11 +44,6 @@ public class SellerUI extends AbstractUI {
 		this.panel.add(this.manage);
 		this.manage.addActionListener(this);
 		
-		// logout button
-		this.account.setText("Back to logout");
-		this.account.setBounds(2, 2, 150, 23);
-		this.panel.add(account);
-		this.account.addActionListener(this);
 		
 		//label nameShop
 		this.labNom.setText("Name of Shop : " + (facade.getNameShop()));
@@ -69,10 +62,6 @@ public class SellerUI extends AbstractUI {
 		this.labSite.setBounds(200, 350, 300, 23);
 		this.panel.add(labSite);
 		
-		// text label 
-		this.label.setText("Cet view est pour le seller");
-		this.label.setBounds(200, 2, 300, 23);
-		this.panel.add(label);
 		
 	}
 
