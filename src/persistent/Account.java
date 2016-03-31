@@ -18,6 +18,9 @@ public abstract class Account implements InterfaceModel {
 	protected String email = "";
 	protected String firstName = "";
 	protected String lastName = "";
+	protected String addressRoad ="";
+	protected String addressCity="";
+	protected String addressPostal="";
 	
 	public Account() {
 	}
@@ -44,6 +47,16 @@ public abstract class Account implements InterfaceModel {
 	
 	public String getLastName() {
 		return this.lastName;
+	}
+	
+	public String getAddressCity() {
+		return this.addressCity;
+	}
+	public String getAddressRoad() {
+		return this.addressRoad;
+	}
+	public String getAddressPostal() {
+		return this.addressPostal;
 	}
 	
 	public void setLogin(String login) {

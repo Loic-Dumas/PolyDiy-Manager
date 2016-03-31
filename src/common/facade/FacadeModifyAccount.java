@@ -39,5 +39,23 @@ public class FacadeModifyAccount {
 		return lastName;
 	}
 	
+	public String getAddressRoad(int ID) throws Exception{
+		ModifyAccountHandler handler = new ModifyAccountHandler();
+		String AddressRoad = handler.getAddressRoad(ID); //cf modifyAccountHandler
+		return AddressRoad;
+	}
+	
+	public String getAddressCity(int ID) throws Exception{
+		ModifyAccountHandler handler = new ModifyAccountHandler();
+		String AddressCity = handler.getAddressCity(ID); //cf modifyAccountHandler
+		return AddressCity;
+	}
+	
+	public String getAddressPostal(int ID) throws Exception{
+		ModifyAccountHandler handler = new ModifyAccountHandler();
+		String AddressPostal = handler.getAddressPostal(ID); //cf modifyAccountHandler
+		return AddressPostal;
+	}
+	
 	
 }

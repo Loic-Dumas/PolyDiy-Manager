@@ -46,7 +46,9 @@ public class UpdateAccountUI extends AbstractUI {
 		String textLogin = facade.getLogin(ID);
 		String textLastName = facade.getLastName(ID);
 		String textFirstName = facade.getFirstName(ID);
-		//A FAIRE POUR LES ADRESSES
+		String textAddressRoad = facade.getAddressRoad(ID);
+		String textAddressCity = facade.getAddressCity(ID);
+		String textAddressPostal = facade.getAddressPostal(ID);
 		
 		
 		//Label to inform the user where he is.
@@ -104,17 +106,17 @@ public class UpdateAccountUI extends AbstractUI {
 		this.tfFirstName.setBounds(327, 247, 313, 35);
 		this.panel.add(tfFirstName);
 		
-		this.tfAddressRoad.setText("addressRoadBD"); //A MODIFIER
+		this.tfAddressRoad.setText(textAddressRoad); //A MODIFIER
 		this.tfAddressRoad.setColumns(10);
 		this.tfAddressRoad.setBounds(327, 291, 313, 35);
 		this.panel.add(tfAddressRoad);
 		
-		this.tfAddressCity.setText("adressCityBD"); //A MODIFIER
+		this.tfAddressCity.setText(textAddressCity); //A MODIFIER
 		this.tfAddressCity.setColumns(10);
 		this.tfAddressCity.setBounds(327, 335, 313, 35);
 		this.panel.add(tfAddressCity);
 		
-		this.tfAddressPostalCode.setText("addressPostalCodeBD"); //A MODIFIER
+		this.tfAddressPostalCode.setText(textAddressPostal); //A MODIFIER
 		this.tfAddressPostalCode.setColumns(10);
 		this.tfAddressPostalCode.setBounds(327, 379, 313, 35);
 		this.panel.add(tfAddressPostalCode);
@@ -137,11 +139,12 @@ public class UpdateAccountUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getActionCommand().equals("Cancel")) { //arg0.getSource() == updateInfo
+		if (arg0.getActionCommand().equals("Cancel")) { 
 			this.setChanged();
 			this.notifyObservers("account");
 		} else if (arg0.getActionCommand().equals("Validate")) {
-			//modifier les infos
+			this.setChanged(); //AJOUTER LUPDATE
+			this.notifyObservers("account");
 		}
 	} //end Override
 
