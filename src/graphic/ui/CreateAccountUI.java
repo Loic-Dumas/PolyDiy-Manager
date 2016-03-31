@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
 
 public class CreateAccountUI extends AbstractUI {
+	private JLabel image;
 	private JLabel loginLabel = new JLabel("Login : ", JLabel.LEFT);
 	private JTextField login = new JTextField(10);
 	private JLabel passwordLabel = new JLabel("Password : ", JLabel.LEFT);
@@ -34,70 +36,51 @@ public class CreateAccountUI extends AbstractUI {
 	public CreateAccountUI(UIMessage communication) {
 		super(communication);
 		
-		this.panel.setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.weightx = 0;
-		constraints.weighty = 0;
+		this.panel.setLayout(null);
 		
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		this.loginLabel.setPreferredSize(new Dimension(150, 30));
-		this.panel.add(this.loginLabel, constraints);
+		this.image = new JLabel( new ImageIcon( "LogoFinal.PNG"));
+		this.image.setBounds(100, 200, 250, 250);
+		this.panel.add(image);
 		
-		constraints.gridx = 1;
-		constraints.gridy = 0;
-		this.panel.add(this.login, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 1;
-		this.passwordLabel.setPreferredSize(new Dimension(150, 30));
-		this.panel.add(this.passwordLabel, constraints);
+		this.loginLabel.setBounds(500, 200, 100, 20);
+		this.panel.add(this.loginLabel);
 
-		constraints.gridx = 1;
-		constraints.gridy = 1;
-		this.panel.add(this.password, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 2;
-		this.emailLabel.setPreferredSize(new Dimension(150, 30));
-		this.panel.add(this.emailLabel, constraints);
+		this.login.setBounds(610, 200, 150, 20);
+		this.panel.add(this.login);
 
-		constraints.gridx = 1;
-		constraints.gridy = 2;
-		this.panel.add(this.email, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 3;
-		this.firstNameLabel.setPreferredSize(new Dimension(150, 30));
-		this.panel.add(this.firstNameLabel, constraints);
+		this.passwordLabel.setBounds(500, 230, 100, 20);
+		this.panel.add(this.passwordLabel);
 
-		constraints.gridx = 1;
-		constraints.gridy = 3;
-		this.panel.add(this.firstName, constraints);
+		this.password.setBounds(610, 230, 150, 20);
+		this.panel.add(this.password);
 		
-		constraints.gridx = 0;
-		constraints.gridy = 4;
-		this.lastNameLabel.setPreferredSize(new Dimension(150, 30));
-		this.panel.add(this.lastNameLabel, constraints);
+		this.emailLabel.setBounds(500, 260, 150, 20);
+		this.panel.add(this.emailLabel);
 
-		constraints.gridx = 1;
-		constraints.gridy = 4;
-		this.panel.add(this.lastName, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 5;
-		this.panel.add(this.userCheck, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 6;
-		this.panel.add(this.sellerCheck, constraints);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 7;
-		this.register.setPreferredSize(new Dimension(150, 30));
+		this.email.setBounds(610, 260, 150, 20);
+		this.panel.add(this.email);
+
+		this.firstNameLabel.setBounds(500, 290, 150, 20);
+		this.panel.add(this.firstNameLabel);
+
+		this.firstName.setBounds(610, 290, 150, 20);
+		this.panel.add(this.firstName);
+
+		this.lastNameLabel.setBounds(500, 320, 150, 20);
+		this.panel.add(this.lastNameLabel);
+
+		this.lastName.setBounds(610, 320, 150, 20);
+		this.panel.add(this.lastName);
+
+		this.userCheck.setBounds(500, 350, 150, 20);
+		this.panel.add(this.userCheck);
+
+		this.sellerCheck.setBounds(500, 380, 150, 20);
+		this.panel.add(this.sellerCheck);
+
+		this.register.setBounds(500, 410, 150, 20);
 		this.register.setText("Sign on");
-		this.panel.add(this.register, constraints);
+		this.panel.add(this.register);
 		this.register.addActionListener(this);
 	}
 

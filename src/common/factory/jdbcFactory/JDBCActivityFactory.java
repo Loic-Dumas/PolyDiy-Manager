@@ -1,5 +1,7 @@
 package common.factory.jdbcFactory;
 
+import java.util.Arrays;
+
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.factory.ActivityFactory;
@@ -39,6 +41,15 @@ public class JDBCActivityFactory extends ActivityFactory {
 	}
 
 	@Override
+	public Activity buildActivityFromId(int idActivity) throws Exception {
+		Activity activity = new JDBCActivity();
+		if(idActivity != -1) {
+			activity.loadFromKeys(Arrays.asList("id_activity"), Arrays.asList(Integer.toString(idActivity)));
+		}
+		return activity;
+	}
+
+	@Override
 	public SetTask buildListTasksFromUser(int idUser) throws Exception {
 		SetTask tasks = new JDBCSetTask(idUser);
 		
@@ -54,6 +65,15 @@ public class JDBCActivityFactory extends ActivityFactory {
 		task.setIdActivity(idActivity);
 		task.setIdCategory(idCategory);
 		task.setIdUser(idUser);
+		return task;
+	}
+
+	@Override
+	public Task buildTaskFromId(int idTask) throws Exception {
+		Task task = new JDBCTask();
+		if(idTask != -1) {
+			task.loadFromKeys(Arrays.asList("id_task"), Arrays.asList(Integer.toString(idTask)));
+		}
 		return task;
 	}
 
@@ -75,6 +95,15 @@ public class JDBCActivityFactory extends ActivityFactory {
 		objective.setFacultativIdActivity(facultativIdActivity);
 		objective.setIdCategory(idCategory);
 		objective.setIdUser(idUser);
+		return objective;
+	}
+
+	@Override
+	public Objective buildObjectiveFromId(int idObjective) throws Exception {
+		Objective objective = new JDBCObjective();
+		if(idObjective != -1) {
+			objective.loadFromKeys(Arrays.asList("id_objective"), Arrays.asList(Integer.toString(idObjective)));
+		}
 		return objective;
 	}
 

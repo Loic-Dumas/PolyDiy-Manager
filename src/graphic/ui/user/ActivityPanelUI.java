@@ -176,16 +176,31 @@ public class ActivityPanelUI extends AbstractUI{
 	public void actionPerformed(ActionEvent arg0) {
 		switch(arg0.getActionCommand()) {
 		case "+ Activity":
+			communication.shareElement("id_activity", -1);
+			this.setChanged();
+			this.notifyObservers("modifyActivity");
 			break;
 		case "+ Task":
+			communication.shareElement("id_task", -1);
+			this.setChanged();
+			this.notifyObservers("modifyTask");
 			break;
 		case "+ Objective":
+			communication.shareElement("id_objective", -1);
+			this.setChanged();
+			this.notifyObservers("modifyObjective");
 			break;
 		case "activity":
+			this.setChanged();
+			this.notifyObservers("modifyActivity");
 			break;
 		case "task":
+			this.setChanged();
+			this.notifyObservers("modifyTask");
 			break;
 		case "objective":
+			this.setChanged();
+			this.notifyObservers("modifyObjective");
 			break;
 		default:
 			break;

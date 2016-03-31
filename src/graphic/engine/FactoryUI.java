@@ -3,7 +3,6 @@ package graphic.engine;
 import java.util.HashMap;
 import java.util.Map;
 
-import graphic.ui.AdvertisementUI;
 import graphic.ui.CreateAccountUI;
 import graphic.ui.EditSellerUI;
 import graphic.ui.LoginUI;
@@ -16,6 +15,9 @@ import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
 import graphic.ui.user.ActivityPanelUI;
+import graphic.ui.user.ModifyActivityUI;
+import graphic.ui.user.ModifyObjectiveUI;
+import graphic.ui.user.ModifyTaskUI;
 //import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
@@ -31,7 +33,6 @@ public class FactoryUI {
 	public FactoryUI() {
 		this.ui.put("login", LoginUI.class);
 		this.ui.put("logout", LogoutUI.class);
-		this.ui.put("advertisement", AdvertisementUI.class);
 		this.ui.put("createAccount", CreateAccountUI.class);
 		this.ui.put("navBar", NavBarUI.class);
 		this.ui.put("account", AccountUI.class);
@@ -48,6 +49,9 @@ public class FactoryUI {
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 		this.ui.put("updateAccount", UpdateAccountUI.class);
 		this.ui.put("activityPanel", ActivityPanelUI.class);
+		this.ui.put("modifyActivity", ModifyActivityUI.class);
+		this.ui.put("modifyTask", ModifyTaskUI.class);
+		this.ui.put("modifyObjective", ModifyObjectiveUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

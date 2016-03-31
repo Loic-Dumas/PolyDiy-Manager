@@ -72,7 +72,7 @@ public class JDBCActivity extends Activity {
 	@Override
 	public void insert() throws Exception {
 		if (!this.isExisting()) {
-			this.component.insert("activity_category(title, description, deadline, id_activity_category, id_user)", 
+			this.component.insert("activity(title, description, deadline, id_activity_category, id_user)", 
 									"'" + this.title + "', '" + this.description + "', '" + this.deadline + "','"
 									+ this.idActivityCategory + "','" + this.idUser + "'");
 		} else {
@@ -95,6 +95,12 @@ public class JDBCActivity extends Activity {
 	@Override
 	public void delete() throws Exception {
 		if (this.isExisting()) {
+			this.component.delete("objective",
+					new SQLCondition(Arrays.asList("facultativ_id_activity"),
+									Arrays.asList(Integer.toString(this.idActivity))));
+			this.component.delete("task",
+					new SQLCondition(Arrays.asList("id_activity"),
+									Arrays.asList(Integer.toString(this.idActivity))));
 			this.component.delete("activity",
 					new SQLCondition(Arrays.asList("id_activity"), 
 									Arrays.asList(Integer.toString(this.idActivity))));
