@@ -4,10 +4,17 @@ package persistent.abstractclass;
  * An account contain a login, a password and and ID.
  * The constructor need a login (String).
  * 
- * @author loicd_000
+ * @author loicd_000 
  * @version 1.0
  * @since 2016-03-02
  */
+
+/**
+ * @author Faustine
+ * @version 2.0
+ * @since 2016-03-24
+ */
+
 public abstract class Account implements InterfaceModel { 
 	
 	protected String login = "";
@@ -23,36 +30,63 @@ public abstract class Account implements InterfaceModel {
 	public Account() {
 	}
 	
+	/**
+	 * @return the login of the account 
+	 */
 	public String getLogin() {
 		return this.login;
 	}
 	
+	/**
+	 * @return the password of the account 
+	 */
 	public String getPassword() {
 		return this.password;
 	}
 	
+	/**
+	 * @return the id of the account
+	 */
 	public int getID() {
 		return this.ID;
 	}
 	
+	/**
+	 * @return the email of the account
+	 */
 	public String getEmail() {
 		return this.email;
 	}
 	
+	/**
+	 * @return the first name of the account
+	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 	
+	/**
+	 * @return the last name of the account
+	 */
 	public String getLastName() {
 		return this.lastName;
 	}
 	
+	/**
+	 * @return the address city of the account
+	 */
 	public String getAddressCity() {
 		return this.addressCity;
 	}
+	/**
+	 * @return the address road of the account
+	 */
 	public String getAddressRoad() {
 		return this.addressRoad;
 	}
+	/**
+	 * @return the address postal of the account
+	 */
 	public String getAddressPostal() {
 		return this.addressPostal;
 	}

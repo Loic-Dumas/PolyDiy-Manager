@@ -33,7 +33,7 @@ public class CreateAccountUI extends AbstractUI {
 	/**
 	 * Panel to create an Account.
 	 * if a user wants to create an account he must put his informations
-	 * in all the textfield
+	 * in all the textfields
 	 * @param communication
 	 */
 
