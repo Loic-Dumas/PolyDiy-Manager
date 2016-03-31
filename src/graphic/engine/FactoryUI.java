@@ -15,6 +15,7 @@ import graphic.ui.account.UpdateAccountUI;
 import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
 import graphic.ui.seller.SellerUI;
+import graphic.ui.user.ActivityPanelUI;
 //import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
@@ -46,6 +47,7 @@ public class FactoryUI {
 		this.ui.put("productInShop", ProductInShopUI.class);
 		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
 		this.ui.put("updateAccount", UpdateAccountUI.class);
+		this.ui.put("activityPanel", ActivityPanelUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

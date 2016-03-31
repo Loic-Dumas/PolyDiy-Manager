@@ -3,7 +3,7 @@ package persistent;
 import common.InterfaceModel;
 
 public abstract class Objective implements InterfaceModel {
-	protected int idOjective = -1;
+	protected int idObjective = -1;
 	protected String title = "";
 	protected String description = "";
 	protected String deadline = "";
@@ -11,8 +11,8 @@ public abstract class Objective implements InterfaceModel {
 	protected int idCategory = -1;
 	protected int idUser = -1;
 	
-	public int getIdOjective() {
-		return this.idOjective;
+	public int getIdObjective() {
+		return this.idObjective;
 	}
 	
 	public String getTitle() {
@@ -39,8 +39,8 @@ public abstract class Objective implements InterfaceModel {
 		return this.idUser;
 	}
 	
-	public void setIdOjective(int idOjective) {
-		this.idOjective = idOjective;
+	public void setIdObjective(int idOjective) {
+		this.idObjective = idOjective;
 	}
 	
 	public void setTitle(String title) {

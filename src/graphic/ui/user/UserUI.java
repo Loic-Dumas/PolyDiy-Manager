@@ -17,6 +17,7 @@ import graphic.engine.UIMessage;
 public class UserUI extends AbstractUI {
 	private JButton myList = new JButton();
 	private JButton shop = new JButton();
+	private JButton activity = new JButton();
     private JPanel journalPanel = new JPanel(); 
 	
 	public UserUI(UIMessage communication) {
@@ -36,6 +37,12 @@ public class UserUI extends AbstractUI {
 		this.shop.setBounds(160, 2, 150, 23);
 		this.panel.add(shop);
 		this.shop.addActionListener(this);
+		
+		// activity button
+		this.activity.setText("Activity panel");
+		this.activity.setBounds(318, 2, 150, 23);
+		this.panel.add(activity);
+		this.activity.addActionListener(this);
 
 		// Journal
 		JLabel journal = new JLabel();
@@ -62,7 +69,9 @@ public class UserUI extends AbstractUI {
 			result = "wishLists";
 		} else if (arg0.getActionCommand().equals("PDM - Shop")) {
 			result = "PDMShop";
-		} 
+		} else if (arg0.getActionCommand().equals("Activity panel")) {
+			result = "activityPanel";
+		}
 
 		// now if there are a change of UI, we notifyObservers
 		if (!result.equals("")) {
