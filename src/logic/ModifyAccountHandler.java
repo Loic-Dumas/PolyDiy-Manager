@@ -47,5 +47,25 @@ public class ModifyAccountHandler {
 	return firstNameBD;
 	}
 	
+	public String getAddressRoad(int ID) throws Exception{
+		JDBCSessionFactory factory = new JDBCSessionFactory();
+		Account account = factory.buildAccountWithID(ID);
+		String addressRoadBD = account.getAddressRoad();
+	return addressRoadBD;
+	}
+	
+	public String getAddressCity(int ID) throws Exception{
+		JDBCSessionFactory factory = new JDBCSessionFactory();
+		Account account = factory.buildAccountWithID(ID);
+		String addressCityBD = account.getAddressCity();
+	return addressCityBD;
+	}
+	
+	public String getAddressPostal(int ID) throws Exception{
+		JDBCSessionFactory factory = new JDBCSessionFactory();
+		Account account = factory.buildAccountWithID(ID);
+		String addressPostalBD = account.getAddressPostal();
+	return addressPostalBD;
+	}
 	
 }
