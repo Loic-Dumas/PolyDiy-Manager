@@ -8,11 +8,14 @@ import graphic.ui.CreateAccountUI;
 import graphic.ui.LoginUI;
 import graphic.ui.LogoutUI;
 import graphic.ui.NavBarUI;
+import graphic.ui.UpdateAccountUI;
 import graphic.ui.account.AccountUI;
+import graphic.ui.account.UpdateAccount_welcomeUI;
 import graphic.ui.admin.AdminUI;
-//import graphic.ui.seller.EditSellerUI;
+import graphic.ui.seller.ManageShopUI;
 import graphic.ui.seller.SellerUI;
 import graphic.ui.seller.UpdateSellerUI;
+//import graphic.ui.user.PDMShopUI;
 import graphic.ui.user.UserUI;
 import graphic.ui.user.list.CartUI;
 import graphic.ui.user.list.WishListUI;
@@ -40,6 +43,9 @@ public class FactoryUI {
 		this.ui.put("cart", CartUI.class);
 		this.ui.put("update", UpdateSellerUI.class);
 		this.ui.put("productInShop", ProductInShopUI.class);
+		this.ui.put("account_welcome", UpdateAccount_welcomeUI.class);
+		this.ui.put("updateAccount", UpdateAccountUI.class);
+		this.ui.put("manageShopUI", ManageShopUI.class);
 	}
 	
 	@SuppressWarnings("unchecked")

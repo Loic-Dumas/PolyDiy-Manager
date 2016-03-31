@@ -15,6 +15,7 @@ import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.engine.UIMessage;
+import graphic.ui.seller.ManageShopUI;
 
 /**
  * 
@@ -28,9 +29,9 @@ public class Application extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	
 	Map<String, AbstractUI> panels = new HashMap<String, AbstractUI>();
-	
+
 	UIMessage message = new UIMessage();
-	
+
 	public Application()
 	{
 		super();
@@ -79,7 +80,9 @@ public class Application extends JFrame implements Observer{
 				break;
 			case "edit":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("update", BorderLayout.CENTER);
+				//this.addUI("manageShopUI", BorderLayout.CENTER);
 				break;
 			case "update":
 				this.clearUI();
@@ -89,8 +92,12 @@ public class Application extends JFrame implements Observer{
 			case "account":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
-				this.addUI("account", BorderLayout.CENTER);
+				this.addUI("account_welcome", BorderLayout.CENTER);
 				break;
+			case "updateAccount":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("updateAccount", BorderLayout.CENTER);
 			case "user":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
@@ -135,6 +142,11 @@ public class Application extends JFrame implements Observer{
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("cart", BorderLayout.CENTER);
+				break;
+			case "manage":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("manageShopUI", BorderLayout.CENTER);
 				break;
 			default:
 				if (((String) arg).contains("wishList selected :")) {

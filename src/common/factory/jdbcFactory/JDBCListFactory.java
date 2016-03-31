@@ -1,4 +1,9 @@
 package common.factory.jdbcFactory;
+/**
+ * @author nassim vachor, loic
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;

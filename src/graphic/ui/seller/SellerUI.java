@@ -87,21 +87,23 @@ public class SellerUI extends AbstractUI {
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
+		}
 		//manage Shop
-		if (arg0.getSource()== manage) {
-				try {
-					this.notifyObservers("edit");
-					this.setChanged();
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				}
+		if (arg0.getActionCommand()== "Manage Shop") {
+			try {
+				this.setChanged();
+				this.notifyObservers("manage");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 		// back to logout
 		if (arg0.getActionCommand().equals("Back to logout")) {
 			action = "back to logout";
-			} 
-	
-			
-		
+		}
+
+
+
 		// we have an action, so we notify observers.
 		if (!action.equals("")) {
 			try {
@@ -115,7 +117,4 @@ public class SellerUI extends AbstractUI {
 			System.err.println("Button action not catch.");
 		}
 	}
-
-}
-}
 }

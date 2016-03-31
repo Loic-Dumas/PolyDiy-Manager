@@ -16,7 +16,7 @@ public class FacadeEditProfil {
 		this.IDaccount = IDaccount;
 	}
 	
-public void createSeller(int ID, String nameShop, String description, String siret, String website) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
+	public void createSeller(int ID, String nameShop, String description, String siret, String website) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
 		
 		this.handler.createSeller(IDaccount, nameShop, description, siret, website);
 		

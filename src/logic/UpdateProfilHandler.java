@@ -27,9 +27,6 @@ public class UpdateProfilHandler {
 		this.seller = ProfilFactory.buildSeller(ID);
 	}
 	
-	
-	
-	
 	public String getNameShop( ) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
 		
 		return  this.seller.getNameShop();
