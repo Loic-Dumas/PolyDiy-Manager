@@ -20,6 +20,12 @@ import graphic.engine.UIMessage;
 import logic.facade.list.FacadeManageCart;
 import persistent.abstractclass.list.ProductWishList;
 
+/**
+ * This view is used to display the cart.
+ * she need in communication id_user as parameter
+ * @author loicd_000
+ *
+ */
 public class CartUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton wishLists = new JButton();
@@ -32,6 +38,9 @@ public class CartUI extends AbstractUI {
 	private FacadeManageCart facadeList = new FacadeManageCart(); 
 
 	
+	/**
+	 * @param communication
+	 */
 	public CartUI(UIMessage communication) {
 		super(communication);
 		this.facadeList.createAndGetCart((int)this.communication.getElement("id_user"));

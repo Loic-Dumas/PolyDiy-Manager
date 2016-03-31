@@ -22,6 +22,12 @@ import graphic.engine.UIMessage;
 import logic.facade.shop.FacadePDMShop;
 import persistent.abstractclass.Product;
 
+/**
+ * this is the view for the shop.
+ * Displays all the product available in shop
+ * @author loicd_000
+ *
+ */
 public class PDMShopUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton cart = new JButton();

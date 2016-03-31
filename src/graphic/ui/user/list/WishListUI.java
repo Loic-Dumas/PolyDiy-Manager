@@ -20,6 +20,12 @@ import graphic.engine.UIMessage;
 import logic.facade.list.FacadeManageWishList;
 import persistent.abstractclass.list.ProductWishList;
 
+/**
+ * this is the view for a wishList
+ * needs in communication id_wishlist as parameter
+ * @author loicd_000
+ *
+ */
 public class WishListUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton backWishLists = new JButton();
