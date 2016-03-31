@@ -19,6 +19,12 @@ import logic.facade.list.FacadeSetInfoWishList;
 import logic.facade.shop.FacadeProductInShop;
 import persistent.abstractclass.Product;
 
+/**
+ * this is the view for product.
+ * need id_product and id_user from communication
+ * @author loicd_000
+ *
+ */
 public class ProductInShopUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton backShop = new JButton();
@@ -38,6 +44,10 @@ public class ProductInShopUI extends AbstractUI {
 
 	Border border = BorderFactory.createLineBorder(Color.black, 1);
 
+	/**
+	 * Constructor of the view of a ProductInShop
+	 * @param communication
+	 */
 	public ProductInShopUI(UIMessage communication) {
 		super(communication);
 

@@ -22,6 +22,12 @@ import graphic.engine.UIMessage;
 import logic.facade.list.FacadeManageSetWishList;
 import persistent.abstractclass.list.WishList;
 
+/**
+ * this view displays all the wishlist.
+ * needs in communication id_user as parameter
+ * @author loicd_000
+ *
+ */
 public class WishListsUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton wishLists = new JButton();

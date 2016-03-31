@@ -6,6 +6,8 @@ import common.set.SetWithKey;
 import persistent.abstractclass.InterfaceModel;
 
 /**
+ * this class is for a wishlist, extends from SetWithKey<ProductWishList>
+ * to contains ProductWishist
  * @author loicd_000
  *
  */
