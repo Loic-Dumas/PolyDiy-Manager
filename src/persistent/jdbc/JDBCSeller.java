@@ -22,15 +22,30 @@ import persistent.abstractclass.Seller;
 
 public class JDBCSeller extends Seller{
 	private JDBCComponent component = null;
-	
+
+	/**
+	 * This constructor of JDBCSeller which call seller constructor.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * return Description
+	 */
 	public JDBCSeller () throws ErrorConnectionException, AlertDriver {
 		super();
 		this .component = new JDBCComponent();
 	}
+
+	/**
+	 * This is constructor of JDBCSeller with id, which is the idaccount of this seller
+	 * with this id we load all informations of seller froom DB 
+	 * 
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * @param ID
+	 */
 	public JDBCSeller(int ID) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
 		super(ID);
 		this .component = new JDBCComponent();
-		
+
 		try {
 			ResultSet result = this.component.select("*", "seller_account", "id_account = '" + this.ID + "'");
 			if (result.first()) {
@@ -46,13 +61,27 @@ public class JDBCSeller extends Seller{
 		} 
 	}
 
+	
+	/**
+	 * This method check is the seller exist in DB
+	 * 
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * @param IDProduct 
+	 * @return Boolean
+	 */
 	@Override
 	public Boolean isExisting() throws Exception {
 		ResultSet result = this.component.select("*", "Seller_account", "id_account = '" + this.ID + "'");
 		return result != null && result.first();
 	}
 
-
+	/**
+	 * This method insert row in seller table of the seller exist.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * 
+	 */
 	@Override
 	public void insert() throws Exception {
 		if(!this.isExisting()) {
@@ -61,7 +90,12 @@ public class JDBCSeller extends Seller{
 			throw new AlreadyExistTuple("Seller");
 		}
 	}
-
+	/**
+	 * This method update seller informations in DB if it exists.
+	 * @author nassim vachor
+	 * @since 2016-03-21
+	 * 
+	 */
 	@Override
 	public void update() throws Exception {
 		if(this.isExisting()) {
@@ -78,12 +112,12 @@ public class JDBCSeller extends Seller{
 	@Override
 	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void delete() throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/*@Override
@@ -94,6 +128,6 @@ public class JDBCSeller extends Seller{
 			throw new NotExistingTuple("Session");
 		}
 	}*/
-	
-	
+
+
 }

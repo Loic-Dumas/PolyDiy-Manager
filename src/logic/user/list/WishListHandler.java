@@ -16,6 +16,7 @@ import persistent.factory.jdbcFactory.JDBCProductFactory;
 
 /**
  * To handle user interactions with a wish list.
+ * (logic part)
  * @author loicd_000
  * @since 2016-03-21
  */

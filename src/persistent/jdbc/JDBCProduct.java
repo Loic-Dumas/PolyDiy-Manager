@@ -17,10 +17,20 @@ import persistent.abstractclass.Product;
 public class JDBCProduct extends Product {
 	private JDBCComponent component = null;
 
-	public JDBCProduct( int idP, String name, String description, float unitPrice, int stockQuantity, int IDSeller,
+	/**
+	 * @param idPoduct
+	 * @param name
+	 * @param description
+	 * @param unitPrice
+	 * @param stockQuantity
+	 * @param IDSeller
+	 * @param IDCategory
+	 * @param categoryName
+	 */
+	public JDBCProduct( int idPoduct, String name, String description, float unitPrice, int stockQuantity, int IDSeller,
 			int IDCategory, String categoryName) {
 		super(IDSeller);
-		this.setIDProduct(idP);
+		this.setIDProduct(idPoduct);
 		this.setName(name);
 		this.setDescription(description);
 		this.setUnitPrice(unitPrice);
@@ -30,18 +40,22 @@ public class JDBCProduct extends Product {
 		this.setCategoryName(categoryName);
 	}
 	
+	/**
+	 * @param IDProduct
+	 * @param IDSeller
+	 * @throws ErrorConnectionException
+	 * @throws AlertDriver
+	 */
 	public JDBCProduct(int IDProduct, int IDSeller) throws ErrorConnectionException, AlertDriver {
 		super(IDProduct, IDSeller);
 		
 		this.component = new JDBCComponent();
-		System.out.println("Je suis dans le JDBCProduct");
 
 
 		ResultSet result = this.component.select("*", "product p, product_category c", "id_product = "
 		+ IDProduct  + "id_seller = "+ IDSeller + " AND c.id_category = p.id_category");
 
 			
-		System.out.println("JDBCProduct j'ai passé le select");
 		try {
 			if (result.first()) {
 				// load informations
@@ -62,6 +76,11 @@ public class JDBCProduct extends Product {
 	
 	
 	
+	/**
+	 * @param IDProduct
+	 * @throws ErrorConnectionException
+	 * @throws AlertDriver
+	 */
 	public JDBCProduct(int IDProduct) throws ErrorConnectionException, AlertDriver {
 		super(IDProduct);
 		
@@ -88,6 +107,9 @@ public class JDBCProduct extends Product {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#isExisting()
+	 */
 	@Override
 	public Boolean isExisting() throws Exception {
 		ResultSet result = this.component.select("*", "Product", "id_product = " + this.IDProduct);
@@ -121,6 +143,12 @@ public class JDBCProduct extends Product {
 
 	}
 
+	/**
+	 * @param name
+	 * @param value
+	 * @throws LoadFromStringKeyException
+	 * @throws NotUniqueAttribute
+	 */
 	public void loadFromStringKey(String name, String value) throws LoadFromStringKeyException, NotUniqueAttribute {
 		ResultSet result = this.component.select("*", "product", value + " = '" + value + "'");
 
@@ -146,6 +174,9 @@ public class JDBCProduct extends Product {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#insert()
+	 */
 	@Override
 	public void insert() throws Exception {
 		if (!this.isExisting()) {
@@ -156,6 +187,9 @@ public class JDBCProduct extends Product {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#update()
+	 */
 	@Override
 	public void update() throws Exception {
 		if (this.isExisting()) {
@@ -168,6 +202,9 @@ public class JDBCProduct extends Product {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#delete()
+	 */
 	@Override
 	public void delete() throws Exception {
 		if (this.isExisting()) {
@@ -177,11 +214,17 @@ public class JDBCProduct extends Product {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#hasChanged()
+	 */
 	@Override
 	public Boolean hasChanged() throws Exception {
 		return this.hasChanged;
 	}
 
+	/* (non-Javadoc)
+	 * @see persistent.abstractclass.InterfaceModel#loadFromKeys(java.util.List, java.util.List)
+	 */
 	@Override
 	public void loadFromKeys(List<String> columnNames, List<String> columnValues) throws Exception {
 		// TODO Auto-generated method stub

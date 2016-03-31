@@ -29,7 +29,7 @@ public class UpdateAccountUI extends AbstractUI {
 	private JLabel lblNewAddresspostal = new JLabel();
 	
 	/**
-	 * Create the panel ModifyIdentityUI.
+	 * Create the panel UpdateAccountUI.
 	 * Here you can modify your login, last name, first name
 	 * and your address.
 	 */
@@ -137,6 +137,7 @@ public class UpdateAccountUI extends AbstractUI {
 
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeModifyAccount facade = new FacadeModifyAccount();

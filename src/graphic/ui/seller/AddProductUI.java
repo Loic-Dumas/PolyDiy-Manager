@@ -28,7 +28,7 @@ public class AddProductUI extends AbstractUI{
 		super(communication);
 			//this.nameShop.setPreferredSize(new Dimension(150, 30));
 		this.panel.setLayout(null);
-		label = new JLabel("Name of Produc");
+		label = new JLabel("Name of Product");
 		this.label.setBounds(123, 80, 100, 14);
 		this.panel.add(label);
 		name = new JTextField();
