@@ -1,4 +1,10 @@
-package graphic.ui;
+package graphic.ui.seller;
+/**
+ * 
+ * @author nassim vachor
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 
 import java.awt.event.ActionEvent;
@@ -58,12 +64,12 @@ public class UpdateSellerUI extends AbstractUI {
 		this.update.setText("Update");
 		
 		//this.update.setPreferredSize(new Dimension(150, 30));
-		 this.update.setBounds(123, 240, 182, 20);
+		 this.update.setBounds(143, 240, 120, 30);
 		 this.panel.add(this.update);		
 		this.update.addActionListener(this);
 		this.cancel.setText("Cancel");
 		//this.cancel.setPreferredSize(new Dimension(150, 30));
-		this.cancel.setBounds(320, 240, 182, 20);
+		this.cancel.setBounds(340, 240, 120, 30);
 		this.panel.add(this.cancel);
 		this.cancel.addActionListener(this);
 		this.panel.setVisible(true);
@@ -73,16 +79,15 @@ public class UpdateSellerUI extends AbstractUI {
 	public void actionPerformed(ActionEvent arg0) {
 		FacadeEditProfil facade = new FacadeEditProfil((int)this.communication.getElement("id_account"));
 		try {
-			if (arg0.getSource()==
-					update){
+			if (arg0.getSource()==update){
 			facade.createSeller((int)this.communication.getElement("id_account"), this.nameShop.getText(), this.description.getText(), this.siret.getText(), this.website.getText());
 			facade.Validate();
 			this.setChanged();
-			this.notifyObservers("edit");
+			this.notifyObservers("seller");
 			}
 			if (arg0.getSource()== cancel){
 				this.setChanged();
-				this.notifyObservers("update");
+				this.notifyObservers("seller");
 				
 			}
 		} catch (Exception e) {

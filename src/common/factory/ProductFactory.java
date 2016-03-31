@@ -1,4 +1,9 @@
 package common.factory;
+/**
+ * @author nassim vachor
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
@@ -9,8 +14,9 @@ import persistent.list.ProductWishList;
 public abstract class ProductFactory {
 	public abstract Product buildProduct(int ID)
 			throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
-
-	public abstract Product buildProduct(int IDProduct, String name, String description, float unitPrice,
+	public abstract Product buildProduct(int ID, int IDSeller)
+			throws ErrorConnectionException, UnknownIDProductException, AlertDriver;
+	public abstract Product buildProduct( int idP, String name, String description, float unitPrice,
 			int stockQuantity, int IDSeller, int IDCategory, String categoryName);
 
 	public abstract ProductWishList buildProductWishList(int ID, int IDWishList, int quantity, float unitPrice)

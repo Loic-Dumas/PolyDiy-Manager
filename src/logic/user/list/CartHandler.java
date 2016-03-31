@@ -1,10 +1,11 @@
-package logic.user;
+package logic.user.list;
 
 import java.util.Iterator;
 import java.util.Set;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.exception.NoCartException;
 import common.exception.UnknownIDProductException;
 import common.factory.ListFactory;
 import common.factory.ProductFactory;
@@ -33,6 +34,8 @@ public class CartHandler {
 					this.cart = listFactory.buildCart(IDUser);
 				} catch (AlertDriver e) {
 					e.printStackTrace();
+				} catch (NoCartException e) {
+					
 				}
 			} catch (ErrorConnectionException e) {
 				System.err.println("Impossible to return the cart.");
@@ -140,19 +143,9 @@ public class CartHandler {
 		try {
 			this.cart.getElementByKey(stringIDProduct).delete();
 		} catch (Exception e1) {
-			// TODO gerer les exceptions de ce remove
 			e1.printStackTrace();
 		}
 		
-		this.cart.removeElementByKey(stringIDProduct);
-		
-		//now we update the wishList
-		try {
-			this.cart.update();
-		} catch (Exception e) {
-			// TODO gerer les exceptions de ce remove
-			e.printStackTrace();
-		}
 	}
 	
 

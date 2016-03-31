@@ -2,7 +2,7 @@ package common.facade.list;
 
 import java.util.Set;
 
-import logic.user.CartHandler;
+import logic.user.list.CartHandler;
 import persistent.list.Cart;
 import persistent.list.ProductWishList;
 

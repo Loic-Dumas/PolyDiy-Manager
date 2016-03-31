@@ -16,7 +16,7 @@ import common.jdbc.JDBCComponent;
  * The JDBC object of a product.
  * Request to the db the name, description, unitPrice and stockQuantity.
  * 
- * @author LoicDumas02
+ * @author LoicDumas02, nassim vachor
  * @version 1.0
  * @since 2016-03-19
  */
@@ -25,9 +25,10 @@ import persistent.Product;
 public class JDBCProduct extends Product {
 	private JDBCComponent component = null;
 
-	public JDBCProduct(int IDProduct, String name, String description, float unitPrice, int stockQuantity, int IDSeller,
+	public JDBCProduct( int idP, String name, String description, float unitPrice, int stockQuantity, int IDSeller,
 			int IDCategory, String categoryName) {
-		super(IDProduct);
+		super(IDSeller);
+		this.setIDProduct(idP);
 		this.setName(name);
 		this.setDescription(description);
 		this.setUnitPrice(unitPrice);
@@ -36,6 +37,39 @@ public class JDBCProduct extends Product {
 		this.setIDCategory(IDCategory);
 		this.setCategoryName(categoryName);
 	}
+	
+	public JDBCProduct(int IDProduct, int IDSeller) throws ErrorConnectionException, AlertDriver {
+		super(IDProduct, IDSeller);
+		
+		this.component = new JDBCComponent();
+		System.out.println("Je suis dans le JDBCProduct");
+
+
+		ResultSet result = this.component.select("*", "product p, product_category c", "id_product = "
+		+ IDProduct  + "id_seller = "+ IDSeller + " AND c.id_category = p.id_category");
+
+			
+		System.out.println("JDBCProduct j'ai passé le select");
+		try {
+			if (result.first()) {
+				// load informations
+				this.IDProduct = result.getInt("id_product");
+				this.name = result.getString("name");
+				this.description = result.getString("description");
+				this.unitPrice = result.getFloat("unitPrice");
+				this.stockQuantity = result.getInt("stockQuantity");
+				this.IDCategory = result.getInt("id_seller");
+				this.categoryName = result.getString("title");
+
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
 	public JDBCProduct(int IDProduct) throws ErrorConnectionException, AlertDriver {
 		super(IDProduct);
 		
@@ -75,7 +109,7 @@ public class JDBCProduct extends Product {
 		try {
 			if (result.first()) {
 				if (result.next()) {
-					throw new NotUniqueAttribute(name, "Account");
+					throw new NotUniqueAttribute(name, "Product");
 				} else {
 					result.first();
 				}
@@ -101,7 +135,7 @@ public class JDBCProduct extends Product {
 		try {
 			if (result.first()) {
 				if (result.next()) {
-					throw new NotUniqueAttribute(name, "Account");
+					throw new NotUniqueAttribute(name, "Product");
 				} else {
 					result.first();
 				}
@@ -136,7 +170,7 @@ public class JDBCProduct extends Product {
 			this.component.update(
 					"(name, description, unitPrice, stockQuantity) = (" + this.name + "," + this.description + ","
 							+ this.unitPrice + "," + this.stockQuantity + ")",
-					"Account", "id_product = " + this.IDProduct);
+					"Product", "id_product = " + this.IDProduct);
 		} else {
 			throw new NotExistingTuple("Product");
 		}

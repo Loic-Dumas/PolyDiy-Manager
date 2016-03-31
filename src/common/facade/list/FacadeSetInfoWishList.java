@@ -2,7 +2,7 @@ package common.facade.list;
 
 import java.util.Set;
 
-import logic.user.SetInfoWishListHandler;
+import logic.user.list.SetInfoWishListHandler;
 import persistent.list.SetInfoWishList;
 
 public class FacadeSetInfoWishList {

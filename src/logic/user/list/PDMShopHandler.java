@@ -1,4 +1,4 @@
-package logic.user;
+package logic.user.list;
 
 import java.util.Set;
 
@@ -72,8 +72,6 @@ public class PDMShopHandler {
 		
 		return this.setProduct.getElementByKey(IDProduct);
 	}
-	
-
 	
 	
 	/**

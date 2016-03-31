@@ -27,6 +27,11 @@ public abstract class Product implements InterfaceModel {
 		this.IDProduct = ID;
 		this.hasChanged = true;
 	}
+	public Product (int ID, int IDSeller){
+		this.IDProduct= ID;
+		this.IDSeller = IDSeller;
+		this.hasChanged = true;
+	}
 
 	public int getIDProduct() {
 		return this.IDProduct;

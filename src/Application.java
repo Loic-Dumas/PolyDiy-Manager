@@ -16,6 +16,7 @@ import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.engine.UIMessage;
+import graphic.ui.seller.ManageShopUI;
 
 /**
  * 
@@ -80,7 +81,9 @@ public class Application extends JFrame implements Observer{
 				break;
 			case "edit":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("update", BorderLayout.CENTER);
+				//this.addUI("manageShopUI", BorderLayout.CENTER);
 				break;
 			case "update":
 				this.clearUI();
@@ -146,6 +149,11 @@ public class Application extends JFrame implements Observer{
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("activityPanel", BorderLayout.CENTER);
+				break;
+			case "manage":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("manageShopUI", BorderLayout.CENTER);
 				break;
 			default:
 				if (((String) arg).contains("wishList selected :")) {

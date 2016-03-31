@@ -1,7 +1,8 @@
-package logic.user;
+package logic.user.list;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.exception.NoCartException;
 import common.exception.UnknownIDProductException;
 import common.factory.ListFactory;
 import common.factory.ProductFactory;
@@ -60,7 +61,12 @@ public class ProductInShopHandler {
 //			}
 			
 			// we create the cart
-			this.cart = this.listFactory.buildCart(IDUser);
+			try {
+				this.cart = this.listFactory.buildCart(IDUser);
+			} catch (NoCartException e1) {
+				System.err.println("Il n'y a pas de Cart !");
+				//e1.printStackTrace();
+			}
 			
 			//if the cart already have the product, we increment the quantity of this product.
 			if (cart.containsKey(String.valueOf(IDProduct))) {
@@ -103,6 +109,8 @@ public class ProductInShopHandler {
 	 */
 	public void addToWishList(int IDProduct, float unitPrice, int quantity, int IDWishList) {
 		try {
+			
+			
 			this.wishList = this.listFactory.buildWishList(IDWishList);
 			
 			if (wishList.containsKey(String.valueOf(IDProduct))) {

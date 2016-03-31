@@ -40,11 +40,11 @@ public class ProductInShopUI extends AbstractUI {
 
 	public ProductInShopUI(UIMessage communication) {
 		super(communication);
-		
+
 		int IDProduct = (int) this.communication.getElement("id_product");
 		int IDUser = (int) this.communication.getElement("id_user");
-		Product product = this.facadeProduct.createAndGetProduct(IDProduct);
 		
+		Product product = this.facadeProduct.createAndGetProduct(IDProduct);
 		this.facadeSetInfoWishList.createAndGetExistingWishList(IDUser);
 		
 
@@ -159,10 +159,6 @@ public class ProductInShopUI extends AbstractUI {
 				
 				int IDProduct = (int) this.communication.getElement("id_product");
 				Product product = this.facadeProduct.createAndGetProduct(IDProduct);
-				
-//				this.facadeProduct.addToCart(product.getIDProduct(), product.getUnitPrice(), 
-//						Integer.parseInt(this.quantityTextField.getText()), IDUser);
-				
 				this.facadeProduct.addToWishList(IDProduct, product.getUnitPrice(), 
 						Integer.parseInt(this.quantityTextField.getText()), 
 						this.facadeSetInfoWishList.getIDWishList((String) this.selectWishList.getSelectedItem()));

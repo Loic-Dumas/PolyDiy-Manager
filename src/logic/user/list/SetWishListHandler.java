@@ -1,4 +1,4 @@
-package logic.user;
+package logic.user.list;
 
 import java.util.Set;
 

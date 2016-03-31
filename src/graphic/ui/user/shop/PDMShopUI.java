@@ -26,9 +26,13 @@ public class PDMShopUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton cart = new JButton();
 	private JButton searchProductButton = new JButton();
+
 	private JLabel welcome = new JLabel();
+
 	private JTextField searchProductFiekd = new JTextField();
+
 	private JComboBox<String> selectCategory = new JComboBox<String>();
+
 	private JTable table = new JTable();
 	private JPanel tablePanel = new JPanel();
 
@@ -79,6 +83,12 @@ public class PDMShopUI extends AbstractUI {
 		int nbOfColumn = 2;
 		String[] title = { "Product", "Price", " Stock", "ID" };
 		Object[][] data = new Object[nbOfRow][nbOfColumn];
+
+		// for (int i = 0 ; i < nbOfRow ; i++) {
+		// Object[] newLine = { "Lama " + i, "24", "15 €", "155"};
+		// data[i] = newLine;
+		//
+		// }
 
 		int j = 0;
 		for (Iterator<String> i = this.facadeList.getListID().iterator(); i.hasNext();) {
@@ -166,9 +176,9 @@ public class PDMShopUI extends AbstractUI {
 	}
 
 	public String inStock(int stock) {
-		String result = "Not available";
+		String result = "not in stock";
 		if (stock > 0) {
-			result = "Available";
+			result = "in stock";
 		}
 		return result;
 	}

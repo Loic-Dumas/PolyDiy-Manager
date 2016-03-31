@@ -53,6 +53,18 @@ public class JDBCCart extends Cart {
 						e.printStackTrace();
 					} 
 				} 
+			} else {
+				this.component.insert("wishlist(id_user, label)", "'" + this.IDUser + "', 'Cart'");
+				result = this.component.select(
+						"*", 
+						"wishlist", 
+						"id_user = '" + IDUser + "' AND label = 'Cart' " );
+				
+				if (result.first()) {
+					this.IDWishList = result.getInt("id_wishlist");
+					this.IDUser = IDUser;
+					this.label = "Cart";
+				} 
 			}
 			
 			
@@ -80,7 +92,7 @@ public class JDBCCart extends Cart {
 
 	@Override
 	public void insert() throws Exception {
-		// TODO JDBCCart Auto-generated method stub
+		
 		
 	}
 

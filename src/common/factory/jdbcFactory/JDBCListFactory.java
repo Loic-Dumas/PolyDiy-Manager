@@ -1,7 +1,13 @@
 package common.factory.jdbcFactory;
+/**
+ * @author nassim vachor, loic
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
+import common.exception.NoCartException;
 import common.exception.needHaveBothIDUserAndLabelException;
 import common.exception.wishListAlreadyExistException;
 import common.factory.ListFactory;
@@ -50,7 +56,7 @@ public class JDBCListFactory extends ListFactory{
 	}
 
 	@Override
-	public Cart buildCart(int IDUser) throws ErrorConnectionException, AlertDriver {
+	public Cart buildCart(int IDUser) throws ErrorConnectionException, AlertDriver, NoCartException {
 		return new JDBCCart(IDUser);
 	}
 
