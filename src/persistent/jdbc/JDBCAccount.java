@@ -12,7 +12,7 @@ import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.Account;
+import persistent.abstractclass.Account;
 
 /**
  * This class extends from account. 
@@ -102,9 +102,8 @@ public class JDBCAccount extends Account {
 	public void update() throws Exception {
 		if(this.isExisting()) {
 			try {
-				this.component.update("(login, password, email, first_name, last_name) = (" + this.login + "," 
-				                       + this.password + "," + this.email + "," + this.firstName + "," + this.lastName + ")",
-				                       "Account", new SQLCondition(Arrays.asList("id_account"),
+				this.component.update("(login, password, email, first_name, last_name, road, city, postal_code) = ( '" + this.login + "' , '" + this.password + "' , '" + this.email + "' , '" + this.firstName + "' , '" + this.lastName + "' , '" + this.addressRoad + "' , '" + this.addressPostal + "' , '" + this.addressCity + "' )",
+										"Account", new SQLCondition(Arrays.asList("id_account"),
 				                    		   						Arrays.asList(Integer.toString(this.ID))));
 			} catch (Exception e) {
 				e.printStackTrace();

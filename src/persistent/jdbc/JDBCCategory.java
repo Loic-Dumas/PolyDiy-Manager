@@ -12,7 +12,7 @@ import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.Category;
+import persistent.abstractclass.Category;
 
 public class JDBCCategory extends Category {
 	private JDBCComponent component = null;

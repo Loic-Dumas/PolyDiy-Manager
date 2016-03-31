@@ -12,7 +12,7 @@ import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.ActivityCategory;
+import persistent.abstractclass.ActivityCategory;
 
 public class JDBCActivityCategory extends ActivityCategory {
 	private JDBCComponent component = null;
@@ -49,16 +49,17 @@ public class JDBCActivityCategory extends ActivityCategory {
 
 		if (result != null) {
 			try {
-				result.first();
-				if (result.next()) {
-					throw new NotUniqueAttribute(columnNames, "activity_category");
-				} else {
-					result.first();
+				if(result.first()) {
+					if (result.next()) {
+						throw new NotUniqueAttribute(columnNames, "activity_category");
+					} else {
+						result.first();
+					}
+					this.idActivityCategory = result.getInt("id_activity_category");
+					this.label = result.getString("label");
+					this.shortDescription = result.getString("short_description");
+					this.description = result.getString("description");
 				}
-				this.idActivityCategory = result.getInt("id_activity_category");
-				this.label = result.getString("label");
-				this.shortDescription = result.getString("short_description");
-				this.description = result.getString("description");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

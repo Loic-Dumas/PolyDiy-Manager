@@ -11,10 +11,10 @@ import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDProductException;
 import common.exception.needHaveBothIDUserAndLabelException;
 import common.exception.wishListAlreadyExistException;
-import common.factory.ProductFactory;
-import common.factory.jdbcFactory.JDBCProductFactory;
 import common.jdbc.JDBCComponent;
-import persistent.list.WishList;
+import persistent.abstractclass.list.WishList;
+import persistent.factory.ProductFactory;
+import persistent.factory.jdbcFactory.JDBCProductFactory;
 
 public class JDBCWishList extends WishList {
 	private JDBCComponent component = null;

@@ -7,7 +7,7 @@ import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.jdbc.JDBCComponent;
-import persistent.User;
+import persistent.abstractclass.User;
 
 public class JDBCUser extends User {
 	private JDBCComponent component = null;

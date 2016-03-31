@@ -17,7 +17,7 @@ import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.UnknownIDSellerException;
 import common.jdbc.JDBCComponent;
-import persistent.Seller;
+import persistent.abstractclass.Seller;
 
 
 public class JDBCSeller extends Seller{
@@ -33,6 +33,7 @@ public class JDBCSeller extends Seller{
 		
 		try {
 			ResultSet result = this.component.select("*", "seller_account", "id_account = '" + this.ID + "'");
+			System.out.println(result);
 			if (result.first()) {
 				this.nameShop = result.getString("nameShop");
 				this.description = result.getString("description");

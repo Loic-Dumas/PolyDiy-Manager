@@ -9,13 +9,12 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 
 import common.exception.ErrorConnectionException;
-import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeSession;
 
 /**
  * 
@@ -36,7 +35,7 @@ public class Application extends JFrame implements Observer{
 	{
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(1366, 700));
+		this.setMinimumSize(new Dimension(800, 700));
 		//this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		
@@ -74,13 +73,14 @@ public class Application extends JFrame implements Observer{
 			case "logout":
 				this.message = new UIMessage();
 				this.clearUI();
-				this.addUI("login", BorderLayout.CENTER);
-				this.addUI("createAccount", BorderLayout.EAST);
-				this.addUI("advertisement", BorderLayout.SOUTH);
+				this.addUI("login", BorderLayout.NORTH);
+				this.addUI("createAccount", BorderLayout.CENTER);
 				break;
 			case "edit":
 				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("update", BorderLayout.CENTER);
+				//this.addUI("manageShopUI", BorderLayout.CENTER);
 				break;
 			case "update":
 				this.clearUI();
@@ -146,6 +146,26 @@ public class Application extends JFrame implements Observer{
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
 				this.addUI("activityPanel", BorderLayout.CENTER);
+				break;
+			case "manage":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("manageShopUI", BorderLayout.CENTER);
+				break;
+			case "modifyActivity":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("modifyActivity", BorderLayout.CENTER);
+				break;
+			case "modifyTask":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("modifyTask", BorderLayout.CENTER);
+				break;
+			case "modifyObjective":
+				this.clearUI();
+				this.addUI("navBar", BorderLayout.NORTH);
+				this.addUI("modifyObjective", BorderLayout.CENTER);
 				break;
 			default:
 				if (((String) arg).contains("wishList selected :")) {

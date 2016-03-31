@@ -4,10 +4,10 @@ import java.util.Set;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ListFactory;
-import common.factory.jdbcFactory.JDBCListFactory;
-import persistent.Product;
-import persistent.SetProduct;
+import persistent.abstractclass.Product;
+import persistent.abstractclass.SetProduct;
+import persistent.factory.ListFactory;
+import persistent.factory.jdbcFactory.JDBCListFactory;
 
 public class PDMShopHandler {
 	protected SetProduct setProduct = null;
@@ -72,8 +72,6 @@ public class PDMShopHandler {
 		
 		return this.setProduct.getElementByKey(IDProduct);
 	}
-	
-
 	
 	
 	/**

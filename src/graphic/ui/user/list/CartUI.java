@@ -14,11 +14,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-import common.facade.list.FacadeManageCart;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.list.ProductWishList;
+import logic.facade.list.FacadeManageCart;
+import persistent.abstractclass.list.ProductWishList;
 
 public class CartUI extends AbstractUI {
 	private JButton backUser = new JButton();

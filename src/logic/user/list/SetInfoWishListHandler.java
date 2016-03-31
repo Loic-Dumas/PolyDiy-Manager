@@ -4,9 +4,9 @@ import java.util.Set;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ListFactory;
-import common.factory.jdbcFactory.JDBCListFactory;
-import persistent.list.SetInfoWishList;
+import persistent.abstractclass.list.SetInfoWishList;
+import persistent.factory.ListFactory;
+import persistent.factory.jdbcFactory.JDBCListFactory;
 
 public class SetInfoWishListHandler {
 

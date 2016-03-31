@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import common.facade.FacadeActivityPanel;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Activity;
-import persistent.Objective;
-import persistent.Task;
+import logic.facade.FacadeActivityPanel;
+import persistent.abstractclass.Activity;
+import persistent.abstractclass.Objective;
+import persistent.abstractclass.Task;
 
 public class ActivityPanelUI extends AbstractUI{
 	private JButton addActivity = new JButton("+ Activity");
@@ -85,7 +85,7 @@ public class ActivityPanelUI extends AbstractUI{
 				if (e.getClickCount() == 1) {
 					JTable target = (JTable) e.getSource();
 					int row = target.getSelectedRow();
-					int column = target.getSelectedColumn();
+					//int column = target.getSelectedColumn();
 					
 					communication.shareElement("id_activity", activities.getValueAt(row, 1));
 					actionPerformed(new ActionEvent(activitiesPanel, 0, "activity"));
@@ -124,7 +124,7 @@ public class ActivityPanelUI extends AbstractUI{
 				if (e.getClickCount() == 1) {
 					JTable target = (JTable) e.getSource();
 					int row = target.getSelectedRow();
-					int column = target.getSelectedColumn();
+					//int column = target.getSelectedColumn();
 					
 					communication.shareElement("id_task", tasks.getValueAt(row, 1));
 					actionPerformed(new ActionEvent(tasksPanel, 0, "task"));
@@ -163,7 +163,7 @@ public class ActivityPanelUI extends AbstractUI{
 				if (e.getClickCount() == 1) {
 					JTable target = (JTable) e.getSource();
 					int row = target.getSelectedRow();
-					int column = target.getSelectedColumn();
+					//int column = target.getSelectedColumn();
 					
 					communication.shareElement("id_objective", objectives.getValueAt(row, 1));
 					actionPerformed(new ActionEvent(objectivesPanel, 0, "objective"));
@@ -176,16 +176,31 @@ public class ActivityPanelUI extends AbstractUI{
 	public void actionPerformed(ActionEvent arg0) {
 		switch(arg0.getActionCommand()) {
 		case "+ Activity":
+			communication.shareElement("id_activity", -1);
+			this.setChanged();
+			this.notifyObservers("modifyActivity");
 			break;
 		case "+ Task":
+			communication.shareElement("id_task", -1);
+			this.setChanged();
+			this.notifyObservers("modifyTask");
 			break;
 		case "+ Objective":
+			communication.shareElement("id_objective", -1);
+			this.setChanged();
+			this.notifyObservers("modifyObjective");
 			break;
 		case "activity":
+			this.setChanged();
+			this.notifyObservers("modifyActivity");
 			break;
 		case "task":
+			this.setChanged();
+			this.notifyObservers("modifyTask");
 			break;
 		case "objective":
+			this.setChanged();
+			this.notifyObservers("modifyObjective");
 			break;
 		default:
 			break;

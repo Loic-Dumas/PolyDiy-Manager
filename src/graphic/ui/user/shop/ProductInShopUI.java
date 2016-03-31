@@ -13,11 +13,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import common.facade.list.FacadeSetInfoWishList;
-import common.facade.shop.FacadeProductInShop;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Product;
+import logic.facade.list.FacadeSetInfoWishList;
+import logic.facade.shop.FacadeProductInShop;
+import persistent.abstractclass.Product;
 
 public class ProductInShopUI extends AbstractUI {
 	private JButton backUser = new JButton();
@@ -40,11 +40,11 @@ public class ProductInShopUI extends AbstractUI {
 
 	public ProductInShopUI(UIMessage communication) {
 		super(communication);
-		
+
 		int IDProduct = (int) this.communication.getElement("id_product");
 		int IDUser = (int) this.communication.getElement("id_user");
-		Product product = this.facadeProduct.createAndGetProduct(IDProduct);
 		
+		Product product = this.facadeProduct.createAndGetProduct(IDProduct);
 		this.facadeSetInfoWishList.createAndGetExistingWishList(IDUser);
 		
 
