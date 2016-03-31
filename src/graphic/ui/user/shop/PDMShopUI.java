@@ -23,6 +23,8 @@ import graphic.engine.UIMessage;
 import persistent.Product;
 
 public class PDMShopUI extends AbstractUI {
+	private JButton backUser = new JButton();
+	private JButton cart = new JButton();
 	private JButton searchProductButton = new JButton();
 	private JLabel welcome = new JLabel();
 	private JTextField searchProductFiekd = new JTextField();
@@ -39,6 +41,18 @@ public class PDMShopUI extends AbstractUI {
 
 		this.panel.setLayout(null);
 
+		// user button
+		this.backUser.setText("Back to User");
+		this.backUser.setBounds(200 , 2, 150, 23);
+		this.panel.add(backUser);
+		this.backUser.addActionListener(this);
+		
+		// user button
+		this.cart.setText("Back to Cart");
+		this.cart.setBounds(360 , 2, 150, 23);
+		this.panel.add(cart);
+		this.cart.addActionListener(this);
+		
 		// welcome textField
 		this.welcome.setText("Welcome to the PDM Shop !");
 		this.welcome.setBounds(2, 2, 300, 23);
@@ -72,8 +86,6 @@ public class PDMShopUI extends AbstractUI {
 			Product product = this.facadeList.createAndGetExistingSetProduct().getElementByKey(key);
 			Object[] newLine = { product.getName(), "" + product.getUnitPrice() + " €",
 					inStock(product.getStockQuantity()), product.getIDProduct() };
-			System.out.println("J'ai le produit " + product.getName() + " - " + product.getUnitPrice() + " -  "
-					+ inStock(product.getStockQuantity()) + " - " + product.getIDProduct());
 			data[j] = newLine;
 			j++;
 		}
@@ -131,7 +143,7 @@ public class PDMShopUI extends AbstractUI {
 			result = "user";
 		} else if (arg0.getActionCommand().equals("Wish Lists")) {
 			result = "wishLists";
-		} else if (arg0.getActionCommand().equals("Cart")) {
+		} else if (arg0.getActionCommand().equals("Back to Cart")) {
 			result = "cart";
 		}
 

@@ -36,19 +36,14 @@ public class JDBCProduct extends Product {
 		this.setIDCategory(IDCategory);
 		this.setCategoryName(categoryName);
 	}
-
 	public JDBCProduct(int IDProduct) throws ErrorConnectionException, AlertDriver {
 		super(IDProduct);
 		
 		this.component = new JDBCComponent();
-		System.out.println("Je suis dans le JDBCProduct");
-
 
 		ResultSet result = this.component.select("*", "product p, product_category c", "id_product = "
 		+ IDProduct + " AND c.id_category = p.id_category");
-
-			
-		System.out.println("JDBCProduct j'ai passé le select");
+		
 		try {
 			if (result.first()) {
 				// load informations

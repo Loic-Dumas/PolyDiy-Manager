@@ -25,7 +25,7 @@ public class JDBCObjective extends Objective {
 	public Boolean isExisting() throws Exception {
 		ResultSet result = this.component.select(Arrays.asList("*"), "objective",
 				new SQLCondition(Arrays.asList("id_objective"), 
-								Arrays.asList(Integer.toString(this.idOjective))));
+								Arrays.asList(Integer.toString(this.idObjective))));
 		return result != null && result.first();
 	}
 
@@ -56,7 +56,7 @@ public class JDBCObjective extends Objective {
 				} else {
 					result.first();
 				}
-				this.idOjective = result.getInt("id_objective");
+				this.idObjective = result.getInt("id_objective");
 				this.title = result.getString("title");
 				this.description = result.getString("description");
 				this.deadline = result.getString("deadline");
@@ -99,7 +99,7 @@ public class JDBCObjective extends Objective {
 		if (this.isExisting()) {
 			this.component.delete("objective",
 					new SQLCondition(Arrays.asList("id_objective"), 
-									Arrays.asList(Integer.toString(this.idOjective))));
+									Arrays.asList(Integer.toString(this.idObjective))));
 		} else {
 			throw new NotExistingTuple("objective");
 		}

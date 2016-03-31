@@ -36,5 +36,7 @@ public class AccountRegister {
 		this.seller.setIDaccount(this.account.getID());
 		this.user.insert();
 		this.seller.insert();
+		
+		// TODO create cart
 	}
 }
