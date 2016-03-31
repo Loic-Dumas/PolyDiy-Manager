@@ -16,11 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
 import common.exception.wishListAlreadyExistException;
-import common.facade.list.FacadeManageSetWishList;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.list.WishList;
+import logic.facade.list.FacadeManageSetWishList;
+import persistent.abstractclass.list.WishList;
 
 public class WishListsUI extends AbstractUI {
 	private JButton backUser = new JButton();

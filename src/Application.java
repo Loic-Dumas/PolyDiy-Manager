@@ -9,14 +9,12 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 
 import common.exception.ErrorConnectionException;
-import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.FactoryUI;
 import graphic.engine.UIMessage;
-import graphic.ui.seller.ManageShopUI;
+import logic.facade.FacadeSession;
 
 /**
  * 

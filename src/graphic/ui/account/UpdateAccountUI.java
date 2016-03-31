@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeModifyAccount;
 
 public class UpdateAccountUI extends AbstractUI {
 	private JTextField tfLogin = new JTextField();

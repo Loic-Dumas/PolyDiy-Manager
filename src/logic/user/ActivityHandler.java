@@ -4,13 +4,13 @@ import java.util.Collection;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ActivityFactory;
-import common.factory.CategoryFactory;
-import common.factory.jdbcFactory.JDBCActivityFactory;
-import common.factory.jdbcFactory.JDBCCategoryFactory;
-import persistent.Activity;
-import persistent.ActivityCategory;
-import persistent.list.SetActivity;
+import persistent.abstractclass.Activity;
+import persistent.abstractclass.ActivityCategory;
+import persistent.abstractclass.list.SetActivity;
+import persistent.factory.ActivityFactory;
+import persistent.factory.CategoryFactory;
+import persistent.factory.jdbcFactory.JDBCActivityFactory;
+import persistent.factory.jdbcFactory.JDBCCategoryFactory;
 
 public class ActivityHandler {
 	private SetActivity activities = null;

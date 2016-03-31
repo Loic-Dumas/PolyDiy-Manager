@@ -12,15 +12,7 @@ import common.exception.NotUniqueAttribute;
 import common.exception.loadFromIntKeyException;
 import common.exception.loadFromStringKeyException;
 import common.jdbc.JDBCComponent;
-/**
- * The JDBC object of a product.
- * Request to the db the name, description, unitPrice and stockQuantity.
- * 
- * @author LoicDumas02, nassim vachor
- * @version 1.0
- * @since 2016-03-19
- */
-import persistent.Product;
+import persistent.abstractclass.Product;
 
 public class JDBCProduct extends Product {
 	private JDBCComponent component = null;

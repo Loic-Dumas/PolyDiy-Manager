@@ -7,12 +7,12 @@ import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.NoCartException;
 import common.exception.UnknownIDProductException;
-import common.factory.ListFactory;
-import common.factory.ProductFactory;
-import common.factory.jdbcFactory.JDBCListFactory;
-import common.factory.jdbcFactory.JDBCProductFactory;
-import persistent.list.Cart;
-import persistent.list.ProductWishList;
+import persistent.abstractclass.list.Cart;
+import persistent.abstractclass.list.ProductWishList;
+import persistent.factory.ListFactory;
+import persistent.factory.ProductFactory;
+import persistent.factory.jdbcFactory.JDBCListFactory;
+import persistent.factory.jdbcFactory.JDBCProductFactory;
 
 public class CartHandler {
 	ListFactory listFactory = new JDBCListFactory();

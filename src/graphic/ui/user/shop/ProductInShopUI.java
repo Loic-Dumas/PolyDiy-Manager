@@ -13,11 +13,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import common.facade.list.FacadeSetInfoWishList;
-import common.facade.shop.FacadeProductInShop;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Product;
+import logic.facade.list.FacadeSetInfoWishList;
+import logic.facade.shop.FacadeProductInShop;
+import persistent.abstractclass.Product;
 
 public class ProductInShopUI extends AbstractUI {
 	private JButton backUser = new JButton();

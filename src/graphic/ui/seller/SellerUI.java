@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
-import common.facade.FacadeEditProfil;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeEditProfil;
 
 public class SellerUI extends AbstractUI {
 	FacadeEditProfil facade;

@@ -12,7 +12,7 @@ import common.exception.NotExistingTuple;
 import common.exception.NotUniqueAttribute;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.Activity;
+import persistent.abstractclass.Activity;
 
 public class JDBCActivity extends Activity {
 	private JDBCComponent component = null;

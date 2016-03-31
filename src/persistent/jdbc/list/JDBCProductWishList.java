@@ -10,7 +10,7 @@ import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.UnknownIDProductException;
 import common.jdbc.JDBCComponent;
-import persistent.list.ProductWishList;
+import persistent.abstractclass.list.ProductWishList;
 
 public class JDBCProductWishList extends ProductWishList{
 	private JDBCComponent component = null;

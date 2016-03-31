@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 
-import common.factory.jdbcFactory.JDBCActivityFactory;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.list.SetObjective;
+import persistent.abstractclass.list.SetObjective;
+import persistent.factory.jdbcFactory.JDBCActivityFactory;
 
 public class JDBCSetObjective extends SetObjective {
 	private JDBCComponent component = null;

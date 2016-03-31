@@ -15,11 +15,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-import common.facade.FacadeProduct;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Product;
+import logic.facade.FacadeProduct;
+import persistent.abstractclass.Product;
 
 public class ManageShopUI extends AbstractUI {
 		private JTable table;

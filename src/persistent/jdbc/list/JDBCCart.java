@@ -7,10 +7,10 @@ import java.util.List;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDProductException;
-import common.factory.ProductFactory;
-import common.factory.jdbcFactory.JDBCProductFactory;
 import common.jdbc.JDBCComponent;
-import persistent.list.Cart;
+import persistent.abstractclass.list.Cart;
+import persistent.factory.ProductFactory;
+import persistent.factory.jdbcFactory.JDBCProductFactory;
 
 public class JDBCCart extends Cart {
 	private JDBCComponent component = null;
@@ -54,6 +54,7 @@ public class JDBCCart extends Cart {
 					} 
 				} 
 			} else {
+				result.close();
 				this.component.insert("wishlist(id_user, label)", "'" + this.IDUser + "', 'Cart'");
 				result = this.component.select(
 						"*", 

@@ -6,10 +6,10 @@ import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ListFactory;
-import common.factory.jdbcFactory.JDBCListFactory;
 import common.jdbc.JDBCComponent;
-import persistent.list.SetWishList;
+import persistent.abstractclass.list.SetWishList;
+import persistent.factory.ListFactory;
+import persistent.factory.jdbcFactory.JDBCListFactory;
 
 public class JDBCSetWishList extends SetWishList {
 	private JDBCComponent component = null;

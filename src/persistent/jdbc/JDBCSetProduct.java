@@ -11,10 +11,10 @@ import java.util.List;
 
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
-import common.factory.ProductFactory;
-import common.factory.jdbcFactory.JDBCProductFactory;
 import common.jdbc.JDBCComponent;
-import persistent.SetProduct;
+import persistent.abstractclass.SetProduct;
+import persistent.factory.ProductFactory;
+import persistent.factory.jdbcFactory.JDBCProductFactory;
 
 public class JDBCSetProduct extends SetProduct {
 	private JDBCComponent component = null;

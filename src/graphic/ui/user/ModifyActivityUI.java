@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import common.facade.FacadeActivityPanel;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeActivityPanel;
 
 public class ModifyActivityUI  extends AbstractUI{
 	private JTextField title = new JTextField();

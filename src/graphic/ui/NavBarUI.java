@@ -6,9 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import common.facade.FacadeSession;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeSession;
 
 public class NavBarUI extends AbstractUI{
 	private JButton account = new JButton();

@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import common.facade.FacadeActivityPanel;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeActivityPanel;
 
 public class ModifyTaskUI extends AbstractUI {
 	private JTextField title = new JTextField();

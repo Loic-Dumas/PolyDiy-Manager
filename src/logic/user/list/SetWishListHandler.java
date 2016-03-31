@@ -6,10 +6,10 @@ import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.wishListAlreadyExistException;
-import common.factory.ListFactory;
-import common.factory.jdbcFactory.JDBCListFactory;
-import persistent.list.SetWishList;
-import persistent.list.WishList;
+import persistent.abstractclass.list.SetWishList;
+import persistent.abstractclass.list.WishList;
+import persistent.factory.ListFactory;
+import persistent.factory.jdbcFactory.JDBCListFactory;
 
 public class SetWishListHandler {
 	ListFactory listFactory = new JDBCListFactory();

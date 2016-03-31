@@ -6,9 +6,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import common.facade.FacadeModifyAccount;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeModifyAccount;
 
 public class UpdateAccount_welcomeUI extends AbstractUI {
 	private JButton updateInfo = new JButton();

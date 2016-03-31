@@ -2,13 +2,13 @@ package logic.user;
 
 import java.util.Collection;
 
-import common.factory.ActivityFactory;
-import common.factory.CategoryFactory;
-import common.factory.jdbcFactory.JDBCActivityFactory;
-import common.factory.jdbcFactory.JDBCCategoryFactory;
-import persistent.Category;
-import persistent.Objective;
-import persistent.list.SetObjective;
+import persistent.abstractclass.Category;
+import persistent.abstractclass.Objective;
+import persistent.abstractclass.list.SetObjective;
+import persistent.factory.ActivityFactory;
+import persistent.factory.CategoryFactory;
+import persistent.factory.jdbcFactory.JDBCActivityFactory;
+import persistent.factory.jdbcFactory.JDBCCategoryFactory;
 
 public class ObjectiveHandler {
 	private SetObjective objectives = null;

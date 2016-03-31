@@ -14,7 +14,7 @@ import common.exception.NotUniqueAttribute;
 import common.exception.SessionErrorException;
 import common.jdbc.JDBCComponent;
 import common.jdbc.SQLCondition;
-import persistent.Session;
+import persistent.abstractclass.Session;
 
 public class JDBCSession extends Session {
 	private JDBCComponent component = null;

@@ -2,13 +2,13 @@ package logic.user;
 
 import java.util.Collection;
 
-import common.factory.ActivityFactory;
-import common.factory.CategoryFactory;
-import common.factory.jdbcFactory.JDBCActivityFactory;
-import common.factory.jdbcFactory.JDBCCategoryFactory;
-import persistent.Category;
-import persistent.Task;
-import persistent.list.SetTask;
+import persistent.abstractclass.Category;
+import persistent.abstractclass.Task;
+import persistent.abstractclass.list.SetTask;
+import persistent.factory.ActivityFactory;
+import persistent.factory.CategoryFactory;
+import persistent.factory.jdbcFactory.JDBCActivityFactory;
+import persistent.factory.jdbcFactory.JDBCCategoryFactory;
 
 public class TaskHandler {
 	private SetTask tasks = null;

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.jdbc.JDBCComponent;
-import persistent.list.SetInfoWishList;
-import persistent.list.WishListInfo;
+import persistent.abstractclass.list.SetInfoWishList;
+import persistent.abstractclass.list.WishListInfo;
 
 public class JDBCSetInfoWishList extends SetInfoWishList {
 	private JDBCComponent component = null;

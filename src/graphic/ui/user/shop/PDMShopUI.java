@@ -16,11 +16,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import common.facade.shop.FacadePDMShop;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
-import persistent.Product;
+import logic.facade.shop.FacadePDMShop;
+import persistent.abstractclass.Product;
 
 public class PDMShopUI extends AbstractUI {
 	private JButton backUser = new JButton();

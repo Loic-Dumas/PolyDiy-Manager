@@ -14,9 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import common.facade.FacadeEditProfil;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
+import logic.facade.FacadeEditProfil;
 
 public class UpdateSellerUI extends AbstractUI {
 		 private JTextField nameShop;

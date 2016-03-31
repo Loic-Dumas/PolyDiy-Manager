@@ -17,7 +17,7 @@ import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.UnknownIDSellerException;
 import common.jdbc.JDBCComponent;
-import persistent.Seller;
+import persistent.abstractclass.Seller;
 
 
 public class JDBCSeller extends Seller{
