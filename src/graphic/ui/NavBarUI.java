@@ -23,7 +23,7 @@ public class NavBarUI extends AbstractUI{
 		
 //		this.panel.setLayout(null);
 		
-		this.userLabel.setText("Welcome " + (int)this.communication.getElement("id_account"));
+		this.userLabel.setText("Welcome " + this.communication.getElement("login"));
 		this.panel.add(userLabel);
 
 		// account button

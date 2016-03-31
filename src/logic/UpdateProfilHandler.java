@@ -8,29 +8,33 @@ package logic;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
-import common.factory.ProfilFactory;
-import common.factory.jdbcFactory.JDBCProfilFactory;
+import common.factory.SellerProfilFactory;
+import common.factory.jdbcFactory.JDBCSellerProfilFactory;
 import persistent.Seller;
 
 public class UpdateProfilHandler {
 	
 	private Seller seller = null;	
 	
-	ProfilFactory ProfilFactory = new JDBCProfilFactory();
+	SellerProfilFactory ProfilFactory = new JDBCSellerProfilFactory();
 	
 	public void createSeller(int ID, String nameShop, String description, String siret, String website) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
 		
 		this.seller = ProfilFactory.buildSeller( ID, nameShop, description, siret, website);
 	}
+	public void getSellerWithId(int ID) throws ErrorConnectionException, AlertDriver, UnknownIDSellerException {
+		
+		this.seller = ProfilFactory.buildSeller(ID);
+	}
 	
 	public String getNameShop( ) throws UnknownIDSellerException, ErrorConnectionException, AlertDriver {
 		
-		return this.seller.getNameShop();
+		return  this.seller.getNameShop();
 	}
 	
 	
 
-	public void SetNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+	public void setNameShop(String name) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
 	
 		this.seller.setNameShop(name);
 	}
@@ -44,7 +48,7 @@ public class UpdateProfilHandler {
 		
 		
 		
-	public void SetSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
+	public void setSiert(String siret) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver{
 		
 		this.seller.setSiret(siret);
 	}

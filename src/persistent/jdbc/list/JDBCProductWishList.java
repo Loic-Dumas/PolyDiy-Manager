@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import common.exception.AlertDriver;
+import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NotExistingTuple;
 import common.exception.UnknownIDProductException;
@@ -36,13 +37,22 @@ public class JDBCProductWishList extends ProductWishList{
 
 	@Override
 	public Boolean isExisting() throws Exception {
-		ResultSet result = this.component.select("*", "item_wishlist ", "id_product = " + this.IDProduct );
-		return result != null;
+		this.component = new JDBCComponent();
+		ResultSet result = this.component.select("*", "item_wishlist "
+				, "id_wishlist = " +   this.IDWishList +" AND id_product = " + this.IDProduct );
+		return result.first();
 	}
 
 	@Override
 	public void insert() throws Exception {
-		// TODO JDBCProductWishList Auto-generated method stub
+		this.component = new JDBCComponent();
+		
+		if (!this.isExisting()) {
+			this.component.insert("item_wishlist(id_wishlist, id_product, quantity, unitprice )",
+					" '" + this.IDWishList + "', '" + this.IDProduct + "' , '" + this.quantity + "' , '" + this.unitPrice + "'");
+		} else {
+			throw new AlreadyExistTuple("WishList");
+		}
 		
 	}
 
@@ -50,8 +60,8 @@ public class JDBCProductWishList extends ProductWishList{
 	public void update() throws Exception {
 		this.component = new JDBCComponent();
 		if(this.isExisting()) {
-			this.component.update("(id_product, name, description, unitPrice, stockQuantity) = (" + this.IDProduct + "," 
-		                           + this.name + "," + this.description + "," + this.unitPrice + "," + this.stockQuantity + ")",
+			this.component.update("(id_wishlist, id_product, quantity, unitprice) = (" + this.IDWishList + "," 
+		                           + this.IDProduct + "," + this.quantity + "," + this.unitPrice + ")",
 		                           "item_wishlist", "id_product = " + this.IDProduct + "AND id_wishlist = " + this.IDWishList );
 		} else {
 			throw new NotExistingTuple("item_wishlist");

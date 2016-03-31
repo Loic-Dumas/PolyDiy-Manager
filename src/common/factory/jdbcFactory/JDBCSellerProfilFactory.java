@@ -8,13 +8,13 @@ package common.factory.jdbcFactory;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.UnknownIDSellerException;
-import common.factory.ProfilFactory;
+import common.factory.SellerProfilFactory;
 import persistent.Seller;
 import persistent.User;
 import persistent.jdbc.JDBCSeller;
 import persistent.jdbc.JDBCUser;
 
-public class JDBCProfilFactory extends ProfilFactory {
+public class JDBCSellerProfilFactory extends SellerProfilFactory {
 	@Override
 	public Seller buildSeller(int ID) throws ErrorConnectionException, UnknownIDSellerException, AlertDriver {
 		return new JDBCSeller(ID);

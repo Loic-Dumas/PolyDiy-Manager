@@ -139,11 +139,27 @@ public class UpdateAccountUI extends AbstractUI {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		FacadeModifyAccount facade = new FacadeModifyAccount();
+		
 		if (arg0.getActionCommand().equals("Cancel")) { 
 			this.setChanged();
 			this.notifyObservers("account");
+			
 		} else if (arg0.getActionCommand().equals("Validate")) {
-			this.setChanged(); //AJOUTER LUPDATE
+			int ID = (int) this.communication.getElement("id_account");
+			String login = this.tfLogin.getText();
+			String firstName = this.tfFirstName.getText();
+			String lastName = this.tfLastName.getText();
+			String road = this.tfAddressRoad.getText();
+			String city = this.tfAddressPostalCode.getText();
+			String postalCode = this.tfAddressCity.getText();			
+			try {
+				System.out.println("on va exécuter le updateAccout dans l'UI");
+				facade.updateAccount(ID, login , firstName, lastName, road, city, postalCode);
+			} catch (Exception e) {
+				System.out.println("Le updateAccout exécuté dans l'UI n'a pas pu aboutir");
+			}
+			this.setChanged(); 
 			this.notifyObservers("account");
 		}
 	} //end Override

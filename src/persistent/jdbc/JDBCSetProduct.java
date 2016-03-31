@@ -1,4 +1,9 @@
 package persistent.jdbc;
+/**
+ * @author nassim vachor, loic
+ * @version 1.0
+ * @since 2016-03-21
+ */
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,11 +24,11 @@ public class JDBCSetProduct extends SetProduct {
 		super(IDSeller);
 		this.component = new JDBCComponent();
 
-		ResultSet result = this.component.select("*", "product p, product_category c", "c.id_category = p.id_category");
+		ResultSet result = this.component.select("*", "product p, product_category c", "c.id_category = p.id_category AND id_seller = '" + this.getIDSeller() + "'");
 		try {
 			while (result.next()) {
 				this.addElement(result.getString("id_product"),
-						this.productFactory.buildProduct(result.getInt("id_product"), result.getString("name"),
+						this.productFactory.buildProduct(result.getInt("id_product"),result.getString("name"),
 								result.getString("description"), result.getFloat("unitPrice"),
 								result.getInt("stockQuantity"), result.getInt("id_seller"),
 								result.getInt("id_category"), result.getString("title")));
@@ -41,7 +46,7 @@ public class JDBCSetProduct extends SetProduct {
 		try {
 			while (result.next()) {
 				this.addElement(result.getString("id_product"),
-						this.productFactory.buildProduct(result.getInt("id_product"), result.getString("name"),
+						this.productFactory.buildProduct(result.getInt("id_product"),result.getString("name"),
 								result.getString("description"), result.getFloat("unitPrice"),
 								result.getInt("stockQuantity"), result.getInt("id_seller"),
 								result.getInt("id_category"), result.getString("title")));

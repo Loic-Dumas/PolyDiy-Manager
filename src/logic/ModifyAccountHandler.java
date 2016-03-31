@@ -1,24 +1,39 @@
 package logic;
 
+import common.factory.SessionFactory;
 import common.factory.jdbcFactory.JDBCSessionFactory;
 import persistent.Account;
 
 public class ModifyAccountHandler {
+	private Account account =null; 
 
-/*	public void update(int accountID, String login, String firstName, String lastName) throws Exception{
+	public void update(int accountID, String login, String firstName, String lastName, String road, String postalCode, String city) throws Exception{
 		SessionFactory factory = new JDBCSessionFactory();
-		Account account = factory.buildAccount(login);
-		if(account.getLogin()!=null){
-			//on modifie le loggin
+		account = factory.buildAccountWithID(accountID);
+		if(login != ""){
+			System.out.println("on est dans le setLogin");
+			this.account.setLogin(login);
 		}
-		if(account.getfirstName()!=null){
-			//on modifie le firstName
+		if(firstName != ""){
+			this.account.setFirstName(firstName);
 		}
-		if(account.getlastName()!=null){
-			//on modifie le lastName
+		if(lastName != ""){
+			this.account.setLastName(lastName);
 		}
-	} */
-	
+		if(road != ""){
+			this.account.setRoad(road);
+		}
+		if(city != ""){
+			this.account.setCity(city);
+		}
+		if(postalCode != ""){
+			this.account.setPostalCode(postalCode);
+		}
+		if(account != null){
+			this.account.update();
+		}
+		
+	}
 
 	
 	/**
