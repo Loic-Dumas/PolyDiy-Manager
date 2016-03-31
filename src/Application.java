@@ -24,6 +24,9 @@ import logic.facade.FacadeSession;
  * @since 2016-03-028
  */
 
+/**
+ * Personalize JFrame and implements mechanics of switch between UIs.
+ */
 public class Application extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	
@@ -31,6 +34,9 @@ public class Application extends JFrame implements Observer{
 
 	UIMessage message = new UIMessage();
 
+	/**
+	 * Constructor of the application - initialize the window.
+	 */
 	public Application()
 	{
 		super();
@@ -50,6 +56,11 @@ public class Application extends JFrame implements Observer{
         });
 	}
 	
+	/**
+	 * add an UI in the window
+	 * @param ui - label of the UI to build.
+	 * @param position - position of the UI in the window, following the BordeLayout manager.
+	 */
 	public void addUI(String ui, String position) {
 		FactoryUI factory = new FactoryUI();
 		this.panels.put(ui, factory.build(ui, this.message));
@@ -58,6 +69,10 @@ public class Application extends JFrame implements Observer{
 		this.setVisible(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 * Implement the switch between UIs.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof UIMessage) {
@@ -68,7 +83,7 @@ public class Application extends JFrame implements Observer{
 			case "login":
 				this.clearUI();
 				this.addUI("navBar", BorderLayout.NORTH);
-				this.addUI("account", BorderLayout.CENTER);
+				this.addUI("account_welcome", BorderLayout.CENTER);
 				break;
 			case "logout":
 				this.message = new UIMessage();
@@ -190,6 +205,10 @@ public class Application extends JFrame implements Observer{
 		}
 	}
 	
+	/**
+	 * End the session before closing the application.
+	 * @throws Exception Different error to display to user.
+	 */
 	private void endSession() throws Exception {
 		if (this.message != null && this.message.isExisting("id_account")) {
 			FacadeSession facade = new FacadeSession();
@@ -201,6 +220,9 @@ public class Application extends JFrame implements Observer{
 		}
 	}
 	
+	/**
+	 * Remove all the UI from the application.
+	 */
 	private void clearUI() {
 		this.getContentPane().removeAll();
 		this.panels.clear();

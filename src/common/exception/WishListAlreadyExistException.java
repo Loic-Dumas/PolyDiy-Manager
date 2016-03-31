@@ -7,15 +7,21 @@ package common.exception;
  * @version 1.0
  * @since 2016-03-03
  */
-public class wishListAlreadyExistException extends Exception {
+public class WishListAlreadyExistException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private String invalidName;
 	
-	public wishListAlreadyExistException(String labelWishList){
+	/**
+	 * Constructor for the exception.
+	 * @param labelWishList - the label for wishlist which already exists.
+	 */
+	public WishListAlreadyExistException(String labelWishList){
 		this.invalidName = labelWishList;
 	}
 	
-
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		return "Impossible to create the wish List with name : " + invalidName;

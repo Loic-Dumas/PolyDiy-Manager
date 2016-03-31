@@ -9,21 +9,22 @@ import javax.swing.JOptionPane;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
 
+/**
+ * @author loicd_000
+ *
+ */
 public class AdminUI extends AbstractUI {
-	private JButton account = new JButton();
 	private JLabel label = new JLabel();
 	
 	
+	/**
+	 * create an AdminView
+	 * @param communication
+	 */
 	public AdminUI(UIMessage communication) {
 		super(communication);
 		
 		this.panel.setLayout(null);
-
-		// logout button
-		this.account.setText("Back to logout");
-		this.account.setBounds(2, 2, 150, 23);
-		this.panel.add(account);
-		this.account.addActionListener(this);
 		
 		
 		// text label lambda
@@ -32,6 +33,9 @@ public class AdminUI extends AbstractUI {
 		this.panel.add(label);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String action = "";

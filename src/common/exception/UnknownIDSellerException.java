@@ -11,9 +11,17 @@ public class UnknownIDSellerException extends Exception{
 	private static final long serialVersionUID = 1L;
 	private int unknownID;
 	
+	/**
+	 * Constructor of the exception.
+	 * @param ID - the seller's id which is unknown.
+	 */
 	public UnknownIDSellerException(int ID){
 		this.unknownID = ID;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
 	@Override
 	public String getMessage() {
 		return "The seller with ID : " + unknownID + " is unknown.";

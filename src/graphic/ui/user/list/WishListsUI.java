@@ -15,13 +15,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-import common.exception.wishListAlreadyExistException;
+import common.exception.WishListAlreadyExistException;
 import graphic.dataTable.DataModelSetWishList;
 import graphic.engine.AbstractUI;
 import graphic.engine.UIMessage;
 import logic.facade.list.FacadeManageSetWishList;
 import persistent.abstractclass.list.WishList;
 
+/**
+ * this view displays all the wishlist.
+ * needs in communication id_user as parameter
+ * @author loicd_000
+ *
+ */
 public class WishListsUI extends AbstractUI {
 	private JButton backUser = new JButton();
 	private JButton wishLists = new JButton();
@@ -176,7 +182,7 @@ public class WishListsUI extends AbstractUI {
 			try {
 				this.facadeList.createWishList((int)this.communication.getElement("id_user"), this.newWishList.getText());
 				result = "wishLists";
-			} catch (wishListAlreadyExistException e) {
+			} catch (WishListAlreadyExistException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				result = "nothing changes";
 			}

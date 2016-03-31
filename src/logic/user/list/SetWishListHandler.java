@@ -5,7 +5,7 @@ import java.util.Set;
 import common.exception.AlertDriver;
 import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
-import common.exception.wishListAlreadyExistException;
+import common.exception.WishListAlreadyExistException;
 import persistent.abstractclass.list.SetWishList;
 import persistent.abstractclass.list.WishList;
 import persistent.factory.ListFactory;
@@ -49,15 +49,15 @@ public class SetWishListHandler {
 	 * @author loicd_000
 	 * @param IDUser
 	 * @param label
-	 * @throws wishListAlreadyExistException 
+	 * @throws WishListAlreadyExistException 
 	 */
-	public void createWishList(int IDUser, String label) throws wishListAlreadyExistException {
+	public void createWishList(int IDUser, String label) throws WishListAlreadyExistException {
 		this.setWishList.addElement("0", listFactory.buildWishList(IDUser, label));
 		
 		try {
 			this.setWishList.getElementByKey("0").insert();
 		} catch (AlreadyExistTuple e) {
-			throw new  wishListAlreadyExistException(label) ;
+			throw new  WishListAlreadyExistException(label) ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

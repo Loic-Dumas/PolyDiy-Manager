@@ -3,7 +3,7 @@ package logic.facade.list;
 import java.util.Set;
 
 import common.exception.NoWishListException;
-import common.exception.wishListAlreadyExistException;
+import common.exception.WishListAlreadyExistException;
 import logic.user.list.SetWishListHandler;
 import persistent.abstractclass.list.SetWishList;
 import persistent.abstractclass.list.WishList;
@@ -31,9 +31,9 @@ public class FacadeManageSetWishList {
 	 * @author loicd_000
 	 * @param IDUser
 	 * @param label
-	 * @throws wishListAlreadyExistException 
+	 * @throws WishListAlreadyExistException 
 	 */
-	public void  createWishList(int IDUser, String label) throws wishListAlreadyExistException {
+	public void  createWishList(int IDUser, String label) throws WishListAlreadyExistException {
 		this.setWishListHandler.createWishList(IDUser, label);
 	}
 	

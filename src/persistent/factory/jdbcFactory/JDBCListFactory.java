@@ -8,8 +8,8 @@ package persistent.factory.jdbcFactory;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import common.exception.NoCartException;
-import common.exception.needHaveBothIDUserAndLabelException;
-import common.exception.wishListAlreadyExistException;
+import common.exception.NeedHaveBothIDUserAndLabelException;
+import common.exception.WishListAlreadyExistException;
 import persistent.abstractclass.SetProduct;
 import persistent.abstractclass.list.Cart;
 import persistent.abstractclass.list.SetInfoWishList;
@@ -34,11 +34,11 @@ public class JDBCListFactory extends ListFactory{
 	 * @return The WishList created;
 	 */
 	@Override
-	public WishList buildWishList(int IDUser, String labelWishList) throws wishListAlreadyExistException {
+	public WishList buildWishList(int IDUser, String labelWishList) throws WishListAlreadyExistException {
 		JDBCWishList wishList = null;
 		try {
 			wishList = new JDBCWishList(IDUser, labelWishList);
-		} catch (needHaveBothIDUserAndLabelException e) {
+		} catch (NeedHaveBothIDUserAndLabelException e) {
 			e.printStackTrace();
 		} 
 		

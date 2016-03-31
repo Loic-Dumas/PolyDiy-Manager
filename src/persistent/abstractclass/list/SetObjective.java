@@ -4,6 +4,11 @@ import common.set.SetWithKey;
 import persistent.abstractclass.InterfaceModel;
 import persistent.abstractclass.Objective;
 
+/**
+ * an aggregate of Objective accessible by keys
+ * @author loicd_000
+ *
+ */
 public abstract class SetObjective extends SetWithKey<Objective>implements InterfaceModel {
 	protected int idUser = -1;
 
