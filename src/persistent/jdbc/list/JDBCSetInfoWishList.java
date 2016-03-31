@@ -9,6 +9,11 @@ import common.jdbc.JDBCComponent;
 import persistent.abstractclass.list.SetInfoWishList;
 import persistent.abstractclass.list.WishListInfo;
 
+/**
+ * The JDBCImplementation of a SetInfoWishList
+ * @author loicd_000
+ *
+ */
 public class JDBCSetInfoWishList extends SetInfoWishList {
 	private JDBCComponent component = null;
 	
