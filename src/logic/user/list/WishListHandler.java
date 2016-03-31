@@ -3,6 +3,7 @@ package logic.user.list;
 import java.util.Set;
 
 import common.exception.AlertDriver;
+import common.exception.AlreadyExistTuple;
 import common.exception.ErrorConnectionException;
 import common.exception.NoWishListException;
 import common.exception.UnknownIDProductException;
@@ -102,15 +103,24 @@ public class WishListHandler {
 			}
 			
 			try {
-				this.wishList.addElement(String.valueOf(IDProduct), 
-						this.productFactory.buildProductWishList(IDProduct, this.wishList.getID(),  quantity, unitPrice));
-				result = true;
+				if (wishList.containsKey(String.valueOf(IDProduct))) {
+					this.wishList.addElement(String.valueOf(IDProduct), 
+							this.productFactory.buildProductWishList(IDProduct, this.wishList.getID(),  quantity, unitPrice));
+					result = true;
+				} else {
+					try {
+						throw new AlreadyExistTuple("Product");
+					} catch (AlreadyExistTuple e) {
+						e.printStackTrace();
+					}
+				}
+				
 			} catch (AlertDriver e1) {
 				e1.printStackTrace();
 			}
 			
 			try {
-				this.wishList.update();
+				this.wishList.getElementByKey(String.valueOf(IDProduct)).insert();
 			} catch (Exception e) {
 				// TODO gerer les exceptions de cet update
 				e.printStackTrace();

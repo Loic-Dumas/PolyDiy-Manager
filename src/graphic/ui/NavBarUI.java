@@ -1,5 +1,6 @@
 package graphic.ui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
@@ -56,6 +57,8 @@ public class NavBarUI extends AbstractUI{
 		this.logout.setText("Logout");
 		this.panel.add(logout);
 		this.logout.addActionListener(this);
+		
+		this.panel.setBackground(Color.GRAY);
 
 	}
 
