@@ -82,4 +82,14 @@ public abstract class Account implements InterfaceModel {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public void setRoad(String road) {
+		this.addressRoad = road;
+	}
+	public void setCity(String city) {
+		this.addressCity = city;
+	}
+	public void setPostalCode(String postalCode) {
+		this.addressPostal = postalCode;
+	}
 }

@@ -16,10 +16,10 @@ public class FacadeModifyAccount {
 	}
 	
 	//fonction updateAccount
-	/*public void updateAccount(int accountID, String updateLogin, String updatefirstName, String updatelastName) throws Exception {
+	public void updateAccount(int accountID, String updateLogin, String updatefirstName, String updatelastName, String road, String postalCode, String city) throws Exception {
 		ModifyAccountHandler handler = new ModifyAccountHandler();
-		handler.update(accountID, updateLogin, updatefirstName, updatelastName);
-	}*/
+		handler.update(accountID, updateLogin, updatefirstName, updatelastName, road, postalCode,city);
+	}
 
 	public String getLogin(int ID) throws Exception{
 		ModifyAccountHandler handler = new ModifyAccountHandler();
