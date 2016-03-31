@@ -4,14 +4,32 @@ import persistent.abstractclass.Account;
 import persistent.factory.SessionFactory;
 import persistent.factory.jdbcFactory.JDBCSessionFactory;
 
+/**
+ * 
+ * @author Faustine
+ * @version 1.0
+ * @since 2016-31-03
+ * 
+ */
+
 public class ModifyAccountHandler {
 	private Account account =null; 
 
+	/** to update an account with its ID, login, firstname
+	 * lasname, and the complete address (road, city and postal code)
+	 * @param accountID 
+	 * @param updateLogin - the new login
+	 * @param updatefirstName - the new first name
+	 * @param updatelastName - the new last name
+	 * @param road - the new road
+	 * @param postalCode - the new postal code
+	 * @param city - the new city
+	 * @throws Exception
+	 */
 	public void update(int accountID, String login, String firstName, String lastName, String road, String postalCode, String city) throws Exception{
 		SessionFactory factory = new JDBCSessionFactory();
 		account = factory.buildAccountWithID(accountID);
 		if(login != ""){
-			System.out.println("on est dans le setLogin");
 			this.account.setLogin(login);
 		}
 		if(firstName != ""){
@@ -37,8 +55,9 @@ public class ModifyAccountHandler {
 
 	
 	/**
+	 * to get the login of an account with its ID 
 	 * @param ID
-	 * @return 
+	 * @return the login of the account
 	 * @throws Exception
 	 */
 	public String getLogin(int ID) throws Exception{
@@ -48,6 +67,12 @@ public class ModifyAccountHandler {
 	return loginBD;
 	}
 	
+	/**
+	 * to get the lastName of an account with its ID 
+	 * @param ID
+	 * @return the last name of the account
+	 * @throws Exception
+	 */
 	public String getLastName(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
 		Account account = factory.buildAccountWithID(ID);
@@ -55,6 +80,12 @@ public class ModifyAccountHandler {
 	return lastNameBD;
 	}
 	
+	/**
+	 * to get the firstName of an account with its ID 
+	 * @param ID
+	 * @return the first name of the account
+	 * @throws Exception
+	 */
 	public String getFirstName(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
 		Account account = factory.buildAccountWithID(ID);
@@ -62,6 +93,12 @@ public class ModifyAccountHandler {
 	return firstNameBD;
 	}
 	
+	/**
+	 * to get the address road of an account with its ID 
+	 * @param ID
+	 * @return the address road of the account
+	 * @throws Exception
+	 */
 	public String getAddressRoad(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
 		Account account = factory.buildAccountWithID(ID);
@@ -69,6 +106,12 @@ public class ModifyAccountHandler {
 	return addressRoadBD;
 	}
 	
+	/**
+	 * to get the address city of an account with its ID 
+	 * @param ID
+	 * @return the address city of the account
+	 * @throws Exception
+	 */
 	public String getAddressCity(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
 		Account account = factory.buildAccountWithID(ID);
@@ -76,6 +119,12 @@ public class ModifyAccountHandler {
 	return addressCityBD;
 	}
 	
+	/**
+	 * to get the address postal of an account with its ID 
+	 * @param ID
+	 * @return the address postal code of the account
+	 * @throws Exception
+	 */
 	public String getAddressPostal(int ID) throws Exception{
 		JDBCSessionFactory factory = new JDBCSessionFactory();
 		Account account = factory.buildAccountWithID(ID);

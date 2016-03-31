@@ -9,6 +9,11 @@ import common.jdbc.SQLCondition;
 import persistent.abstractclass.list.SetObjective;
 import persistent.factory.jdbcFactory.JDBCActivityFactory;
 
+/**
+ * the JDBC version of SetObjective
+ * @author loicd_000
+ *
+ */
 public class JDBCSetObjective extends SetObjective {
 	private JDBCComponent component = null;
 	

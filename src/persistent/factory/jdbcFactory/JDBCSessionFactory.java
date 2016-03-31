@@ -10,6 +10,11 @@ import persistent.factory.SessionFactory;
 import persistent.jdbc.JDBCAccount;
 import persistent.jdbc.JDBCSession;
 
+/**
+ * To build an account or a session
+ * @author Faustine
+ *
+ */
 public class JDBCSessionFactory extends SessionFactory {
 
 	@Override

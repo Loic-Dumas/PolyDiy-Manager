@@ -9,6 +9,11 @@ import common.jdbc.SQLCondition;
 import persistent.abstractclass.list.SetTask;
 import persistent.factory.jdbcFactory.JDBCActivityFactory;
 
+/**
+ * the JDBC version of SetTask
+ * @author loicd_000
+ *
+ */
 public class JDBCSetTask extends SetTask {
 	private JDBCComponent component = null;
 	

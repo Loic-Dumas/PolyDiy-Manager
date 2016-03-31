@@ -2,11 +2,17 @@ package test;
 
 import org.junit.Test;
 
+
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 import junit.framework.TestCase;
 import persistent.jdbc.JDBCTask;
 
+/**
+ * Test for the task
+ * @author loicd_000
+ *
+ */
 public class JDBCTask_Test extends TestCase {
 	private JDBCTask task;
 	

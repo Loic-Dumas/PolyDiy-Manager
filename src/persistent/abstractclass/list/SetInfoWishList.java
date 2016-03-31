@@ -4,6 +4,7 @@ import common.set.SetWithKey;
 
 /**
  * an aggregation of WishListInfo accessible by keys.
+ * 
  * @author loicd_000
  *
  */
@@ -11,7 +12,8 @@ public class SetInfoWishList extends SetWithKey<WishListInfo> {
 	protected int IDUser;
 
 	public SetInfoWishList(int IDUser) {
-		this.IDUser = IDUser;	}
+		this.IDUser = IDUser;
+	}
 
 	public int getIDUser() {
 		return IDUser;
@@ -20,6 +22,5 @@ public class SetInfoWishList extends SetWithKey<WishListInfo> {
 	public void setIDUser(int IDUser) {
 		this.IDUser = IDUser;
 	}
-	
 
 }

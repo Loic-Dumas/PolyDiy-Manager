@@ -16,11 +16,8 @@ import persistent.abstractclass.list.WishList;
 import persistent.factory.ProductFactory;
 import persistent.factory.jdbcFactory.JDBCProductFactory;
 
-/**
- * @author loicd_000
- *
- */
-/**
+
+/**The JDBC implementation of a wishList
  * @author loicd_000
  *
  */

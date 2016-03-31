@@ -13,6 +13,7 @@ import logic.facade.FacadeModifyAccount;
 public class UpdateAccount_welcomeUI extends AbstractUI {
 	private JButton updateInfo = new JButton();
 	private JLabel labelLoginUser = new JLabel();
+	
 	/**
 	 * Create the panel to give the information of the user's account.
 	 * @throws Exception 

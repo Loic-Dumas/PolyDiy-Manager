@@ -30,6 +30,13 @@ public class CreateAccountUI extends AbstractUI {
 	private JCheckBox sellerCheck = new JCheckBox("Activate profile Seller");
 	private JButton register = new JButton();
 	
+	/**
+	 * Panel to create an Account.
+	 * if a user wants to create an account he must put his informations
+	 * in all the textfields
+	 * @param communication
+	 */
+
 	public CreateAccountUI(UIMessage communication) {
 		super(communication);
 		
