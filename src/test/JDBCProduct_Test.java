@@ -9,7 +9,7 @@ import common.exception.ErrorConnectionException;
 import junit.framework.TestCase;
 import persistent.jdbc.JDBCProduct;
 
-public class JDBCProduct_Test extends TestCase {
+/*public class JDBCProduct_Test extends TestCase {
 	private JDBCProduct product;
 
 	@Before
@@ -137,3 +137,4 @@ public class JDBCProduct_Test extends TestCase {
 	}
 
 }
+*/

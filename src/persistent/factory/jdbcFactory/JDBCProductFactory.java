@@ -27,9 +27,9 @@ public class JDBCProductFactory extends ProductFactory{
 	
 	}
 	@Override
-	public Product buildProduct(int idP, String name, String description, float unitPrice, int stockQuantity,
+	public Product buildProduct( String name, String description, float unitPrice, int stockQuantity,
 			int IDSeller, int IDCategory, String categoryName) {
-		return new JDBCProduct( idP, name,  description,  unitPrice,  stockQuantity,
+		return new JDBCProduct( name,  description,  unitPrice,  stockQuantity,
 				 IDSeller,  IDCategory,  categoryName);
 	}
 	

@@ -108,19 +108,19 @@ import persistent.abstractclass.SetProduct;
 		 * @return The name of the product
 		 * @throws Exception 
 		 */
-		public void addProduct(int IDProduct, String name, String description, float unitPrice,
+		public void addProduct( String name, String description, float unitPrice,
 				int stockQuantity,  int idS, int IDCategory, String categoryName) throws Exception {
-			this.handler.addProduct(IDProduct, name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
+			this.handler.addProduct( name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
 		}
 		
 		
 
 		
 		// create product 
-		public void createProduct(int idP, String name, String description, float unitPrice,
+		public void createProduct( String name, String description, float unitPrice,
 				int stockQuantity, int ids, int IDCategory, String categoryName) throws ErrorConnectionException, AlertDriver {
 			
-			this.handler.createProduct(idP, name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
+			this.handler.createProduct( name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
 		}
 		
 		public void getProductWithId(int ID, int idS) throws ErrorConnectionException, AlertDriver, UnknownIDProductException {

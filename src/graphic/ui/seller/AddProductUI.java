@@ -77,11 +77,16 @@ public class AddProductUI extends AbstractUI{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		/*if (arg0.getActionCommand()== "Add to Shop"){
-			this.facade.addProduct(1, this.name.getText(), this.description.getText(), this.unitPrice.getText(), this.stockQuantity.getText(), (int)this.communication.getElement("id_seller"), 1,"Cuisine");
-			this.setChanged();
+		if (arg0.getActionCommand().equals("Add to Shop")){
+			try {
+				this.facade.addProduct(this.name.getText(), this.description.getText(), (Float) Float.parseFloat(this.unitPrice.getText()), (int)Integer.parseInt (this.stockQuantity.getText()), (int)this.communication.getElement("id_seller"), 1,"Cuisine");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.setChanged(); 
 			this.notifyObservers("seller");
-			}*/
+			}
 		if (arg0.getSource()== cancel){
 			this.setChanged();
 			this.notifyObservers("manage");

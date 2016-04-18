@@ -139,21 +139,23 @@ public class ProductSellerHandler {
 	 * @return The name of the product
 	 * @throws Exception 
 	 */
-	public void addProduct(int IDProduct, String name, String description, float unitPrice,
+	public void addProduct( String name, String description, float unitPrice,
 			int stockQuantity, int IDSeller, int IDCategory, String categoryName) throws Exception {
 		// if the product exist in this setProduct
-		 if (this.setProduct.containsKey(String.valueOf(IDProduct)) ) {
+		 if (this.setProduct.containsKey(String.valueOf(this.product.getIDProduct())) ) {
 			 System.err.println("this product is already exist in this se");
 			 		}
 		 else {
 			// if product does not exist in the set but it exists in the databas, so we load it and after we add
 			 if ( this.product.isExisting()){
-				 this.product = productFactory.buildProduct(IDProduct, IDSeller);
-				 this.setProduct.addElement(String.valueOf(IDProduct),product);
+				 this.product = productFactory.buildProduct(this.product.getIDProduct(), IDSeller);
+				 this.product.insert();
+				 this.setProduct.addElement(String.valueOf(this.product.getIDProduct()),product);
 			 }
 			 //if the product exist nowhere, so we should build it and after add it 
 			 else{
-				 this.product = productFactory.buildProduct(IDProduct,name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
+				 this.product = productFactory.buildProduct(name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
+				 this.product.insert();
 				 this.setProduct.addElement(String.valueOf(product.getIDProduct()),product);
 			 }
 		 
@@ -164,10 +166,10 @@ public class ProductSellerHandler {
 
 	
 	// create product 
-	public void createProduct(int idP, String name, String description, float unitPrice,
+	public void createProduct( String name, String description, float unitPrice,
 			int stockQuantity, int IDSeller, int IDCategory, String categoryName) throws ErrorConnectionException, AlertDriver {
 		
-		this.product = productFactory.buildProduct(idP, name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
+		this.product = productFactory.buildProduct( name, description, unitPrice, stockQuantity, IDSeller, IDCategory, categoryName);
 	}
 	
 	public void getProductWithId(int ID, int IDSeller) throws ErrorConnectionException, AlertDriver, UnknownIDProductException {

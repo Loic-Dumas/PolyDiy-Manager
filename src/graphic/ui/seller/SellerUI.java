@@ -71,8 +71,8 @@ public class SellerUI extends AbstractUI {
 		// edit Profil
 		if (arg0.getSource()== edit) {
 			try {
-				this.notifyObservers("edit");
 				this.setChanged();
+				this.notifyObservers("edit");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

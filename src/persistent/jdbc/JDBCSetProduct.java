@@ -28,7 +28,7 @@ public class JDBCSetProduct extends SetProduct {
 		try {
 			while (result.next()) {
 				this.addElement(result.getString("id_product"),
-						this.productFactory.buildProduct(result.getInt("id_product"),result.getString("name"),
+						this.productFactory.buildProduct(result.getString("name"),
 								result.getString("description"), result.getFloat("unitPrice"),
 								result.getInt("stockQuantity"), result.getInt("id_seller"),
 								result.getInt("id_category"), result.getString("title")));
@@ -46,7 +46,7 @@ public class JDBCSetProduct extends SetProduct {
 		try {
 			while (result.next()) {
 				this.addElement(result.getString("id_product"),
-						this.productFactory.buildProduct(result.getInt("id_product"),result.getString("name"),
+						this.productFactory.buildProduct(result.getString("name"),
 								result.getString("description"), result.getFloat("unitPrice"),
 								result.getInt("stockQuantity"), result.getInt("id_seller"),
 								result.getInt("id_category"), result.getString("title")));

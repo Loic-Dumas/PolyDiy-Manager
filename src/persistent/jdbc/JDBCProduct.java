@@ -27,10 +27,10 @@ public class JDBCProduct extends Product {
 	 * @param IDCategory
 	 * @param categoryName
 	 */
-	public JDBCProduct( int idPoduct, String name, String description, float unitPrice, int stockQuantity, int IDSeller,
+	public JDBCProduct( /*int idPoduct,*/ String name, String description, float unitPrice, int stockQuantity, int IDSeller,
 			int IDCategory, String categoryName) {
 		super(IDSeller);
-		this.setIDProduct(idPoduct);
+		//this.setIDProduct(idPoduct);
 		this.setName(name);
 		this.setDescription(description);
 		this.setUnitPrice(unitPrice);
