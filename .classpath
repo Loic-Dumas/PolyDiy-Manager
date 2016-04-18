@@ -2,7 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/USER/Desktop/PolyDiy-Manager/src/postgresql-9.4.1208.jre6.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/loicd_000/workspace/PolyDiy-Manager/src/postgresql-9.4.1208.jre6.jar"/>
+>>>>>>> f1b39d328cb6143250aede749258a6fc9b12db6c
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

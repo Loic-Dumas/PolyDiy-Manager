@@ -2,16 +2,33 @@ package common.jdbc;
 
 import java.util.List;
 
+/**
+ * @author IsilinBN
+ * Implements a class to declare condition of the WHERE SQL contract.
+ */
 public class SQLCondition {
 	private String condition = "";
 	
+	/**
+	 * Empty constructor.
+	 */
 	public SQLCondition() {
 	}
 	
+	/**
+	 * Constructor with string condition
+	 * @param condition
+	 */
 	public SQLCondition(String condition) {
 		this.condition += "WHERE " + condition;
 	}
 	
+	/**
+	 * Constructor with some conditions
+	 * @param columnNames - left operand of each condition
+	 * @param columnValues - right operand of each condition
+	 * @throws Exception - if invalid parameters : not the same number of right and left operand.
+	 */
 	public SQLCondition(List<String> columnNames, List<String> columnValues) throws Exception {
 		if(columnNames.size() != columnNames.size()) {
 			throw new Exception("Parameter errors !");
@@ -35,6 +52,10 @@ public class SQLCondition {
 		}
 	}
 	
+	/**
+	 * An accessor to the condition.
+	 * @return the condition parsed
+	 */
 	public String get() {
 		return this.condition;
 	}

@@ -70,25 +70,25 @@ public class SellerUI extends AbstractUI {
 		String action = "";
 		// edit Profil
 		if (arg0.getSource()== edit) {
+<<<<<<< HEAD
 			try {
 				this.setChanged();
 				this.notifyObservers("edit");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
+=======
+			action = "edit";
+>>>>>>> f1b39d328cb6143250aede749258a6fc9b12db6c
 		}
 		//manage Shop
 		if (arg0.getActionCommand()== "Manage Shop") {
-			try {
-				this.setChanged();
-				this.notifyObservers("manage");
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
+			action = "manage";
 		}
 		// back to logout
 		if (arg0.getActionCommand().equals("Back to logout")) {
 			action = "back to logout";
+			
 		}
 
 

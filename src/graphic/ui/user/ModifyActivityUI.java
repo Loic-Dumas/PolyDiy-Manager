@@ -64,12 +64,16 @@ public class ModifyActivityUI  extends AbstractUI{
 				this.facade.updateActivity(this.title.getText(), this.description.getText(), this.deadline.getText(),
 										this.facade.getActivityCategory().getIdActivityCategory(), 
 										(int)this.communication.getElement("id_user"));
+				this.setChanged();
+				this.notifyObservers("activityPanel");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		} else if(arg0.getActionCommand().equals("Delete")) {
 			try {
 				this.facade.deleteActivity();
+				this.setChanged();
+				this.notifyObservers("activityPanel");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
