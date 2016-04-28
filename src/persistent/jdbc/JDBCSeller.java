@@ -85,7 +85,7 @@ public class JDBCSeller extends Seller{
 	@Override
 	public void insert() throws Exception {
 		if(!this.isExisting()) {
-			this.component.insert("Seller_account(id_account,nameshop,siret,website,description)", "'" + this.IDaccount + "', '" + this.nameShop + "', '"  + this.description + "', '"  + this.siret + "', '"  + this.website + "'");
+			this.component.insert("Seller_account(id_account,nmmeshop,siret,website,description)", "'" + this.IDaccount + "', '" + this.nameShop + "', '"  + this.description + "', '"  + this.siret + "', '"  + this.website + "'");
 		} else {
 			throw new AlreadyExistTuple("Seller");
 		}
@@ -99,7 +99,7 @@ public class JDBCSeller extends Seller{
 	@Override
 	public void update() throws Exception {
 		if(this.isExisting()) {
-			this.component.update("(nameshop, description, siret, website) = ('" + this.nameShop + "','" + this.description + "','" + this.siret + "','" +this.website + "')", "Seller_account","id_account = '" + this.ID + "'");
+			this.component.update("( nameShop, description, siret, website) = ('" + this.nameShop + "','" + this.description + "','" + this.siret + "','" +this.website + "')", "Seller_account","id_account = '" + this.ID + "'");
 		} else {
 			throw new NotExistingTuple("Seller");
 		}

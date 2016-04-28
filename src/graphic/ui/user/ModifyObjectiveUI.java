@@ -62,16 +62,12 @@ public class ModifyObjectiveUI extends AbstractUI {
 		if(e.getActionCommand().equals("Update")) {
 			try {
 				this.facade.updateObjective();
-				this.setChanged();
-				this.notifyObservers("activityPanel");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		} else if(e.getActionCommand().equals("Delete")) {
 			try {
 				this.facade.deleteObjective();
-				this.setChanged();
-				this.notifyObservers("activityPanel");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

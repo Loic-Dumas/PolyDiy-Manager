@@ -8,10 +8,6 @@ import java.util.List;
 import common.exception.AlertDriver;
 import common.exception.ErrorConnectionException;
 
-/**
- * @author IsilinBN
- * A facade to declare quickly SQL queries.
- */
 public class JDBCComponent {
 	private Statement stmt = null;
 	
@@ -23,13 +19,6 @@ public class JDBCComponent {
 		}
 	}
 	
-/**
- * Out of date version
- * @param selectionIn - the selection element of the query.
- * @param objectIn
- * @param conditionIn
- * @return the result if exist, null else
- */
 public ResultSet select(String selectionIn, String objectIn, String conditionIn) {
 		String query = "SELECT " + selectionIn + " FROM " + objectIn;
 		if(conditionIn != "") {
@@ -55,12 +44,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 
-	/**
-	 * @param selectionIn
-	 * @param objectIn
-	 * @param conditionIn
-	 * @return
-	 */
 	public ResultSet select(List<String> selectionIn, String objectIn, SQLCondition conditionIn) {
 		String query = "SELECT ";
 		if(selectionIn.isEmpty()) {
@@ -94,10 +77,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 	
-	/**
-	 * @param objectIn
-	 * @param conditionIn
-	 */
 	public void delete(String objectIn, SQLCondition conditionIn){
 		String query = "DELETE FROM " + objectIn + conditionIn.get() + ";";
 		try {
@@ -108,11 +87,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 	
-	/**
-	 * @param newValueIn
-	 * @param objectIn
-	 * @param conditionIn
-	 */
 	public void update(String newValueIn, String objectIn, SQLCondition conditionIn) {
 		String query = "UPDATE " + objectIn + " SET " + newValueIn + conditionIn.get();
 		query += ";";
@@ -124,10 +98,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 	
-	/**
-	 * @param objectIn
-	 * @param valuesIn
-	 */
 	public void insert(String objectIn, String valuesIn) {
 		String query = "INSERT INTO " + objectIn + " VALUES(" + valuesIn + ");";
 		try {
@@ -138,11 +108,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 	
-	/**
-	 * Out of date version
-	 * @param objectIn
-	 * @param conditionIn
-	 */
 	public void delete(String objectIn, String conditionIn){
 		String query = "DELETE FROM " + objectIn + " WHERE " + conditionIn + ";";
 		try {
@@ -153,12 +118,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 	
-	/**
-	 * Out of date version
-	 * @param newValueIn
-	 * @param objectIn
-	 * @param conditionIn
-	 */
 	public void update(String newValueIn, String objectIn, String conditionIn) {
 		String query = "UPDATE " + objectIn + " SET " + newValueIn;
 		if(conditionIn != "") {
@@ -173,9 +132,6 @@ public ResultSet select(String selectionIn, String objectIn, String conditionIn)
 		}
 	}
 
-	/**
-	 * 
-	 */
 	public void clear() {
 		try {
 			this.stmt.close();

@@ -42,7 +42,7 @@ public class CreateAccountUI extends AbstractUI {
 		
 		this.panel.setLayout(null);
 		
-		this.image = new JLabel( new ImageIcon("src/LogoFinal.PNG"));
+		this.image = new JLabel( new ImageIcon( "LogoFinal.PNG"));
 		this.image.setBounds(100, 200, 250, 250);
 		this.panel.add(image);
 		
